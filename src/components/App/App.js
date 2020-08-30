@@ -2,7 +2,7 @@ import React from 'react';
 import style from './App.module.scss';
 import Header from '../Header';
 import Navigation from '../Navigation';
-import MainContent from '../MainContent';
+import Profile from '../Profile';
 
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
       <Header />
       <div className={style.Display}>
       <Navigation />
-      <MainContent />
+      <Profile />
       </div>
     </div>
   );
