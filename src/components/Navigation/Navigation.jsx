@@ -1,18 +1,36 @@
 import React from "react";
 import style from "./Navigation.module.scss";
 
-
 const Navigation = () => {
-  
   return (
     <header>
       <div className={style.NavigationContainer}>
         <ul>
-          <li><a href="#">Profile</a></li>
-          <li><a href="#">Messages</a></li>
-          <li><a href="#">News</a></li>
-          <li><a href="#">Music</a></li>
-          <li><a href="#">Settings</a></li>
+          <li className={style.NavigationContainer__item}>
+            <a className={style.NavigationContainer__link} href="#">
+              Profile
+            </a>
+          </li>
+          <li className={style.NavigationContainer__item}>
+            <a className={style.NavigationContainer__link} href="#">
+              Messages
+            </a>
+          </li>
+          <li className={style.NavigationContainer__item}>
+            <a className={style.NavigationContainer__link} href="#">
+              News
+            </a>
+          </li>
+          <li className={style.NavigationContainer__item}>
+            <a className={style.NavigationContainer__link} href="#">
+              Music
+            </a>
+          </li>
+          <li className={style.NavigationContainer__item}>
+            <a className={style.NavigationContainer__link} href="#">
+              Settings
+            </a>
+          </li>
         </ul>
       </div>
     </header>
