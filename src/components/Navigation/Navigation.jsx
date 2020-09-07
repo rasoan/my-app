@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./Navigation.module.scss";
+import {NavLink} from 'react-router-dom';
 
 const Navigation = () => {
   return (
@@ -7,29 +8,29 @@ const Navigation = () => {
       <div className={style.NavigationContainer}>
         <ul>
           <li className={style.NavigationContainer__item}>
-            <a className={style.NavigationContainer__link} href="#">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
               Profile
-            </a>
+            </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <a className={style.NavigationContainer__link} href="#">
-              Messages
-            </a>
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Dialog">
+            Dialog
+            </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <a className={style.NavigationContainer__link} href="#">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/News">
               News
-            </a>
+            </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <a className={style.NavigationContainer__link} href="#">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Music">
               Music
-            </a>
+            </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <a className={style.NavigationContainer__link} href="#">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Settings">
               Settings
-            </a>
+            </NavLink>
           </li>
         </ul>
       </div>
