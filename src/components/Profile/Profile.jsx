@@ -3,10 +3,13 @@ import style from "./Profile.module.scss";
 import Post from "../Post";
 import TextInput from "../TextInput";
 import ButtonAddPost from "../ButtonAddPost";
+import ProfileInfo from '../ProfileInfo';
 
 const Profile = () => {
   return (
-    <div>
+    <div className={style.ProfileContainer}>
+      <ProfileInfo imgSrc="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
+      <h3>My posts</h3>
       <TextInput />
       <ButtonAddPost />
       <Post
