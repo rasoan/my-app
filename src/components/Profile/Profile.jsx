@@ -4,40 +4,29 @@ import Post from "../Post";
 import TextInput from "../TextInput";
 import ButtonAddPost from "../ButtonAddPost";
 import ProfileInfo from '../ProfileInfo';
+import PropTypes from "prop-types";
 
-const Profile = () => {
+
+
+
+
+const Profile = (props) => {
   return (
     <div className={style.ProfileContainer}>
       <ProfileInfo imgSrc="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
       <h3>My posts</h3>
       <TextInput />
       <ButtonAddPost />
-      <Post
-        className={style.message}
-        content="hello"
-        imgSrc="https://archilab.online/images/1/123.jpg"
-        countLikes="2"
-      />
-      <Post
-        className={style.message}
-        content="oy sheet"
-        imgSrc="https://archilab.online/images/1/123.jpg"
-        countLikes="4"
-      />
-      <Post
-        className={style.message}
-        content="bay"
-        imgSrc="https://archilab.online/images/1/123.jpg"
-        countLikes="5"
-      />
-      <Post
-        className={style.message}
-        content="noise"
-        imgSrc="https://archilab.online/images/1/123.jpg"
-        countLikes="1"
-      />
+      {props.posts.map( post => <Post className={style.message} content={post.content} imgSrc={post.imgSrc} countLikes={post.countLikes} /> )}
     </div>
   );
 };
 
+
+Profile.propTypes = {
+  message: PropTypes.string.isRequired,
+  content: PropTypes.string.isRequired,
+  imgSrc: PropTypes.string.isRequired,
+  countLikes: PropTypes.string.isRequired,
+};
 export default Profile;
