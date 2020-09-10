@@ -1,4 +1,5 @@
 let state = {
+    profilePage: {
     posts: [{
             content: 'alo',
             imgSrc: 'https://archilab.online/images/1/123.jpg',
@@ -25,7 +26,9 @@ let state = {
             countLikes: '23'
         },
     ],
-    messagesData: [{
+    },
+    messagesPage: {
+    messages: [{
             id: "1",
             message: "Hello my friend"
         },
@@ -71,5 +74,8 @@ let state = {
             name: "Natasha"
         },
     ],
+   }
 
 }
+
+export default state;

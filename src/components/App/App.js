@@ -14,8 +14,8 @@ const App = (props) => {
         <Header />
         <div className={style.Display}>
           <Navigation />
-          <Route path="/Dialog" render={ () => <Dialog messagesData={props.messagesData} dialogsData={props.dialogsData} /> } />
-          <Route path="/Profile" render={ () => <Profile posts={props.posts}/> } />
+          <Route path="/Dialog" render={ () => <Dialog messagesData={props.state.messagesPage.messages} dialogsData={props.state.messagesPage.dialogsData} /> } />
+          <Route path="/Profile" render={ () => <Profile posts={props.state.profilePage.posts}/> } />
         </div>
       </div>
     </BrowserRouter>
