@@ -74,8 +74,8 @@ let state = {
             name: "Natasha"
         },
     ],
-   }
-
+   },
+   sidebar: {}
 }
 
 export default state;

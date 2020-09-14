@@ -2,7 +2,7 @@ import React from "react";
 import style from "./TextInput.module.scss";
 
 const TextInput = (props) => {
-  return <textarea className={style.TextInput}></textarea>
+  return <textarea ref={props.newPostElement} className={style.TextInput}></textarea>
 };
 
 
