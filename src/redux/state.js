@@ -1,3 +1,5 @@
+import {rerenderEntireTree} from '../render.js';
+
 let state = {
     profilePage: {
     posts: [{
@@ -76,6 +78,18 @@ let state = {
     ],
    },
    sidebar: {}
+}
+
+export let addPost = (postMessage) => {
+    let newPost = {
+        content: postMessage,
+        imgSrc: 'https://archilab.online/images/1/123.jpg',
+        countLikes: '222'
+    };
+
+    state.profilePage.posts.push(newPost);
+
+    rerenderEntireTree(state);
 }
 
 export default state;

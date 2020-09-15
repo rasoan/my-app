@@ -8,30 +8,31 @@ import PropTypes from "prop-types";
 
 let newPostElement = React.createRef();
 
-let addPost = () => {
-  let text = newPostElement.current.value;
-  alert(text);
-}
+
 
 
 
 const Profile = (props) => {
+  let addPost = () => {
+    let text = newPostElement.current.value;
+    props.addPost(text);
+  }
+
   return (
     <div className={style.ProfileContainer}>
       <ProfileInfo imgSrc="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
       <h3>My posts</h3>
       <TextInput newPostElement={newPostElement}/>
       <ButtonAddPost addPost={ addPost }/>
-      {props.posts.map( post => <Post className={style.message} content={post.content} imgSrc={post.imgSrc} countLikes={post.countLikes} /> )}
+      {props.posts.map( post => <Post content={post.content} imgSrc={post.imgSrc} countLikes={post.countLikes} /> )}
     </div>
   );
 };
 
 
 Profile.propTypes = {
-  message: PropTypes.string.isRequired,
-  content: PropTypes.string.isRequired,
-  imgSrc: PropTypes.string.isRequired,
-  countLikes: PropTypes.string.isRequired,
+  content: PropTypes.string,
+  imgSrc: PropTypes.string,
+  countLikes: PropTypes.string,
 };
 export default Profile;

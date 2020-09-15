@@ -9,16 +9,14 @@ import {Route, BrowserRouter} from 'react-router-dom';
 
 const App = (props) => {
   return (
-    <BrowserRouter>
       <div>
         <Header />
         <div className={style.Display}>
           <Navigation />
           <Route path="/Dialog" render={ () => <Dialog messagesData={props.state.messagesPage.messages} dialogsData={props.state.messagesPage.dialogsData} /> } />
-          <Route path="/Profile" render={ () => <Profile posts={props.state.profilePage.posts}/> } />
+          <Route path="/Profile" render={ () => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/> } />
         </div>
       </div>
-    </BrowserRouter>
   );
 }
 
