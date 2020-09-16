@@ -1,4 +1,6 @@
-import {rerenderEntireTree} from '../render.js';
+let rerenderEntireTree = () => {
+    console.log('State changed');
+}
 
 let state = {
     profilePage: {
@@ -12,22 +14,8 @@ let state = {
             imgSrc: 'https://archilab.online/images/1/123.jpg',
             countLikes: '3'
         },
-        {
-            content: 'fucking',
-            imgSrc: 'https://archilab.online/images/1/123.jpg',
-            countLikes: '2'
-        },
-        {
-            content: 'back',
-            imgSrc: 'https://archilab.online/images/1/123.jpg',
-            countLikes: '66'
-        },
-        {
-            content: 'stay home',
-            imgSrc: 'https://archilab.online/images/1/123.jpg',
-            countLikes: '23'
-        },
     ],
+    newPostText: 'it-camasutra.com!',
     },
     messagesPage: {
     messages: [{
@@ -88,8 +76,21 @@ export let addPost = (postMessage) => {
     };
 
     state.profilePage.posts.push(newPost);
-
     rerenderEntireTree(state);
+    state.
+    console.log('Added post and newPostText = ', state.profilePage.newPostText)
 }
+
+export let updateNewPostText = (newText) => {
+    state.profilePage.newPostText = newText;
+    rerenderEntireTree(state);
+    console.log('Changing text and newPostText = ', state.profilePage.newPostText)
+}
+
+export const subscribe = (observer) => {
+  rerenderEntireTree = observer;
+}
+
+window.state = state;
 
 export default state;

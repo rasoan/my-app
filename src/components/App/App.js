@@ -14,7 +14,7 @@ const App = (props) => {
         <div className={style.Display}>
           <Navigation />
           <Route path="/Dialog" render={ () => <Dialog messagesData={props.state.messagesPage.messages} dialogsData={props.state.messagesPage.dialogsData} /> } />
-          <Route path="/Profile" render={ () => <Profile posts={props.state.profilePage.posts} addPost={props.addPost}/> } />
+          <Route path="/Profile" render={ () => <Profile profilePage={props.state.profilePage} addPost={props.addPost} updateNewPostText={props.updateNewPostText} /> } />
         </div>
       </div>
   );
