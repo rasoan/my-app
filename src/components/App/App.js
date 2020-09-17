@@ -4,7 +4,7 @@ import Header from '../Header';
 import Navigation from '../Navigation';
 import Profile from '../Profile';
 import Dialog from '../Dialog';
-import {Route, BrowserRouter} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 
 
 const App = (props) => {

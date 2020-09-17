@@ -68,7 +68,7 @@ let state = {
    sidebar: {}
 }
 
-export let addPost = (postMessage) => {
+export const addPost = (postMessage) => {
     let newPost = {
         content: postMessage,
         imgSrc: 'https://archilab.online/images/1/123.jpg',
@@ -76,21 +76,20 @@ export let addPost = (postMessage) => {
     };
 
     state.profilePage.posts.push(newPost);
+    state.profilePage.newPostText = '';
     rerenderEntireTree(state);
-    state.
-    console.log('Added post and newPostText = ', state.profilePage.newPostText)
+    //console.log('Added post and newPostText = ', state.profilePage.newPostText)
 }
 
-export let updateNewPostText = (newText) => {
+export const updateNewPostText = (newText) => {
     state.profilePage.newPostText = newText;
     rerenderEntireTree(state);
-    console.log('Changing text and newPostText = ', state.profilePage.newPostText)
+    //console.log('Changing text and newPostText = ', state.profilePage.newPostText)
 }
 
 export const subscribe = (observer) => {
-  rerenderEntireTree = observer;
+    rerenderEntireTree = observer;
 }
 
 window.state = state;
-
 export default state;
