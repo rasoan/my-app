@@ -13,12 +13,14 @@ let newPostElement = React.createRef();
 
 
 const Profile = (props) => {
+  console.log(props);
+
   let addPost = () => {
     let text = props.profilePage.newPostText;
     props.addPost(text);
   }
   
-
+  
   return (
     <div className={style.ProfileContainer}>
       <ProfileInfo imgSrc="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"/>
