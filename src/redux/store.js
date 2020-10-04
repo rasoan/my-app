@@ -1,3 +1,6 @@
+import profileReducer from './profile-reducer.js';
+import dialogsReducer from './dialogs-reducer.js';
+
 
 let store = {
     _state: {
@@ -15,26 +18,10 @@ let store = {
         ],
         newPostText: 'it-camasutra.com!',
         },
-        messagesPage: {
-        messages: [{
+        dialogsPage: {
+          messages: [{
                 id: "1",
                 message: "Hello my friend"
-            },
-            {
-                id: "2",
-                message: "By my friend"
-            },
-            {
-                id: "3",
-                message: "Hello world"
-            },
-            {
-                id: "4",
-                message: "Good bye"
-            },
-            {
-                id: "5",
-                message: "ou sheet!"
             },
         ],
         dialogsData: [{
@@ -62,35 +49,25 @@ let store = {
                 name: "Natasha"
             },
         ],
+        newMessageBody: "",
        },
        sidebar: {}
     },
-    _callSubscribe() {
-        console.log('State changed');
-    },
     getState() {
         return this._state;
+    },
+    _callSubscribe() {
+       // console.log('State changed');
     },
     subscribe(observer) {
         this._callSubscribe = observer;
     },
     dispatch( action ) {
-        if ( action.type === 'ADD-POST' ) {
-            let newPost = {
-                content: action.message,
-                imgSrc: 'https://archilab.online/images/1/123.jpg',
-                countLikes: '222'
-            };
         
-            this._state.profilePage.posts.push(newPost);
-            this._state.profilePage.newPostText = '';
-            this._callSubscribe();
-            //console.log('Added post and newPostText = ', state.profilePage.newPostText)
-        } else if ( action.type === 'UPDATE-NEW-POST-TEXT' ) {
-            this._state.profilePage.newPostText = action.newText;
-            this._callSubscribe();
-            //console.log('Changing text and newPostText = ', state.profilePage.newPostText)
-        }
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._callSubscribe();
+
     },
 }
 

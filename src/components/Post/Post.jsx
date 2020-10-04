@@ -2,6 +2,8 @@ import React from "react";
 import style from "./Post.module.scss";
 import PropTypes from "prop-types";
 
+
+
 const Post = (props) => {
   return (
     <div className={style.PostContainer}>

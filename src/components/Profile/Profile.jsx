@@ -5,6 +5,7 @@ import TextInput from "../TextInput";
 import ButtonAddPost from "../ButtonAddPost";
 import ProfileInfo from '../ProfileInfo';
 import PropTypes from "prop-types";
+import {addPostActionCreator} from '../../redux/profile-reducer.js';
 
 let newPostElement = React.createRef();
 
@@ -17,7 +18,7 @@ const Profile = (props) => {
 
   let addPost = () => {
     let text = props.profilePage.newPostText;
-    props.dispatch({ type: 'ADD-POST', message: text});
+    props.dispatch( addPostActionCreator(text) );
   }
   
   

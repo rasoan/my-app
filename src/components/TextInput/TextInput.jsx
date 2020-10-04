@@ -1,12 +1,11 @@
 import React from "react";
 import style from "./TextInput.module.scss";
-
-
+import {updateNewPostTextActionCreator} from '../../redux/profile-reducer.js';
 
 const TextInput = (props) => {
 
   let onPostChange = () => {
-    props.dispatch( { type: 'UPDATE-NEW-POST-TEXT', newText: props.newPostElement.current.value} );
+    props.dispatch( updateNewPostTextActionCreator(props.newPostElement.current.value) );
   }
   
   return <textarea onChange={onPostChange} value={props.newPostText} ref={props.newPostElement} className={style.TextInput}></textarea>

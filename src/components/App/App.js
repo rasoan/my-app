@@ -16,8 +16,8 @@ const App = (props) => {
         <Header />
         <div className={style.Display}>
           <Navigation />
-          <Route path="/Dialog" render={ () => <Dialog messagesData={props.state.messagesPage.messages} dialogsData={props.state.messagesPage.dialogsData} /> } />
-          <Route path="/Profile" render={ () => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} /> } />
+          <Route path="/Dialog" render={ () => <Dialog store={props.store} dispatch={props.store.dispatch.bind(props.store)}/> } />
+          <Route path="/Profile" render={ () => <Profile profilePage={props.store.getState().profilePage} dispatch={props.store.dispatch.bind(props.store)} /> } />
         </div>
       </div>
   );
