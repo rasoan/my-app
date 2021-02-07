@@ -4,19 +4,14 @@ import {BrowserRouter} from 'react-router-dom';
 import React from 'react';
 import store from './redux/store.js';
 
-
-
-
 let rerenderEntireTree = (state) => {
-  
     ReactDOM.render(
       <BrowserRouter>
           <App  store={store} />
       </BrowserRouter>,
         document.getElementById('root')
-       );
-     
-    }
+       );     
+}
 
 rerenderEntireTree(store.getState());
 store.subscribe(rerenderEntireTree);
