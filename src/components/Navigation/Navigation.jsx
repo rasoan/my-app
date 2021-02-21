@@ -6,7 +6,7 @@ const Navigation = () => {
   return (
     <header>
       <div className={style.NavigationContainer}>
-        <ul>
+        <ul className={style.NavigationContainer__list}>
           <li className={style.NavigationContainer__item}>
             <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
               Profile

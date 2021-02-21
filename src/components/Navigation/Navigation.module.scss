@@ -1,9 +1,11 @@
 .NavigationContainer {
+  margin: 0 0 0 30px;
   width: min-content;
-  height: 700px;
-  padding: 20px 50px 20px 10px;
-  background-color: rgb(163, 180, 179);
   color: white;
+}
+
+.NavigationContainer__list {
+  padding: 0;
 }
 
 .NavigationContainer__item {
