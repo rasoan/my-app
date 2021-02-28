@@ -1,7 +1,22 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
-const profileReducer = (state, action) => {
+let initialState = {
+  posts: [{
+          content: 'alo',
+          imgSrc: 'https://archilab.online/images/1/123.jpg',
+          countLikes: '1'
+      },
+      {
+          content: 'helo',
+          imgSrc: 'https://archilab.online/images/1/123.jpg',
+          countLikes: '3'
+      },
+  ],
+  newPostText: 'it-camasutra.com!',
+};
+
+const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
       let newPost = {

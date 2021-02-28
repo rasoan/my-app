@@ -3,6 +3,7 @@ import style from "./TextInput.module.scss";
 import {updateNewPostTextActionCreator} from '../../redux/profile-reducer.js';
 
 const TextInput = (props) => {
+
   let onPostChange = () => {
     props.dispatch(updateNewPostTextActionCreator(props.newPostElement.current.value));
   }

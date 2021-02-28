@@ -8,9 +8,9 @@ import { updateNewMessageBodyCreator, sendMessageCreator } from "../../redux/dia
 let newMessageElement = React.createRef();
 
 const Dialog = (props) => {
-  let messagesData= props.store.getState().dialogsPage.messages; 
-  let dialogsData= props.store.getState().dialogsPage.dialogsData;
-  let newMessageBody = props.store.getState().dialogsPage.newMessageBody; 
+  let messagesData= props.state.dialogsPage.messages; 
+  let dialogsData= props.state.dialogsPage.dialogsData;
+  let newMessageBody = props.state.dialogsPage.newMessageBody; 
 
 
   dialogsData = dialogsData.map((element) => (

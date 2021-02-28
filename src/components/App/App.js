@@ -7,14 +7,14 @@ import Dialog from '../Dialog';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
-
+  
   return (
     <div>
       <Header />
       <div className={style.container}>
-        <LeftPanel friendList={props.store.getState().friendList} />
-        <Route path="/Dialog" render={() => <Dialog store={props.store} dispatch={props.store.dispatch.bind(props.store)} />} />
-        <Route path="/Profile" render={() => <Profile profilePage={props.store.getState().profilePage} dispatch={props.store.dispatch.bind(props.store)} />} />
+        <LeftPanel state={props.state} dispatch={props.dispatch}/>
+        <Route path="/Dialog" render={() => <Dialog state={props.state} dispatch={props.dispatch} />} />
+        <Route path="/Profile" render={() => <Profile profilePage={props.state.profilePage} dispatch={props.dispatch} />} />
       </div>
     </div>
   );

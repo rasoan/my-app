@@ -5,10 +5,13 @@ import FriendList from "../FriendList";
 import PropTypes from "prop-types";
 
 const LeftPanel = (props) => {
+  
+  let friendList = props.state.sidebarPage.friendList;
+ 
   return (
     <div className={style.leftPanelWrapper}>
       <Navigation />
-      <FriendList friendList={props.friendList}/>
+      <FriendList friendList={friendList}/>
     </div>
   );
 };
