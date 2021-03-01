@@ -3,24 +3,18 @@ import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
 import Posts from "./Posts/Posts";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import {addPostActionCreator} from '../../redux/profile-reducer.js';
 
 
-const Profile = (props) => {
-    
-  let addPost = () => {
-    let text = props.profilePage.newPostText;
-    let action = addPostActionCreator(text);
-    props.dispatch(action);
-  }
-  
+
+
+const Profile = (props) => { 
   return (
     <div className={style.ProfileContainer}>
       <ProfileInfo />
-      <Posts posts={props.profilePage.posts}
-             addPost={addPost}
-             dispatch={props.dispatch}
-             newPostText={props.profilePage.newPostText}/>
+      <Posts posts={props.posts}
+             addPost={props.addPost}
+             newPostText={props.newPostText}
+             onPostChange={props.onPostChange} />
     </div>
   );
 };
