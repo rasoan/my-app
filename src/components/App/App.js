@@ -2,7 +2,7 @@ import React from 'react';
 import style from './App.module.scss';
 import LeftPanel from'../LeftPanel';
 import Header from '../Header';
-import Profile from '../Profile';
+import Profile from '../Profile/Profile';
 import Dialog from '../Dialog';
 import { Route } from 'react-router-dom';
 

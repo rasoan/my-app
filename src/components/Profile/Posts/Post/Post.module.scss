@@ -1,0 +1,25 @@
+.PostContainer {
+    width: 200px;
+    border: 1px solid black;
+    border-radius: 20px;
+    padding: 10px 10px 5px;
+    margin: 20px;
+  }
+  
+  .PostContentImg {
+    display: flex;
+  }
+  
+  .PostCountLikes {
+    margin: 0 0px 5px auto;
+    width: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #20183a;
+  }
+  
+  .image {
+    border: 1px solid black;
+    border-radius: 50%;
+    margin-right: 10px;
+  }  
