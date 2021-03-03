@@ -2,7 +2,7 @@ import React from 'react';
 import style from './App.module.scss';
 import LeftPanel from'../LeftPanel';
 import Header from '../Header';
-import ProfileContainer from '../Profile/ProfileContainer';
+import Profile from '../Profile/Profile';
 import Dialog from '../Dialog';
 import { Route } from 'react-router-dom';
 
@@ -15,8 +15,7 @@ const App = (props) => {
         <LeftPanel state={props.state} dispatch={props.dispatch}/>
         <Route path="/Dialog" render={() => <Dialog dialogsPage={props.state.dialogsPage} 
                                                     dispatch={props.dispatch} />} />
-        <Route path="/Profile" render={() => <ProfileContainer profilePage={props.state.profilePage}
-                                                               dispatch={props.dispatch} />} />
+        <Route path="/Profile" render={() => <Profile store={props.store} />} />
       </div>
     </div>
   );
