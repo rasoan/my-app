@@ -13,8 +13,7 @@ const App = (props) => {
       <Header />
       <div className={style.container}>
         <LeftPanel state={props.state} dispatch={props.dispatch}/>
-        <Route path="/Dialog" render={() => <DialogsContainer dialogsPage={props.state.dialogsPage} 
-                                                              dispatch={props.dispatch} />} />
+        <Route path="/Dialog" render={() => <DialogsContainer store={props.store} />} />
         <Route path="/Profile" render={() => <Profile store={props.store} />} />
       </div>
     </div>
