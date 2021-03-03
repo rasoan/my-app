@@ -3,7 +3,7 @@ import style from './App.module.scss';
 import LeftPanel from'../LeftPanel';
 import Header from '../Header';
 import Profile from '../Profile/Profile';
-import Dialog from '../Dialog';
+import DialogsContainer from '../Dialogs/DialogsContainer';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -13,8 +13,8 @@ const App = (props) => {
       <Header />
       <div className={style.container}>
         <LeftPanel state={props.state} dispatch={props.dispatch}/>
-        <Route path="/Dialog" render={() => <Dialog dialogsPage={props.state.dialogsPage} 
-                                                    dispatch={props.dispatch} />} />
+        <Route path="/Dialog" render={() => <DialogsContainer dialogsPage={props.state.dialogsPage} 
+                                                              dispatch={props.dispatch} />} />
         <Route path="/Profile" render={() => <Profile store={props.store} />} />
       </div>
     </div>

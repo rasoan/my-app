@@ -1,13 +1,13 @@
 import React from "react";
-import style from "./Dialog.module.scss";
-import Message from "../Message";
+import style from "./Dialogs.module.scss";
+import Message from "./Message/Message";
 
-import DialogItem from "../DialogItem";
+import DialogItem from "./DialogItem/DialogItem";
 import { updateNewMessageBodyCreator, sendMessageCreator } from "../../redux/dialogs-reducer.js";
 
 let newMessageElement = React.createRef();
 
-const Dialog = (props) => {
+const Dialogs = (props) => {
   let messagesData= props.dialogsPage.messages; 
   let dialogsData= props.dialogsPage.dialogsData;
   let newMessageBody = props.dialogsPage.newMessageBody; 
@@ -45,4 +45,4 @@ const Dialog = (props) => {
   );
 };
 
-export default Dialog;
+export default Dialogs;
