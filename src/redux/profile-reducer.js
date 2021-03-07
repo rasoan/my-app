@@ -2,16 +2,17 @@ const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 
 let initialState = {
-  posts: [{
-          content: 'alo',
-          imgSrc: 'https://archilab.online/images/1/123.jpg',
-          countLikes: '1'
-      },
-      {
-          content: 'helo',
-          imgSrc: 'https://archilab.online/images/1/123.jpg',
-          countLikes: '3'
-      },
+  posts: [
+          {
+           content: 'alo',
+           imgSrc: 'https://archilab.online/images/1/123.jpg',
+           countLikes: '1',
+          },
+          {
+           content: 'helo',
+           imgSrc: 'https://archilab.online/images/1/123.jpg',
+           countLikes: '3',
+          },
   ],
   newPostText: 'it-camasutra.com!',
 };
@@ -19,20 +20,23 @@ let initialState = {
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_POST:
-      let newPost = {
-        content: action.message,
-        imgSrc: 'https://archilab.online/images/1/123.jpg',
-        countLikes: '222'
-      };
-      state.posts.push(newPost);
-      state.newPostText = '';  
-      break;
+      return {
+              ...state,
+              posts: [...state.posts, {
+                                       content: action.message,
+                                       imgSrc: 'https://archilab.online/images/1/123.jpg',
+                                       countLikes: '222',
+                                      }],
+              newPostText: "",
+             };
     case UPDATE_NEW_POST_TEXT:
-      state.newPostText = action.newText;
-      break;
+      return {
+              ...state,
+              newPostText: action.newText,
+             };
     default:
+      return state;
   }
-  return state;
 }
 
 export default profileReducer;

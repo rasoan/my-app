@@ -5,15 +5,13 @@ import DialogItem from "./DialogItem/DialogItem";
 let newMessageElement = React.createRef();
 
 const Dialogs = (props) => {
-  
-  let dialogsData= props.state.dialogsData;
+
+  let dialogsData= props.dialogsData;
   dialogsData = dialogsData.map((element) => (
     <DialogItem name={element.name} id={element.id} />
   ));
-  
 
-  let messagesData= props.state.messages; 
-  
+  let messagesData= props.messages; 
   messagesData = messagesData.map((element) => (
     <Message message={element.message} />
   ));
@@ -25,13 +23,13 @@ const Dialogs = (props) => {
         <div>{messagesData}</div>
         <div>
           <div className="textarea">
-            <textarea value={props.state.newMessageBody}
+            <textarea value={props.newMessageBody}
                          onChange={() => props.onNewMessageChange(newMessageElement)} 
                          placeholder='Enter you message'
                          ref={newMessageElement}>
             </textarea>
           </div>
-          <div><button onClick={props.onSendMessageClick}>Send</button></div>
+          <div><button onClick={() => props.onSendMessageClick(props.newMessageBody)}>Send</button></div>
         </div>
       </div>
     </div>

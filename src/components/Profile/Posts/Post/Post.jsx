@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 
 
 const Post = (props) => {
+  
   return (
     <div className={style.PostContainer}>
       <div className={style.PostContentImg}>

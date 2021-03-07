@@ -5,6 +5,7 @@ import Post from "./Post/Post";
 //import PropTypes from "prop-types";
 
 const Posts = (props) => {
+
   let posts = props
              .posts
              .map(post => <Post content={post.content} 
@@ -16,7 +17,7 @@ const Posts = (props) => {
       {posts}
       <TextInput newPostText={props.newPostText} 
                  onPostChange={props.onPostChange} />
-      <ButtonAddPost addPost={props.addPost}/>
+      <ButtonAddPost addPost={() => props.addPost(props.newPostText)} />
     </div>
   );
 };

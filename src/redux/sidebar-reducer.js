@@ -42,16 +42,19 @@ let initialState = {
 const sidebarReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_FRIEND:
-      let newFriend = {
-        id: action.id,
-        name: action.name,
-        imgSrc: "https://www.meme-arsenal.com/memes/3f3299a732784726e8fde7455231bce6.jpg",
-      };
-      state.friendList.push(newFriend);
-      break;
+      return {
+              ...state,
+              friendList: [...state.friendList, {
+                                                 id: action.id,
+                                                 name: action.name,
+                                                 imgSrc: "https://www.meme-arsenal.com/memes/3f3299a732784726e8fde7455231bce6.jpg",
+                                                },
+                          ],
+             }
     default:
+      return state;
   }
-  return state;
+  
 }
 
 export default sidebarReducer;
