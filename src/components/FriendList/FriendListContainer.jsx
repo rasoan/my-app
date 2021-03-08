@@ -1,13 +1,15 @@
 import React from "react";
 import FriendList from './FriendList'
-import {addFriendActionCreator} from '../../redux/sidebar-reducer';
+import {addFriendActionCreator} from '../../redux/users-reducer';
 import {connect} from "react-redux";
 
 
 
 let mapStateToProps = (state) => {
+
+  let friendList = state.usersPage.users.filter(user => user.friend);
   return {
-          friendList: state.sidebarPage.friendList,
+          friendList,
          }
 }
 

@@ -4,6 +4,7 @@ import LeftPanel from'../LeftPanel';
 import Header from '../Header';
 import Profile from '../Profile/Profile';
 import DialogsContainer from '../Dialogs/DialogsContainer';
+import Users from '../Users/Users';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -15,6 +16,7 @@ const App = (props) => {
         <LeftPanel />
         <Route path="/Dialog" render={() => <DialogsContainer />} />
         <Route path="/Profile" render={() => <Profile />} />
+        <Route path="/Users" render={() => <Users />} />
       </div>
     </div>
   );

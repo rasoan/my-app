@@ -28,6 +28,11 @@ const Navigation = () => {
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Users">
+              Users
+            </NavLink>
+          </li>
+          <li className={style.NavigationContainer__item}>
             <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Settings">
               Settings
             </NavLink>
