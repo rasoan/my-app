@@ -1,3 +1,6 @@
+import * as axios from "axios";
+
+
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
 const SET_USERS = 'SET_USERS';
@@ -64,6 +67,9 @@ let initialState = {
 };
 
 const sidebarReducer = (state = initialState, action) => {
+  axios.get("https://social-network.samuraijs.com/api/1.0/users").then(response => {
+    console.log(response.data.items);
+  });
   switch (action.type) {
     case SET_USERS:
       return {
