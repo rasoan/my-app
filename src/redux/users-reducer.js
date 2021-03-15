@@ -1,15 +1,15 @@
-
-
-
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
 const SET_USERS = 'SET_USERS';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
+const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
+
 
 let initialState = {
   users: [],
   pagesSize: 3,
-  totalUsersCount: 20,
-  currentPage: 3,
+  totalUsersCount: 0,
+  currentPage: 2,
 };
 
 
@@ -18,7 +18,7 @@ const sidebarReducer = (state = initialState, action) => {
     case SET_USERS:
       return {
               ...state,
-              users: [...state.users, ...action.users]
+              users: [...action.users]
              }
     case ADD_FRIEND:
       return {
@@ -40,6 +40,16 @@ const sidebarReducer = (state = initialState, action) => {
                 return u;
               }),
              }
+    case SET_CURRENT_PAGE:
+      return {
+               ...state,
+               currentPage: action.currentPage,
+             }
+    case SET_TOTAL_USERS_COUNT:
+      return {
+               ...state,
+               totalUsersCount: action.totalUsersCount,
+             }
     default:
       return state;
   }
@@ -49,3 +59,5 @@ export default sidebarReducer;
 export let setUsersActionCreator =(users) => ({type: SET_USERS, users});
 export let addFriendActionCreator = (id) => ({type: ADD_FRIEND, id});
 export let deleteFriendActionCreator = (id) => ({type: DELETE_FRIEND, id});
+export let setCurrentPageActionCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export let setTotalUsersCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
