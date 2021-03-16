@@ -6,14 +6,19 @@ import {setUsersActionCreator,
         addFriendActionCreator, 
         deleteFriendActionCreator,
         setCurrentPageActionCreator,
-        setTotalUsersCountActionCreator} from '../../../redux/users-reducer';
+        setTotalUsersCountActionCreator,
+        toggleIsFetchingActionCreator} from '../../../redux/users-reducer';
 
 class UsersListContainer extends React.Component {
   componentDidMount() {
+    const toggleIsFetching = this.props.toggleIsFetching;
+    toggleIsFetching();
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`)
          .then(response => {
           this.props.setUsers(response.data.items);
           this.props.setTotalUsersCount(response.data.totalCount);
+          toggleIsFetching();
+          
     });
   }
   
@@ -24,7 +29,9 @@ class UsersListContainer extends React.Component {
                        users={this.props.users}
                        addOrDeleteFriend={this.props.addOrDeleteFriend}
                        setCurrentPage={this.props.setCurrentPage} 
-                       setUsers={this.props.setUsers} />); 
+                       setUsers={this.props.setUsers} 
+                       isFetching={this.props.isFetching}
+                       toggleIsFetching={this.props.toggleIsFetching} />); 
   }
 }
 
@@ -34,6 +41,7 @@ let mapStateToProps = (state) => {
           pagesSize: state.usersPage.pagesSize,
           totalUsersCount: state.usersPage.totalUsersCount,
           currentPage: state.usersPage.currentPage,
+          isFetching: state.usersPage.isFetching,
          }
 }
 
@@ -59,6 +67,10 @@ let mapDispatchToProps = (dispatch) => {
           },
           setTotalUsersCount: (totalUsersCount) => {
             let action = setTotalUsersCountActionCreator(totalUsersCount);
+            dispatch(action);
+          },
+          toggleIsFetching: () => {
+            let action = toggleIsFetchingActionCreator();
             dispatch(action);
           }
          }

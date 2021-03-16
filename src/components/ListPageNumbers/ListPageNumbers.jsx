@@ -6,10 +6,12 @@ const ListPageNumbers = (props) => {
   let pagesSize = props.pagesSize;
 
   let onPageChanged = (pageNumber, pagesSize) => {
+    props.toggleIsFetching();
     props.setCurrentPage(pageNumber);
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pagesSize}`)
          .then(response => {
            props.setUsers(response.data.items);
+           props.toggleIsFetching();
          });
   }
 
