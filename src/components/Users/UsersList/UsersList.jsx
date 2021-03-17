@@ -3,7 +3,7 @@ import style from "./UsersList.module.scss";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem/UserItem";
 import ListPageNumbers from "../../ListPageNumbers/ListPageNumbers";
-
+import Preloader from "../../Preloader/Preloader";
 
 
 let UsersList = (props) => {
@@ -13,24 +13,22 @@ let UsersList = (props) => {
     pages.push(i);
   }
   let currentPage = props.currentPage;
-    
-
     return (<>
-               {props.isFetching ? 
-               <img width="200" height="200"
-                    src="https://lh3.googleusercontent.com/proxy/g8qGLsI0d4PkrJInOzXa8-K7BPPa6VT7Wdf2zO0-3vcWhf5x2h84CHOJE3tXYeRIa3_bRNP_Bz8LdMVTMFw1BeF3-zv26VATPUBboU6eS1w6s9NtzcrX2PGE5JbKPY52zxaD6Eca05Yx69hR"/> : null}
-               {!props.isFetching && <ListPageNumbers pages={pages}
+               <ListPageNumbers pages={pages}
                                 currentPage={currentPage} 
                                 setCurrentPage={props.setCurrentPage}
                                 pagesSize={props.pagesSize} 
                                 setUsers={props.setUsers} 
-                                toggleIsFetching={props.toggleIsFetching}/>}
+                                toggleIsFetching={props.toggleIsFetching}
+                                isFetching={props.isFetching}/>
+               {props.isFetching ? <Preloader /> : null}
                {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/" + user.id}
                                                     id={user.id} 
                                                     photo={user.photos.small}
                                                     name={user.name}
                                                     followed={user.followed} 
-                                                    addOrDeleteFriend={props.addOrDeleteFriend} />)}
+                                                    addFriend={props.addFriend}
+                                                    deleteFriend={props.deleteFriend} />)}
            </>);        
 }
 

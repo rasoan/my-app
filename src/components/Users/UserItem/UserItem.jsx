@@ -9,6 +9,7 @@ const UserItem = (props) => {
   let buttonText = props.followed ? "Удалить из друзей": "Добавить в друзья";
   let styleButton = props.followed ? style.deleteFriendButton: style.addFriendButton;
   let srcPhoto = props.photo ? props.photo: userPhoto;
+
   return (
             <div className={style.UserItemContainer}>
               <NavLink to={props.navlinkTo}>
@@ -19,8 +20,12 @@ const UserItem = (props) => {
                 <p>{""}</p>
                 <p>{""}</p>
                 <button onClick={() => {
-                  
-                  return props.addOrDeleteFriend({id: props.id, followed: props.followed})
+                  if (props.followed) {
+                    return props.deleteFriend(props.id);
+                  }
+                  else {
+                     return props.addFriend(props.id);
+                  }
                 }
                 } className={styleButton}>{buttonText}</button>
               </div>

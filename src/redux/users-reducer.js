@@ -8,7 +8,7 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
 let initialState = {
   users: [],
-  pagesSize: 3,
+  pagesSize: 5,
   totalUsersCount: 0,
   currentPage: 2,
   isFetching: false,
@@ -16,6 +16,7 @@ let initialState = {
 
 
 const sidebarReducer = (state = initialState, action) => {
+  
   switch (action.type) {
     case SET_USERS:
       return {
@@ -23,6 +24,7 @@ const sidebarReducer = (state = initialState, action) => {
               users: [...action.users]
              }
     case ADD_FRIEND:
+      
       return {
               ...state,
               users: state.users.map(u => {
@@ -53,16 +55,16 @@ const sidebarReducer = (state = initialState, action) => {
                totalUsersCount: action.totalUsersCount,
              }
     case TOGGLE_IS_FETCHING:
-      if (state.isFetching) {
+      if (action.isFetching) {
         return {
                 ...state,
-                isFetching: false,
+                isFetching: true,
                }
       }
       else {
         return {
                 ...state,
-                isFetching: true,
+                isFetching: false,
                }
       }
     default:
@@ -76,4 +78,4 @@ export let addFriendActionCreator = (id) => ({type: ADD_FRIEND, id});
 export let deleteFriendActionCreator = (id) => ({type: DELETE_FRIEND, id});
 export let setCurrentPageActionCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export let setTotalUsersCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
-export let toggleIsFetchingActionCreator = () => ({type: TOGGLE_IS_FETCHING});
+export let toggleIsFetchingActionCreator = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});

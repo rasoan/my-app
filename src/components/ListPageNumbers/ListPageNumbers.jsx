@@ -4,14 +4,14 @@ import * as axios from "axios";
 
 const ListPageNumbers = (props) => {
   let pagesSize = props.pagesSize;
-
+  let isFetchingStyle = props.isFetching ? style.isFetchingStyle: "";
   let onPageChanged = (pageNumber, pagesSize) => {
-    props.toggleIsFetching();
+    props.toggleIsFetching(true);
     props.setCurrentPage(pageNumber);
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pagesSize}`)
          .then(response => {
            props.setUsers(response.data.items);
-           props.toggleIsFetching();
+           props.toggleIsFetching(false);
          });
   }
 
@@ -19,8 +19,12 @@ const ListPageNumbers = (props) => {
                     .pages
                     .map(pageNumber => {
                       return <li className={style.pageNumberContainer}>
-                               <button onClick={() => onPageChanged(pageNumber, pagesSize)} 
-                                       className={`${style.button} ${props.currentPage === pageNumber && style.currentPage}`}>
+                               <button onClick={() => {
+                                                       if (!props.isFetching) onPageChanged(pageNumber, pagesSize)
+                                                      }
+                                               } 
+                                       className={`${style.button} ${props.currentPage === pageNumber && style.currentPage}`}
+                                       disabled={props.isFetching}>
                                  {pageNumber}
                                </button>
                              </li>
@@ -28,7 +32,7 @@ const ListPageNumbers = (props) => {
                                 );
 
 
-  return (<ul className={style.pageNumberListContainer}>{pageNumbers}</ul>);
+  return (<ul className={`${isFetchingStyle} ${style.pageNumberListContainer}`}>{pageNumbers}</ul>);
 };
 
 export default ListPageNumbers;

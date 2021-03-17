@@ -12,13 +12,12 @@ import {setUsersActionCreator,
 class UsersListContainer extends React.Component {
   componentDidMount() {
     const toggleIsFetching = this.props.toggleIsFetching;
-    toggleIsFetching();
+    toggleIsFetching(true);
     axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`)
          .then(response => {
           this.props.setUsers(response.data.items);
           this.props.setTotalUsersCount(response.data.totalCount);
-          toggleIsFetching();
-          
+          toggleIsFetching(false);
     });
   }
   
@@ -27,7 +26,8 @@ class UsersListContainer extends React.Component {
                        pagesSize={this.props.pagesSize}
                        currentPage={this.props.currentPage}
                        users={this.props.users}
-                       addOrDeleteFriend={this.props.addOrDeleteFriend}
+                       addFriend={this.props.addFriend}
+                       deleteFriend={this.props.deleteFriend}
                        setCurrentPage={this.props.setCurrentPage} 
                        setUsers={this.props.setUsers} 
                        isFetching={this.props.isFetching}
@@ -47,15 +47,13 @@ let mapStateToProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
   return {
-          addOrDeleteFriend: (userInfo) => {
-            if (userInfo.followed) {
-              let action = deleteFriendActionCreator(userInfo.id);
-              dispatch(action);
-            }
-            else {
+          addFriend: (userInfo) => {
               let action = addFriendActionCreator(userInfo.id);
               dispatch(action);
-            }
+          },
+          deleteFriend: (userInfo) => {
+              let action = deleteFriendActionCreator(userInfo.id);
+              dispatch(action);
           },
           setUsers: (users) => {
             let action = setUsersActionCreator(users);
@@ -69,11 +67,20 @@ let mapDispatchToProps = (dispatch) => {
             let action = setTotalUsersCountActionCreator(totalUsersCount);
             dispatch(action);
           },
-          toggleIsFetching: () => {
-            let action = toggleIsFetchingActionCreator();
+          toggleIsFetching: (isFetching) => {
+            let action = toggleIsFetchingActionCreator(isFetching);
             dispatch(action);
           }
          }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersListContainer);
+
+
+export default connect(mapStateToProps, {
+  deleteFriend: deleteFriendActionCreator,
+  addFriend: addFriendActionCreator,
+  setUsers: setUsersActionCreator,
+  setCurrentPage: setCurrentPageActionCreator,
+  setTotalUsersCount: setTotalUsersCountActionCreator,
+  toggleIsFetching: toggleIsFetchingActionCreator,
+ })(UsersListContainer);

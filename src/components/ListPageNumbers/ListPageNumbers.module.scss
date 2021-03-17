@@ -18,3 +18,13 @@
       cursor: pointer;
     }
 }
+
+.isFetchingStyle {
+
+}
+
+.isFetchingStyle .button {
+    &:hover {
+        cursor: default;
+      }
+}
