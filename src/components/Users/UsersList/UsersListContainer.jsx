@@ -2,12 +2,12 @@ import React from "react";
 import * as axios from "axios";
 import UsersList from "./UsersList";
 import {connect} from "react-redux";
-import {setUsersActionCreator, 
-        addFriendActionCreator, 
-        deleteFriendActionCreator,
-        setCurrentPageActionCreator,
-        setTotalUsersCountActionCreator,
-        toggleIsFetchingActionCreator} from '../../../redux/users-reducer';
+import {setUsers, 
+        addFriend, 
+        deleteFriend,
+        setCurrentPage,
+        setTotalUsersCount,
+        toggleIsFetching} from '../../../redux/users-reducer';
 
 class UsersListContainer extends React.Component {
   componentDidMount() {
@@ -45,42 +45,14 @@ let mapStateToProps = (state) => {
          }
 }
 
-let mapDispatchToProps = (dispatch) => {
-  return {
-          addFriend: (userInfo) => {
-              let action = addFriendActionCreator(userInfo.id);
-              dispatch(action);
-          },
-          deleteFriend: (userInfo) => {
-              let action = deleteFriendActionCreator(userInfo.id);
-              dispatch(action);
-          },
-          setUsers: (users) => {
-            let action = setUsersActionCreator(users);
-            dispatch(action);
-          },
-          setCurrentPage: (currentPage) => {
-            let action = setCurrentPageActionCreator(currentPage);
-            dispatch(action);
-          },
-          setTotalUsersCount: (totalUsersCount) => {
-            let action = setTotalUsersCountActionCreator(totalUsersCount);
-            dispatch(action);
-          },
-          toggleIsFetching: (isFetching) => {
-            let action = toggleIsFetchingActionCreator(isFetching);
-            dispatch(action);
-          }
-         }
-}
 
 
-
-export default connect(mapStateToProps, {
-  deleteFriend: deleteFriendActionCreator,
-  addFriend: addFriendActionCreator,
-  setUsers: setUsersActionCreator,
-  setCurrentPage: setCurrentPageActionCreator,
-  setTotalUsersCount: setTotalUsersCountActionCreator,
-  toggleIsFetching: toggleIsFetchingActionCreator,
- })(UsersListContainer);
+export default connect(mapStateToProps,{
+                                        deleteFriend,
+                                        addFriend,
+                                        setUsers,
+                                        setCurrentPage,
+                                        setTotalUsersCount,
+                                        toggleIsFetching,
+                                       }
+                                        )(UsersListContainer);

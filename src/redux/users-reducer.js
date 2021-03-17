@@ -73,9 +73,9 @@ const sidebarReducer = (state = initialState, action) => {
 }
 
 export default sidebarReducer;
-export let setUsersActionCreator =(users) => ({type: SET_USERS, users});
-export let addFriendActionCreator = (id) => ({type: ADD_FRIEND, id});
-export let deleteFriendActionCreator = (id) => ({type: DELETE_FRIEND, id});
-export let setCurrentPageActionCreator = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
-export let setTotalUsersCountActionCreator = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
-export let toggleIsFetchingActionCreator = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
+export let setUsers =(users) => ({type: SET_USERS, users});
+export let addFriend = (id) => ({type: ADD_FRIEND, id});
+export let deleteFriend = (id) => ({type: DELETE_FRIEND, id});
+export let setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
+export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
