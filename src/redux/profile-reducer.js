@@ -1,5 +1,8 @@
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
+const SET_USER_PROFILE = 'SET_USER_PROFILE';
+const START_FETCHING = 'START_FETCHING';
+const STOP_FETCHING = 'STOP_FETCHING';
 
 let initialState = {
   posts: [
@@ -15,10 +18,17 @@ let initialState = {
           },
   ],
   newPostText: 'it-camasutra.com!',
+  profile: null,
+  isFetching: false,
 };
 
 const profileReducer = (state = initialState, action) => {
   switch (action.type) {
+    case SET_USER_PROFILE:
+      return {
+              ...state,
+              profile: action.profile,
+             };
     case ADD_POST:
       return {
               ...state,
@@ -34,6 +44,16 @@ const profileReducer = (state = initialState, action) => {
               ...state,
               newPostText: action.newText,
              };
+    case START_FETCHING:
+        return {
+                 ...state,
+                 isFetching: true,
+               }
+    case STOP_FETCHING:
+        return {
+                 ...state,
+                 isFetching: false,
+               }
     default:
       return state;
   }
@@ -46,3 +66,12 @@ export let addPostActionCreator = (text) =>
 
 export let updateNewPostTextActionCreator = (newText) => 
     ({type: UPDATE_NEW_POST_TEXT, newText,});
+
+export let setUserProfile = (profile) =>
+    ({type: SET_USER_PROFILE, profile});
+
+export let startFetching = () => ({type: START_FETCHING});
+
+
+export let stopFetching = () => 
+    ({type: STOP_FETCHING});

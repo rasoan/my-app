@@ -1,13 +1,14 @@
 import React from "react";
 import style from "./ProfileInfo.module.scss";
 
+const ProfileInfo = (props) => {
 
-const ProfileInfo = () => {
   return (
     <div className={style.ProfileInfoContainer}>
+      <h1>{props.profile.fullName}</h1>
       <img
           className={style.image}
-          src="https://m.iguides.ru/upload/iblock/637/6375946d9669a27030241e80ffa82b93.jpg"
+          src={props.profile.photos.large}
         ></img>
     </div>
   );
