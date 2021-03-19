@@ -22,7 +22,7 @@ let UsersList = (props) => {
                                 toggleIsFetching={props.toggleIsFetching}
                                 isFetching={props.isFetching}/>
                {props.isFetching ? <Preloader /> : null}
-               {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/" + user.id}
+               {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/Profile/" + user.id}
                                                     id={user.id} 
                                                     photo={user.photos.small}
                                                     name={user.name}

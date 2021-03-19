@@ -14,9 +14,9 @@ const App = (props) => {
       <Header />
       <div className={style.container}>
         <LeftPanel />
-        <Route path="/Dialog" render={() => <DialogsContainer />} />
-        <Route path="/Profile" render={() => <ProfileContainer />} />
-        <Route path="/Users" render={() => <Users />} />
+        <Route path='/Dialog' render={() => <DialogsContainer />} />
+        <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
+        <Route path='/Users' render={() => <Users />} />
       </div>
     </div>
   );

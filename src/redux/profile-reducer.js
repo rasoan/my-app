@@ -70,8 +70,8 @@ export let updateNewPostTextActionCreator = (newText) =>
 export let setUserProfile = (profile) =>
     ({type: SET_USER_PROFILE, profile});
 
-export let startFetching = () => ({type: START_FETCHING});
-
+export let startFetching = () => 
+    ({type: START_FETCHING});
 
 export let stopFetching = () => 
     ({type: STOP_FETCHING});
