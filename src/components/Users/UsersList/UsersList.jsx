@@ -13,6 +13,7 @@ let UsersList = (props) => {
     pages.push(i);
   }
   let currentPage = props.currentPage;
+
     return (<>
                <ListPageNumbers pages={pages}
                                 currentPage={currentPage} 
@@ -23,12 +24,17 @@ let UsersList = (props) => {
                                 isFetching={props.isFetching}/>
                {props.isFetching ? <Preloader /> : null}
                {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/Profile/" + user.id}
-                                                    id={user.id} 
-                                                    photo={user.photos.small}
-                                                    name={user.name}
-                                                    followed={user.followed} 
-                                                    addFriend={props.addFriend}
-                                                    deleteFriend={props.deleteFriend} />)}
+                                                                         id={user.id} 
+                                                                         photo={user.photos.small}
+                                                                         name={user.name}
+                                                                         followed={user.followed} 
+                                                                         addFriend={props.addFriend}
+                                                                         deleteFriend={props.deleteFriend}
+                                                                         toggleIsFetching={props.toggleIsFetching}
+                                                                         isFetching={props.isFetching} 
+                                                                         toggleIsFetchingAddOrDeleteFriend={props.toggleIsFetchingAddOrDeleteFriend}
+                                                                         isFetchingAddOrDeleteFriend={props.isFetchingAddOrDeleteFriend}
+                                                                         isFetchingAddOrDeleteFriendId={props.isFetchingAddOrDeleteFriendId === user.id ? props.isFetchingAddOrDeleteFriendId: false}/>)}
            </>);        
 }
 

@@ -8,11 +8,13 @@ const ListPageNumbers = (props) => {
   let onPageChanged = (pageNumber, pagesSize) => {
     props.toggleIsFetching(true);
     props.setCurrentPage(pageNumber);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pagesSize}`)
-         .then(response => {
-           props.setUsers(response.data.items);
-           props.toggleIsFetching(false);
-         });
+    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pagesSize}`, {
+      withCredentials: true,
+    })
+    .then(response => {
+      props.setUsers(response.data.items);
+      props.toggleIsFetching(false);
+    });
   }
 
   let pageNumbers = props
