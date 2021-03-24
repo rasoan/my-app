@@ -5,6 +5,8 @@ import {NavLink} from "react-router-dom";
 import userPhoto from "../../../images/avatar.png";
 import * as axios from "axios";
 import Preloader from "../../Preloader/Preloader";
+import {usersApi} from "../../../api/api";
+
 
 
 const UserItem = (props) => {
@@ -25,35 +27,23 @@ const UserItem = (props) => {
                 {isFetching || <button onClick={() => {
                   if (props.followed) {
                     props.toggleIsFetchingAddOrDeleteFriend(true, props.id);
-                    axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {
-                      withCredentials: true,
-                      headers: {
-                        "API-KEY": "fd622230-6210-4ef3-a457-276f95f589d0",
-                      }
-                    })
-                    .then(response => {
-                      
-                      if (response.data.resultCode === 0) {
-                       props.deleteFriend(props.id);
-                       props.toggleIsFetchingAddOrDeleteFriend(false);
-                      }
-                    });
+                    usersApi.unfollow(props.id)
+                            .then(response => {
+                              if (response.resultCode === 0) {
+                                props.deleteFriend(props.id);
+                                props.toggleIsFetchingAddOrDeleteFriend(false);       
+                              }
+                            });
                   }
                   else {
                     props.toggleIsFetchingAddOrDeleteFriend(true, props.id)
-                    axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${props.id}`, {}, {
-                      withCredentials: true,
-                      headers: {
-                        "API-KEY": "fd622230-6210-4ef3-a457-276f95f589d0",
-                      }
-                    })
-                    .then(response => {
-                      
-                      if (response.data.resultCode === 0) {
-                       props.addFriend(props.id);
-                      }
-                      props.toggleIsFetchingAddOrDeleteFriend(false);
-                    });
+                    usersApi.follow(props.id)
+                            .then(response => {
+                              if (response.resultCode === 0) {
+                                props.addFriend(props.id);
+                              }
+                              props.toggleIsFetchingAddOrDeleteFriend(false);
+                            });
                   }
                 }
                 } className={styleButton}>{buttonText}</button>}

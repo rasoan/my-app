@@ -1,5 +1,5 @@
 import React from "react";
-import * as axios from "axios";
+
 import UsersList from "./UsersList";
 import {connect} from "react-redux";
 import {setUsers, 
@@ -9,19 +9,18 @@ import {setUsers,
         setTotalUsersCount,
         toggleIsFetching,
         toggleIsFetchingAddOrDeleteFriend} from '../../../redux/users-reducer';
+import {usersApi} from "../../../api/api";
 
 class UsersListContainer extends React.Component {
   componentDidMount() {
     const toggleIsFetching = this.props.toggleIsFetching;
     toggleIsFetching(true);
-    axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`,{
-      withCredentials: true,
-    })
-         .then(response => {
-          this.props.setUsers(response.data.items);
-          this.props.setTotalUsersCount(response.data.totalCount);
-          toggleIsFetching(false);
-    });
+    usersApi.getUsers(this.props.currentPage, this.props.pagesSize)
+      .then(response => {
+        this.props.setUsers(response.items);
+        this.props.setTotalUsersCount(response.totalCount);
+        toggleIsFetching(false);
+      });
   }
   
   render() {
