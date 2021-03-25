@@ -8,19 +8,15 @@ import {setUsers,
         setCurrentPage,
         setTotalUsersCount,
         toggleIsFetching,
-        toggleIsFetchingAddOrDeleteFriend} from '../../../redux/users-reducer';
+        isFetchingFollowOrUnfollowStart,
+        isFetchingFollowOrUnfollowEnd,
+        getUsers,
+        unfollow, follow} from '../../../redux/users-reducer';
 import {usersApi} from "../../../api/api";
 
 class UsersListContainer extends React.Component {
   componentDidMount() {
-    const toggleIsFetching = this.props.toggleIsFetching;
-    toggleIsFetching(true);
-    usersApi.getUsers(this.props.currentPage, this.props.pagesSize)
-      .then(response => {
-        this.props.setUsers(response.items);
-        this.props.setTotalUsersCount(response.totalCount);
-        toggleIsFetching(false);
-      });
+    this.props.getUsers(this.props.currentPage, this.props.pagesSize);
   }
   
   render() {
@@ -31,13 +27,13 @@ class UsersListContainer extends React.Component {
                        addFriend={this.props.addFriend}
                        deleteFriend={this.props.deleteFriend}
                        setCurrentPage={this.props.setCurrentPage} 
-                       setUsers={this.props.setUsers} 
                        isFetching={this.props.isFetching}
-                       toggleIsFetching={this.props.toggleIsFetching} 
-                       isFetchingAddOrDeleteFriend={this.props.isFetchingAddOrDeleteFriend}
-                       toggleIsFetchingAddOrDeleteFriend={this.props.toggleIsFetchingAddOrDeleteFriend}
-                       isFetchingAddOrDeleteFriendId={this.props.isFetchingAddOrDeleteFriendId}
-                       />); 
+                       isFetchingFollowOrUnfollowStart={this.props.isFetchingFollowOrUnfollowStart}
+                       isFetchingFollowOrUnfollowEnd={this.props.isFetchingFollowOrUnfollowEnd}
+                       isFetchingFollowOrUnfollowIdList={this.props.isFetchingFollowOrUnfollowIdList} 
+                       getUsers={this.props.getUsers}
+                       follow={this.props.follow} 
+                       unfollow={this.props.unfollow} />); 
   }
 }
 
@@ -48,18 +44,18 @@ let mapStateToProps = (state) => {
           totalUsersCount: state.usersPage.totalUsersCount,
           currentPage: state.usersPage.currentPage,
           isFetching: state.usersPage.isFetching,
-          isFetchingAddOrDeleteFriend: state.usersPage.isFetchingAddOrDeleteFriend,
-          isFetchingAddOrDeleteFriendId: state.usersPage.isFetchingAddOrDeleteFriendId,
+          isFetchingFollowOrUnfollowIdList: state.usersPage.isFetchingFollowOrUnfollowIdList,
          }
 }
 
 export default connect(mapStateToProps,{
                                         deleteFriend,
                                         addFriend,
-                                        setUsers,
                                         setCurrentPage,
-                                        setTotalUsersCount,
-                                        toggleIsFetching,
-                                        toggleIsFetchingAddOrDeleteFriend,
+                                        isFetchingFollowOrUnfollowStart,
+                                        isFetchingFollowOrUnfollowEnd,
+                                        getUsers,
+                                        follow,
+                                        unfollow,
                                        }
                                         )(UsersListContainer);

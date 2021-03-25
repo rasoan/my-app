@@ -1,10 +1,13 @@
+import {usersApi} from "../api/api";
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
-const TOGGLE_IS_FETCHING_ADD_OR_DELETE_FRIEND = 'TOGGLE_IS_FETCHING_ADD_OR_DELETE_FRIEND';
+const IS_FETCHING_FOLLOW_OR_UNFOLLOW_START = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_START';
+const IS_FETCHING_FOLLOW_OR_UNFOLLOW_END = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_END';
+
 
 
 let initialState = {
@@ -13,8 +16,7 @@ let initialState = {
   totalUsersCount: 0,
   currentPage: 2,
   isFetching: false,
-  isFetchingAddOrDeleteFriend: false,
-  isFetchingAddOrDeleteFriendId: false,
+  isFetchingFollowOrUnfollowIdList: [],
 };
 
 
@@ -70,20 +72,17 @@ const usersReducer = (state = initialState, action) => {
                 isFetching: false,
                }
       }
-    case TOGGLE_IS_FETCHING_ADD_OR_DELETE_FRIEND:
-      if (action.isFetchingAddOrDeleteFriend) {
+    case IS_FETCHING_FOLLOW_OR_UNFOLLOW_START:
         return {
                 ...state,
-                isFetchingAddOrDeleteFriend: true,
-                isFetchingAddOrDeleteFriendId: action.isFetchingAddOrDeleteFriendId,
+                isFetchingFollowOrUnfollowIdList: [...state.isFetchingFollowOrUnfollowIdList, action.id],
                }
-        }
-      else {
+    case IS_FETCHING_FOLLOW_OR_UNFOLLOW_END:
+      let isFetchingFollowOrUnfollowIdList = state.isFetchingFollowOrUnfollowIdList.filter(id => id !== action.id);
         return {
                 ...state,
-                isFetchingAddOrDeleteFriend: false,
+                isFetchingFollowOrUnfollowIdList,
                }
-        }
     default:
       return state;
   }
@@ -96,4 +95,43 @@ export let deleteFriend = (id) => ({type: DELETE_FRIEND, id});
 export let setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export let toggleIsFetchingAddOrDeleteFriend = (isFetchingAddOrDeleteFriend, id = false) => ({type: TOGGLE_IS_FETCHING_ADD_OR_DELETE_FRIEND, isFetchingAddOrDeleteFriend, isFetchingAddOrDeleteFriendId: id});
+export let isFetchingFollowOrUnfollowStart = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START, id});
+export let isFetchingFollowOrUnfollowEnd = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END, id});
+
+export const getUsers = (currentPage, pagesSize) => {
+  return (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    usersApi.getUsers(currentPage, pagesSize)
+      .then(response => {
+        dispatch(setUsers(response.items));
+        dispatch(setTotalUsersCount(response.totalCount));
+        dispatch(toggleIsFetching(false));
+      });
+  }
+}
+
+export const unfollow = (id) => {
+  return (dispatch) => {
+    dispatch(isFetchingFollowOrUnfollowStart(id));
+    usersApi.unfollow(id)
+            .then(response => {
+              if (response.resultCode === 0) {
+                dispatch(deleteFriend(id));
+                dispatch(isFetchingFollowOrUnfollowEnd(id));       
+              }
+            });
+  }
+}
+
+export const follow = (id) => {
+  return (dispatch) => {
+    dispatch(isFetchingFollowOrUnfollowStart(id));
+    usersApi.follow(id)
+            .then(response => {
+              if (response.resultCode === 0) {
+                dispatch(addFriend(id));
+              }
+              dispatch(isFetchingFollowOrUnfollowEnd(id));
+            });
+  }
+}

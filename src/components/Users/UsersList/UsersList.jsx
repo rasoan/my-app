@@ -20,8 +20,8 @@ let UsersList = (props) => {
                                 setCurrentPage={props.setCurrentPage}
                                 pagesSize={props.pagesSize} 
                                 setUsers={props.setUsers} 
-                                toggleIsFetching={props.toggleIsFetching}
-                                isFetching={props.isFetching}/>
+                                isFetching={props.isFetching}
+                                getUsers={props.getUsers} />
                {props.isFetching ? <Preloader /> : null}
                {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/Profile/" + user.id}
                                                                          id={user.id} 
@@ -33,8 +33,11 @@ let UsersList = (props) => {
                                                                          toggleIsFetching={props.toggleIsFetching}
                                                                          isFetching={props.isFetching} 
                                                                          toggleIsFetchingAddOrDeleteFriend={props.toggleIsFetchingAddOrDeleteFriend}
-                                                                         isFetchingAddOrDeleteFriend={props.isFetchingAddOrDeleteFriend}
-                                                                         isFetchingAddOrDeleteFriendId={props.isFetchingAddOrDeleteFriendId === user.id ? props.isFetchingAddOrDeleteFriendId: false}/>)}
+                                                                         isFetchingFollowOrUnfollowStart={props.isFetchingFollowOrUnfollowStart}
+                                                                         isFetchingFollowOrUnfollowEnd={props.isFetchingFollowOrUnfollowEnd}
+                                                                         isFetchingFollowOrUnfollowIdList={props.isFetchingFollowOrUnfollowIdList}
+                                                                         follow={props.follow} 
+                                                                         unfollow={props.unfollow} />)}
            </>);        
 }
 

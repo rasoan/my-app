@@ -1,18 +1,14 @@
 import React from "react";
 import style from "./ListPageNumbers.module.scss";
 import {usersApi} from "../../api/api";
+import {getUsersThunkCreator} from '../../redux/users-reducer';
 
 const ListPageNumbers = (props) => {
   let pagesSize = props.pagesSize;
   let isFetchingStyle = props.isFetching ? style.isFetchingStyle: "";
   let onPageChanged = (pageNumber, pagesSize) => {
-    props.toggleIsFetching(true);
     props.setCurrentPage(pageNumber);
-    usersApi.getUsers(pageNumber, pagesSize)
-      .then(response => {
-        props.setUsers(response.items);
-        props.toggleIsFetching(false);
-      });
+    props.getUsers(pageNumber, pagesSize);
   }
 
   let pageNumbers = props

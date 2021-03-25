@@ -7,14 +7,11 @@ import * as axios from "axios";
 import Preloader from "../../Preloader/Preloader";
 import {usersApi} from "../../../api/api";
 
-
-
 const UserItem = (props) => {
   let buttonText = props.followed ? "Удалить из друзей": "Добавить в друзья";
   let styleButton = props.followed ? style.deleteFriendButton: style.addFriendButton;
   let srcPhoto = props.photo ? props.photo: userPhoto;
-  let isFetching = props.isFetchingAddOrDeleteFriend && props.isFetchingAddOrDeleteFriendId === props.id ? <Preloader /> : null;
-  
+  let isFetching = props.isFetchingFollowOrUnfollowIdList.some(element => element === props.id) ? <Preloader /> : null;
   return (
             <div className={style.UserItemContainer}>
               <NavLink to={props.navlinkTo}>
@@ -25,25 +22,12 @@ const UserItem = (props) => {
                 <p>{""}</p>
                 <p>{""}</p>
                 {isFetching || <button onClick={() => {
-                  if (props.followed) {
-                    props.toggleIsFetchingAddOrDeleteFriend(true, props.id);
-                    usersApi.unfollow(props.id)
-                            .then(response => {
-                              if (response.resultCode === 0) {
-                                props.deleteFriend(props.id);
-                                props.toggleIsFetchingAddOrDeleteFriend(false);       
-                              }
-                            });
+                  if (!props.followed) {
+                    props.follow(props.id);
                   }
-                  else {
-                    props.toggleIsFetchingAddOrDeleteFriend(true, props.id)
-                    usersApi.follow(props.id)
-                            .then(response => {
-                              if (response.resultCode === 0) {
-                                props.addFriend(props.id);
-                              }
-                              props.toggleIsFetchingAddOrDeleteFriend(false);
-                            });
+
+                  if (props.followed) {
+                    props.unfollow(props.id);
                   }
                 }
                 } className={styleButton}>{buttonText}</button>}
