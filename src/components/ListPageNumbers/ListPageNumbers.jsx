@@ -1,7 +1,5 @@
 import React from "react";
 import style from "./ListPageNumbers.module.scss";
-import {usersApi} from "../../api/api";
-import {getUsersThunkCreator} from '../../redux/users-reducer';
 
 const ListPageNumbers = (props) => {
   let pagesSize = props.pagesSize;

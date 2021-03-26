@@ -8,8 +8,6 @@ const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const IS_FETCHING_FOLLOW_OR_UNFOLLOW_START = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_START';
 const IS_FETCHING_FOLLOW_OR_UNFOLLOW_END = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_END';
 
-
-
 let initialState = {
   users: [],
   pagesSize: 5,
@@ -18,7 +16,6 @@ let initialState = {
   isFetching: false,
   isFetchingFollowOrUnfollowIdList: [],
 };
-
 
 const usersReducer = (state = initialState, action) => {
   

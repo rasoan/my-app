@@ -3,9 +3,8 @@ import style from "./UserItem.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
 import userPhoto from "../../../images/avatar.png";
-import * as axios from "axios";
 import Preloader from "../../Preloader/Preloader";
-import {usersApi} from "../../../api/api";
+
 
 const UserItem = (props) => {
   let buttonText = props.followed ? "Удалить из друзей": "Добавить в друзья";

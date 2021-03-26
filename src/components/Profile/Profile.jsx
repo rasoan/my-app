@@ -5,7 +5,6 @@ import PostsContainer from "./Posts/PostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
              
 const Profile = (props) => {
-
   if (!props.profile) return (<></>);
   return (
     <div className={style.ProfileContainer}>

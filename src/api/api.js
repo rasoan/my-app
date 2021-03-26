@@ -1,4 +1,3 @@
-
 import * as axios from "axios";
 
 const instance = axios.create({
@@ -10,6 +9,15 @@ const instance = axios.create({
 });
 
 export const usersApi = {
+    getAuthMe() {
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/auth/me`)
+                       .then(response => response.data);
+    },
+    getProfile(id) {
+        id = id ? id: 2;
+        return instance.get(`https://social-network.samuraijs.com/api/1.0/profile/`+ id)
+                       .then(response => response.data);
+    },
     getUsers(currentPage = 1, pagesSize = 10) {
         return instance.get(`users?page=${currentPage}&count=${pagesSize}`)
                        .then(response => response.data);

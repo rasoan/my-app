@@ -61,3 +61,18 @@ export let sendMessageCreator = (newMessage) =>
     ({type: SEND_MESSAGE, newMessage,});
 export let updateNewMessageBodyCreator = (body) => 
     ({type: UPDATE_NEW_MESSAGE_BODY, body,});
+
+
+export const onSendMessageClick = (newMessageBody) => {
+      return (dispatch) => {
+              let action = sendMessageCreator(newMessageBody);
+              dispatch(action);
+             }
+}
+
+export const onNewMessageChange = (newMessageElement) => {
+  return (dispatch) => {
+           let action = updateNewMessageBodyCreator(newMessageElement);
+           dispatch(action);
+         }
+}

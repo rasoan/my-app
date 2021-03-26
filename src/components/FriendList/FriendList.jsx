@@ -3,7 +3,6 @@ import style from "./FriendList.module.scss";
 import PropTypes from "prop-types";
 import Friend from "./Friend/Friend";
 
-
 const FriendList = (props) => {
   let styleContainer = props.friendList.length ? style.container: "";
   let friends = props.friendList.map((friend) => <Friend navlinkTo={"/" + friend.id} 
@@ -14,7 +13,6 @@ const FriendList = (props) => {
            </div>
          );
 }
-
 
 FriendList.propTypes = {
   // message: PropTypes.string.isRequired,

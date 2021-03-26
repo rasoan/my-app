@@ -19,7 +19,6 @@ let UsersList = (props) => {
                                 currentPage={currentPage} 
                                 setCurrentPage={props.setCurrentPage}
                                 pagesSize={props.pagesSize} 
-                                setUsers={props.setUsers} 
                                 isFetching={props.isFetching}
                                 getUsers={props.getUsers} />
                {props.isFetching ? <Preloader /> : null}
@@ -27,20 +26,12 @@ let UsersList = (props) => {
                                                                          id={user.id} 
                                                                          photo={user.photos.small}
                                                                          name={user.name}
-                                                                         followed={user.followed} 
-                                                                         addFriend={props.addFriend}
-                                                                         deleteFriend={props.deleteFriend}
-                                                                         toggleIsFetching={props.toggleIsFetching}
-                                                                         isFetching={props.isFetching} 
-                                                                         toggleIsFetchingAddOrDeleteFriend={props.toggleIsFetchingAddOrDeleteFriend}
-                                                                         isFetchingFollowOrUnfollowStart={props.isFetchingFollowOrUnfollowStart}
-                                                                         isFetchingFollowOrUnfollowEnd={props.isFetchingFollowOrUnfollowEnd}
+                                                                         followed={user.followed}
                                                                          isFetchingFollowOrUnfollowIdList={props.isFetchingFollowOrUnfollowIdList}
                                                                          follow={props.follow} 
                                                                          unfollow={props.unfollow} />)}
            </>);        
 }
-
 
 UsersList.propTypes = {
   // message: PropTypes.string.isRequired,
