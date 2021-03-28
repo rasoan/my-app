@@ -1,7 +1,9 @@
 import React from "react";
 import style from "./Users.module.scss";
 import PropTypes from "prop-types";
-import UsersListContainer from "./UsersList/UsersListContainer"
+import UsersListContainer from "./UsersList/UsersListContainer";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
              
 const Users = (props) => {
   return (
@@ -11,4 +13,6 @@ const Users = (props) => {
   );
 };
 
-export default Users;
+export default compose(
+                       withAuthRedirect
+                      )(Users);

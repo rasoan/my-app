@@ -29,7 +29,8 @@ let UsersList = (props) => {
                                                                          followed={user.followed}
                                                                          isFetchingFollowOrUnfollowIdList={props.isFetchingFollowOrUnfollowIdList}
                                                                          follow={props.follow} 
-                                                                         unfollow={props.unfollow} />)}
+                                                                         unfollow={props.unfollow}
+                                                                         defaultAvatarSrc={props.defaultAvatarSrc} />)}
            </>);        
 }
 

@@ -1,4 +1,5 @@
 import {usersApi} from "../api/api";
+import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 const ADD_FRIEND = 'ADD_FRIEND';
 const DELETE_FRIEND = 'DELETE_FRIEND';
 const SET_USERS = 'SET_USERS';
@@ -10,6 +11,7 @@ const IS_FETCHING_FOLLOW_OR_UNFOLLOW_END = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_END';
 
 let initialState = {
   users: [],
+  defaultAvatarSrc: DEFAULT_AVATAR_SRC,
   pagesSize: 5,
   totalUsersCount: 0,
   currentPage: 2,

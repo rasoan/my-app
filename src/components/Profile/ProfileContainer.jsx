@@ -3,12 +3,22 @@ import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
 import Profile from "../Profile/Profile";
 import {connect} from "react-redux";
-import {getProfile} from "../../redux/profile-reducer";
+import {getProfile, lookingMyProfile, notLookingMyProfile} from "../../redux/profile-reducer";
 import { withRouter } from "react-router";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {compose} from "redux";
                  
 class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.getProfile(this.props.match.params.userId);
+    if (this.props.match.params.userId) {
+      console.log("смотрим чужую страницу");
+      this.props.notLookingMyProfile();
+    }
+    else {
+      console.log("это мой профайл");
+      this.props.lookingMyProfile();
+    }
   }
   render() {
     return (
@@ -24,5 +34,8 @@ let mapStateToProps = (state) => (
   }
 )
 
-let WithUrlDataContainerComponent = withRouter(ProfileContainer)
-export default connect(mapStateToProps,{getProfile,})(WithUrlDataContainerComponent);
+export default compose(
+                       withAuthRedirect,
+                       connect(mapStateToProps,{getProfile, lookingMyProfile, notLookingMyProfile}),
+                       withRouter
+                      )(ProfileContainer);

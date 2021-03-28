@@ -8,12 +8,14 @@ import {
        } from '../../../redux/users-reducer';
 
 
+
 class UsersListContainer extends React.Component {
   componentDidMount() {
     this.props.getUsers(this.props.currentPage, this.props.pagesSize);
   }
   
   render() {
+
     return (<UsersList totalUsersCount={this.props.totalUsersCount}
                        pagesSize={this.props.pagesSize}
                        currentPage={this.props.currentPage}
@@ -23,7 +25,8 @@ class UsersListContainer extends React.Component {
                        isFetchingFollowOrUnfollowIdList={this.props.isFetchingFollowOrUnfollowIdList} 
                        getUsers={this.props.getUsers}
                        follow={this.props.follow} 
-                       unfollow={this.props.unfollow} />); 
+                       unfollow={this.props.unfollow} 
+                       defaultAvatarSrc={this.props.defaultAvatarSrc} />); 
   }
 }
 
@@ -35,6 +38,8 @@ let mapStateToProps = (state) => {
           currentPage: state.usersPage.currentPage,
           isFetching: state.usersPage.isFetching,
           isFetchingFollowOrUnfollowIdList: state.usersPage.isFetchingFollowOrUnfollowIdList,
+          isAuth: state.auth.isAuth,
+          defaultAvatarSrc: state.usersPage.defaultAvatarSrc,
          }
 }
 

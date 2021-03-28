@@ -1,0 +1,1 @@
+export const DEFAULT_STATUS_TEXT = "Статуса нет.";
