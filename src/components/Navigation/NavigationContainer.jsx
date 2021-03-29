@@ -1,12 +1,13 @@
 import React from "react";
 import Navigation from './Navigation';
-import {getProfile} from '../../redux/profile-reducer';
+import {getProfile, lookingMyProfile} from '../../redux/profile-reducer';
 import {compose} from "redux";
 import {connect} from "react-redux";
 
 class NavigationContainer extends React.Component {
   clickProfileLink= () => {
-    this.props.getProfile()
+    this.props.getProfile();
+    this.props.lookingMyProfile();
   }
 
   render() {
@@ -21,5 +22,5 @@ let mapStateToProps = (state) => (
   }
 )
 export default compose(
-                       connect(mapStateToProps, {getProfile})
+                       connect(mapStateToProps, {getProfile, lookingMyProfile})
                       )(NavigationContainer);

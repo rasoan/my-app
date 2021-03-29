@@ -5,9 +5,10 @@ import Friend from "./Friend/Friend";
 
 const FriendList = (props) => {
   let styleContainer = props.friendList.length ? style.container: "";
-  let friends = props.friendList.map((friend) => <Friend navlinkTo={"/Profile/" + friend.id} 
+  let friends = props.friendList.map((friend) => <Friend id={friend.id} 
                                                          srcPhoto={friend.photos.small}
-                                                         name={friend.name} />);
+                                                         name={friend.name} 
+                                                         clickProfileUser={props.clickProfileUser}/>);
   return ( <div className={styleContainer}>
             {friends}
            </div>

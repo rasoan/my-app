@@ -1,12 +1,16 @@
 import React from "react";
 import FriendList from './FriendList'
 import {connect} from "react-redux";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+import {getProfile, notLookingMyProfile} from "../../redux/profile-reducer";
 import {compose} from "redux";
 
 class FriendListContainer extends React.Component {
+  clickProfileUser = (id) => {
+    this.props.getProfile(id);
+    this.props.notLookingMyProfile();
+  }
   render() {
-    return <FriendList friendList={this.props.friendList}/>
+    return <FriendList friendList={this.props.friendList} clickProfileUser={this.clickProfileUser} />
   }
 }
 
@@ -19,5 +23,5 @@ let mapStateToProps = (state) => {
 
 
 export default compose(
-                       connect(mapStateToProps, {})
+                       connect(mapStateToProps, {getProfile, notLookingMyProfile})
                       )(FriendListContainer);

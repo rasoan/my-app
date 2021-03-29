@@ -7,7 +7,7 @@ import userPhoto from "../../../images/avatar.png"
 const Friend = (props) => {
   let srcPhoto = props.srcPhoto ? props.srcPhoto: userPhoto;
 
-  return (<NavLink className={style.friendContainer} to={props.navlinkTo}>
+  return (<NavLink onClick={() => props.clickProfileUser(props.id)} className={style.friendContainer} to={`/Profile/${props.id}`}>
             <img className={style.photo} src={srcPhoto} />
             <p className={style.name}>{props.name}</p>
           </NavLink>

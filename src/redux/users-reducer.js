@@ -27,8 +27,7 @@ const usersReducer = (state = initialState, action) => {
               ...state,
               users: [...action.users]
              }
-    case ADD_FRIEND:
-      
+    case ADD_FRIEND:   
       return {
               ...state,
               users: state.users.map(u => {
