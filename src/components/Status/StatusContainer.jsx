@@ -17,20 +17,20 @@ class StatusContainer extends React.Component {
     }
   }
 
-  activateEditMode() {
+  activateEditMode = () => {
     this.setState({
                    editMode: true,
                    textInput: this.props.statusText,
                   });
   }
-  deActivateEditMode() {
+  deActivateEditMode = () => {
     this.setState({editMode: false,});
 
     if (this.props.statusText === "") {
       this.props.useDefaultStatusText();
     }
   }
-  deActivateEditModeEnterDown(e) {
+  deActivateEditModeEnterDown = (e) => {
     if (e.keyCode === 13) {
       this.setState({editMode: false,});
       if (this.props.statusText === "") {
@@ -46,9 +46,9 @@ class StatusContainer extends React.Component {
 
   render() {
     return <Status editMode={this.state.editMode}
-                   activateEditMode={this.activateEditMode.bind(this)} 
-                   deActivateEditMode={this.deActivateEditMode.bind(this)}
-                   deActivateEditModeEnterDown={this.deActivateEditModeEnterDown.bind(this)}
+                   activateEditMode={this.activateEditMode} 
+                   deActivateEditMode={this.deActivateEditMode}
+                   deActivateEditModeEnterDown={this.deActivateEditModeEnterDown}
                    onStatusChange={this.props.onStatusChange} 
                    statusText={this.props.statusText} 
                    lookingAtMyProfile={this.props.lookingAtMyProfile}/>
