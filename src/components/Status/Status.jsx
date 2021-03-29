@@ -6,8 +6,9 @@ const Status = (props) => {
   let activateEditMode = props.lookingAtMyProfile ? props.activateEditMode.bind(this): ()=>{};
   let statusTextStyle = props.lookingAtMyProfile ? style.statusText: "";
 
-  return <div>
-           {props.editMode && <input ref={newStatusElement}
+  return <div className={style.statusTextContainer}>
+           {props.editMode && <input className={style.inputStatusText}
+                                     ref={newStatusElement}
                                      onFocus={(event) => event.target.select()}
                                      onKeyDown={(e) => props.deActivateEditModeEnterDown(e)}
                                      onBlur={props.deActivateEditMode}
@@ -15,10 +16,9 @@ const Status = (props) => {
                                      type="text"
                                      autoFocus={true}
                                      value={props.statusText} />}
-           {!props.editMode && <div className={style.statusTextContainer}>
-                                 <span className={statusTextStyle} 
-                                       onClick={activateEditMode}>{props.statusText}</span>
-                               </div>}
+           {!props.editMode && <span className={statusTextStyle} 
+                                       onClick={activateEditMode}>{props.statusText}</span>}
+                               
          </div>
 };
 
