@@ -12,11 +12,9 @@ class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.getProfile(this.props.match.params.userId);
     if (this.props.match.params.userId) {
-      console.log("смотрим чужую страницу");
       this.props.notLookingMyProfile();
     }
     else {
-      console.log("это мой профайл");
       this.props.lookingMyProfile();
     }
   }
