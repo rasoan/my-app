@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./LeftPanel.module.scss";
-import Navigation from "../Navigation";
+import NavigationContainer from "../Navigation/NavigationContainer";
 import FriendListContainer from "../FriendList/FriendListContainer";
 
 const LeftPanel = () => {
   return ( <div className={style.leftPanelWrapper}>
-             <Navigation />
+             <NavigationContainer />
              <FriendListContainer />
           </div>
          )};

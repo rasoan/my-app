@@ -13,7 +13,6 @@ const USE_DEFAULT_STATUS_TEXT = 'USE_DEFAULT_STATUS_TEXT';
 const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
 
-
 let initialState = {
   posts: [{
       content: 'alo',
@@ -31,6 +30,7 @@ let initialState = {
   isFetching: false,
   statusText: null,
   lookingAtMyProfile: true,
+  redrawToProfileComponent: true,
 };
 
 const profileReducer = (state = initialState, action) => {
