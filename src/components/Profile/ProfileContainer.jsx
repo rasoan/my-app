@@ -3,7 +3,7 @@ import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
 import Profile from "../Profile/Profile";
 import {connect} from "react-redux";
-import {getProfile, lookingMyProfile, notLookingMyProfile} from "../../redux/profile-reducer";
+import {getProfile, lookingMyProfile, notLookingMyProfile, getStatus} from "../../redux/profile-reducer";
 import { withRouter } from "react-router";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
@@ -11,6 +11,7 @@ import {compose} from "redux";
 class ProfileContainer extends React.Component {
   componentDidMount() {
     this.props.getProfile(this.props.match.params.userId);
+    this.props.getStatus(this.props.match.params.userId);
     if (this.props.match.params.userId) {
       this.props.notLookingMyProfile();
     }
@@ -34,6 +35,6 @@ let mapStateToProps = (state) => (
 
 export default compose(
                        withAuthRedirect,
-                       connect(mapStateToProps,{getProfile, lookingMyProfile, notLookingMyProfile}),
+                       connect(mapStateToProps,{getProfile, lookingMyProfile, notLookingMyProfile, getStatus}),
                        withRouter
                       )(ProfileContainer);

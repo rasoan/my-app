@@ -1,16 +1,19 @@
 import {
-  usersApi
+  usersApi,
+  profileAPI
 } from "../api/api";
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-import {DEFAULT_STATUS_TEXT} from "../constants/Profile"
+import {DEFAULT_STATUS_TEXT, MY_ID} from "../constants/Profile"
 const ADD_POST = 'ADD-POST';
 const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const START_FETCHING = 'START_FETCHING';
 const STOP_FETCHING = 'STOP_FETCHING';
-const UPDATE_NEW_STATUS_TEXT = 'UPDATE_NEW_STATUS_TEXT';
+const GET_STATUS = 'GET_STATUS';
+const UPDATE_STATUS_TEXT = 'UPDATE_STATUS_TEXT';
 const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
+
 
 let initialState = {
   posts: [{
@@ -45,7 +48,6 @@ const profileReducer = (state = initialState, action) => {
                                  large: action.profile.photos.large || DEFAULT_AVATAR_SRC,
                                 }
                        },
-              statusText: action.profile.aboutMe || DEFAULT_STATUS_TEXT,
              };
     case ADD_POST:
       return {
@@ -72,10 +74,11 @@ const profileReducer = (state = initialState, action) => {
           ...state,
           isFetching: false,
         }
-      case UPDATE_NEW_STATUS_TEXT:
+      case UPDATE_STATUS_TEXT:
+        let updateStatusText = action.statusText && action.statusText !== ""? action.statusText: DEFAULT_STATUS_TEXT;
         return {
                 ...state,
-                statusText: action.statusText,
+                statusText: updateStatusText,
                }
       case SET_FLAG_LOOKING_AT_MY_PROFILE:
         return {
@@ -86,6 +89,13 @@ const profileReducer = (state = initialState, action) => {
         return {
                 ...state,
                 lookingAtMyProfile: false,
+               }
+      case GET_STATUS:
+        let getStatusText = action.statusText && action.statusText !== ""? action.statusText: DEFAULT_STATUS_TEXT;
+        debugger
+        return {
+                ...state,
+                statusText: getStatusText,
                }
         default:
           return state;
@@ -124,7 +134,7 @@ export let stopFetching = () =>
 
 export let updateNewStatusTextAC = (statusText) =>
 ({
-  type: UPDATE_NEW_STATUS_TEXT,
+  type: UPDATE_STATUS_TEXT,
   statusText,
 });
 
@@ -138,10 +148,17 @@ export let notLookingMyProfileAC = () =>
   type: SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
 });
 
+export let getStatusAC = (statusText) =>
+({
+  type: GET_STATUS,
+  statusText
+})
+
 export const getProfile = (id) => {
+  id = id ? id: MY_ID;
   return (dispatch) => {
            dispatch(startFetching());
-           usersApi.getProfile(id)
+           profileAPI.getProfile(id)
                    .then(response => {
                      dispatch(setUserProfile(response));
                      dispatch(stopFetching());
@@ -163,10 +180,15 @@ export const addPost = (newPostText) => {
           }
 }
 
-export const updateNewStatusText = (newStatusElement) => {
+export const updateNewStatusText = (newStatusText) => {
   return (dispatch) => {
-           let action = updateNewStatusTextAC(newStatusElement);
-           dispatch(action);
+           profileAPI.updateStatus(newStatusText)
+                     .then(response => {
+                        if (response.status === 200) {
+                          let action = updateNewStatusTextAC(newStatusText);
+                          dispatch(action);
+                        }
+                     });
          }
 }
 
@@ -182,4 +204,17 @@ export const notLookingMyProfile = () => {
           let action = notLookingMyProfileAC();
           dispatch(action);
   }
+}
+
+export const getStatus = (userId) => {
+  userId = userId ? userId: MY_ID;
+  return (dispatch) => {
+           profileAPI.getStatus(userId)
+                     .then(response => {
+                       if(response.status === 200) {
+                        let action = getStatusAC(response.data);
+                        dispatch(action);
+                       }
+                     });
+          }
 }
