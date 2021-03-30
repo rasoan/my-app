@@ -12,8 +12,13 @@ class StatusContainer extends React.Component {
     statusTextCopy: null,
   }
 
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
     
+    if (prevProps.statusText !== this.props.statusText) {
+      this.setState({
+                     statusText: this.props.statusText,  
+                    });
+    }
   }
 
   onStatusChange = (statusText) => {
