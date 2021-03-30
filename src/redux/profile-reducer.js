@@ -92,7 +92,6 @@ const profileReducer = (state = initialState, action) => {
                }
       case GET_STATUS:
         let getStatusText = action.statusText && action.statusText !== ""? action.statusText: DEFAULT_STATUS_TEXT;
-        debugger
         return {
                 ...state,
                 statusText: getStatusText,
@@ -160,8 +159,10 @@ export const getProfile = (id) => {
            dispatch(startFetching());
            profileAPI.getProfile(id)
                    .then(response => {
-                     dispatch(setUserProfile(response));
-                     dispatch(stopFetching());
+                     if(response.status === 200) {
+                       dispatch(setUserProfile(response.data));
+                       dispatch(stopFetching());
+                    }
                    });
           }
 }

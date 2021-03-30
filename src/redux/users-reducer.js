@@ -101,9 +101,11 @@ export const getUsers = (currentPage, pagesSize) => {
     dispatch(toggleIsFetching(true));
     usersApi.getUsers(currentPage, pagesSize)
       .then(response => {
-        dispatch(setUsers(response.items));
-        dispatch(setTotalUsersCount(response.totalCount));
-        dispatch(toggleIsFetching(false));
+        if(response.status === 200) {
+          dispatch(setUsers(response.data.items));
+          dispatch(setTotalUsersCount(response.data.totalCount));
+          dispatch(toggleIsFetching(false));
+        }
       });
   }
 }
@@ -113,7 +115,7 @@ export const unfollow = (id) => {
     dispatch(isFetchingFollowOrUnfollowStart(id));
     usersApi.unfollow(id)
             .then(response => {
-              if (response.resultCode === 0) {
+              if (response.data.resultCode === 0) {
                 dispatch(deleteFriend(id));
                 dispatch(isFetchingFollowOrUnfollowEnd(id));       
               }
@@ -126,7 +128,7 @@ export const follow = (id) => {
     dispatch(isFetchingFollowOrUnfollowStart(id));
     usersApi.follow(id)
             .then(response => {
-              if (response.resultCode === 0) {
+              if (response.data.resultCode === 0) {
                 dispatch(addFriend(id));
               }
               dispatch(isFetchingFollowOrUnfollowEnd(id));
