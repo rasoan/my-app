@@ -3,44 +3,59 @@ import style from "./Status.module.scss";
 import Status from "./Status";
 import {compose} from "redux";
 import { connect } from "react-redux";
-import {onStatusChange, useDefaultStatusText} from "../../redux/profile-reducer";
+import {updateNewStatusText} from "../../redux/profile-reducer";
 
 class StatusContainer extends React.Component {
   state = {
     editMode: false,
-    textInput: null,
+    statusText: this.props.statusText,
+    statusTextCopy: null,
   }
 
   componentDidMount() {
-    if (!this.props.statusText) {
-      this.props.useDefaultStatusText();
-    }
+    
+  }
+
+  onStatusChange = (statusText) => {
+    this.setState({statusText,});
   }
 
   activateEditMode = () => {
     this.setState({
                    editMode: true,
-                   textInput: this.props.statusText,
+                   statusTextCopy: this.state.statusText,
                   });
   }
   deActivateEditMode = () => {
     this.setState({editMode: false,});
-
-    if (this.props.statusText === "") {
-      this.props.useDefaultStatusText();
+    if (this.state.statusText === "") {
+      this.setState({statusText: this.props.defaultStatusText,});
+      this.props.updateNewStatusText(this.props.defaultStatusText);
+    }
+    else {
+      this.props.updateNewStatusText(this.state.statusText);
     }
   }
-  deActivateEditModeEnterDown = (e) => {
-    if (e.keyCode === 13) {
-      this.setState({editMode: false,});
-      if (this.props.statusText === "") {
-        this.props.useDefaultStatusText();
+  deActivateEditModeEnterOrEsc = (e) => {
+    if (e.keyCode === 13) { // если клавиша Enter
+      if (this.state.statusText === "") {
+        this.setState({
+                       editMode: false,
+                       statusText: this.props.defaultStatusText,
+                      });
+        this.props.updateNewStatusText(this.props.defaultStatusText);
+      }
+      else {
+        this.setState({editMode: false,});
+        this.props.updateNewStatusText(this.state.statusText);
       }
     }
 
-    if (e.keyCode === 27) {
-      this.setState({editMode: false,});
-      this.props.onStatusChange(this.state.textInput);
+    if (e.keyCode === 27) { // если клавиша esc
+      this.setState({
+        editMode: false,
+        statusText: this.state.statusTextCopy,
+       });
     }
   }
 
@@ -48,18 +63,19 @@ class StatusContainer extends React.Component {
     return <Status editMode={this.state.editMode}
                    activateEditMode={this.activateEditMode} 
                    deActivateEditMode={this.deActivateEditMode}
-                   deActivateEditModeEnterDown={this.deActivateEditModeEnterDown}
-                   onStatusChange={this.props.onStatusChange} 
-                   statusText={this.props.statusText} 
+                   deActivateEditModeEnterOrEsc={this.deActivateEditModeEnterOrEsc}
+                   onStatusChange={this.onStatusChange} 
+                   statusText={this.state.statusText} 
                    lookingAtMyProfile={this.props.lookingAtMyProfile}/>
   };
 }
 
 let mapStateToProps = (state) => ({
   statusText: state.profilePage.statusText,
+  defaultStatusText: state.profilePage.defaultStatusText,
   lookingAtMyProfile: state.profilePage.lookingAtMyProfile,
 });
 
 export default compose(
-                       connect(mapStateToProps, {onStatusChange, useDefaultStatusText})
+                       connect(mapStateToProps, {updateNewStatusText})
                       )(StatusContainer);

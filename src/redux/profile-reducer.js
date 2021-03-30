@@ -9,7 +9,6 @@ const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const START_FETCHING = 'START_FETCHING';
 const STOP_FETCHING = 'STOP_FETCHING';
 const UPDATE_NEW_STATUS_TEXT = 'UPDATE_NEW_STATUS_TEXT';
-const USE_DEFAULT_STATUS_TEXT = 'USE_DEFAULT_STATUS_TEXT';
 const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
 
@@ -28,7 +27,8 @@ let initialState = {
   newPostText: 'it-camasutra.com!',
   profile: null,
   isFetching: false,
-  statusText: null,
+  defaultStatusText: DEFAULT_STATUS_TEXT,
+  statusText: DEFAULT_STATUS_TEXT,
   lookingAtMyProfile: true,
   redrawToProfileComponent: true,
 };
@@ -77,11 +77,6 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 statusText: action.statusText,
                }
-      case USE_DEFAULT_STATUS_TEXT:
-        return {
-                ...state,
-                statusText: action.defaultStatusText,
-               }
       case SET_FLAG_LOOKING_AT_MY_PROFILE:
         return {
                 ...state,
@@ -127,16 +122,10 @@ export let stopFetching = () =>
     type: STOP_FETCHING
   });
 
-export let updateNewStatusText = (newStatusElement) =>
+export let updateNewStatusTextAC = (statusText) =>
 ({
   type: UPDATE_NEW_STATUS_TEXT,
-  statusText: newStatusElement,
-});
-
-export let defaultStatusTextAC = () => 
-({
-  type: USE_DEFAULT_STATUS_TEXT,
-  defaultStatusText: DEFAULT_STATUS_TEXT,
+  statusText,
 });
 
 export let lookingMyProfileAC = () =>
@@ -174,17 +163,10 @@ export const addPost = (newPostText) => {
           }
 }
 
-export const onStatusChange = (newStatusElement) => {
+export const updateNewStatusText = (newStatusElement) => {
   return (dispatch) => {
-           let action = updateNewStatusText(newStatusElement);
+           let action = updateNewStatusTextAC(newStatusElement);
            dispatch(action);
-         }
-}
-
-export const useDefaultStatusText = () => {
-  return (dispatch) => {
-          let action = defaultStatusTextAC();
-          dispatch(action);
          }
 }
 
