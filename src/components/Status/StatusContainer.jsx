@@ -13,7 +13,6 @@ class StatusContainer extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    
     if (prevProps.statusText !== this.props.statusText) {
       this.setState({
                      statusText: this.props.statusText,  
@@ -31,36 +30,21 @@ class StatusContainer extends React.Component {
                    statusTextCopy: this.state.statusText,
                   });
   }
+
   deActivateEditMode = () => {
     this.setState({editMode: false,});
-    if (this.state.statusText === "") {
-      this.setState({statusText: this.props.defaultStatusText,});
-      this.props.updateNewStatusText(this.props.defaultStatusText);
-    }
-    else {
-      this.props.updateNewStatusText(this.state.statusText);
-    }
+    let statusText = this.state.statusText !== "" ? this.state.statusText: this.props.defaultStatusText;
+    this.props.updateNewStatusText(statusText);
   }
   deActivateEditModeEnterOrEsc = (e) => {
     if (e.keyCode === 13) { // если клавиша Enter
-      if (this.state.statusText === "") {
-        this.setState({
-                       editMode: false,
-                       statusText: this.props.defaultStatusText,
-                      });
-        this.props.updateNewStatusText(this.props.defaultStatusText);
-      }
-      else {
-        this.setState({editMode: false,});
-        this.props.updateNewStatusText(this.state.statusText);
-      }
+      this.setState({editMode: false,});
+      let statusText = this.state.statusText !== "" ? this.state.statusText: this.props.defaultStatusText;
+      this.props.updateNewStatusText(statusText);
     }
 
     if (e.keyCode === 27) { // если клавиша esc
-      this.setState({
-        editMode: false,
-        statusText: this.state.statusTextCopy,
-       });
+      this.setState({editMode: false, statusText: this.state.statusTextCopy,});
     }
   }
 
