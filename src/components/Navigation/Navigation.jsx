@@ -13,27 +13,27 @@ const Navigation = (props) => {
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Dialog">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/dialog">
             Dialog
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/News">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/news">
               News
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Music">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/music">
               Music
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Users">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/users">
               Users
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/Settings">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/settings">
               Settings
             </NavLink>
           </li>

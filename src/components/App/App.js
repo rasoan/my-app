@@ -5,7 +5,7 @@ import Header from '../Header';
 import ProfileContainer from '../Profile/ProfileContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import Users from '../Users/Users';
-import Login from '../Login';
+import Authorization from '../Authorization/Authorization';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -15,10 +15,10 @@ const App = (props) => {
       <Header />
       <div className={style.container}>
         <LeftPanel />
-        <Route path='/Dialog' render={() => <DialogsContainer />} />
-        <Route path='/Profile/:userId?' render={() => <ProfileContainer />} />
-        <Route path='/Users' render={() => <Users />} />
-        <Route path='/Login' render={() => <Login />} />
+        <Route path='/dialog' render={() => <DialogsContainer />} />
+        <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
+        <Route path='/users' render={() => <Users />} />
+        <Route path='/authorization' render={() => <Authorization />} />
       </div>
     </div>
   );
