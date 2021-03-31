@@ -64,6 +64,11 @@ export const signIn = (email, password, rememberMe = false, captcha = true)  => 
             .then(response => {
               let {id, email, login} = response.data.data;
               if (response.data.resultCode === 0) {
+                console.log("правильный пароль, вы залогинились!")
+                
+              }
+              else {
+                console.log("неверный пароль!")
               }
               authAPI.getAuthMe()
                      .then(response => {
