@@ -5,7 +5,7 @@ import Header from '../Header';
 import ProfileContainer from '../Profile/ProfileContainer';
 import DialogsContainer from '../Dialogs/DialogsContainer';
 import Users from '../Users/Users';
-import Authorization from '../Authorization/Authorization';
+import AuthorizationPage from '../Authorization/AuthorizationPage/AuthorizationPage';
 import { Route } from 'react-router-dom';
 
 const App = (props) => {
@@ -18,7 +18,7 @@ const App = (props) => {
         <Route path='/dialog' render={() => <DialogsContainer />} />
         <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
         <Route path='/users' render={() => <Users />} />
-        <Route path='/authorization' render={() => <Authorization />} />
+        <Route path='/authorization' render={() => <AuthorizationPage />} />
       </div>
     </div>
   );

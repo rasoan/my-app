@@ -1,12 +1,18 @@
 import {authAPI} from "../api/api";
+import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
 const SET_USER_DATA = "SET_USER_DATA";
 const SIGN_IN = "SIGN_IN";
+const SIGN_UP = "SIGN_UP";
+const LOG_OUT = "LOG_OUT";
 
 let initialState = {
   userId: null,
   email: null,
   login: null,
   isAuth: false,
+  signInImg: SIGN_IN_IMG,
+  signUpImg: SIGN_UP_IMG,
+  logOutImg: LOG_OUT_IMG,
 };
 //SignIn
 const authReducer = (state = initialState, action) => {
@@ -18,6 +24,16 @@ const authReducer = (state = initialState, action) => {
               isAuth: true,
              }
       case SIGN_IN:
+        return {
+                ...state,
+                isAuth: action.isAuth,
+               }
+      case SIGN_UP:
+        return {
+                ...state,
+                isAuth: action.isAuth,
+               }
+      case LOG_OUT:
         return {
                 ...state,
                 isAuth: action.isAuth,
@@ -44,6 +60,20 @@ export let signInAC = (isAuth) => {
           type: SIGN_IN,
           isAuth,
          }
+}
+
+export let signUpAC = (isAuth) => {
+  return {
+    type: SIGN_UP,
+    isAuth,
+   }
+}
+
+export let logOutAC = (isAuth) => {
+  return {
+    type: LOG_OUT,
+    isAuth,
+   }
 }
 
 export const authMe = () => {
@@ -75,8 +105,28 @@ export const signIn = (email, password, rememberMe = false, captcha = true)  => 
                        if (response.data.resultCode === 0) {
                          let {id, email, login} = response.data.data; 
                          dispatch(setUserData(id, email, login));
+                         //window.location.href = '/Profile'; // этот код надо как-то переделать, костыль
                        }
                      });
             })
    }  
+}
+
+export const signUp = ()  => {
+  return (dispatch) => {
+    // authAPI.signUp()
+    //        .then(response => {
+
+    //        });
+  }  
+}
+
+export const logOut = ()  => {
+  return (dispatch) => {
+    authAPI.logOut()
+           .then(response => {
+             console.log(response.resultCode);
+             dispatch(logOutAC(false));
+           });
+  }  
 }

@@ -1,7 +1,11 @@
 import React from "react";
 import { Field, reduxForm } from "redux-form";
-import {signIn} from "../../redux/auth-reducer";
+import {signIn} from "../../../redux/auth-reducer";
 import {connect} from "react-redux";
+
+
+
+
 
 const AuthorizationForm = (props) => {
   return (
@@ -22,7 +26,7 @@ const AuthorizationForm = (props) => {
 
 const AuthorizationFormRedux = reduxForm({form: 'authorization'},)(AuthorizationForm);
 
-const Authorization = (props) => {
+const AuthorizationPage = (props) => {
   const onSubmit = (formData) => {
     props.signIn(formData.login, formData.password);
   }
@@ -34,5 +38,7 @@ const Authorization = (props) => {
          );
 };
 
-export default connect(null, {signIn})(Authorization);
+
+
+export default connect(null, {signIn})(AuthorizationPage);
 

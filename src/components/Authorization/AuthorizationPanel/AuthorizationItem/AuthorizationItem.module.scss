@@ -1,0 +1,26 @@
+.authorizationItem {
+    display: flex;
+    height: 20px;
+    margin: 5px 5px;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 10px;
+    background-color: white;
+    text-decoration: none;
+    &:hover {
+        opacity: 0.95;
+    }
+}
+
+.authorizationImg {
+  width: 20px;
+  height: 20px;
+}
+
+.authorizationText {
+  color: black;
+  font-weight: bold;
+  font-size: 10px;
+  margin: 5px 0 0;
+}
