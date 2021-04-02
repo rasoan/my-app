@@ -7,9 +7,9 @@ const AuthorizationPanel = (props) => {
   if (props.isAuth) {
     return (<div className={style.authorizationPanelWrapper}>
               <div className={style.authorizationPanelInfo}>
-                <p className={style.infoText}>Айди: {props.authorizationInfo.userId}</p>
-                <p className={style.infoText}>Логин: {props.authorizationInfo.login}</p>
-                <p className={style.infoText}>Почта: {props.authorizationInfo.email}</p>
+                <p className={style.infoText}>{"Айди: " + props.authorizationInfo.userId}</p>
+                <p className={style.infoText}>{"Логин: " + props.authorizationInfo.login}</p>
+                <p className={style.infoText}>{"Почта: " + props.authorizationInfo.email}</p>
               </div>
               <div className={style.authorizationPanel}>
                 <AuthorizationItem text={"Выйти"}

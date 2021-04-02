@@ -1,8 +1,19 @@
 import React from "react";
-import TextInput from "../../TextInput/TextInput";
-import ButtonAddPost from "../../ButtonAddPost/ButtonAddPost";
 import Post from "./Post/Post";
-//import PropTypes from "prop-types";
+import {Field, reduxForm} from "redux-form";
+
+const PostForm = (props) => {
+  return (
+    <form onSubmit={props.handleSubmit}>
+      <div>
+        <Field placeholder={"Введите ваше пост"} name={"post"} component={"textarea"} />
+      </div>
+      <button>Отправить сообщение</button>
+    </form>
+  );
+};
+
+const PostFormRedux = reduxForm({form: 'profile'},)(PostForm);
 
 const Posts = (props) => {
 
@@ -11,13 +22,15 @@ const Posts = (props) => {
              .map(post => <Post content={post.content} 
                                  imgSrc={post.imgSrc} 
                                  countLikes={post.countLikes} />);
+  
+  let addPost = (postData) => {
+    props.addPost(postData.post);
+  }
   return (
     <div>
       <h3>My posts</h3>
       {posts}
-      <TextInput newPostText={props.newPostText} 
-                 onPostChange={props.onPostChange} />
-      <ButtonAddPost addPost={() => props.addPost(props.newPostText)} />
+      <PostFormRedux onSubmit={addPost} />
     </div>
   );
 };

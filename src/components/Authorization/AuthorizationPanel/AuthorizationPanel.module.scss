@@ -1,9 +1,10 @@
 .authorizationPanelWrapper {
     display: flex;
+    align-items: center;
 }
 
 .authorizationPanelInfo {
-    width: min-content;
+    width: max-content;
     background-color: white;
     padding: 5px;
 }

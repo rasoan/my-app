@@ -5,7 +5,6 @@ import {
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 import {DEFAULT_STATUS_TEXT, MY_ID} from "../constants/Profile"
 const ADD_POST = 'ADD-POST';
-const UPDATE_NEW_POST_TEXT = 'UPDATE-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const START_FETCHING = 'START_FETCHING';
 const STOP_FETCHING = 'STOP_FETCHING';
@@ -27,7 +26,6 @@ let initialState = {
       countLikes: '3',
     },
   ],
-  newPostText: 'it-camasutra.com!',
   profile: null,
   isFetching: false,
   defaultStatusText: DEFAULT_STATUS_TEXT,
@@ -58,11 +56,6 @@ const profileReducer = (state = initialState, action) => {
             countLikes: '222',
           }],
           newPostText: "",
-      };
-    case UPDATE_NEW_POST_TEXT:
-      return {
-        ...state,
-        newPostText: action.newText,
       };
     case START_FETCHING:
       return {
@@ -107,12 +100,6 @@ export let addPostActionCreator = (text) =>
   ({
     type: ADD_POST,
     message: text,
-  });
-
-export let updateNewPostText = (newText) =>
-  ({
-    type: UPDATE_NEW_POST_TEXT,
-    newText,
   });
 
 export let setUserProfile = (profile) =>
@@ -164,13 +151,6 @@ export const getProfile = (id) => {
                        dispatch(stopFetching());
                     }
                    });
-          }
-}
-
-export const onPostChange = (newPostElement) => {
-  return (dispatch) => {
-            let action = updateNewPostText(newPostElement);
-            dispatch(action);
           }
 }
 
