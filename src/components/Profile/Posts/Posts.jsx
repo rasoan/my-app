@@ -1,12 +1,19 @@
 import React from "react";
 import Post from "./Post/Post";
 import {Field, reduxForm} from "redux-form";
+import {Textarea} from "../../common/FormsControls/FormControls";
+import {required, maxLengthCreator} from "../../../utils/validators/validators";
+
+const maxLength10 = maxLengthCreator(10);
 
 const PostForm = (props) => {
   return (
     <form onSubmit={props.handleSubmit}>
       <div>
-        <Field placeholder={"Введите ваше пост"} name={"post"} component={"textarea"} />
+        <Field placeholder={"Введите ваше пост"}
+               name={"post"}
+               component={Textarea} 
+               validate={[required, maxLength10]} />
       </div>
       <button>Отправить сообщение</button>
     </form>
