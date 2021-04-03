@@ -21,7 +21,7 @@ const authReducer = (state = initialState, action) => {
       return {
               ...state,
               ...action.data,
-              isAuth: true,
+              isAuth: action.isAuth,
              }
       case SIGN_IN:
         return {
@@ -44,14 +44,15 @@ const authReducer = (state = initialState, action) => {
 }
 
 export default authReducer;
-export let setUserData = (userId, email, login) => {
+export let setUserData = (userId = null, email = null, login = null, isAuth = false) => {
   return {
     type: SET_USER_DATA,
     data: {
       userId,
       email,
       login
-    }
+    },
+    isAuth,
   }
 };
 
@@ -82,32 +83,24 @@ export const authMe = () => {
             .then(response => {
               if (response.data.resultCode === 0) {
                 let {id, email, login} = response.data.data; 
-                dispatch(setUserData(id, email, login));
+                dispatch(setUserData(id, email, login, true));
               }
             });
   }
 }
 
-export const signIn = (email, password, rememberMe = false, captcha = true)  => {
+export const signIn = (email, password, rememberMe = null)  => {
    return (dispatch) => {
-     authAPI.signIn(email, password, rememberMe, captcha)
-            .then(response => {
-              let {id, email, login} = response.data.data;
+     authAPI.signIn(email, password, rememberMe)
+            .then(response => {              
               if (response.data.resultCode === 0) {
-                console.log("правильный пароль, вы залогинились!")
-                
+                let {id, email, login} = response.data.data;
+                dispatch(authMe());
               }
               else {
-                console.log("неверный пароль!")
+                console.log(response.data.messages[0]);
+                dispatch(authMe());
               }
-              authAPI.getAuthMe()
-                     .then(response => {
-                       if (response.data.resultCode === 0) {
-                         let {id, email, login} = response.data.data; 
-                         dispatch(setUserData(id, email, login));
-                         //window.location.href = '/Profile'; // этот код надо как-то переделать, костыль
-                       }
-                     });
             })
    }  
 }
@@ -125,8 +118,9 @@ export const logOut = ()  => {
   return (dispatch) => {
     authAPI.logOut()
            .then(response => {
-             console.log(response.resultCode);
-             dispatch(logOutAC(false));
+             if (response.data.resultCode === 0) {
+               dispatch(setUserData());
+             }
            });
   }  
 }

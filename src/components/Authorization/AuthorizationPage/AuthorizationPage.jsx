@@ -4,6 +4,7 @@ import {signIn} from "../../../redux/auth-reducer";
 import {connect} from "react-redux";
 import {required, maxLengthCreator} from "../../../utils/validators/validators";
 import {Login, Pass} from "../../common/FormsControls/FormControls";
+import { Redirect } from "react-router";
 const maxLength40 = maxLengthCreator(40);
 
 
@@ -20,7 +21,8 @@ const AuthorizationForm = (props) => {
         <Field placeholder={"Пароль"}
                name={"password"}
                component={Pass}
-               validate={[maxLength40, required]} />
+               validate={[maxLength40, required]}
+               type="password" />
       </div>
       <div>
         <Field type="checkbox" name={"rememberMe"} component={"input"} /> запомнить меня
@@ -34,7 +36,11 @@ const AuthorizationFormRedux = reduxForm({form: 'authorization'},)(Authorization
 
 const AuthorizationPage = (props) => {
   const onSubmit = (formData) => {
-    props.signIn(formData.login, formData.password);
+    props.signIn(formData.login, formData.password, formData.rememberMe);
+  }
+
+  if(props.isAuth) {
+    return <Redirect to="/profile" />
   }
   return (
           <div>
@@ -44,7 +50,10 @@ const AuthorizationPage = (props) => {
          );
 };
 
+const mapStateToProps = (state) => ({
+  isAuth: state.auth.isAuth,
+})
 
 
-export default connect(null, {signIn})(AuthorizationPage);
+export default connect(mapStateToProps, {signIn})(AuthorizationPage);
 
