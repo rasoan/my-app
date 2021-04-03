@@ -1,26 +1,74 @@
 import React from "react";
 import style from "./FormControls.module.scss";
 
-export const Textarea = ({input, meta, ...props}) => {
-    const CLASS_ELEMENT = meta.touched && meta.error ? style.notCorrect: !meta.touched ? style.default: style.correct;
+export const TextareaDefault = ({input, meta, ...props}) => {
+    const CORRECT_INPUT = meta.touched && !meta.error;
+    const INCORRECT_INPUT = meta.error && meta.touched;
+    const NOT_TOUCHED = !meta.touched;
     return (
         <div>
             <div>
-              <textarea {...input} {...props} className={CLASS_ELEMENT} />
+              <textarea {...input} {...props} className={CORRECT_INPUT ? style.correct : 
+                                                         INCORRECT_INPUT ? style.inCorrect : 
+                                                         NOT_TOUCHED ? style.default: style.default} />
             </div>
-            {meta.touched && meta.error && <span className={style.promptText}>{meta.error}</span>}
+            {INCORRECT_INPUT && <span className={style.promptText}>{meta.error}</span>}
         </div>
     );
 }
 
-export const Input = ({input, meta, ...props}) => {
-    const CLASS_ELEMENT = meta.touched && meta.error ? style.notCorrect: !meta.touched ? style.default: style.correct;
+export const InputDefault = ({input, meta, ...props}) => {
+    const CORRECT_INPUT = meta.touched && !meta.error;
+    const INCORRECT_INPUT = meta.error && meta.touched;
+    const NOT_TOUCHED = !meta.touched;
     return (
         <div>
             <div>
-              <input {...input} {...props} className={CLASS_ELEMENT} />
+              <input {...input} {...props} className={CORRECT_INPUT ? style.correct : 
+                                                      INCORRECT_INPUT ? style.inCorrect : 
+                                                      NOT_TOUCHED ? style.default: style.default} />
             </div>
-            {meta.touched && meta.error && <span className={style.promptText}>{meta.error}</span>}
+            {INCORRECT_INPUT && <span className={style.promptText}>{meta.error}</span>}
         </div>
     );
+}
+
+export const Login = ({input, meta, ...props}) => {
+    const CORRECT_INPUT = meta.touched && !meta.error;
+    const INCORRECT_INPUT = meta.error && meta.touched;
+    const NOT_TOUCHED = !meta.touched;
+    return (
+        <div>
+            <div>
+              <input {...input} {...props} className={CORRECT_INPUT ? style.correct : 
+                                                      INCORRECT_INPUT ? style.inCorrect : 
+                                                      NOT_TOUCHED ? style.default: style.default} />
+            </div>
+            {INCORRECT_INPUT && <span className={style.promptText}>{meta.error}</span>}
+        </div>
+    );
+}
+
+export const Pass = ({input, meta, ...props}) => {
+    const CORRECT_INPUT = meta.touched && !meta.error;
+    const INCORRECT_INPUT = meta.error && meta.touched;
+    const NOT_TOUCHED = !meta.touched;
+    return (
+        <div>
+            <div>
+              <input {...input} {...props} className={CORRECT_INPUT ? style.correct : 
+                                                      INCORRECT_INPUT ? style.inCorrect : 
+                                                      NOT_TOUCHED ? style.default: style.default} />
+            </div>
+            {INCORRECT_INPUT && <span className={style.promptText}>{meta.error}</span>}
+        </div>
+    );
+}
+
+export const TextareaStatus = () => {
+    return (
+        <div>
+            hello
+        </div>
+    )
 }

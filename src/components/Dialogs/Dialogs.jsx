@@ -3,7 +3,7 @@ import style from "./Dialogs.module.scss";
 import Message from "./Message/Message";
 import DialogItem from "./DialogItem/DialogItem";
 import {Field, reduxForm} from "redux-form";
-import {Input} from "../common/FormsControls/FormControls";
+import {TextareaDefault} from "../common/FormsControls/FormControls";
 import {required, maxLengthCreator} from "../../utils/validators/validators";
 
 const maxLength10 = maxLengthCreator(10);
@@ -14,7 +14,7 @@ const MessageForm = (props) => {
       <div>
         <Field placeholder={"Введите ваше сообщение"} 
                name={"message"}
-               component={Input}
+               component={TextareaDefault}
                validate={[required, maxLength10]} />
       </div>
       <button>Отправить сообщение</button>

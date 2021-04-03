@@ -2,6 +2,10 @@ import React from "react";
 import style from "./Status.module.scss";
 
 
+
+
+
+
 const Status = (props) => {
   let activateEditMode = props.lookingAtMyProfile ? props.activateEditMode: ()=>{};
   let statusTextStyle = props.lookingAtMyProfile ? style.statusText: "";
