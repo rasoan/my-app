@@ -1,3 +1,4 @@
+import { stopSubmit } from "redux-form";
 import {authAPI} from "../api/api";
 import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
 const SET_USER_DATA = "SET_USER_DATA";
@@ -91,17 +92,19 @@ export const authMe = () => {
 
 export const signIn = (email, password, rememberMe = null)  => {
    return (dispatch) => {
+
+  
      authAPI.signIn(email, password, rememberMe)
             .then(response => {              
               if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data;
                 dispatch(authMe());
               }
               else {
-                console.log(response.data.messages[0]);
                 dispatch(authMe());
+                let action = stopSubmit("authorization", {_error: response.data.messages[0]});
+                dispatch(action);
               }
-            })
+            });
    }  
 }
 

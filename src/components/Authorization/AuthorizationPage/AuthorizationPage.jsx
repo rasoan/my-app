@@ -1,4 +1,5 @@
 import React from "react";
+import styleForm from "../../common/FormsControls/FormControls.module.scss";
 import { Field, reduxForm } from "redux-form";
 import {signIn} from "../../../redux/auth-reducer";
 import {connect} from "react-redux";
@@ -28,6 +29,9 @@ const AuthorizationForm = (props) => {
         <Field type="checkbox" name={"rememberMe"} component={"input"} /> запомнить меня
       </div>
       <button>Залогиниться</button>
+      {props.error && <div className={styleForm.inCorrectSubmitDataHint}>
+        <p>{props.error}</p>
+      </div>}
     </form>
   );
 };
