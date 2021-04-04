@@ -5,7 +5,6 @@ import Profile from "../Profile/Profile";
 import {connect} from "react-redux";
 import {getProfile, lookingMyProfile, notLookingMyProfile, getStatus} from "../../redux/profile-reducer";
 import { withRouter } from "react-router";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
                  
 class ProfileContainer extends React.Component {
@@ -34,7 +33,6 @@ let mapStateToProps = (state) => (
 )
 
 export default compose(
-                       withAuthRedirect,
                        connect(mapStateToProps,{getProfile, lookingMyProfile, notLookingMyProfile, getStatus}),
                        withRouter
                       )(ProfileContainer);

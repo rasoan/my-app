@@ -15,10 +15,6 @@ class AuthorizationPanelContainer extends React.Component {
     console.log("выйти из системы");
     this.props.logOut();
   }
-
-  componentDidMount() {
-    this.props.authMe();
-  }
   
   render() {
     return (<AuthorizationPanel  signInImg={this.props.signInImg}

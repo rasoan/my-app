@@ -80,13 +80,13 @@ export let logOutAC = (isAuth) => {
 
 export const authMe = () => {
   return (dispatch) => {
-    authAPI.getAuthMe()
-            .then(response => {
-              if (response.data.resultCode === 0) {
-                let {id, email, login} = response.data.data; 
-                dispatch(setUserData(id, email, login, true));
-              }
-            });
+    return authAPI.getAuthMe()
+                  .then(response => {
+                    if (response.data.resultCode === 0) {
+                      let {id, email, login} = response.data.data; 
+                      dispatch(setUserData(id, email, login, true));
+                    }
+                  });
   }
 }
 

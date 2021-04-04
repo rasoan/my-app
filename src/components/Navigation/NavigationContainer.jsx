@@ -4,13 +4,18 @@ import {getProfile, lookingMyProfile} from '../../redux/profile-reducer';
 import {compose} from "redux";
 import {connect} from "react-redux";
 
+
 class NavigationContainer extends React.Component {
   clickProfileLink= () => {
-    this.props.getProfile();
-    this.props.lookingMyProfile();
+    if(!this.props.isAuth) {
+      console.log("Надо отправить на логинизацию, пользователь анонимный!")
+    }
   }
 
   render() {
+    if(!this.props.isAuth) {
+      console.log("Надо запретить редактировать статус и так далее, пользователь анонимный.")
+    }
     return <Navigation clickProfileLink={this.clickProfileLink} />;
   }
 };
@@ -19,6 +24,7 @@ class NavigationContainer extends React.Component {
 let mapStateToProps = (state) => (
   {
     redrawToProfileComponent: state.profilePage.redrawToProfileComponent,
+    isAuth: state.auth.isAuth,
   }
 )
 export default compose(
