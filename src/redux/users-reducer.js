@@ -96,7 +96,7 @@ export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetc
 export let isFetchingFollowOrUnfollowStart = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START, id});
 export let isFetchingFollowOrUnfollowEnd = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END, id});
 
-export const getUsers = (currentPage, pagesSize) => {
+export const getUsersSC = (currentPage, pagesSize) => {
   return (dispatch) => {
     dispatch(toggleIsFetching(true));
     usersApi.getUsers(currentPage, pagesSize)

@@ -3,15 +3,16 @@ import UsersList from "./UsersList";
 import {connect} from "react-redux";
 import {
         setCurrentPage,
-        getUsers,
+        getUsersSC,
         unfollow, follow
        } from '../../../redux/users-reducer';
+import {getUsers, getPagesSize, getTotalUsersCount, getCurrentPagestate, getIsFetching, getIsFetchingFollowOrUnfollowIdList, getIsAuth, getDefaultAvatarSrc} from "../../../redux/users-selectors";
 
 
 
 class UsersListContainer extends React.Component {
   componentDidMount() {
-    this.props.getUsers(this.props.currentPage, this.props.pagesSize);
+    this.props.getUsersSC(this.props.currentPage, this.props.pagesSize);
   }
   
   render() {
@@ -23,7 +24,7 @@ class UsersListContainer extends React.Component {
                        setCurrentPage={this.props.setCurrentPage} 
                        isFetching={this.props.isFetching}
                        isFetchingFollowOrUnfollowIdList={this.props.isFetchingFollowOrUnfollowIdList} 
-                       getUsers={this.props.getUsers}
+                       getUsers={this.props.getUsersSC}
                        follow={this.props.follow} 
                        unfollow={this.props.unfollow} 
                        defaultAvatarSrc={this.props.defaultAvatarSrc} />); 
@@ -32,20 +33,20 @@ class UsersListContainer extends React.Component {
 
 let mapStateToProps = (state) => {
   return {
-          users: state.usersPage.users,
-          pagesSize: state.usersPage.pagesSize,
-          totalUsersCount: state.usersPage.totalUsersCount,
-          currentPage: state.usersPage.currentPage,
-          isFetching: state.usersPage.isFetching,
-          isFetchingFollowOrUnfollowIdList: state.usersPage.isFetchingFollowOrUnfollowIdList,
-          isAuth: state.auth.isAuth,
-          defaultAvatarSrc: state.usersPage.defaultAvatarSrc,
+          users: getUsers(state),
+          pagesSize: getPagesSize(state),
+          totalUsersCount: getTotalUsersCount(state),
+          currentPage: getCurrentPagestate(state),
+          isFetching: getIsFetching(state),
+          isFetchingFollowOrUnfollowIdList: getIsFetchingFollowOrUnfollowIdList(state),
+          isAuth: getIsAuth(state),
+          defaultAvatarSrc: getDefaultAvatarSrc(state),
          }
 }
 
 export default connect(mapStateToProps,{
                                         setCurrentPage,
-                                        getUsers,
+                                        getUsersSC,
                                         follow,
                                         unfollow,
                                        }
