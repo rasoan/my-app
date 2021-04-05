@@ -96,24 +96,24 @@ const profileReducer = (state = initialState, action) => {
 
 export default profileReducer;
 
-export let addPostActionCreator = (text) =>
+export let addPostAC = (text) =>
   ({
     type: ADD_POST,
     message: text,
   });
 
-export let setUserProfile = (profile) =>
+export let setUserProfileAC = (profile) =>
   ({
     type: SET_USER_PROFILE,
     profile
   });
 
-export let startFetching = () =>
+export let startFetchingAC = () =>
   ({
     type: START_FETCHING
   });
 
-export let stopFetching = () =>
+export let stopFetchingAC = () =>
   ({
     type: STOP_FETCHING
   });
@@ -142,60 +142,57 @@ export let getStatusAC = (statusText) =>
 
 export const getProfile = (id) => {
   id = id ? id: MY_ID;
-  return (dispatch) => {
-           dispatch(startFetching());
-           profileAPI.getProfile(id)
-                   .then(response => {
-                     if(response.status === 200) {
-                       dispatch(setUserProfile(response.data));
-                       dispatch(stopFetching());
-                    }
-                   });
-          }
+  return async (dispatch) => {
+    let action = startFetchingAC();
+    dispatch(action);
+    let response = await profileAPI.getProfile(id)
+    if (response.status === 200) {
+      action = setUserProfileAC(response.data);
+      dispatch(action);
+      action = stopFetchingAC();
+      dispatch(action);
+    }
+  }
 }
 
 export const addPost = (newPostText) => {
   return (dispatch) => {
-            let action = addPostActionCreator(newPostText);
-            dispatch(action);
-          }
+    let action = addPostAC(newPostText);
+    dispatch(action);
+  }
 }
 
 export const updateNewStatusText = (newStatusText) => {
-  return (dispatch) => {
-           profileAPI.updateStatus(newStatusText)
-                     .then(response => {
-                        if (response.status === 200) {
-                          let action = updateNewStatusTextAC(newStatusText);
-                          dispatch(action);
-                        }
-                     });
-         }
+  return async (dispatch) => {
+    let response = await profileAPI.updateStatus(newStatusText)
+    if (response.status === 200) {
+      let action = updateNewStatusTextAC(newStatusText);
+      dispatch(action);
+    }
+  }
 }
 
 export const lookingMyProfile = () => {
   return (dispatch) => {
-          let action = lookingMyProfileAC();
-          dispatch(action);
+    let action = lookingMyProfileAC();
+    dispatch(action);
   }
 }
 
 export const notLookingMyProfile = () => {
   return (dispatch) => {
-          let action = notLookingMyProfileAC();
-          dispatch(action);
+    let action = notLookingMyProfileAC();
+    dispatch(action);
   }
 }
 
 export const getStatus = (userId) => {
   userId = userId ? userId: MY_ID;
-  return (dispatch) => {
-           profileAPI.getStatus(userId)
-                     .then(response => {
-                       if(response.status === 200) {
-                        let action = getStatusAC(response.data);
-                        dispatch(action);
-                       }
-                     });
-          }
+  return async (dispatch) => {
+    let response = await profileAPI.getStatus(userId)
+    if (response.status === 200) {
+      let action = getStatusAC(response.data);
+      dispatch(action);
+    }
+  }
 }

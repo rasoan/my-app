@@ -97,41 +97,45 @@ export let isFetchingFollowOrUnfollowStart = (id) => ({type: IS_FETCHING_FOLLOW_
 export let isFetchingFollowOrUnfollowEnd = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END, id});
 
 export const getUsersSC = (currentPage, pagesSize) => {
-  return (dispatch) => {
-    dispatch(toggleIsFetching(true));
-    usersApi.getUsers(currentPage, pagesSize)
-      .then(response => {
-        if(response.status === 200) {
-          dispatch(setUsers(response.data.items));
-          dispatch(setTotalUsersCount(response.data.totalCount));
-          dispatch(toggleIsFetching(false));
-        }
-      });
+  return async (dispatch) => {
+    let action = toggleIsFetching(true);
+    dispatch(action);
+    let response = await usersApi.getUsers(currentPage, pagesSize);
+    if (response.status === 200) {
+      action = setUsers(response.data.items);
+      dispatch(action);
+      action = setTotalUsersCount(response.data.totalCount);
+      dispatch(action);
+      action = toggleIsFetching(false);
+      dispatch(action);
+    }
   }
 }
 
 export const unfollow = (id) => {
-  return (dispatch) => {
-    dispatch(isFetchingFollowOrUnfollowStart(id));
-    usersApi.unfollow(id)
-            .then(response => {
-              if (response.data.resultCode === 0) {
-                dispatch(deleteFriend(id));
-                dispatch(isFetchingFollowOrUnfollowEnd(id));       
-              }
-            });
+  return async (dispatch) => {
+    let action = isFetchingFollowOrUnfollowStart(id);
+    dispatch(action);
+    let response = await usersApi.unfollow(id);
+    if (response.data.resultCode === 0) {
+      action = deleteFriend(id);
+      dispatch(action);
+      action = isFetchingFollowOrUnfollowEnd(id);
+      dispatch(action);       
+    }
   }
 }
 
 export const follow = (id) => {
-  return (dispatch) => {
-    dispatch(isFetchingFollowOrUnfollowStart(id));
-    usersApi.follow(id)
-            .then(response => {
-              if (response.data.resultCode === 0) {
-                dispatch(addFriend(id));
-              }
-              dispatch(isFetchingFollowOrUnfollowEnd(id));
-            });
+  return async (dispatch) => {
+    let action = isFetchingFollowOrUnfollowStart(id);
+    dispatch(action);
+    let response = await usersApi.follow(id)
+    if (response.data.resultCode === 0) {
+      action = addFriend(id);
+      dispatch(action);
+    }
+    action = isFetchingFollowOrUnfollowEnd(id);
+    dispatch(action);
   }
 }

@@ -45,7 +45,7 @@ const authReducer = (state = initialState, action) => {
 }
 
 export default authReducer;
-export let setUserData = (userId = null, email = null, login = null, isAuth = false) => {
+export let setUserDataAC = (userId = null, email = null, login = null, isAuth = false) => {
   return {
     type: SET_USER_DATA,
     data: {
@@ -79,51 +79,45 @@ export let logOutAC = (isAuth) => {
 }
 
 export const authMe = () => {
-  return (dispatch) => {
-    return authAPI.getAuthMe()
-                  .then(response => {
-                    if (response.data.resultCode === 0) {
-                      let {id, email, login} = response.data.data; 
-                      dispatch(setUserData(id, email, login, true));
-                    }
-                  });
+  return async (dispatch) => {
+    let response = await authAPI.getAuthMe();
+    if (response.data.resultCode === 0) {
+      let {id, email, login} = response.data.data;
+      let action = setUserDataAC(id, email, login, true);
+      dispatch(action);
+    }
+    return response;
   }
 }
 
 export const signIn = (email, password, rememberMe = null)  => {
-   return (dispatch) => {
-
-  
-     authAPI.signIn(email, password, rememberMe)
-            .then(response => {              
-              if (response.data.resultCode === 0) {
-                dispatch(authMe());
-              }
-              else {
-                dispatch(authMe());
-                let action = stopSubmit("authorization", {_error: response.data.messages[0]});
-                dispatch(action);
-              }
-            });
+   return async (dispatch) => {
+     let response = await authAPI.signIn(email, password, rememberMe);
+     if (response.data.resultCode === 0) {
+       let action = authMe();
+       dispatch(action);
+     }
+     else {
+       let action = authMe();
+       dispatch(action);
+       action = stopSubmit("authorization", {_error: response.data.messages[0]});
+       dispatch(action);
+     }
+     return response;
    }  
 }
 
 export const signUp = ()  => {
-  return (dispatch) => {
-    // authAPI.signUp()
-    //        .then(response => {
-
-    //        });
-  }  
+  return (dispatch) => {}  
 }
 
 export const logOut = ()  => {
-  return (dispatch) => {
-    authAPI.logOut()
-           .then(response => {
-             if (response.data.resultCode === 0) {
-               dispatch(setUserData());
-             }
-           });
+  return async (dispatch) => {
+    let response = await authAPI.logOut();
+    if (response.data.resultCode === 0) {
+      let action = setUserDataAC();
+      dispatch(action);
+    }
+
   }  
 }

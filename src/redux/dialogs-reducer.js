@@ -16,22 +16,6 @@ let initialState = {
                  id: "2",
                  name: "Kostya"
                 },
-                {
-                 id: "3",
-                 name: "Vika"
-                },
-                {
-                 id: "4",
-                 name: "Tola"
-                },
-                {
-                 id: "5",
-                 name: "Mola"
-                },
-                {
-                 id: "6",
-                 name: "Natasha"
-                },
   ],
 };
 
@@ -50,12 +34,12 @@ const dialogsReducer = (state = initialState, action) => {
 
 export default dialogsReducer;
 
-export let sendMessageCreator = (newMessage) => 
+export let sendMessageCreatorAC = (newMessage) => 
       ({type: SEND_MESSAGE, newMessage,});
 
 export const onSendMessageClick = (newMessageBody) => {
       return (dispatch) => {
-               let action = sendMessageCreator(newMessageBody);
+               let action = sendMessageCreatorAC(newMessageBody);
                dispatch(action);
              }
 }
