@@ -17,8 +17,8 @@ const StatusContainer = (props) => {
     props.updateNewStatusText(status);
   }
 
-  const onStatusChange = (status) => {
-    setStatus(status);
+  const onStatusChange = (statusInputText) => {
+    setStatus(statusInputText);
   }
 
   const deActivateEditModeEnterOrEsc = (e) => {

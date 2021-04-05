@@ -23,7 +23,6 @@ const PostForm = (props) => {
 const PostFormRedux = reduxForm({form: 'profile'},)(PostForm);
 
 const Posts = (props) => {
-
   let posts = props
              .posts
              .map(post => <Post content={post.content} 

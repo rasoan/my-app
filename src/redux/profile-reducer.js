@@ -17,12 +17,12 @@ const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
 let initialState = {
   posts: [{
       content: 'alo',
-      imgSrc: 'https://archilab.online/images/1/123.jpg',
+      imgSrc: 'http://sun9-44.userapi.com/s/v1/if1/qw3vWR63rnWIPexrEErujILvop-GpxX8MJRJx1emFNrgy2Ve9Hf3sqh5NLHETJNtyNMxaiTe.jpg?size=200x0&quality=96&crop=18,0,586,594&ava=1',
       countLikes: '1',
     },
     {
       content: 'helo',
-      imgSrc: 'https://archilab.online/images/1/123.jpg',
+      imgSrc: 'http://sun9-44.userapi.com/s/v1/if1/qw3vWR63rnWIPexrEErujILvop-GpxX8MJRJx1emFNrgy2Ve9Hf3sqh5NLHETJNtyNMxaiTe.jpg?size=200x0&quality=96&crop=18,0,586,594&ava=1',
       countLikes: '3',
     },
   ],
@@ -52,7 +52,7 @@ const profileReducer = (state = initialState, action) => {
         ...state,
         posts: [...state.posts, {
             content: action.message,
-            imgSrc: 'https://archilab.online/images/1/123.jpg',
+            imgSrc: 'http://sun9-44.userapi.com/s/v1/if1/qw3vWR63rnWIPexrEErujILvop-GpxX8MJRJx1emFNrgy2Ve9Hf3sqh5NLHETJNtyNMxaiTe.jpg?size=200x0&quality=96&crop=18,0,586,594&ava=1',
             countLikes: '222',
           }],
           newPostText: "",
