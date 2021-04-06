@@ -2,7 +2,7 @@ import React from "react";
 import style from "./UsersList.module.scss";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem/UserItem";
-import ListPageNumbers from "../../ListPageNumbers/ListPageNumbers";
+import Pagination from "../../Pagination/Pagination";
 import Preloader from "../../Preloader/Preloader";
 
 
@@ -15,12 +15,12 @@ let UsersList = (props) => {
   let currentPage = props.currentPage;
 
     return (<>
-               <ListPageNumbers pages={pages}
-                                currentPage={currentPage} 
-                                setCurrentPage={props.setCurrentPage}
-                                pagesSize={props.pagesSize} 
-                                isFetching={props.isFetching}
-                                getUsers={props.getUsers} />
+               <Pagination listPageNumbers={pages}
+                           currentPageNumber={currentPage} 
+                           setCurrentPage={props.setCurrentPage}
+                           countCardsInPage={props.pagesSize} 
+                           loading={props.isFetching}
+                           getCards={props.getUsers} />
                {props.isFetching ? <Preloader /> : null}
                {!props.isFetching && props.users.map((user) => <UserItem navlinkTo={"/Profile/" + user.id}
                                                                          id={user.id} 
