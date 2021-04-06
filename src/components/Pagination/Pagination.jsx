@@ -1,13 +1,13 @@
-import React from "react";
+import React, {useState} from "react";
 import style from "./Pagination.module.scss";
 
-const Pagination = ({listPageNumbers, currentPageNumber, setCurrentPage, countCardsInPage, getCards, loading}) => {
-  let isFetchingStyle = loading ? style.isFetchingStyle: "";
+const Pagination = ({listPageNumbers, countCardsInPage, getCards, loading}) => {
+  let loadingStyle = loading ? style.loadingStyle: "";
   let onPageChanged = (pageNumber, countCardsInPage) => {
-    setCurrentPage(pageNumber);
+    setCurrentPageNumber(pageNumber);
     getCards(pageNumber, countCardsInPage);
   }
-
+  const [currentPageNumber, setCurrentPageNumber] = useState(1); // переменная одинаковая X
   let pageNumbers = listPageNumbers
                     .map(pageNumber => {
                       return <li className={style.pageNumberContainer}>
@@ -24,7 +24,7 @@ const Pagination = ({listPageNumbers, currentPageNumber, setCurrentPage, countCa
                                 );
 
 
-  return (<ul className={`${isFetchingStyle} ${style.pageNumberListContainer}`}>{pageNumbers}</ul>);
+  return (<ul className={`${loadingStyle} ${style.pageNumberListContainer}`}>{pageNumbers}</ul>);
 };
 
 export default Pagination;

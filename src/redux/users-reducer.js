@@ -3,7 +3,6 @@ import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
-const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const IS_FETCHING_FOLLOW_OR_UNFOLLOW_START = 'IS_FETCHING_FOLLOW_OR_UNFOLLOW_START';
@@ -14,7 +13,6 @@ let initialState = {
   defaultAvatarSrc: DEFAULT_AVATAR_SRC,
   pagesSize: 5,
   totalUsersCount: 0,
-  currentPage: 2,
   isFetching: false,
   isFetchingFollowOrUnfollowIdList: [],
 };
@@ -46,11 +44,6 @@ const usersReducer = (state = initialState, action) => {
                 }
                 return u;
               }),
-             }
-    case SET_CURRENT_PAGE:
-      return {
-               ...state,
-               currentPage: action.currentPage,
              }
     case SET_TOTAL_USERS_COUNT:
       return {
@@ -90,7 +83,6 @@ export default usersReducer;
 export let setUsers =(users) => ({type: SET_USERS, users});
 export let followAC = (id) => ({type: FOLLOW, id});
 export let unfollowAC = (id) => ({type: UNFOLLOW, id});
-export let setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 export let isFetchingFollowOrUnfollowStart = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START, id});

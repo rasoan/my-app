@@ -2,7 +2,6 @@ import React from "react";
 import UsersList from "./UsersList";
 import {connect} from "react-redux";
 import {
-        setCurrentPage,
         getUsersSC,
         unfollow, follow
        } from '../../../redux/users-reducer';
@@ -19,9 +18,7 @@ class UsersListContainer extends React.Component {
 
     return (<UsersList totalUsersCount={this.props.totalUsersCount}
                        pagesSize={this.props.pagesSize}
-                       currentPage={this.props.currentPage}
                        users={this.props.users}
-                       setCurrentPage={this.props.setCurrentPage} 
                        isFetching={this.props.isFetching}
                        isFetchingFollowOrUnfollowIdList={this.props.isFetchingFollowOrUnfollowIdList} 
                        getUsers={this.props.getUsersSC}
@@ -36,7 +33,6 @@ let mapStateToProps = (state) => {
           users: getUsers(state),
           pagesSize: getPagesSize(state),
           totalUsersCount: getTotalUsersCount(state),
-          currentPage: getCurrentPagestate(state),
           isFetching: getIsFetching(state),
           isFetchingFollowOrUnfollowIdList: getIsFetchingFollowOrUnfollowIdList(state),
           isAuth: getIsAuth(state),
@@ -45,7 +41,6 @@ let mapStateToProps = (state) => {
 }
 
 export default connect(mapStateToProps,{
-                                        setCurrentPage,
                                         getUsersSC,
                                         follow,
                                         unfollow,

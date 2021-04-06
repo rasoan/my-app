@@ -15,8 +15,6 @@ let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFet
 
     return (<>
                <Pagination listPageNumbers={pages}
-                           currentPageNumber={currentPage} 
-                           setCurrentPage={setCurrentPage}
                            countCardsInPage={pagesSize} 
                            loading={isFetching}
                            getCards={getUsers} />
