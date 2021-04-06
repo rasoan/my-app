@@ -2,14 +2,14 @@ import React from "react";
 import style from "./Friend.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
-import userPhoto from "../../../images/avatar.png"
+import {DEFAULT_AVATAR_SRC} from "../../../constants/Users";
 
-const Friend = (props) => {
-  let srcPhoto = props.srcPhoto ? props.srcPhoto: userPhoto;
+const Friend = ({srcPhoto, clickProfileUser, id, name}) => {
+  srcPhoto = srcPhoto ? srcPhoto: DEFAULT_AVATAR_SRC;
 
-  return (<NavLink onClick={() => props.clickProfileUser(props.id)} className={style.friendContainer} to={`/Profile/${props.id}`}>
+  return (<NavLink onClick={() => clickProfileUser(id)} className={style.friendContainer} to={`/Profile/${id}`}>
             <img className={style.photo} src={srcPhoto} />
-            <p className={style.name}>{props.name}</p>
+            <p className={style.name}>{name}</p>
           </NavLink>
           );
 };

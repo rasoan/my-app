@@ -2,13 +2,13 @@ import React from "react";
 import style from "./Navigation.module.scss";
 import {NavLink} from 'react-router-dom';
 
-const Navigation = (props) => {
+const Navigation = ({clickProfileLink,}) => {
   return (
     <header>
       <div className={style.NavigationContainer}>
         <ul className={style.NavigationContainer__list}>
           <li className={style.NavigationContainer__item}>
-            <NavLink onClick={props.clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
+            <NavLink onClick={clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
               Profile
             </NavLink>
           </li>

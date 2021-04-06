@@ -8,9 +8,9 @@ import {required, maxLengthCreator} from "../../utils/validators/validators";
 
 const maxLength10 = maxLengthCreator(10);
 
-const MessageForm = (props) => {
+const MessageForm = ({handleSubmit}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field placeholder={"Введите ваше сообщение"} 
                name={"message"}
@@ -24,29 +24,22 @@ const MessageForm = (props) => {
 
 const MessageFormRedux = reduxForm({form: 'message'},)(MessageForm);
 
-
-
-const Dialogs = (props) => {
-  let dialogsData= props.dialogsData;
-  
+const Dialogs = ({dialogsData, messages, onSendMessageClick}) => { 
   dialogsData = dialogsData.map((element) => (
     <DialogItem name={element.name} id={element.id} />
   ));
-
-  let messagesData= props.messages; 
-  messagesData = messagesData.map((element) => (
+  messages = messages.map((element) => (
     <Message message={element.message} />
   ));
-
   let sendMessage = (formData) => {
-    props.onSendMessageClick(formData.message);
+    onSendMessageClick(formData.message);
   }
-  
+
   return (
     <div className={style.dialogs}>
       <div className={style.dialogsItems}>{dialogsData}</div>
       <div className={style.messages}>
-        <div>{messagesData}</div>
+        <div>{messages}</div>
         <div>
           <MessageFormRedux onSubmit={sendMessage} />
         </div>
@@ -54,9 +47,5 @@ const Dialogs = (props) => {
     </div>
   );
 };
-
-
-
-
 
 export default Dialogs;

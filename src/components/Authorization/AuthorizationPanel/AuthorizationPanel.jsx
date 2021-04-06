@@ -13,8 +13,8 @@ const AuthorizationPanel = ({isAuth, authorizationInfo, logOutClick, signInOnCli
               </div>
               <div className={style.authorizationPanel}>
                 <AuthorizationItem text={"Выйти"}
-                                onClickF={logOutClick}
-                                srcImg={LOG_OUT_IMG} />
+                                   onClickF={logOutClick}
+                                   srcImg={LOG_OUT_IMG} />
               </div>
             </div>);
   }

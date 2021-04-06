@@ -5,16 +5,16 @@ import {compose} from "redux";
 import { connect } from "react-redux";
 import {updateNewStatusText} from "../../redux/profile-reducer";
 
-const StatusContainer = (props) => {
+const StatusContainer = ({defaultStatusText, updateNewStatusText}) => {
   const [editMode, setEditMode] = useState(false);
-  const [status, setStatus] = useState(props.defaultStatusText);
+  const [status, setStatus] = useState(defaultStatusText);
   //const [statusTextCopy, setStatusTextCopy] = useState(null)
   const activateEditMode = () => {
     setEditMode(true);
   }
   const deActivateEditMode = () => {
     setEditMode(false);
-    props.updateNewStatusText(status);
+    updateNewStatusText(status);
   }
 
   const onStatusChange = (statusInputText) => {
@@ -25,13 +25,13 @@ const StatusContainer = (props) => {
     if (e.keyCode === 13) { // если клавиша Enter
       setEditMode(false);
       //let statusText = this.state.statusText !== "" ? this.state.statusText: this.props.defaultStatusText;
-      props.updateNewStatusText(status);
+      updateNewStatusText(status);
     }
 
     if (e.keyCode === 27) { // если клавиша esc
      // this.setState({editMode: false, statusText: this.state.statusTextCopy,});
       setEditMode(false);
-      props.updateNewStatusText(status); // заглушка
+      updateNewStatusText(status); // заглушка
     }
   }
 

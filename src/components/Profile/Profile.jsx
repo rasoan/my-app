@@ -4,13 +4,12 @@ import PropTypes from "prop-types";
 import PostsContainer from "./Posts/PostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
              
-const Profile = (props) => {
-  
-  if (!props.profile) return (<></>);
+const Profile = ({profile, }) => {
+  if (!profile) return (<></>);
   return (
     <div className={style.ProfileContainer}>
-      <ProfileInfo profile={props.profile} />
-      <PostsContainer profile={props.profile} />
+      <ProfileInfo profile={profile} />
+      <PostsContainer profile={profile} />
     </div>
   );
 };

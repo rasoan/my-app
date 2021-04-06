@@ -5,27 +5,27 @@ import {NavLink} from "react-router-dom";
 import Preloader from "../../Preloader/Preloader";
 
 
-const UserItem = (props) => {
-  let buttonText = props.followed ? "Удалить из друзей": "Добавить в друзья";
-  let styleButton = props.followed ? style.deleteFriendButton: style.addFriendButton;
-  let isFetching = props.isFetchingFollowOrUnfollowIdList.some(element => element === props.id) ? <Preloader /> : null;
-  let avatarSrc = props.photo ? props.photo: props.defaultAvatarSrc;
+const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList, photo, name, defaultAvatarSrc, id, navlinkTo}) => {
+  let buttonText = followed ? "Удалить из друзей": "Добавить в друзья";
+  let styleButton = followed ? style.deleteFriendButton: style.addFriendButton;
+  let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <Preloader /> : null;
+  let avatarSrc = photo ? photo: defaultAvatarSrc;
   return (
             <div className={style.UserItemContainer}>
-              <NavLink to={props.navlinkTo}>
+              <NavLink to={navlinkTo}>
                 <img className={style.photo} src={avatarSrc} />
-                <p className={style.name}>{props.name}</p>
+                <p className={style.name}>{name}</p>
               </NavLink>
               <div>
                 <p>{""}</p>
                 <p>{""}</p>
                 {isFetching || <button onClick={() => {
-                  if (!props.followed) {
-                    props.follow(props.id);
+                  if (!followed) {
+                    follow(id);
                   }
 
-                  if (props.followed) {
-                    props.unfollow(props.id);
+                  if (followed) {
+                    unfollow(id);
                   }
                 }
                 } className={styleButton}>{buttonText}</button>}
