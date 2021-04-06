@@ -9,9 +9,9 @@ import { Redirect } from "react-router";
 const maxLength40 = maxLengthCreator(40);
 
 
-const AuthorizationForm = (props) => {
+const AuthorizationForm = ({handleSubmit, error}) => {
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div>
         <Field placeholder={"Логин"}
                name={"login"}
@@ -29,8 +29,8 @@ const AuthorizationForm = (props) => {
         <Field type="checkbox" name={"rememberMe"} component={"input"} /> запомнить меня
       </div>
       <button>Залогиниться</button>
-      {props.error && <div className={styleForm.inCorrectSubmitDataHint}>
-        <p>{props.error}</p>
+      {error && <div className={styleForm.inCorrectSubmitDataHint}>
+        <p>{error}</p>
       </div>}
     </form>
   );
@@ -38,12 +38,12 @@ const AuthorizationForm = (props) => {
 
 const AuthorizationFormRedux = reduxForm({form: 'authorization'},)(AuthorizationForm);
 
-const AuthorizationPage = (props) => {
+const AuthorizationPage = ({signIn, isAuth}) => {
   const onSubmit = (formData) => {
-    props.signIn(formData.login, formData.password, formData.rememberMe);
+    signIn(formData.login, formData.password, formData.rememberMe);
   }
 
-  if(props.isAuth) {
+  if(isAuth) {
     return <Redirect to="/profile" />
   }
   return (
