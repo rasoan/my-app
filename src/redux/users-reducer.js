@@ -1,7 +1,7 @@
 import {usersApi} from "../api/api";
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-const ADD_FRIEND = 'ADD_FRIEND';
-const DELETE_FRIEND = 'DELETE_FRIEND';
+const FOLLOW = 'FOLLOW';
+const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const SET_TOTAL_USERS_COUNT = 'SET_TOTAL_USERS_COUNT';
@@ -27,7 +27,7 @@ const usersReducer = (state = initialState, action) => {
               ...state,
               users: [...action.users]
              }
-    case ADD_FRIEND:   
+    case FOLLOW:   
       return {
               ...state,
               users: state.users.map(u => {
@@ -37,7 +37,7 @@ const usersReducer = (state = initialState, action) => {
                 return u;
               }),
              }
-    case DELETE_FRIEND:
+    case UNFOLLOW:
       return {
               ...state,
               users: state.users.map(u => {
@@ -88,8 +88,8 @@ const usersReducer = (state = initialState, action) => {
 
 export default usersReducer;
 export let setUsers =(users) => ({type: SET_USERS, users});
-export let addFriend = (id) => ({type: ADD_FRIEND, id});
-export let deleteFriend = (id) => ({type: DELETE_FRIEND, id});
+export let followAC = (id) => ({type: FOLLOW, id});
+export let unfollowAC = (id) => ({type: UNFOLLOW, id});
 export let setCurrentPage = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
 export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
 export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
@@ -112,30 +112,26 @@ export const getUsersSC = (currentPage, pagesSize) => {
   }
 }
 
-export const unfollow = (id) => {
-  return async (dispatch) => {
+const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCreator) => {
     let action = isFetchingFollowOrUnfollowStart(id);
     dispatch(action);
-    let response = await usersApi.unfollow(id);
+    let response = await UsersApiFollowOrUnfollow(id);
     if (response.data.resultCode === 0) {
-      action = deleteFriend(id);
-      dispatch(action);
-      action = isFetchingFollowOrUnfollowEnd(id);
-      dispatch(action);       
-    }
-  }
-}
-
-export const follow = (id) => {
-  return async (dispatch) => {
-    let action = isFetchingFollowOrUnfollowStart(id);
-    dispatch(action);
-    let response = await usersApi.follow(id)
-    if (response.data.resultCode === 0) {
-      action = addFriend(id);
+      action = actionCreator(id);
       dispatch(action);
     }
     action = isFetchingFollowOrUnfollowEnd(id);
     dispatch(action);
+}
+
+export const follow = (id) => {
+  return async (dispatch) => {
+    followUnfollow(dispatch, id, usersApi.follow.bind(usersApi), followAC);
+  }
+}
+
+export const unfollow = (id) => {
+  return async (dispatch) => {
+    followUnfollow(dispatch, id, usersApi.unfollow.bind(usersApi), unfollowAC);
   }
 }
