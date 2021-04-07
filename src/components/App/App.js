@@ -11,6 +11,8 @@ import { Route } from 'react-router-dom';
 import {connect} from "react-redux";
 import app, {initializeTheApplication} from "../../redux/app-reducer";
 import {authMe} from "../../redux/auth-reducer";
+import {withSuspense} from "../../hoc/withSuspense";
+
 class App extends React.Component {
   componentDidMount() {
     this.props.authMe()
@@ -29,10 +31,10 @@ class App extends React.Component {
         <Header />
         <div className={style.container}>
           <LeftPanel />
-          <Route path='/dialog' render={() => <DialogsContainer />} />
-          <Route path='/profile/:userId?' render={() => <ProfileContainer />} />
-          <Route path='/users' render={() => <Users />} />
-          <Route path='/authorization' render={() => <AuthorizationPage />} />
+          <Route path='/dialog' render={withSuspense(DialogsContainer)} />
+          <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
+          <Route path='/users' render={withSuspense(Users)} />
+          <Route path='/authorization' render={withSuspense(AuthorizationPage)} />
         </div>
         </div>}
       </div>);
