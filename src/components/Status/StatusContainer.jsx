@@ -1,13 +1,14 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import style from "./Status.module.scss";
 import Status from "./Status";
 import {compose} from "redux";
 import { connect } from "react-redux";
 import {updateNewStatusText} from "../../redux/profile-reducer";
 
-const StatusContainer = ({defaultStatusText, updateNewStatusText}) => {
+const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText}) => {
   const [editMode, setEditMode] = useState(false);
-  const [status, setStatus] = useState(defaultStatusText);
+  const [status, setStatus] = useState(statusGlobalState);
+  const[statusCopy, setStatusCopy] = useState(statusGlobalState);
   //const [statusTextCopy, setStatusTextCopy] = useState(null)
   const activateEditMode = () => {
     setEditMode(true);
@@ -31,9 +32,14 @@ const StatusContainer = ({defaultStatusText, updateNewStatusText}) => {
     if (e.keyCode === 27) { // если клавиша esc
      // this.setState({editMode: false, statusText: this.state.statusTextCopy,});
       setEditMode(false);
-      updateNewStatusText(status); // заглушка
+      setStatus(statusCopy);
     }
   }
+
+  useEffect(() => {
+    setStatus(statusGlobalState);
+    setStatusCopy(statusGlobalState);
+  }, [statusGlobalState]);
 
   return <Status editMode={editMode}
                  activateEditMode={activateEditMode} 
@@ -45,7 +51,7 @@ const StatusContainer = ({defaultStatusText, updateNewStatusText}) => {
 }
 
 let mapStateToProps = (state) => ({
-  statusText: state.profilePage.statusText,
+  statusGlobalState: state.profilePage.statusText,
   defaultStatusText: state.profilePage.defaultStatusText,
   lookingAtMyProfile: state.profilePage.lookingAtMyProfile,
 });
