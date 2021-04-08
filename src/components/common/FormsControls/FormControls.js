@@ -65,10 +65,16 @@ export const Pass = ({input, meta, ...props}) => {
     );
 }
 
-export const TextareaStatus = () => {
+export const InputFile = ({ input, type, meta }) => {
+    const { mime } = this.props;
     return (
-        <div>
-            hello
-        </div>
-    )
-}
+      <div>
+        <input
+          name={input.name}
+          type={type}
+          accept={mime}
+          onChange={event => this.handleChange(event, input)}
+        />
+      </div>
+    );
+  };
