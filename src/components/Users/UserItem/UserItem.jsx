@@ -2,13 +2,13 @@ import React from "react";
 import style from "./UserItem.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
-import Preloader from "../../Preloader/Preloader";
+import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
 
 
 const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList, photo, name, defaultAvatarSrc, id, navlinkTo}) => {
   let buttonText = followed ? "Удалить из друзей": "Добавить в друзья";
   let styleButton = followed ? style.deleteFriendButton: style.addFriendButton;
-  let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <Preloader /> : null;
+  let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <PreloaderServerUpload /> : null;
   let avatarSrc = photo ? photo: defaultAvatarSrc;
   return (
             <div className={style.UserItemContainer}>

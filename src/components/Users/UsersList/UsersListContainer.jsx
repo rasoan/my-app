@@ -5,7 +5,7 @@ import {
         getUsersSC,
         unfollow, follow
        } from '../../../redux/users-reducer';
-import {getUsers, getPagesSize, getTotalUsersCount, getCurrentPagestate, getIsFetching, getIsFetchingFollowOrUnfollowIdList, getIsAuth, getDefaultAvatarSrc} from "../../../redux/users-selectors";
+import {getUsers, getPagesSize, getTotalUsersCount, getIsFetching, getIsFetchingFollowOrUnfollowIdList, getIsAuth, getDefaultAvatarSrc} from "../../../redux/users-selectors";
 
 
 

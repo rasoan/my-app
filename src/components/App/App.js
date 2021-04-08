@@ -2,16 +2,19 @@ import React from 'react';
 import style from './App.module.scss';
 import LeftPanel from'../LeftPanel';
 import Header from '../Header';
-import ProfileContainer from '../Profile/ProfileContainer';
-import DialogsContainer from '../Dialogs/DialogsContainer';
-import Preloader from "../Preloader/Preloader";
-import Users from '../Users/Users';
-import AuthorizationPage from '../Authorization/AuthorizationPage/AuthorizationPage';
+//import ProfileContainer from '../Profile/ProfileContainer';
+//import DialogsContainer from '../Dialogs/DialogsContainer';
+import PreloaderInitializationApplication from "../Preloader/PreloaderInitializationApplication";
+//import Users from '../Users/Users';
 import { Route } from 'react-router-dom';
 import {connect} from "react-redux";
 import app, {initializeTheApplication} from "../../redux/app-reducer";
 import {authMe} from "../../redux/auth-reducer";
 import {withSuspense} from "../../hoc/withSuspense";
+import AuthorizationPage from '../Authorization/AuthorizationPage/AuthorizationPage';
+const ProfileContainer =  React.lazy(() => import('../Profile/ProfileContainer'));
+const DialogsContainer =  React.lazy(() => import('../Dialogs/DialogsContainer'));
+const Users =             React.lazy(() => import('../Users/Users'));
 
 class App extends React.Component {
   componentDidMount() {
@@ -22,7 +25,7 @@ class App extends React.Component {
   }
   render() {
     if (!this.props.initialize) {
-      return (<Preloader />)
+      return (<PreloaderInitializationApplication />)
     }
 
     return (
@@ -34,7 +37,7 @@ class App extends React.Component {
           <Route path='/dialog' render={withSuspense(DialogsContainer)} />
           <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
           <Route path='/users' render={withSuspense(Users)} />
-          <Route path='/authorization' render={withSuspense(AuthorizationPage)} />
+          <Route path='/authorization' render={() => <AuthorizationPage />} />
         </div>
         </div>}
       </div>);

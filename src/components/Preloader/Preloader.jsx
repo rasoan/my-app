@@ -1,10 +1,10 @@
 import React from "react";
-import style from "./Preloader.module.scss";
+import style from "./Preloaders.module.scss";
 
 
 const Preloader = (props) => {
   return (<div>
-            <h2>Загрузка</h2>
+            <h2>Загрузка...</h2>
           </div>
           );
 };

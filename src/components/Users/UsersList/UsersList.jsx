@@ -3,7 +3,7 @@ import style from "./UsersList.module.scss";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem/UserItem";
 import Pagination from "../../Pagination/Pagination";
-import Preloader from "../../Preloader/Preloader";
+import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
 
 
 let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFetching, users, getUsers, follow, unfollow, defaultAvatarSrc, isFetchingFollowOrUnfollowIdList}) => {
@@ -18,7 +18,7 @@ let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFet
                            countCardsInPage={pagesSize} 
                            loading={isFetching}
                            getCards={getUsers} />
-               {isFetching ? <Preloader /> : null}
+               {isFetching ? <PreloaderServerUpload /> : null}
                {!isFetching && users.map((user) => <UserItem navlinkTo={"/Profile/" + user.id}
                                                                          id={user.id} 
                                                                          photo={user.photos.small}
