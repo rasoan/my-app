@@ -7,12 +7,13 @@ import {updateNewStatusText} from "../../redux/profile-reducer";
 
 const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText}) => {
   const [editMode, setEditMode] = useState(false);
+  const [statusCopy, setStatusCopy] = useState(statusGlobalState);
   const [status, setStatus] = useState(statusGlobalState);
-  const[statusCopy, setStatusCopy] = useState(statusGlobalState);
-  //const [statusTextCopy, setStatusTextCopy] = useState(null)
+
   const activateEditMode = () => {
     setEditMode(true);
   }
+  
   const deActivateEditMode = () => {
     setEditMode(false);
     let statusTemporaryVariable = status !== "" ? status: defaultStatusText;
@@ -39,7 +40,6 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
     }
 
     if (e.keyCode === 27) { // если клавиша esc
-     // this.setState({editMode: false, statusText: this.state.statusTextCopy,});
       setEditMode(false);
       setStatus(statusCopy);
     }
