@@ -15,7 +15,12 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
   }
   const deActivateEditMode = () => {
     setEditMode(false);
-    updateNewStatusText(status);
+    let statusTemporaryVariable = status !== "" ? status: defaultStatusText;
+    updateNewStatusText(statusTemporaryVariable);
+    if (status === "") {
+      setStatus(defaultStatusText);
+      setStatusCopy(defaultStatusText);
+    }
   }
 
   const onStatusChange = (statusInputText) => {
@@ -25,8 +30,12 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
   const deActivateEditModeEnterOrEsc = (e) => {
     if (e.keyCode === 13) { // если клавиша Enter
       setEditMode(false);
-      //let statusText = this.state.statusText !== "" ? this.state.statusText: this.props.defaultStatusText;
-      updateNewStatusText(status);
+      let statusTemporaryVariable = status !== "" ? status: defaultStatusText;
+      updateNewStatusText(statusTemporaryVariable);
+      if (status === "") {
+        setStatus(defaultStatusText);
+        setStatusCopy(defaultStatusText);
+      }
     }
 
     if (e.keyCode === 27) { // если клавиша esc
