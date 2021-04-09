@@ -13,6 +13,7 @@ const UPDATE_STATUS_TEXT = 'UPDATE_STATUS_TEXT';
 const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
 const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
+const SAVE_PROFILE = 'SAVE_PROFILE';
 //updateProfilePicture
 
 let initialState = {
@@ -98,6 +99,14 @@ const profileReducer = (state = initialState, action) => {
                           photos: {...action.imagefile}
                          },
                }
+      case SAVE_PROFILE:
+        return {
+                ...state,
+                profile: {
+                          ...state.profile,
+                          ...action.profile,
+                         }
+               }
         default:
           return state;
   }
@@ -153,6 +162,12 @@ export let updateProfilePictureAC = (imagefile) =>
 ({
   type: UPDATE_PROFILE_PICTURE,
   imagefile,
+})
+
+export let saveProfileAC = (profile) =>
+({
+  type: SAVE_PROFILE,
+  profile,
 })
 
 export const getProfile = (id) => {
@@ -221,6 +236,16 @@ export const updateProfilePicture = (imagefile) => {
     }
     else {
       console.log("Фотография профиля не обновилась, не подходящий формат файла!")
+    }
+  }
+}
+
+export const saveProfile = (profile) => {
+  return async (dispatch) => {
+    let response = await profileAPI.saveProfile(profile);
+    if (response.data.resultCode === 0) {
+      let action = saveProfileAC(profile);
+      dispatch(action);
     }
   }
 }

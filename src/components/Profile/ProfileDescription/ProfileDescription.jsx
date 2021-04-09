@@ -2,11 +2,11 @@ import React from "react";
 import style from "./ProfileDescription.module.scss";
 import ProfileDataForm from "./ProfileDataForm"
 
-const ProfileDescription = ({profile, toggleSetEditMode, editMode}) => {
+const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile}) => {
   //profile.contacts
   const onSubmit = (formData) => {
     toggleSetEditMode();
-    console.log(formData);
+    saveProfile(formData);
   } 
   return (<div>
             {editMode ? <ProfileDataForm onSubmit={onSubmit}

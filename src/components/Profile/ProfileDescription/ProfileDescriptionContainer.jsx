@@ -1,10 +1,10 @@
 import React, {useState} from "react";
 import ProfileDescription from "./ProfileDescription";
 import {connect} from "react-redux";
-import {getProfile} from "../../../redux/profile-reducer";
+import {getProfile, saveProfile} from "../../../redux/profile-reducer";
 import {compose} from "redux";
 
-const ProfileDescriptionContainer = ({profile}) => {
+const ProfileDescriptionContainer = ({profile, saveProfile}) => {
   const [editMode, setEditMode] = useState(false)
   const toggleSetEditMode = () => {
     let mode = editMode ? false: true;
@@ -14,7 +14,8 @@ const ProfileDescriptionContainer = ({profile}) => {
 
   return (<ProfileDescription profile={profile}
                               toggleSetEditMode={toggleSetEditMode}
-                              editMode={editMode} />);
+                              editMode={editMode}
+                              saveProfile={saveProfile} />);
 };
 
 let mapStateToProps = (state) => (
@@ -24,5 +25,5 @@ let mapStateToProps = (state) => (
 )
 
 export default compose(
-                       connect(mapStateToProps,{getProfile}),
+                       connect(mapStateToProps,{getProfile, saveProfile}),
                       )(ProfileDescriptionContainer);

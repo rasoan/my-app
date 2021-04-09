@@ -10,7 +10,7 @@ const ProfileDataForm = ({handleSubmit, profile}) => {
             <div>
               <p><b>Fullname</b>
               <Field placeholder={profile.fullName}
-                     name={"name"}
+                     name={"fullName"}
                      component={InputDefault}
                      validate={[]} /></p>
               
