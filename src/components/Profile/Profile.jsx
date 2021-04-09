@@ -14,7 +14,7 @@ const Profile = ({profile, isFetching}) => {
     <div className={style.ProfileContainer}>
       <div className={style.pictureAndDescriptionContainer}>
         <ProfilePictureContainer />
-        <ProfileDescriptionContainer profile={profile} />
+        <ProfileDescriptionContainer />
       </div>
       <StatusContainer /> 
       <PostsContainer profile={profile} />

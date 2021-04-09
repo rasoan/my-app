@@ -17,14 +17,14 @@ export const TextareaDefault = ({input, meta, ...props}) => {
     );
 }
 
-export const InputDefault = ({input, meta, ...props}) => {
+export const InputDefault = ({input, meta, type=null, ...props}) => {
     const CORRECT_INPUT = meta.touched && !meta.error;
     const INCORRECT_INPUT = meta.error && meta.touched;
     const NOT_TOUCHED = !meta.touched;
     return (
         <div>
             <div>
-              <input {...input} {...props} className={CORRECT_INPUT ? style.correct : 
+              <input {...type} {...input} {...props} className={CORRECT_INPUT ? style.correct : 
                                                       INCORRECT_INPUT ? style.inCorrect : 
                                                       NOT_TOUCHED ? style.default: style.default} />
             </div>
