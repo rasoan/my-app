@@ -3,7 +3,7 @@ import {
   profileAPI
 } from "../api/api";
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-import {DEFAULT_STATUS_TEXT, MY_ID} from "../constants/Profile"
+import {DEFAULT_STATUS_TEXT} from "../constants/Profile"
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const START_FETCHING = 'START_FETCHING';
@@ -156,8 +156,8 @@ export let updateProfilePictureAC = (imagefile) =>
 })
 
 export const getProfile = (id) => {
-  id = id ? id: MY_ID;
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    id = id ? id: getState().auth.userId;
     let action = startFetchingAC();
     dispatch(action);
     let response = await profileAPI.getProfile(id)
@@ -201,10 +201,10 @@ export const notLookingMyProfile = () => {
   }
 }
 
-export const getStatus = (userId) => {
-  userId = userId ? userId: MY_ID;
-  return async (dispatch) => {
-    let response = await profileAPI.getStatus(userId)
+export const getStatus = (id) => {
+  return async (dispatch, getState) => {
+    id = id ? id: getState().auth.userId;
+    let response = await profileAPI.getStatus(id)
     if (response.status === 200) {
       let action = getStatusAC(response.data);
       dispatch(action);
