@@ -1,26 +1,19 @@
 import React, {useState} from "react";
 import style from "./ProfilePicture.module.scss";
-const fileInputRef = React.createRef();
 
-const ProfilePicture = ({photos}) => {
-  const [fileInput, setFileInput] = useState();
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    setFileInput(fileInputRef.current.files[0]);
-  }
+const ProfilePicture = ({photos, onSubmit, fileInputRef, lookingAtMyProfile}) => {
 
   return (
-    <div className={style.ProfileInfoContainer}>
+    <div className={style.profilePictureContainer}>
       <img className={style.image} src={photos.large} />
-      <form onSubmit={onSubmit}>
-        <input type="file" placeholder="Загрузить файл" ref={fileInputRef} />
-        <button type="submit">Загрузить файл</button>
-      </form>
-        
+      {lookingAtMyProfile && <form onSubmit={onSubmit} className={style.profilePictureUpload}>
+         <div className={style.profilePictureUploadBlock}>
+          <input type="file" ref={fileInputRef} />
+          <button type="submit">Загрузить файл</button>
+        </div>
+      </form>}    
     </div>
   );
 };
 
 export default ProfilePicture;
-

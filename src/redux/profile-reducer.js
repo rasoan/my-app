@@ -12,7 +12,8 @@ const GET_STATUS = 'GET_STATUS';
 const UPDATE_STATUS_TEXT = 'UPDATE_STATUS_TEXT';
 const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
-
+const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
+//updateProfilePicture
 
 let initialState = {
   posts: [{
@@ -89,6 +90,14 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 statusText: getStatusText,
                }
+      case UPDATE_PROFILE_PICTURE:
+        return {
+                ...state,
+                profile: {
+                          ...state.profile,
+                          photos: {...action.imagefile}
+                         },
+               }
         default:
           return state;
   }
@@ -138,6 +147,12 @@ export let getStatusAC = (statusText) =>
 ({
   type: GET_STATUS,
   statusText
+})
+
+export let updateProfilePictureAC = (imagefile) =>
+({
+  type: UPDATE_PROFILE_PICTURE,
+  imagefile,
 })
 
 export const getProfile = (id) => {
@@ -193,6 +208,19 @@ export const getStatus = (userId) => {
     if (response.status === 200) {
       let action = getStatusAC(response.data);
       dispatch(action);
+    }
+  }
+}
+
+export const updateProfilePicture = (imagefile) => {
+  return async (dispatch) => {
+    let response = await profileAPI.updateProfilePicture(imagefile);
+    if (response.data.resultCode === 0) {
+      let action = updateProfilePictureAC(response.data.data.photos);
+      dispatch(action);
+    }
+    else {
+      console.log("Фотография профиля не обновилась, не подходящий формат файла!")
     }
   }
 }

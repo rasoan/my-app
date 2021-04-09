@@ -12,9 +12,11 @@ const Profile = ({profile, isFetching}) => {
   if (!profile) return <></> 
   return (
     <div className={style.ProfileContainer}>
-      <ProfilePictureContainer />
+      <div className={style.pictureAndDescriptionContainer}>
+        <ProfilePictureContainer />
+        <ProfileDescription profile={profile} />
+      </div>
       <StatusContainer /> 
-      <ProfileDescription profile={profile} />
       <PostsContainer profile={profile} />
     </div>
   );
