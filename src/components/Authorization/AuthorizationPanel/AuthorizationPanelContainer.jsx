@@ -3,6 +3,7 @@ import AuthorizationPanel from "./AuthorizationPanel";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {logOut, authMe} from "../../../redux/auth-reducer";
+import {getProfile} from "../../../redux/profile-reducer";
 
 class AuthorizationPanelContainer extends React.Component {
   signInOnClick = () => {
@@ -11,7 +12,7 @@ class AuthorizationPanelContainer extends React.Component {
   signUpOnClick = () => {
     console.log("открыть страницу регистрации")
   }
-  logOutClick = () => {
+  logOutClick = async () => {
     console.log("выйти из системы");
     this.props.logOut();
   }

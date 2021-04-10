@@ -2,7 +2,7 @@ import React from "react";
 import style from "./ProfileDescription.module.scss";
 import ProfileDataForm from "./ProfileDataForm"
 
-const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile}) => {
+const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile, lookingAtMyProfile}) => {
   const onSubmit = async (formData) => {
     await saveProfile(formData);
     toggleSetEditMode();
@@ -13,13 +13,14 @@ const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile})
                                          initialValues={profile} 
                                          toggleSetEditMode={toggleSetEditMode} />: 
                         <ProfileData profile={profile}
-                                     toggleSetEditMode={toggleSetEditMode} />}
+                                     toggleSetEditMode={toggleSetEditMode}
+                                     lookingAtMyProfile={lookingAtMyProfile} />}
           </div>);
 };
 
-const ProfileData = ({profile, toggleSetEditMode}) => {
+const ProfileData = ({profile, toggleSetEditMode, lookingAtMyProfile}) => {
   return (<div className={style.ProfileInfoContainer}>
-            <button onClick={toggleSetEditMode}>Редактировать</button>
+            {lookingAtMyProfile && <button onClick={toggleSetEditMode}>Редактировать</button>}
             <div>
               <p><b>Fullname:</b> {profile.fullName}</p>
               <p><b>Looking for a job:</b> {profile.lookingForAJob ? "Yes": "No"}</p>

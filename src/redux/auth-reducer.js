@@ -1,13 +1,13 @@
 import { stopSubmit } from "redux-form";
 import {authAPI} from "../api/api";
-import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
+import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
 const SET_USER_DATA = "SET_USER_DATA";
 const SIGN_IN = "SIGN_IN";
 const SIGN_UP = "SIGN_UP";
 const LOG_OUT = "LOG_OUT";
 
 let initialState = {
-  userId: null,
+  userId: DEFAULT_USER_ID,
   email: null,
   login: null,
   isAuth: false,
@@ -86,6 +86,10 @@ export const authMe = () => {
       let action = setUserDataAC(id, email, login, true);
       dispatch(action);
     }
+    else if (response.data.resultCode === 2) {
+      let action = setUserDataAC(DEFAULT_USER_ID);
+      dispatch(action);
+    }
     return response;
   }
 }
@@ -115,9 +119,9 @@ export const logOut = ()  => {
   return async (dispatch) => {
     let response = await authAPI.logOut();
     if (response.data.resultCode === 0) {
-      let action = setUserDataAC();
+      let action = setUserDataAC(DEFAULT_USER_ID);  
       dispatch(action);
     }
-
+    return response;
   }  
 }

@@ -172,10 +172,11 @@ export let saveProfileAC = (profile) =>
 
 export const getProfile = (id) => {
   return async (dispatch, getState) => {
+    
     id = id ? id: getState().auth.userId;
     let action = startFetchingAC();
     dispatch(action);
-    let response = await profileAPI.getProfile(id)
+    let response = await profileAPI.getProfile(id)    
     if (response.status === 200) {
       action = setUserProfileAC(response.data);
       dispatch(action);

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
 import Profile from "../Profile/Profile";
@@ -7,28 +7,28 @@ import {getProfile, lookingMyProfile, notLookingMyProfile, getStatus} from "../.
 import { withRouter } from "react-router";
 import {compose} from "redux";
                  
-class ProfileContainer extends React.Component {
-  componentDidMount() {
-    this.props.getProfile(this.props.match.params.userId);
-    this.props.getStatus(this.props.match.params.userId);
-    if (this.props.match.params.userId) {
-      this.props.notLookingMyProfile();
-    }
-    else {
-      this.props.lookingMyProfile();
-    }
-  }
-  render() {
-    return (
-            <Profile {...this.props} profile={this.props.profile} />
-           );
-  };
-}
+const ProfileContainer = (props) => {
+  
+    useEffect(() => {
+      props.getProfile(props.match.params.userId);
+      props.getStatus(props.match.params.userId);
+      if (props.match.params.userId || !props.isAuth) {
+        props.notLookingMyProfile();
+      }
+      else {
+        props.lookingMyProfile();
+      }
+    }, [props.isAuth]);
+    return (<Profile {...props} profile={props.profile} />);
+};
+
+
 
 let mapStateToProps = (state) => (
   {
     profile: state.profilePage.profile,
     isFetching: state.profilePage.isFetching,
+    isAuth: state.auth.isAuth,
   }
 )
 
