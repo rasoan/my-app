@@ -3,14 +3,14 @@ import style from "./ProfileDescription.module.scss";
 import ProfileDataForm from "./ProfileDataForm"
 
 const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile}) => {
-  //profile.contacts
-  const onSubmit = (formData) => {
+  const onSubmit = async (formData) => {
+    await saveProfile(formData);
     toggleSetEditMode();
-    saveProfile(formData);
   } 
   return (<div>
             {editMode ? <ProfileDataForm onSubmit={onSubmit}
-                                         profile={profile} 
+                                         profile={profile}
+                                         initialValues={profile} 
                                          toggleSetEditMode={toggleSetEditMode} />: 
                         <ProfileData profile={profile}
                                      toggleSetEditMode={toggleSetEditMode} />}

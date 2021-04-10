@@ -1,12 +1,18 @@
 import React from "react";
 import style from "./ProfileDescription.module.scss";
+import { Field, reduxForm } from "redux-form";
+import {InputDefault} from "../../common/FormsControls/FormControls";
 
-
-
-const Contact = ({contactTitle, contactValue}) => {
+export const Contact = ({contactTitle, contactValue}) => {
   return (<div>
            <p><b>{contactTitle}:</b> {contactValue}</p>
          </div>);
 }
 
-export default Contact;
+export const ContactForm = ({contactTitle, contactValue}) => {
+  return (<div>
+           <p><b>{contactTitle}:</b> {contactValue}</p>
+           <Field name={"contacts." + contactTitle}
+                  component={InputDefault} />
+         </div>);
+}

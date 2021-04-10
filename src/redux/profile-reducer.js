@@ -241,11 +241,16 @@ export const updateProfilePicture = (imagefile) => {
 }
 
 export const saveProfile = (profile) => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
+    let id = getState().auth.userId;
     let response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === 0) {
-      let action = saveProfileAC(profile);
-      dispatch(action);
+      let response = await profileAPI.getProfile(id)
+      if (response.status === 200) {
+        let action = setUserProfileAC(response.data);
+        dispatch(action);
+      }
     }
+    return response;
   }
 }

@@ -65,16 +65,7 @@ export const Pass = ({input, meta, ...props}) => {
     );
 }
 
-export const InputFile = ({ input, type, meta }) => {
-    const { mime } = this.props;
-    return (
-      <div>
-        <input
-          name={input.name}
-          type={type}
-          accept={mime}
-          onChange={event => this.handleChange(event, input)}
-        />
-      </div>
-    );
-  };
+export const InputCheckbox = ({input, ...props}) => {
+
+    return ( <input {...input} {...props} type="checkbox" />);
+}
