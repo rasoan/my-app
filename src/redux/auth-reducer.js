@@ -1,21 +1,23 @@
 import { stopSubmit } from "redux-form";
-import {authAPI} from "../api/api";
+import {authAPI, securituAPI} from "../api/api";
 import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
 const SET_USER_DATA = "SET_USER_DATA";
 const SIGN_IN = "SIGN_IN";
 const SIGN_UP = "SIGN_UP";
 const LOG_OUT = "LOG_OUT";
+const GET_CAPTCHA = "GET_CAPTCHA";
 
 let initialState = {
   userId: DEFAULT_USER_ID,
   email: null,
   login: null,
   isAuth: false,
+  captchaUrl: null,
   signInImg: SIGN_IN_IMG,
   signUpImg: SIGN_UP_IMG,
   logOutImg: LOG_OUT_IMG,
 };
-//SignIn
+
 const authReducer = (state = initialState, action) => {
   switch (action.type) {
     case SET_USER_DATA:
@@ -27,7 +29,7 @@ const authReducer = (state = initialState, action) => {
       case SIGN_IN:
         return {
                 ...state,
-                isAuth: action.isAuth,
+                isAuth: true,
                }
       case SIGN_UP:
         return {
@@ -37,8 +39,13 @@ const authReducer = (state = initialState, action) => {
       case LOG_OUT:
         return {
                 ...state,
-                isAuth: action.isAuth,
+                isAuth: false,
                }
+      case GET_CAPTCHA:
+        return {
+                ...state,
+                captchaUrl: action.captchaUrl,
+               }        
       default:
         return state;
   }
@@ -53,16 +60,11 @@ export let setUserDataAC = (userId = null, email = null, login = null, isAuth = 
       email,
       login
     },
-    isAuth,
+    isAuth: isAuth,
   }
 };
 
-export let signInAC = (isAuth) => {
-  return {
-          type: SIGN_IN,
-          isAuth,
-         }
-}
+export let signInAC = (isAuth) => ({type: SIGN_IN,});
 
 export let signUpAC = (isAuth) => {
   return {
@@ -71,12 +73,10 @@ export let signUpAC = (isAuth) => {
    }
 }
 
-export let logOutAC = (isAuth) => {
-  return {
-    type: LOG_OUT,
-    isAuth,
-   }
-}
+export let logOutAC = () => ({type: LOG_OUT})
+
+const getCaptchaAC = (captchaUrl) => 
+({type: GET_CAPTCHA, captchaUrl});
 
 export const authMe = () => {
   return async (dispatch) => {
@@ -94,9 +94,9 @@ export const authMe = () => {
   }
 }
 
-export const signIn = (email, password, rememberMe = null)  => {
+export const signIn = (email, password, rememberMe = null, captcha)  => {
    return async (dispatch) => {
-     let response = await authAPI.signIn(email, password, rememberMe);
+     let response = await authAPI.signIn(email, password, rememberMe, captcha);
      if (response.data.resultCode === 0) {
        let action = authMe();
        dispatch(action);
@@ -105,6 +105,9 @@ export const signIn = (email, password, rememberMe = null)  => {
        let action = authMe();
        dispatch(action);
        action = stopSubmit("authorization", {_error: response.data.messages[0]});
+       dispatch(action);
+       let responseCaptcha = await securituAPI.getCaptchaUrl();
+       action = getCaptchaAC(responseCaptcha.data.url);
        dispatch(action);
      }
      return response;
@@ -116,11 +119,15 @@ export const signUp = ()  => {
 }
 
 export const logOut = ()  => {
-  return async (dispatch) => {
+  return async (dispatch, getState) => {
     let response = await authAPI.logOut();
+    
     if (response.data.resultCode === 0) {
-      let action = setUserDataAC(DEFAULT_USER_ID);  
+      let action = setUserDataAC(DEFAULT_USER_ID);
       dispatch(action);
+      
+      console.log("вылогиниваюсь", getState().auth.isAuth && "да" || "нет");
+      console.log(getState().auth.userId)
     }
     return response;
   }  

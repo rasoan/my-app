@@ -9,7 +9,7 @@ import { Redirect } from "react-router";
 const maxLength40 = maxLengthCreator(40);
 
 
-const AuthorizationForm = ({handleSubmit, error}) => {
+const AuthorizationForm = ({handleSubmit, error, captchaUrl}) => {
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -29,6 +29,10 @@ const AuthorizationForm = ({handleSubmit, error}) => {
         <Field type="checkbox" name={"rememberMe"} component={"input"} /> запомнить меня
       </div>
       <button>Залогиниться</button>
+      {captchaUrl && <img src={captchaUrl} />}
+      {captchaUrl &&  <Field placeholder={"Введите текст с картинки"}
+                                      name={"captcha"}
+                                      component={Login} />}
       {error && <div className={styleForm.inCorrectSubmitDataHint}>
         <p>{error}</p>
       </div>}
@@ -38,9 +42,9 @@ const AuthorizationForm = ({handleSubmit, error}) => {
 
 const AuthorizationFormRedux = reduxForm({form: 'authorization'},)(AuthorizationForm);
 
-const AuthorizationPage = ({signIn, isAuth}) => {
+const AuthorizationPage = ({signIn, isAuth, captchaUrl}) => {
   const onSubmit = (formData) => {
-    signIn(formData.login, formData.password, formData.rememberMe);
+    signIn(formData.login, formData.password, formData.rememberMe, formData.captcha);
   }
 
   if(isAuth) {
@@ -49,13 +53,15 @@ const AuthorizationPage = ({signIn, isAuth}) => {
   return (
           <div>
             <h1>Авторизация</h1>
-            <AuthorizationFormRedux onSubmit={onSubmit} />
+            <AuthorizationFormRedux onSubmit={onSubmit}
+                                    captchaUrl={captchaUrl} />
           </div>
          );
 };
 
 const mapStateToProps = (state) => ({
   isAuth: state.auth.isAuth,
+  captchaUrl: state.auth.captchaUrl,
 })
 
 

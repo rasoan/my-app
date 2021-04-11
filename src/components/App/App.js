@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import style from './App.module.scss';
 import LeftPanel from'../LeftPanel';
 import Header from '../Header';
@@ -16,21 +16,24 @@ const ProfileContainer =  React.lazy(() => import('../Profile/ProfileContainer')
 const DialogsContainer =  React.lazy(() => import('../Dialogs/DialogsContainer'));
 const Users =             React.lazy(() => import('../Users/Users'));
 
-class App extends React.Component {
-  componentDidMount() {
-    this.props.authMe()
-              .then(response => {
-                this.props.initializeTheApplication(true);
-              });
-  }
-  render() {
-    if (!this.props.initialize) {
+const App = (props) => {
+  useEffect(() => {
+    props.authMe()
+         .then(response => {
+           props.initializeTheApplication(true);
+         });
+    return () => {}
+  }, [])
+  
+  
+
+    if (!props.initialize) {
       return (<PreloaderInitializationApplication />)
     }
 
     return (
       <div>
-        {this.props.initialize && <div>
+        {props.initialize && <div>
         <Header />
         <div className={style.container}>
           <LeftPanel />
@@ -41,7 +44,6 @@ class App extends React.Component {
         </div>
         </div>}
       </div>);
-  }
 }
 
 let mapStateToProps = (state) => {

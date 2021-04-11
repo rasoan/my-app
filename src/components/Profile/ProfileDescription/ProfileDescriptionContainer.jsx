@@ -8,7 +8,7 @@ const ProfileDescriptionContainer = ({profile, saveProfile, lookingAtMyProfile})
   const [editMode, setEditMode] = useState(false)
   const toggleSetEditMode = () => {
     let mode = editMode ? false: true;
-    setEditMode(mode)
+    setEditMode(mode);
   }
   
 
@@ -27,5 +27,5 @@ let mapStateToProps = (state) => (
 )
 
 export default compose(
-                       connect(mapStateToProps,{getProfile, saveProfile}),
+                       connect(mapStateToProps,{saveProfile}),
                       )(ProfileDescriptionContainer);
