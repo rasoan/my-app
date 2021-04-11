@@ -48,7 +48,7 @@ const App = (props) => {
 
 let mapStateToProps = (state) => {
   return {
-    initialize: state.appPage.initializeTheApplication,
+    initialize: state.app.initializeTheApplication,
   }
 }
 export default connect(mapStateToProps, {authMe, initializeTheApplication})(App);

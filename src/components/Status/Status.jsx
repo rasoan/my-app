@@ -1,9 +1,9 @@
 import React from "react";
 import style from "./Status.module.scss";
 
-const Status = ({lookingAtMyProfile, activateEditMode, editMode, deActivateEditModeEnterOrEsc, onStatusChange, deActivateEditMode, statusText}) => {
-  activateEditMode = lookingAtMyProfile ? activateEditMode: ()=>{};
-  let statusTextStyle = lookingAtMyProfile ? style.statusText: "";
+const Status = ({controlPanels, activateEditMode, editMode, deActivateEditModeEnterOrEsc, onStatusChange, deActivateEditMode, statusText}) => {
+  activateEditMode = controlPanels ? activateEditMode: ()=>{};
+  let statusTextStyle = controlPanels ? style.statusText: "";
   
   return <div className={style.statusTextContainer}>
            {editMode && <input className={style.inputStatusText}

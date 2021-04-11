@@ -24,7 +24,8 @@ class UsersListContainer extends React.Component {
                        getUsers={this.props.getUsersSC}
                        follow={this.props.follow} 
                        unfollow={this.props.unfollow} 
-                       defaultAvatarSrc={this.props.defaultAvatarSrc} />); 
+                       defaultAvatarSrc={this.props.defaultAvatarSrc}
+                       isAuth={this.props.isAuth} />); 
   }
 }
 

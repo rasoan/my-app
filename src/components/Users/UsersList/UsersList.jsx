@@ -6,7 +6,7 @@ import Pagination from "../../Pagination/Pagination";
 import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
 
 
-let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFetching, users, getUsers, follow, unfollow, defaultAvatarSrc, isFetchingFollowOrUnfollowIdList}) => {
+let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFetching, users, getUsers, follow, unfollow, defaultAvatarSrc, isFetchingFollowOrUnfollowIdList, isAuth}) => {
   let countPage = Math.ceil(totalUsersCount / pagesSize);
   let pages = [];
   for(let i = 1; i <= countPage; i++) {
@@ -27,7 +27,7 @@ let UsersList = ({totalUsersCount, pagesSize, currentPage, setCurrentPage, isFet
                                                                          isFetchingFollowOrUnfollowIdList={isFetchingFollowOrUnfollowIdList}
                                                                          follow={follow} 
                                                                          unfollow={unfollow}
-                                                                         defaultAvatarSrc={defaultAvatarSrc} />)}
+                                                                         defaultAvatarSrc={defaultAvatarSrc} isAuth={isAuth}/>)}
            </>);        
 }
 

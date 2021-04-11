@@ -4,7 +4,7 @@ import {connect} from "react-redux";
 import {getProfile, saveProfile} from "../../../redux/profile-reducer";
 import {compose} from "redux";
 
-const ProfileDescriptionContainer = ({profile, saveProfile, lookingAtMyProfile}) => {
+const ProfileDescriptionContainer = ({profile, saveProfile, controlPanels}) => {
   const [editMode, setEditMode] = useState(false)
   const toggleSetEditMode = () => {
     let mode = editMode ? false: true;
@@ -16,13 +16,13 @@ const ProfileDescriptionContainer = ({profile, saveProfile, lookingAtMyProfile})
                               toggleSetEditMode={toggleSetEditMode}
                               editMode={editMode}
                               saveProfile={saveProfile}
-                              lookingAtMyProfile={lookingAtMyProfile} />);
+                              controlPanels={controlPanels} />);
 };
 
 let mapStateToProps = (state) => (
   {
     profile: state.profilePage.profile,
-    lookingAtMyProfile: state.profilePage.lookingAtMyProfile,
+    controlPanels: state.app.controlPanels,
   }
 )
 

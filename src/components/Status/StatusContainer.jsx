@@ -5,7 +5,7 @@ import {compose} from "redux";
 import { connect } from "react-redux";
 import {updateNewStatusText} from "../../redux/profile-reducer";
 
-const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText, lookingAtMyProfile}) => {
+const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText, controlPanels}) => {
   const [editMode, setEditMode] = useState(false);
   const [statusCopy, setStatusCopy] = useState(statusGlobalState);
   const [status, setStatus] = useState(statusGlobalState);
@@ -56,13 +56,13 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
                  deActivateEditModeEnterOrEsc={deActivateEditModeEnterOrEsc}
                  onStatusChange={onStatusChange} 
                  statusText={status} 
-                 lookingAtMyProfile={lookingAtMyProfile}/>
+                 controlPanels={controlPanels}/>
 }
 
 let mapStateToProps = (state) => ({
   statusGlobalState: state.profilePage.statusText,
   defaultStatusText: state.profilePage.defaultStatusText,
-  lookingAtMyProfile: state.profilePage.lookingAtMyProfile,
+  controlPanels: state.app.controlPanels,
 });
 
 export default compose(

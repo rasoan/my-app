@@ -5,7 +5,7 @@ import {NavLink} from "react-router-dom";
 import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
 
 
-const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList, photo, name, defaultAvatarSrc, id, navlinkTo}) => {
+const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList, photo, name, defaultAvatarSrc, id, navlinkTo, isAuth}) => {
   let buttonText = followed ? "Удалить из друзей": "Добавить в друзья";
   let styleButton = followed ? style.deleteFriendButton: style.addFriendButton;
   let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <PreloaderServerUpload /> : null;
@@ -19,7 +19,7 @@ const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList,
               <div>
                 <p>{""}</p>
                 <p>{""}</p>
-                {isFetching || <button onClick={() => {
+                {isFetching || isAuth && <button onClick={() => {
                   if (!followed) {
                     follow(id);
                   }

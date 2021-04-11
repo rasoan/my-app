@@ -4,26 +4,21 @@ import PropTypes from "prop-types";
 import Profile from "../Profile/Profile";
 import {connect} from "react-redux";
 import {getProfile, lookingMyProfile, notLookingMyProfile, getStatus} from "../../redux/profile-reducer";
+import {checkUserOrOwner} from "../../redux/app-reducer";
 import { withRouter } from "react-router";
 import {compose} from "redux";
                  
 const ProfileContainer = (props) => {
-   let {userId, match, profile, isAuth, 
+   let {myId, match, profile, 
         logoutFetching, getProfile, getStatus, 
-        notLookingMyProfile, lookingMyProfile} = props;
+        checkUserOrOwner} = props;
    
     useEffect( () => {
       if (logoutFetching) return;
       getProfile(match.params.userId);
       getStatus(match.params.userId);
-      if (match.params.userId || !isAuth) {
-        notLookingMyProfile();
-      }
-      else {
-        lookingMyProfile();
-      }
-    }, [userId, logoutFetching]);
-
+      checkUserOrOwner(match.params.userId);
+    }, [myId, logoutFetching]);
     return (<Profile {...props} profile={profile} />);
 };
 
@@ -33,13 +28,14 @@ let mapStateToProps = (state) => (
   {
     profile: state.profilePage.profile,
     isFetching: state.profilePage.isFetching,
-    isAuth: state.auth.isAuth,
-    userId: state.auth.userId,
+    myId: state.auth.userId,
     logoutFetching: state.auth.logoutFetching,
   }
 )
 
 export default compose(
-                       connect(mapStateToProps,{getProfile, lookingMyProfile, notLookingMyProfile, getStatus}),
+                       connect(mapStateToProps,{getProfile, lookingMyProfile, 
+                                                notLookingMyProfile, getStatus,
+                                                checkUserOrOwner}),
                        withRouter
                       )(ProfileContainer);

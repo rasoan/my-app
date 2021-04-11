@@ -5,7 +5,7 @@ import {compose} from "redux";
 import {updateProfilePicture} from "../../../redux/profile-reducer";
 const fileInputRef = React.createRef();
 
-const ProfilePictureContainer = ({photos, updateProfilePicture, fileInputRef, lookingAtMyProfile}) => {
+const ProfilePictureContainer = ({photos, updateProfilePicture, fileInputRef, controlPanels}) => {
   const onSubmit = (event) => {
     event.preventDefault();
     updateProfilePicture(fileInputRef.current);
@@ -14,7 +14,7 @@ const ProfilePictureContainer = ({photos, updateProfilePicture, fileInputRef, lo
   return <ProfilePicture photos={photos} 
                          onSubmit={onSubmit}
                          fileInputRef={fileInputRef}
-                         lookingAtMyProfile={lookingAtMyProfile} />;
+                         controlPanels={controlPanels} />;
 };
 
 
@@ -24,7 +24,7 @@ let mapStateToProps = (state) => (
       photos: state.profilePage.profile.photos,
       isFetching: state.profilePage.isFetching,
       fileInputRef: fileInputRef,
-      lookingAtMyProfile: state.profilePage.lookingAtMyProfile,
+      controlPanels: state.app.controlPanels,
     }
   )
   
