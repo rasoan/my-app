@@ -3,7 +3,8 @@ import {
   profileAPI
 } from "../api/api";
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-import {DEFAULT_STATUS_TEXT} from "../constants/Profile"
+import {DEFAULT_STATUS_TEXT} from "../constants/Profile";
+import {DEFAULT_USER_ID} from "../constants/Authorization";
 const ADD_POST = 'ADD-POST';
 const SET_USER_PROFILE = 'SET_USER_PROFILE';
 const START_FETCHING = 'START_FETCHING';
@@ -14,6 +15,7 @@ const SET_FLAG_LOOKING_AT_MY_PROFILE = 'SET_FLAG_LOOKING_AT_MY_PROFILE';
 const SET_FLAG_NOT_LOOKING_AT_MY_PROFILE = 'SET_FLAG_NOT_LOOKING_AT_MY_PROFILE';
 const UPDATE_PROFILE_PICTURE = 'UPDATE_PROFILE_PICTURE';
 const SAVE_PROFILE = 'SAVE_PROFILE';
+
 //updateProfilePicture
 
 let initialState = {
@@ -172,12 +174,10 @@ export let saveProfileAC = (profile) =>
 
 export const getProfile = (id) => {
   return async (dispatch, getState) => {
-    id = id ? id: getState().auth.userId;
-
-    
+    id = checkId(id, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
     let action = startFetchingAC();
     dispatch(action);
-    let response = await profileAPI.getProfile(id)    
+    let response = await profileAPI.getProfile(id);   
     if (response.status === 200) {
       action = setUserProfileAC(response.data);
       dispatch(action);
@@ -220,7 +220,8 @@ export const notLookingMyProfile = () => {
 
 export const getStatus = (id) => {
   return async (dispatch, getState) => {
-    id = id ? id: getState().auth.userId;
+    
+    id = checkId(id, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
     let response = await profileAPI.getStatus(id)
     if (response.status === 200) {
 
@@ -256,4 +257,14 @@ export const saveProfile = (profile) => {
     }
     return response;
   }
+}
+
+const checkId = (id, isAuth, myId, defaultId) => {
+  console.log("id ", id, "isAuth ", isAuth && "да" || "нет", "myId ", myId, "defaultId ", defaultId);
+  if(!id) {
+    id = isAuth ? myId: defaultId;
+  }
+  console.log("Возвращаю id ", id);
+  
+  return id;
 }

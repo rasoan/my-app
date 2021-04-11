@@ -12,10 +12,10 @@ class AuthorizationPanelContainer extends React.Component {
   signUpOnClick = () => {
     console.log("открыть страницу регистрации")
   }
-  logOutClick = () => {
+  logOutClick = async () => {
     console.log("выйти из системы");
     
-    this.props.logOut();
+    await this.props.logOut();
     
   }
   

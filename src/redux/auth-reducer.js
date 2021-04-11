@@ -6,12 +6,14 @@ const SIGN_IN = "SIGN_IN";
 const SIGN_UP = "SIGN_UP";
 const LOG_OUT = "LOG_OUT";
 const GET_CAPTCHA = "GET_CAPTCHA";
-
+const START_LOGOUT_FETCHING = "START_LOGOUT_FETCHING";
+const END_LOGOUT_FETCHING = "END_LOGOUT_FETCHING";
 let initialState = {
   userId: DEFAULT_USER_ID,
+  isAuth: false,
+  logoutFetching: false,
   email: null,
   login: null,
-  isAuth: false,
   captchaUrl: null,
   signInImg: SIGN_IN_IMG,
   signUpImg: SIGN_UP_IMG,
@@ -41,6 +43,16 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 isAuth: false,
                }
+      case START_LOGOUT_FETCHING: 
+        return {
+                ...state,
+                logoutFetching: true,                
+        }
+      case END_LOGOUT_FETCHING: 
+        return {
+                ...state,
+                logoutFetching: false,
+        }
       case GET_CAPTCHA:
         return {
                 ...state,
@@ -50,6 +62,28 @@ const authReducer = (state = initialState, action) => {
         return state;
   }
 }
+
+const startLogoutFetchingAC = () => 
+({type: START_LOGOUT_FETCHING});
+
+const endLogoutFetchingAC = () => 
+({type: END_LOGOUT_FETCHING});
+
+const startLogoutFetching = ()  => {
+  return (dispatch) => {
+    let action = startLogoutFetchingAC();
+    dispatch(action);
+  }  
+}
+
+const endLogoutFetching = ()  => {
+  return (dispatch) => {
+    let action = endLogoutFetchingAC();
+    dispatch(action);
+  }  
+}
+
+
 
 export default authReducer;
 export let setUserDataAC = (userId = null, email = null, login = null, isAuth = false) => {
@@ -74,7 +108,6 @@ export let signUpAC = (isAuth) => {
 }
 
 export let logOutAC = () => ({type: LOG_OUT})
-
 const getCaptchaAC = (captchaUrl) => 
 ({type: GET_CAPTCHA, captchaUrl});
 
@@ -120,15 +153,21 @@ export const signUp = ()  => {
 
 export const logOut = ()  => {
   return async (dispatch, getState) => {
+    
+    let action = startLogoutFetchingAC();
+    dispatch(action);
+    
     let response = await authAPI.logOut();
     
     if (response.data.resultCode === 0) {
       let action = setUserDataAC(DEFAULT_USER_ID);
       dispatch(action);
       
-      console.log("вылогиниваюсь", getState().auth.isAuth && "да" || "нет");
-      console.log(getState().auth.userId)
     }
+    
+    action = endLogoutFetching();
+    dispatch(action);
+    
     return response;
   }  
 }

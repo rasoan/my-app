@@ -8,24 +8,23 @@ import { withRouter } from "react-router";
 import {compose} from "redux";
                  
 const ProfileContainer = (props) => {
-   let {userId, match, profile, isAuth} = props;
-
-    useEffect(() => {
-      console.log("useeffect, ", userId, " " , profile);
-      
-      props.getProfile(userId);
-      props.getStatus(userId);
-      if (props.match.params.userId || !props.isAuth) {
-        props.notLookingMyProfile();
+   let {userId, match, profile, isAuth, 
+        logoutFetching, getProfile, getStatus, 
+        notLookingMyProfile, lookingMyProfile} = props;
+   
+    useEffect( () => {
+      if (logoutFetching) return;
+      getProfile(match.params.userId);
+      getStatus(match.params.userId);
+      if (match.params.userId || !isAuth) {
+        notLookingMyProfile();
       }
       else {
-        props.lookingMyProfile();
+        lookingMyProfile();
       }
-      let ar = [userId, match, profile, isAuth];
-    }, [userId]);
+    }, [userId, logoutFetching]);
 
-
-    return (<Profile {...props} profile={props.profile} />);
+    return (<Profile {...props} profile={profile} />);
 };
 
 
@@ -36,6 +35,7 @@ let mapStateToProps = (state) => (
     isFetching: state.profilePage.isFetching,
     isAuth: state.auth.isAuth,
     userId: state.auth.userId,
+    logoutFetching: state.auth.logoutFetching,
   }
 )
 
