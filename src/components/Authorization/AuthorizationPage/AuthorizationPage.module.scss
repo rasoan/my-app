@@ -1,0 +1,25 @@
+.default {
+    border: 1px solid black;
+}
+
+.correct {
+    border: 2px solid green;
+}
+
+
+.inCorrect {
+    border: 2px solid red;
+}
+
+.promptText {
+    color: red;
+}
+
+.inCorrectSubmitDataHint {
+  margin: 10px;
+  border: 2px solid red;
+  color: red;
+  font-weight: bold;
+  background-color: wheat;
+  padding: 0 30px;
+}

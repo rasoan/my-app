@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "https://rasoan.github.io/my-app",
   "dependencies": {
+    "@hookform/resolvers": "^2.3.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -24,7 +25,8 @@
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0",
     "save": "^2.4.0",
-    "selectors": "0.0.1"
+    "selectors": "0.0.1",
+    "yup": "^0.32.9"
   },
   "scripts": {
     "start": "react-scripts start",
