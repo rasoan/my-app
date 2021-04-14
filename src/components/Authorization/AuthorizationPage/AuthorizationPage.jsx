@@ -1,16 +1,8 @@
 import React from "react";
-import styleForm from "../../common/FormsControls/FormControls.module.scss";
-import { Field, reduxForm } from "redux-form";
 import {signIn} from "../../../redux/auth-reducer";
 import {connect} from "react-redux";
-import {required, maxLengthCreator} from "../../../utils/validators/validators";
-import {Login, Pass} from "../../common/FormsControls/FormControls";
 import { Redirect } from "react-router";
-import {AuthorizationFormRedux, AuthorizationFormTest} from "./AuthorizationForm";
-const maxLength40 = maxLengthCreator(40);
-
-
-
+import {AuthorizationForm} from "./AuthorizationForm";
 
 const AuthorizationPage = ({signIn, isAuth, captchaUrl}) => {
   const handleRegistration = (formData) => {
@@ -24,8 +16,8 @@ const AuthorizationPage = ({signIn, isAuth, captchaUrl}) => {
   return (
           <div>
             <h1>Авторизация</h1>
-            <AuthorizationFormTest handleRegistration={handleRegistration}
-                                   captchaUrl={captchaUrl} />
+            <AuthorizationForm handleRegistration={handleRegistration}
+                               captchaUrl={captchaUrl} />
           </div>
          );
 };
@@ -35,6 +27,11 @@ const mapStateToProps = (state) => ({
   captchaUrl: state.auth.captchaUrl,
 })
 
-
 export default connect(mapStateToProps, {signIn})(AuthorizationPage);
 
+/*
+import styleForm from "../../common/FormsControls/FormControls.module.scss";
+import { Field, reduxForm } from "redux-form";
+import {required, maxLengthCreator} from "../../../utils/validators/validators";
+import {Login, Pass} from "../../common/FormsControls/FormControls";
+*/
