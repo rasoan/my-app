@@ -1,48 +1,37 @@
 import React from "react";
 import style from "./ProfileDescription.module.scss";
-import {ContactForm} from "./Contact";
-import { Field, reduxForm } from "redux-form";
-import {InputDefault, TextareaDefault, InputCheckbox} from "../../common/FormsControls/FormControls";
+import { useForm } from "react-hook-form";
 
-const ProfileDataForm = ({handleSubmit, profile}) => {
-  return (<form onSubmit={handleSubmit} className={style.ProfileInfoContainer}>
-            <button>Сохранить</button>    
+export const ProfileDataForm = ({handleProfile, profile}) => {
+  const { register, handleSubmit } = useForm({
+    defaultValues: {...profile},
+  });
+
+  return (<form onSubmit={handleSubmit(handleProfile)} className={style.ProfileInfoContainer}>
+            <button>Сохранить</button>
             <div>
-              <p><b>Fullname</b>
-              <Field name={"fullName"}
-                     component={InputDefault}
-                     validate={[]} /></p>
-              
+              <b>Fullname</b>
+              <input type="text" {...register("fullName")} />
             </div>
             <div>
               <p><b>Looking for a job</b></p>
-              <Field name={"lookingForAJob"}
-                     id={"lookingForAJob"}
-                     component={InputCheckbox} />
+              <input type="checkbox" {...register("lookingForAJob")} />
             </div>
             <div>
               <p><b>Looking for a job Description</b></p>
-                 <Field name={"lookingForAJobDescription"}
-                        component={TextareaDefault}
-                        validate={[]} />
-            
+              <textarea {...register("lookingForAJobDescription")} />
             </div>
             <div>
               <p><b>About me:</b></p>
-                 <Field name={"aboutMe"}
-                        component={TextareaDefault}
-                        validate={[]} />
+              <textarea {...register("aboutMe")} />
             </div>
             <div>
               <p><b>Contacts:</b> <ul>{Object.keys(profile.contacts).map(key => {
                 return <li key={key}>
-                          <ContactForm  contactTitle={key} contactValue={profile.contacts[key]} />
+                          <p><b>{key}</b></p>
+                          <input {...register(`contacts.${key}`, {pattern: new RegExp("[http]")})} />
                        </li>
               })}</ul></p>
             </div>
           </form>);
 }
-
-const ProfileDataFormRedux = reduxForm({form: 'aboutMe'},)(ProfileDataForm);
-
-export default ProfileDataFormRedux;

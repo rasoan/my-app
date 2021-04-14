@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./ProfileDescription.module.scss";
-import ProfileDataForm from "./ProfileDataForm"
+import {ProfileDataForm} from "./ProfileDataForm"
 
 const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile, controlPanels}) => {
   const onSubmit = async (formData) => {
@@ -8,7 +8,7 @@ const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile, 
     toggleSetEditMode();
   } 
   return (<div>
-            {editMode ? <ProfileDataForm onSubmit={onSubmit}
+            {editMode ? <ProfileDataForm handleProfile={onSubmit}
                                          profile={profile}
                                          initialValues={profile} 
                                          toggleSetEditMode={toggleSetEditMode} />: 

@@ -6,7 +6,6 @@ import {AuthorizationForm} from "./AuthorizationForm";
 
 const AuthorizationPage = ({signIn, isAuth, captchaUrl}) => {
   const handleRegistration = (formData) => {
-    console.log(formData)
     signIn(formData.login, formData.password, formData.rememberMe, formData.captcha);
   }
 
@@ -28,10 +27,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, {signIn})(AuthorizationPage);
-
-/*
-import styleForm from "../../common/FormsControls/FormControls.module.scss";
-import { Field, reduxForm } from "redux-form";
-import {required, maxLengthCreator} from "../../../utils/validators/validators";
-import {Login, Pass} from "../../common/FormsControls/FormControls";
-*/
