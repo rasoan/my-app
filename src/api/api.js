@@ -66,3 +66,39 @@ export const securituAPI = {
         return instance.get('/security/get-captcha-url');
     }
 }
+
+export const dialogsAPI = {
+    startCommunication(userId) { // открыть диалог с другом
+        return instance.put('/dialogs/' + userId);
+    },
+    getAllDialogs() { // получить все диалоги
+        return instance.get("/dialogs")
+    },
+    getUserMessages(userId, currentPage = 1, pagesSize = 10) { // получить сообщения с этим пользователем
+        return instance.get(`/dialogs/${userId}/messages/page=${currentPage}&count=${pagesSize}`);
+    },
+    sendMessage(userId, message = "") { // отправить сообщение
+        return instance.posts(`/dialogs/${userId}/messages`, message);
+    },
+    messageViewed(messageId) { // сообщение просмотрено
+        return instance.get(`/dialogs/messages/${messageId}/viewed`);
+    },
+    addMessageSpam(messageId) { // добавить сообщение в спам
+        return instance.post(`/dialogs/messages/${messageId}/spam`);
+    },
+    restoreYourMessage(messageId) { // восстановить сообщение
+        return instance.put(`/dialogs/messages/${messageId}/restore`);
+    },
+    return_messages_newest_than_date(userId, date) { // не понятно что
+        return instance.put(`/dialogs/${userId}/messages/new?newerThen=${date}`);
+    },
+    getNewMessages() { // получить новые сообщения
+        return instance.get(`/dialogs/messages/new/count`);
+    },
+}
+
+/*
+/dialogs/id
+put
+
+*/

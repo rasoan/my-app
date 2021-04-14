@@ -5,7 +5,10 @@ import {
         getUsersSC,
         unfollow, follow
        } from '../../../redux/users-reducer';
-import {getUsers, getPagesSize, getTotalUsersCount, getIsFetching, getIsFetchingFollowOrUnfollowIdList, getIsAuth, getDefaultAvatarSrc} from "../../../redux/users-selectors";
+import {getUsers, getPagesSize, getTotalUsersCount, 
+        getIsFetching, getIsFetchingFollowOrUnfollowIdList, 
+        getIsAuth, getDefaultAvatarSrc} from "../../../redux/users-selectors";
+import {startCommunication} from "../../../redux/dialogs-reducer";
 
 
 
@@ -25,7 +28,8 @@ class UsersListContainer extends React.Component {
                        follow={this.props.follow} 
                        unfollow={this.props.unfollow} 
                        defaultAvatarSrc={this.props.defaultAvatarSrc}
-                       isAuth={this.props.isAuth} />); 
+                       isAuth={this.props.isAuth}
+                       startCommunication={this.props.startCommunication} />); 
   }
 }
 
@@ -45,5 +49,6 @@ export default connect(mapStateToProps,{
                                         getUsersSC,
                                         follow,
                                         unfollow,
+                                        startCommunication,
                                        }
                                         )(UsersListContainer);
