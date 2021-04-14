@@ -34,8 +34,10 @@ let mapStateToProps = (state) => (
 )
 
 export default compose(
-                       connect(mapStateToProps,{getProfile, lookingMyProfile, 
+                       connect(mapStateToProps,{
+                                                getProfile, lookingMyProfile, 
                                                 notLookingMyProfile, getStatus,
-                                                checkUserOrOwner}),
+                                                checkUserOrOwner
+                                                }),
                        withRouter
                       )(ProfileContainer);

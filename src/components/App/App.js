@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import style from './App.module.scss';
-import LeftPanel from'../LeftPanel';
+import LeftPanel from '../LeftPanel';
 import Header from '../Header';
 //import ProfileContainer from '../Profile/ProfileContainer';
 //import DialogsContainer from '../Dialogs/DialogsContainer';
@@ -11,11 +11,11 @@ import {connect} from "react-redux";
 import app, {initializeTheApplication} from "../../redux/app-reducer";
 import {authMe} from "../../redux/auth-reducer";
 import {withSuspense} from "../../hoc/withSuspense";
-import AuthorizationPage from '../Authorization/AuthorizationPage/AuthorizationPage';
 import { Redirect } from "react-router-dom";
-const ProfileContainer =  React.lazy(() => import('../Profile/ProfileContainer'));
-const DialogsContainer =  React.lazy(() => import('../Dialogs/DialogsContainer'));
-const Users =             React.lazy(() => import('../Users/Users'));
+import AuthorizationPage from '../../pages/AuthorizationPage';
+const ProfilePage =  React.lazy(() => import('../../pages/ProfilePage'));
+const DialogsPage =  React.lazy(() => import('../../pages/DialogsPage'));
+const UsersPage =        React.lazy(() => import('../../pages/UsersPage'));
 
 const App = (props) => {
   useEffect(() => {
@@ -39,9 +39,9 @@ const App = (props) => {
           <LeftPanel />
           <Switch>
             <Route exact path='/' render={() => <Redirect to='/profile' />} />
-            <Route path='/dialog' render={withSuspense(DialogsContainer)} />
-            <Route path='/profile/:userId?' render={withSuspense(ProfileContainer)} />
-            <Route path='/users' render={withSuspense(Users)} />
+            <Route path='/dialog' render={withSuspense(DialogsPage)} />
+            <Route path='/profile/:userId?' render={withSuspense(ProfilePage)} />
+            <Route path='/users' render={withSuspense(UsersPage)} />
             <Route path='/authorization' render={() => <AuthorizationPage />} />
             <Route path='*' render={() => <h2>Error 404, not found!</h2>} />
           </Switch>
