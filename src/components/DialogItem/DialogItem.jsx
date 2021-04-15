@@ -2,11 +2,30 @@ import React from "react";
 import style from "./DialogItem.module.scss";
 import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
+import DialogueInformation from "../DialogueInformation";
 
 const DialogItem = (props) => {
-  let path = "/Dialog/" + props.id;
+  const {userId, userName, hasNewMessages, lastDialogActivityDate, lastUserActivityDate, newMessagesCount, photos} = props;
+
+  let path = "/messages/" + userId;
+  const deleteDialog = (dialogId) => {
+    console.log("удалить диалог ", dialogId);
+  }
   return (
-    <NavLink className={style.navlink} to={path}>{props.name}</NavLink>
+    <div className={style.dialogItemContainer}>
+      <NavLink to={path} className={style.dialogLink}>
+        <img className={style.userImg} src={photos.small} />
+        <p>{userName}</p>
+        <div className={style.containerInfo}>
+          <DialogueInformation header={'Новых сообщений'}
+                               info={hasNewMessages} />
+          <DialogueInformation header={'Последнее сообщение'}
+                               info={lastDialogActivityDate} />
+          <DialogueInformation header={'Был онлайн'}
+                               info={lastUserActivityDate} />
+        </div>
+      </NavLink>
+    </div>
   );
 };
 

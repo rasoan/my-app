@@ -1,3 +1,23 @@
-.navlink {
-    display: block;
-  }
+.dialogItemContainer {
+  position: relative;
+  border: 1px solid black;
+  width: 90%;
+  margin: 10px 0 0 10px;
+  padding: 20px 10px;
+}
+
+.userImg {
+  width: 50px;
+  height: 80px;
+}
+
+.dialogLink {
+  display: flex;
+  align-items: center;
+  height: 60px;
+  text-decoration: none;
+}
+
+.containerInfo {
+  margin-left: auto;
+}

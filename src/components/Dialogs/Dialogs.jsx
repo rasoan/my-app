@@ -1,55 +1,24 @@
 import React, { useEffect } from "react";
 import style from "./Dialogs.module.scss";
-import Message from "../Message/Message";
-import DialogItem from "../DialogItem/DialogItem";
-import {Field, reduxForm} from "redux-form";
-import {TextareaDefault} from "../common/FormsControls/FormControls";
-import {required, maxLengthCreator} from "../../utils/validators/validators";
+import DialogItem from "../DialogItem";
 
-const maxLength10 = maxLengthCreator(10);
 
-const MessageForm = ({handleSubmit}) => {
-
-  return (
-    <form onSubmit={handleSubmit}>
-      <div>
-        <Field placeholder={"Введите ваше сообщение"} 
-               name={"message"}
-               component={TextareaDefault}
-               validate={[required, maxLength10]} />
-      </div>
-      <button>Отправить сообщение</button>
-    </form>
-  );
-};
-
-const MessageFormRedux = reduxForm({form: 'message'},)(MessageForm);
-
-const Dialogs = ({dialogsData, messages, onSendMessageClick, getDialogs, dialogs}) => { 
+const Dialogs = ({dialogs, getDialogs}) => { 
   useEffect(() => {
     getDialogs();
   }, []);
-
-  dialogsData = dialogs.map((element) => (
-    <DialogItem name={element.userName} id={element.id} />
-  ));
   
-  messages = messages.map((element) => (
-    <Message message={element.message} />
-  ));
-  let sendMessage = (formData) => {
-    onSendMessageClick(formData.message);
-  }
+  let dialogsData = dialogs.map((element) => ( <DialogItem userName={element.userName} 
+                                                             userId={element.id}
+                                                             hasNewMessages={element.hasNewMessages}
+                                                             lastDialogActivityDate={element.lastDialogActivityDate}
+                                                             lastUserActivityDate={element.lastUserActivityDate}
+                                                             newMessagesCount={element.newMessagesCount}
+                                                             photos={element.photos} />));
 
   return (
-    <div className={style.dialogs}>
-      <div className={style.dialogsItems}>{dialogsData}</div>
-      <div className={style.messages}>
-        <div>{messages}</div>
-        <div>
-          <MessageFormRedux onSubmit={sendMessage} />
-        </div>
-      </div>
+    <div className={style.dialogsContainer}>
+      {dialogsData}
     </div>
   );
 };

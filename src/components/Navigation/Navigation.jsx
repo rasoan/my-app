@@ -13,8 +13,8 @@ const Navigation = ({clickProfileLink,}) => {
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/dialog">
-            Dialog
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/dialogs">
+            Dialogs
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>

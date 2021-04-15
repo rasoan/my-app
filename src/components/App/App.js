@@ -39,7 +39,7 @@ const App = (props) => {
           <LeftPanel />
           <Switch>
             <Route exact path='/' render={() => <Redirect to='/profile' />} />
-            <Route path='/dialog' render={withSuspense(DialogsPage)} />
+            <Route path='/dialogs' render={withSuspense(DialogsPage)} />
             <Route path='/profile/:userId?' render={withSuspense(ProfilePage)} />
             <Route path='/users' render={withSuspense(UsersPage)} />
             <Route path='/authorization' render={() => <AuthorizationPage />} />

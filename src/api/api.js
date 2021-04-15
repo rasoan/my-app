@@ -83,6 +83,9 @@ export const dialogsAPI = {
     messageViewed(messageId) { // сообщение просмотрено
         return instance.get(`/dialogs/messages/${messageId}/viewed`);
     },
+    deleteOnlyYouMessage(messageId) {
+        return instance.delete(`/dialogs/messages/${messageId}`)
+    },
     addMessageSpam(messageId) { // добавить сообщение в спам
         return instance.post(`/dialogs/messages/${messageId}/spam`);
     },

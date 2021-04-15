@@ -1,4 +1,5 @@
 import {dialogsAPI} from "../api/api";
+import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const START_COMMUNICATION = 'START_COMMUNICATION';
 const GET_DIALOGS = 'GET_ALL_DIALOGS';
@@ -26,7 +27,13 @@ const dialogsReducer = (state = initialState, action) => {
     case GET_DIALOGS:
       return {
               ...state,
-              dialogs: action.dialogs,
+              dialogs: [
+                        ...action.dialogs.map( dialogData => {
+                                                              if (!dialogData.photos.small) dialogData.photos.small = DEFAULT_AVATAR_SRC;
+                                                              if (!dialogData.photos.large) dialogData.photos.large = DEFAULT_AVATAR_SRC;
+                                                              return dialogData;   
+                                                             }),
+                       ],
              }
     default:
       return state;
