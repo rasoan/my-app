@@ -74,8 +74,8 @@ export const dialogsAPI = {
     getAllDialogs() { // получить все диалоги
         return instance.get("/dialogs")
     },
-    getUserMessages(userId, currentPage = 1, pagesSize = 10) { // получить сообщения с этим пользователем
-        return instance.get(`/dialogs/${userId}/messages/page=${currentPage}&count=${pagesSize}`);
+    getMessages(userId, currentPage, pagesSize) { // получить сообщения с этим пользователем
+        return instance.get(`/dialogs/${userId}/messages?page=${currentPage}&count=${pagesSize}`);
     },
     sendMessage(userId, message = "") { // отправить сообщение
         return instance.posts(`/dialogs/${userId}/messages`, message);

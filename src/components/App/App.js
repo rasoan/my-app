@@ -16,6 +16,7 @@ import AuthorizationPage from '../../pages/AuthorizationPage';
 const ProfilePage =  React.lazy(() => import('../../pages/ProfilePage'));
 const DialogsPage =  React.lazy(() => import('../../pages/DialogsPage'));
 const UsersPage =        React.lazy(() => import('../../pages/UsersPage'));
+const MessagesPage = React.lazy(() => import('../../pages/MessagesPage'));
 
 const App = (props) => {
   useEffect(() => {
@@ -40,6 +41,7 @@ const App = (props) => {
           <Switch>
             <Route exact path='/' render={() => <Redirect to='/profile' />} />
             <Route path='/dialogs' render={withSuspense(DialogsPage)} />
+            <Route path='/messages/:userId?' render={withSuspense(MessagesPage)} />
             <Route path='/profile/:userId?' render={withSuspense(ProfilePage)} />
             <Route path='/users' render={withSuspense(UsersPage)} />
             <Route path='/authorization' render={() => <AuthorizationPage />} />

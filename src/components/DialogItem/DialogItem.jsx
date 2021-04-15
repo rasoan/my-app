@@ -8,9 +8,7 @@ const DialogItem = (props) => {
   const {userId, userName, hasNewMessages, lastDialogActivityDate, lastUserActivityDate, newMessagesCount, photos} = props;
 
   let path = "/messages/" + userId;
-  const deleteDialog = (dialogId) => {
-    console.log("удалить диалог ", dialogId);
-  }
+
   return (
     <div className={style.dialogItemContainer}>
       <NavLink to={path} className={style.dialogLink}>
@@ -18,6 +16,8 @@ const DialogItem = (props) => {
         <p>{userName}</p>
         <div className={style.containerInfo}>
           <DialogueInformation header={'Новых сообщений'}
+                               info={newMessagesCount} />
+          <DialogueInformation header={'Есть новые сообщения'}
                                info={hasNewMessages} />
           <DialogueInformation header={'Последнее сообщение'}
                                info={lastDialogActivityDate} />

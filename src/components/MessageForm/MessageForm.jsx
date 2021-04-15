@@ -1,23 +1,37 @@
-import React, { useEffect } from "react";
+import PropTypes from "prop-types";
+import React from "react";
 import style from "./MessageForm.module.scss";
-import {Field, reduxForm} from "redux-form";
-import {TextareaDefault} from "../common/FormsControls/FormControls";
-import {required, maxLengthCreator} from "../../utils/validators/validators";
-const maxLength10 = maxLengthCreator(10);
+import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as Yup from 'yup';
 
-const MessageForm = ({handleSubmit}) => {
+
+const MessageForm = (props) => {
+  const {userId, handleSendMessage} = props;
+  const validationSchema = Yup.object().shape({
+    message: Yup.string()
+              .required('Нельзя отправить пустое сообщение!')
+              .max(100, 'Максимум 100 символов'),
+  });
+
+  const { register, formState, handleSubmit } = useForm({
+      mode: 'onBlur',
+      resolver: yupResolver(validationSchema)
+  });
+
+  const {errors, touchedFields} = formState;
+
 
     return (
-      <form onSubmit={handleSubmit}>
-        <div>
-          <Field placeholder={"Введите ваше сообщение"} 
-                 name={"message"}
-                 component={TextareaDefault}
-                 validate={[required, maxLength10]} />
-        </div>
-        <button>Отправить сообщение</button>
-      </form>
-    );
-  };
+        <form onSubmit={handleSubmit(handleSendMessage)}>
+          <div>
+            <textarea className={errors.message && style.inCorrect ||touchedFields.login && style.correct }
+                      {...register("message")} />
+                      {errors.message && <p>{errors.message.message}</p>}
+          </div>
+          <button>Отправить сообщение</button>
+        </form>
+      );
+}
 
-export default reduxForm({form: 'message'},)(MessageForm);
+export default MessageForm;
