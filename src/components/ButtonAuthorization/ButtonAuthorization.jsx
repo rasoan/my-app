@@ -1,8 +1,8 @@
 import React from "react";
-import style from "./AuthorizationItem.module.scss";
+import style from "./ButtonAuthorization.module.scss";
 import {NavLink} from 'react-router-dom';
 
-const AuthorizationItem = ({onClickF, srcImg, text}) => {
+const ButtonAuthorization = ({onClickF = () => null, srcImg, text}) => {
     return (<NavLink onClick={onClickF}
                      activeClassName={""}
                      className={style.authorizationItem} 
@@ -12,4 +12,4 @@ const AuthorizationItem = ({onClickF, srcImg, text}) => {
              </NavLink>);
 };
 
-export default AuthorizationItem;
+export default ButtonAuthorization;

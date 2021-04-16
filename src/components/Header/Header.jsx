@@ -1,12 +1,12 @@
 import React from "react";
 import style from "./Header.module.scss";
-import AuthorizationPanelContainer from "../AuthorizationPanel/AuthorizationPanelContainer";
+import AuthorizationPanel from "../AuthorizationPanel";
 
 const Header = () => {
   return (
     <header>
       <div className={style.HeaderContainer}>
-        <AuthorizationPanelContainer />
+        <AuthorizationPanel />
       </div>
     </header>
   );
