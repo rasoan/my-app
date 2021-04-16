@@ -2,8 +2,7 @@ import AuthorizationForm from "./AuthorizationForm";
 import React from "react";
 import {signIn} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
-import { Redirect } from "react-router";
-
+import {Redirect} from "react-router";
 
 const AuthorizationFormContainer = ({signIn, isAuth, captchaUrl}) => {
   const handleRegistration = (formData) => {
@@ -13,13 +12,8 @@ const AuthorizationFormContainer = ({signIn, isAuth, captchaUrl}) => {
   if(isAuth) {
     return <Redirect to="/profile" />
   }
-  return (
-          <div>
-            <h1>Авторизация</h1>
-            <AuthorizationForm handleRegistration={handleRegistration}
-                               captchaUrl={captchaUrl} />
-          </div>
-         );
+  return (<AuthorizationForm handleRegistration={handleRegistration}
+                             captchaUrl={captchaUrl} />);
 };
 
 const mapStateToProps = (state) => ({
