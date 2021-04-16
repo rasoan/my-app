@@ -74,11 +74,14 @@ export const dialogsAPI = {
     getAllDialogs() { // получить все диалоги
         return instance.get("/dialogs")
     },
+}
+
+export const messagesAPI = {
     getMessages(userId, currentPage, pagesSize) { // получить сообщения с этим пользователем
         return instance.get(`/dialogs/${userId}/messages?page=${currentPage}&count=${pagesSize}`);
     },
     sendMessage(userId, message = "") { // отправить сообщение
-        return instance.posts(`/dialogs/${userId}/messages`, message);
+        return instance.post(`/dialogs/${userId}/messages`, message);
     },
     messageViewed(messageId) { // сообщение просмотрено
         return instance.get(`/dialogs/messages/${messageId}/viewed`);
@@ -99,7 +102,6 @@ export const dialogsAPI = {
         return instance.get(`/dialogs/messages/new/count`);
     },
 }
-
 /*
 /dialogs/id
 put

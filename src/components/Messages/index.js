@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from "react";
-import {getMessages} from "../../redux/dialogs-reducer";
+import {getMessages} from "../../redux/messages-reducer";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 
 const MessagesContainer = (props) => {
   const {userId, messages, totalCount, getMessages} = props;
-
   useEffect(() => {
     console.log("Получить сообщения с ", userId);
-    getMessages(userId)
+    getMessages(userId);
+    
   },[]);
   
   return (<Messages messages={messages}
@@ -17,8 +17,8 @@ const MessagesContainer = (props) => {
 
 let mapStateToProps = (state) => (
     {
-        messages: state.dialogsPage.messages.items,
-        totalCount: state.dialogsPage.messages.totalCount,
+        messages: state.messagesPage.messages,
+        totalCount: state.messagesPage.totalCount,
     }
   )
   

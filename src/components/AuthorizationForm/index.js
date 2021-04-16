@@ -1,10 +1,11 @@
+import AuthorizationForm from "./AuthorizationForm";
 import React from "react";
 import {signIn} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
 import { Redirect } from "react-router";
-import {AuthorizationForm} from "./AuthorizationPage/AuthorizationForm";
 
-const AuthorizationPage = ({signIn, isAuth, captchaUrl}) => {
+
+const AuthorizationFormContainer = ({signIn, isAuth, captchaUrl}) => {
   const handleRegistration = (formData) => {
     signIn(formData.login, formData.password, formData.rememberMe, formData.captcha);
   }
@@ -26,4 +27,4 @@ const mapStateToProps = (state) => ({
   captchaUrl: state.auth.captchaUrl,
 })
 
-export default connect(mapStateToProps, {signIn})(AuthorizationPage);
+export default connect(mapStateToProps, {signIn})(AuthorizationFormContainer);

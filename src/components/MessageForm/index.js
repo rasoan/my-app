@@ -1,17 +1,21 @@
 import React, {useEffect, useState} from "react";
-import {getMessages} from "../../redux/dialogs-reducer";
+import {getMessages, sendMessage} from "../../redux/messages-reducer";
 import { connect } from "react-redux";
 import MessageForm from "./MessageForm";
 
 const MessageFormContainer = (props) => {
-  const {userId} = props;
+  const {userId, sendMessage} = props;
 
-  const sendMessage = (data) => {
-    console.log(data);
+  const handleSendMessage = (data) => {
+    console.log(data.message);
     console.log(userId);
+    sendMessage(Number(userId), data.message);
   }
-  
-  return (<MessageForm handleSendMessage={sendMessage} />)
+  // useEffect(() => {
+  //   debugger
+  //   console.log("перерисовался")
+  // },[])
+  return (<MessageForm handleSendMessage={handleSendMessage} />)
 }
 
 let mapStateToProps = (state) => (
@@ -21,4 +25,4 @@ let mapStateToProps = (state) => (
     }
   )
   
-  export default connect(mapStateToProps, {getMessages})(MessageFormContainer);
+  export default connect(mapStateToProps, {getMessages, sendMessage})(MessageFormContainer);

@@ -1,10 +1,10 @@
 import React from "react";
-import style from "../../common/FormsControls/FormControls.module.scss";
+import style from "../../components/common/FormsControls/FormControls.module.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-export const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
+const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
   const validationSchema = Yup.object().shape({
     login: Yup.string()
               .required('Поле обязательно для заполнения.')
@@ -54,3 +54,5 @@ export const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
         </form>
       );
 }
+
+export default AuthorizationForm;

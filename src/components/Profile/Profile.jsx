@@ -6,10 +6,13 @@ import ProfileDescriptionContainer from "./ProfileDescription/ProfileDescription
 import StatusContainer from "../Status/StatusContainer";
 import ProfilePictureContainer from "./ProfilePicture/ProfilePictureContainer";
 import PostsContainer from "./Posts/PostsContainer";
+import ButtonFollowUnfollow from "../ButtonFollowUnfollow";
+import ButtonStartCommunication from "../ButtonStartCommunication";
       
-const Profile = ({profile, isFetching}) => {
+const Profile = ({profile, isFetching, follow, unfollow, startCommunication, controlPanels, isAuth}) => {
   if (isFetching) return (<PreloaderServerUpload/>);
   if (!profile) return <></> 
+  
   return (
     <div className={style.ProfileContainer}>
       <div className={style.pictureAndDescriptionContainer}>
@@ -17,6 +20,12 @@ const Profile = ({profile, isFetching}) => {
         <ProfileDescriptionContainer />
       </div>
       <StatusContainer /> 
+      {!controlPanels && isAuth && <ButtonFollowUnfollow follow={follow}
+                                                         unfollow={unfollow}
+                                                         friend={undefined}
+                                                         userId={profile.userId} />}
+      {!controlPanels && isAuth && <ButtonStartCommunication startCommunication={startCommunication}
+                                                             userId={profile.userId} />}
       <PostsContainer profile={profile} />
     </div>
   );

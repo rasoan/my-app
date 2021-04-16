@@ -1,6 +1,6 @@
 import React from "react";
 import style from "./Header.module.scss";
-import AuthorizationPanelContainer from "../Authorization/AuthorizationPanel/AuthorizationPanelContainer";
+import AuthorizationPanelContainer from "../AuthorizationPanel/AuthorizationPanelContainer";
 
 const Header = () => {
   return (

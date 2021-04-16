@@ -2,8 +2,8 @@ import React from "react";
 import AuthorizationPanel from "./AuthorizationPanel";
 import {connect} from "react-redux";
 import {compose} from "redux";
-import {logOut, authMe} from "../../../redux/auth-reducer";
-import {getProfile} from "../../../redux/profile-reducer";
+import {logOut, authMe} from "../../redux/auth-reducer";
+import {getProfile} from "../../redux/profile-reducer";
 
 class AuthorizationPanelContainer extends React.Component {
   signInOnClick = () => {

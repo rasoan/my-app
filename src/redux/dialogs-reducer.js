@@ -9,10 +9,6 @@ let initialState = {
   messages: [],
   dialogsData: [],
   dialogs: [],
-  messages: {
-             totalCount: null,
-             items: [],
-            },
   interlocutors: [],
 };
 

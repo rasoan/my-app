@@ -3,6 +3,7 @@ import style from "./UserItem.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
 import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
+import ButtonFollowUnfollow from "../../ButtonFollowUnfollow";
 let classNames = require('classnames');
 
 const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList, 
@@ -12,6 +13,7 @@ const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList,
   let styleButton =  classNames({ [style.deleteFriendButton]: followed }, { [style.addFriendButton]: !followed });
   let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <PreloaderServerUpload /> : null;
   let avatarSrc = photo ? photo: defaultAvatarSrc;
+
   return (
             <div className={style.UserItemContainer}>
               <NavLink to={navlinkTo}>
@@ -21,16 +23,10 @@ const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList,
               <div>
                 <p>{""}</p>
                 <p>{""}</p>
-                {isFetching || isAuth && <button onClick={() => {
-                  if (!followed) {
-                    follow(id);
-                  }
-
-                  if (followed) {
-                    unfollow(id);
-                  }
-                }
-                } className={styleButton}>{buttonText}</button>}
+                {isFetching || isAuth &&  <ButtonFollowUnfollow follow={follow}
+                                                                unfollow={unfollow}
+                                                                friend={followed}
+                                                                userId={id} />}
                 <button onClick={() => startCommunication(id)}>Начать диалог</button>
               </div>
             </div>

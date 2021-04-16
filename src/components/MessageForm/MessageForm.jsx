@@ -10,8 +10,8 @@ const MessageForm = (props) => {
   const {userId, handleSendMessage} = props;
   const validationSchema = Yup.object().shape({
     message: Yup.string()
-              .required('Нельзя отправить пустое сообщение!')
-              .max(100, 'Максимум 100 символов'),
+                .required('Нельзя отправить пустое сообщение!')
+                .max(100, 'Максимум 100 символов'),
   });
 
   const { register, formState, handleSubmit } = useForm({

@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./AuthorizationPanel.module.scss";
 import AuthorizationItem from './AuthorizationItem/AuthorizationItem';
-import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from '../../../constants/Authorization';
+import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from '../../constants/Authorization';
 
 const AuthorizationPanel = ({isAuth, authorizationInfo, logOutClick, signInOnClick, signUpOnClick}) => {
   if (isAuth) {
