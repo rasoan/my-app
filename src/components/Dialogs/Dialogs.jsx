@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
+import PropTypes from "prop-types";
 import style from "./Dialogs.module.scss";
 import DialogItem from "../DialogItem";
 
-
-const Dialogs = ({dialogs, getDialogs}) => { 
+const Dialogs = (props) => {
+  const {dialogs, getDialogs} = props;
   useEffect(() => {
     getDialogs();
   }, []);
@@ -23,5 +24,10 @@ const Dialogs = ({dialogs, getDialogs}) => {
     </div>
   );
 };
+
+Dialogs.prototypes = {
+  dialogs: PropTypes.array.isRequired,
+  getDialogs: PropTypes.func.isRequired,
+}
 
 export default Dialogs;

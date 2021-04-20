@@ -7,7 +7,7 @@ import * as Yup from 'yup';
 
 
 const MessageForm = (props) => {
-  const {userId, handleSendMessage} = props;
+  const {handleSendMessage} = props;
   const validationSchema = Yup.object().shape({
     message: Yup.string()
                 .required('Нельзя отправить пустое сообщение!')
@@ -32,6 +32,10 @@ const MessageForm = (props) => {
           <button>Отправить сообщение</button>
         </form>
       );
+}
+
+MessageForm.propTypes = {
+  handleSendMessage: PropTypes.func.isRequired,
 }
 
 export default MessageForm;
