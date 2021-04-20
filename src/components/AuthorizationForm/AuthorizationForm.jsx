@@ -1,10 +1,13 @@
 import React from "react";
+import PropTypes from "prop-types";
 import style from "../../components/common/FormsControls/FormControls.module.scss";
 import { useForm } from "react-hook-form";
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as Yup from 'yup';
 
-const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
+const AuthorizationForm = (props) => {
+  const {handleRegistration, captchaUrl} = props;
+
   const validationSchema = Yup.object().shape({
     login: Yup.string()
               .required('Поле обязательно для заполнения.')
@@ -23,7 +26,6 @@ const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
   });
 
   const {errors, touchedFields} = formState;
-
 
     return (
         <form onSubmit={handleSubmit(handleRegistration)}>
@@ -54,5 +56,10 @@ const AuthorizationForm = ({handleRegistration, captchaUrl}) => {
         </form>
       );
 }
+
+AuthorizationForm.propTypes = {
+  captchaUrl: PropTypes.string.isRequired,
+  handleRegistration: PropTypes.func.isRequired,
+};
 
 export default AuthorizationForm;

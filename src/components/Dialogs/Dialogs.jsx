@@ -8,13 +8,14 @@ const Dialogs = ({dialogs, getDialogs}) => {
     getDialogs();
   }, []);
   
-  let dialogsData = dialogs.map((element) => ( <DialogItem userName={element.userName} 
-                                                           userId={element.id}
-                                                           hasNewMessages={element.hasNewMessages}
-                                                           lastDialogActivityDate={element.lastDialogActivityDate}
-                                                           lastUserActivityDate={element.lastUserActivityDate}
-                                                           newMessagesCount={element.newMessagesCount}
-                                                           photos={element.photos} />));
+  let dialogsData = dialogs.map((element, i) => ( <DialogItem key={element.id + " " + i}
+                                                              userName={element.userName} 
+                                                              userId={element.id}
+                                                              hasNewMessages={element.hasNewMessages}
+                                                              lastDialogActivityDate={element.lastDialogActivityDate}
+                                                              lastUserActivityDate={element.lastUserActivityDate}
+                                                              newMessagesCount={element.newMessagesCount}
+                                                              photos={element.photos} />));
 
   return (
     <div className={style.dialogsContainer}>

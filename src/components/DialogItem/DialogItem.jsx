@@ -30,8 +30,13 @@ const DialogItem = (props) => {
 };
 
 DialogItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
+  userId: PropTypes.number.isRequired,
+  userName: PropTypes.string.isRequired,
+  hasNewMessages: PropTypes.bool.isRequired,
+  lastDialogActivityDate: PropTypes.string.isRequired,
+  lastUserActivityDate: PropTypes.string.isRequired,
+  newMessagesCount: PropTypes.number.isRequired,
+  photos: PropTypes.object.isRequired,
 };
 
 export default DialogItem;

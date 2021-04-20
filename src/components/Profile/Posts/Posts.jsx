@@ -1,26 +1,23 @@
 import React from "react";
 import Post from "./Post/Post";
-import {Field, reduxForm} from "redux-form";
-import {TextareaDefault} from "../../common/FormsControls/FormControls";
-import {required, maxLengthCreator} from "../../../utils/validators/validators";
-
-const maxLength10 = maxLengthCreator(10);
+import { useForm } from "react-hook-form";
 
 const PostForm = (props) => {
+  const {addPost} = props;
+
+  const { register, handleSubmit } = useForm();
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit(addPost)}>
       <div>
-        <Field placeholder={"Введите ваше пост"}
-               name={"post"}
-               component={TextareaDefault} 
-               validate={[required, maxLength10]} />
+        <textarea placeholder="Введите ваше пост"
+                  {...register("post")} />
       </div>
       <button>Отправить сообщение</button>
     </form>
   );
 };
 
-const PostFormRedux = reduxForm({form: 'profile'},)(PostForm);
+//const PostFormRedux = reduxForm({form: 'profile'},)(PostForm);
 
 const Posts = (props) => {
   let posts = props
@@ -36,7 +33,7 @@ const Posts = (props) => {
     <div>
       <h3>My posts</h3>
       {posts}
-      <PostFormRedux onSubmit={addPost} />
+      <PostForm addPost={addPost} />
     </div>
   );
 };

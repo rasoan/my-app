@@ -1,16 +1,17 @@
 import React from "react";
-import style from "./ButtonStartCommunication.module.scss";
-//import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 
-const ButtonStartCommunication = ({startCommunication, userId}) => {
+const ButtonStartCommunication = (props) => {
+  const {startCommunication, userId} = props;
 
-  return (<div>
-           <button onClick={() => startCommunication(userId)}>Начать диалог</button>
-         </div>);
+  return (<button onClick={() => startCommunication(userId)}>
+            Начать диалог
+          </button>);
 };
 
-// buttonFollowUnfollow.propTypes = {
-//   id: PropTypes.string.isRequired,
-// };
+ButtonStartCommunication.propTypes = {
+  startCommunication: PropTypes.func.isRequired,
+  userId: PropTypes.string.isRequired,
+};
 
 export default ButtonStartCommunication;

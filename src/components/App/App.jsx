@@ -5,7 +5,7 @@ import Header from "../Header";
 import PreloaderInitializationApplication from "../Preloader/PreloaderInitializationApplication";
 
 const App = (props) => {
-  const { authMe, initializeTheApplication, initialize } = props;
+  const {authMe, initializeTheApplication, initialize} = props;
 
   useEffect(() => {
     (async () => {
@@ -16,22 +16,18 @@ const App = (props) => {
 
   if (!initialize) return <PreloaderInitializationApplication />;
   
-  return (
-    <>
-      {initialize && (
-        <div>
-          <Header />
-          <AppWithRoutes />
-        </div>
-      )}
-    </>
-  );
+  return (<>
+            {initialize && <div>
+              <Header />
+              <AppWithRoutes />
+            </div>}
+          </>);
 };
 
 App.propTypes = {
-  authMe: PropTypes.func,
-  initializeTheApplication: PropTypes.func,
-  initialize: PropTypes.bool,
+  authMe: PropTypes.func.isRequired,
+  initializeTheApplication: PropTypes.func.isRequired,
+  initialize: PropTypes.bool.isRequired,
 };
 
 export default App;
