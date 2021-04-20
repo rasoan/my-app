@@ -1,5 +1,4 @@
 import React from "react";
-import style from "./Messages.module.scss";
 import PropTypes from "prop-types";
 
 const Messages = (props) => {
@@ -12,8 +11,9 @@ const Messages = (props) => {
           </div>);
 };
 
-// Messages.propTypes = {
-//   message: PropTypes.string.isRequired,
-// };
+Messages.propTypes = {
+  messages: PropTypes.array.isRequired,
+  totalCount: PropTypes.number.isRequired,
+}
 
 export default Messages;

@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import style from "./Navigation.module.scss";
 import {NavLink} from 'react-router-dom';
 
-const Navigation = ({clickProfileLink,}) => {
+const Navigation = (props) => {
+  const {clickProfileLink} = props;
   return (
     <header>
       <div className={style.NavigationContainer}>
@@ -42,5 +44,9 @@ const Navigation = ({clickProfileLink,}) => {
     </header>
   );
 };
+
+Navigation.propTypes = {
+  clickProfileLink: PropTypes.func.isRequired,
+}
 
 export default Navigation;
