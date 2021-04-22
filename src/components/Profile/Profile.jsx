@@ -9,7 +9,9 @@ import PostsContainer from "./Posts/PostsContainer";
 import ButtonFollowUnfollow from "../ButtonFollowUnfollow";
 import ButtonStartCommunication from "../ButtonStartCommunication";
       
-const Profile = ({profile, isFetching, follow, unfollow, startCommunication, controlPanels, isAuth}) => {
+const Profile = (props) => {
+  const {profile, isFetching, follow, unfollow, startCommunication, controlPanels, isAuth} = props;
+
   if (isFetching) return (<PreloaderServerUpload/>);
   if (!profile) return <></> 
   
@@ -22,7 +24,7 @@ const Profile = ({profile, isFetching, follow, unfollow, startCommunication, con
       <StatusContainer /> 
       {!controlPanels && isAuth && <ButtonFollowUnfollow follow={follow}
                                                          unfollow={unfollow}
-                                                         friend={undefined}
+                                                         friend={""}
                                                          userId={profile.userId} />}
       {!controlPanels && isAuth && <ButtonStartCommunication startCommunication={startCommunication}
                                                              userId={profile.userId} />}
@@ -30,5 +32,15 @@ const Profile = ({profile, isFetching, follow, unfollow, startCommunication, con
     </div>
   );
 };
+
+Profile.propTypes = {
+  profile: PropTypes.object.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  follow: PropTypes.func.isRequired,
+  unfollow: PropTypes.func.isRequired,
+  startCommunication: PropTypes.func.isRequired,
+  controlPanels: PropTypes.bool.isRequired,
+  isAuth: PropTypes.bool.isRequired,
+}
 
 export default Profile;

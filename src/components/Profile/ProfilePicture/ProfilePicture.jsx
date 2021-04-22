@@ -1,11 +1,13 @@
 import React, {useState} from "react";
+import PropTypes from "prop-types";
 import style from "./ProfilePicture.module.scss";
 
-const ProfilePicture = ({photos, onSubmit, fileInputRef, controlPanels}) => {
+const ProfilePicture = (props) => {
+  const {photos, onSubmit, fileInputRef, controlPanels} = props;
 
   return (
     <div className={style.profilePictureContainer}>
-      <img className={style.image} src={photos.large} />
+      <img className={style.image} src={photos?.large} />
       {controlPanels && <form onSubmit={onSubmit} className={style.profilePictureUpload}>
          <div className={style.profilePictureUploadBlock}>
           <input type="file" ref={fileInputRef} />
@@ -15,5 +17,12 @@ const ProfilePicture = ({photos, onSubmit, fileInputRef, controlPanels}) => {
     </div>
   );
 };
+
+ProfilePicture.propTypes = {
+  photos: PropTypes.object,
+  onSubmit: PropTypes.func,
+  fileInputRef: PropTypes.object,
+  controlPanels: PropTypes.bool,
+}
 
 export default ProfilePicture;

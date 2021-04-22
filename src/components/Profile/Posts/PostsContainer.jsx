@@ -1,19 +1,27 @@
 import React from "react";
+import PropTypes from "prop-types";
 import Posts from "./Posts";
 import {addPost} from '../../../redux/profile-reducer.js';
 import {connect} from "react-redux";
 
-class PostsContainer extends React.Component {
-  render() {
-    return <Posts posts={this.props.posts}
-                  addPost={this.props.addPost} />
-  }
+const PostsContainer = (props) => {
+  const {posts, addPost} = props;
+    return <Posts posts={posts}
+                  addPost={addPost} />
+
 }
 
-let mapStateToProps = (state) => {
+PostsContainer.propTypes = {
+  posts: PropTypes.array,
+  addPost: PropTypes.func,
+}
+
+const mapStateToProps = (state) => {
   return {
           posts: state.profilePage.posts,
          }
 }
 
-export default connect(mapStateToProps, {addPost})(PostsContainer);
+const actionCreators = {addPost};
+
+export default connect(mapStateToProps, actionCreators)(PostsContainer);

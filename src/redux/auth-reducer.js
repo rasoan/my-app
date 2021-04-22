@@ -14,7 +14,7 @@ let initialState = {
   logoutFetching: false,
   email: null,
   login: null,
-  captchaUrl: null,
+  captchaUrl: "",
   signInImg: SIGN_IN_IMG,
   signUpImg: SIGN_UP_IMG,
   logOutImg: LOG_OUT_IMG,

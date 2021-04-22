@@ -1,7 +1,10 @@
 import React, {useState} from "react";
+import PropTypes from "prop-types";
 import style from "./Pagination.module.scss";
 
-const Pagination = ({listPageNumbers, countCardsInPage, getCards, loading}) => {
+const Pagination = (props) => {
+  const {listPageNumbers, countCardsInPage, getCards, loading} = props;
+
   let loadingStyle = loading ? style.loadingStyle: "";
   let onPageChanged = (pageNumber, countCardsInPage) => {
     setCurrentPageNumber(pageNumber);
@@ -23,8 +26,14 @@ const Pagination = ({listPageNumbers, countCardsInPage, getCards, loading}) => {
                                     }
                                 );
 
-
   return (<ul className={`${loadingStyle} ${style.pageNumberListContainer}`}>{pageNumbers}</ul>);
 };
+
+PropTypes.propTypes = {
+  listPageNumbers: PropTypes.array.isRequired,
+  countCardsInPage: PropTypes.number.isRequired,
+  getCards: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+}
 
 export default Pagination;

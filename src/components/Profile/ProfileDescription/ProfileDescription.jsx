@@ -1,12 +1,16 @@
 import React from "react";
+import PropTypes from "prop-types";
 import style from "./ProfileDescription.module.scss";
-import {ProfileDataForm} from "./ProfileDataForm"
+import ProfileDataForm from "./ProfileDataForm";
 
-const ProfileDescription = ({profile, toggleSetEditMode, editMode, saveProfile, controlPanels}) => {
+const ProfileDescription = (props) => {
+  const {profile, toggleSetEditMode, editMode, saveProfile, controlPanels} = props;
+
   const onSubmit = async (formData) => {
     await saveProfile(formData);
     toggleSetEditMode();
-  } 
+  }
+   
   return (<div>
             {editMode ? <ProfileDataForm handleProfile={onSubmit}
                                          profile={profile}
@@ -33,21 +37,27 @@ const ProfileData = ({profile, toggleSetEditMode, controlPanels}) => {
               <p><b>About me:</b> {profile.aboutMe}</p>
             </div>
             <div>
-              <p><b>Contacts:</b> <ul>{Object.keys(profile.contacts).map(key => {
-                return <li key={key}>
+              <b>Contacts:</b> <ul>{profile?.contacts && Object.keys(profile.contacts).map((key, i) => {
+                return <li key={i + key}>
                           <Contact  contactTitle={key} contactValue={profile.contacts[key]} />
                        </li>
-              })}</ul></p>
+              })}</ul>
             </div>
           </div>);
 }
-
-
 
 const Contact = ({contactTitle, contactValue}) => {
   return (<div>
            <p><b>{contactTitle}:</b> {contactValue}</p>
          </div>);
+}
+
+ProfileDescription.propTypes = {
+  profile: PropTypes.object,
+  toggleSetEditMode: PropTypes.func,
+  editMode: PropTypes.bool,
+  saveProfile: PropTypes.func,
+  controlPanels: PropTypes.bool,
 }
 
 export default ProfileDescription;

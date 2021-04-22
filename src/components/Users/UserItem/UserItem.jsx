@@ -34,4 +34,18 @@ const UserItem = ({followed, follow, unfollow, isFetchingFollowOrUnfollowIdList,
           );
 };
 
+UserItem.propTypes = {
+  followed: PropTypes.bool,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func,
+  isFetchingFollowOrUnfollowIdList: PropTypes.bool,
+  photo: PropTypes.string,
+  name: PropTypes.string,
+  defaultAvatarSrc: PropTypes.string,
+  id: PropTypes.number,
+  navlinkTo: PropTypes.string,
+  isAuth: PropTypes.bool,
+  startCommunication: PropTypes.func,
+}
+
 export default UserItem;

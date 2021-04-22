@@ -1,11 +1,14 @@
 import React from "react";
+import PropTypes from "prop-types";
 import ProfilePicture from "./ProfilePicture";
 import {connect} from "react-redux";
 import {compose} from "redux";
 import {updateProfilePicture} from "../../../redux/profile-reducer";
 const fileInputRef = React.createRef();
 
-const ProfilePictureContainer = ({photos, updateProfilePicture, fileInputRef, controlPanels}) => {
+const ProfilePictureContainer = (props) => {
+  const {photos, updateProfilePicture, fileInputRef, controlPanels} = props;
+
   const onSubmit = (event) => {
     event.preventDefault();
     updateProfilePicture(fileInputRef.current);
@@ -17,7 +20,12 @@ const ProfilePictureContainer = ({photos, updateProfilePicture, fileInputRef, co
                          controlPanels={controlPanels} />;
 };
 
-
+ProfilePictureContainer.propTypes = {
+  photos: PropTypes.object,
+  updateProfilePicture: PropTypes.func,
+  fileInputRef: PropTypes.object,
+  controlPanels: PropTypes.bool,
+}
 
 let mapStateToProps = (state) => (
     {
@@ -27,7 +35,7 @@ let mapStateToProps = (state) => (
       controlPanels: state.app.controlPanels,
     }
   )
+
+const actionCreators = {updateProfilePicture};
   
-  export default compose(
-                         connect(mapStateToProps,{updateProfilePicture}),
-                        )(ProfilePictureContainer);
+  export default connect(mapStateToProps,actionCreators)(ProfilePictureContainer);

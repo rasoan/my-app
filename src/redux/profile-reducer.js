@@ -30,7 +30,7 @@ let initialState = {
       countLikes: '3',
     },
   ],
-  profile: null,
+  profile: {},
   isFetching: false,
   defaultStatusText: DEFAULT_STATUS_TEXT,
   statusText: DEFAULT_STATUS_TEXT,

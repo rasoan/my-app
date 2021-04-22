@@ -26,7 +26,7 @@ const actionCreators = {signIn};
 
 AuthorizationFormContainer.propTypes = {
   isAuth: PropTypes.bool.isRequired,
-  captchaUrl: PropTypes.string.isRequired,
+  captchaUrl: PropTypes.string,
   signIn: PropTypes.func.isRequired,
 };
 

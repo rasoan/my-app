@@ -1,17 +1,17 @@
 import React, {useState} from "react";
 import ProfileDescription from "./ProfileDescription";
 import {connect} from "react-redux";
-import {getProfile, saveProfile} from "../../../redux/profile-reducer";
-import {compose} from "redux";
+import {saveProfile} from "../../../redux/profile-reducer";
 
-const ProfileDescriptionContainer = ({profile, saveProfile, controlPanels}) => {
+const ProfileDescriptionContainer = (props) => {
+  const {profile, saveProfile, controlPanels} = props;
+
   const [editMode, setEditMode] = useState(false)
   const toggleSetEditMode = () => {
     let mode = editMode ? false: true;
     setEditMode(mode);
   }
   
-
   return (<ProfileDescription profile={profile}
                               toggleSetEditMode={toggleSetEditMode}
                               editMode={editMode}
@@ -19,13 +19,11 @@ const ProfileDescriptionContainer = ({profile, saveProfile, controlPanels}) => {
                               controlPanels={controlPanels} />);
 };
 
-let mapStateToProps = (state) => (
-  {
+let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     controlPanels: state.app.controlPanels,
-  }
-)
+});
 
-export default compose(
-                       connect(mapStateToProps,{saveProfile}),
-                      )(ProfileDescriptionContainer);
+const actionCreators = {saveProfile};
+
+export default connect(mapStateToProps, actionCreators)(ProfileDescriptionContainer);

@@ -21,6 +21,7 @@ const ProfileContainer = (props) => {
       getStatus(match.params.userId);
       checkUserOrOwner(match.params.userId);
     }, [myId, logoutFetching]);
+
     return (<Profile {...props} profile={profile}
                                 follow={follow}
                                 unfollow={unfollow}
@@ -29,27 +30,39 @@ const ProfileContainer = (props) => {
                                 isAuth={isAuth} />);
 };
 
+ProfileContainer.propTypes = {
+  myId: PropTypes.number,
+  match: PropTypes.object,
+  profile: PropTypes.object,
+  logoutFetching: PropTypes.bool,
+  getProfile: PropTypes.func,
+  getStatus: PropTypes.func,
+  checkUserOrOwner: PropTypes.func,
+  follow: PropTypes.func,
+  unfollow: PropTypes.func,
+  startCommunication: PropTypes.func,
+  controlPanels: PropTypes.bool,
+  isAuth: PropTypes.bool,
+}
 
 
-let mapStateToProps = (state) => (
-  {
+
+let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     isFetching: state.profilePage.isFetching,
     myId: state.auth.userId,
     logoutFetching: state.auth.logoutFetching,
     controlPanels: state.app.controlPanels,
     isAuth: state.auth.isAuth,
-  }
-)
+});
 
-export default compose(
-                       connect(mapStateToProps,{
-                                                getProfile, lookingMyProfile, 
-                                                notLookingMyProfile, getStatus,
-                                                checkUserOrOwner,
-                                                follow,
-                                                unfollow,
-                                                startCommunication,
-                                                }),
-                       withRouter
-                      )(ProfileContainer);
+const actionCreators = {
+  getProfile, lookingMyProfile, 
+  notLookingMyProfile, getStatus,
+  checkUserOrOwner,
+  follow,
+  unfollow,
+  startCommunication,
+}
+
+export default compose(connect(mapStateToProps, actionCreators), withRouter)(ProfileContainer);

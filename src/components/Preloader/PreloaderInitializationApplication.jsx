@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Preloaders.module.scss";
 
-const PreloaderInitializationApplication = (props) => {
+const PreloaderInitializationApplication = () => {
   return (<div>
             <h1>Инициализация приложения!</h1>
           </div>

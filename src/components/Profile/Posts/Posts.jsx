@@ -1,4 +1,6 @@
 import React from "react";
+import PropTypes from "prop-types";
+
 import Post from "./Post/Post";
 import { useForm } from "react-hook-form";
 
@@ -17,14 +19,13 @@ const PostForm = (props) => {
   );
 };
 
-//const PostFormRedux = reduxForm({form: 'profile'},)(PostForm);
-
 const Posts = (props) => {
-  let posts = props
-             .posts
-             .map(post => <Post content={post.content} 
-                                 imgSrc={post.imgSrc} 
-                                 countLikes={post.countLikes} />);
+  let {posts} = props;
+
+  posts =  posts.map((post, i) => <Post key={post.content + i}
+                                   content={post.content} 
+                                   imgSrc={post.imgSrc} 
+                                   countLikes={post.countLikes} />);
   
   let addPost = (postData) => {
     props.addPost(postData.post);
@@ -38,10 +39,12 @@ const Posts = (props) => {
   );
 };
 
+PostForm.propTypes = {
+  addPost: PropTypes.func,
+}
 
-// Posts.propTypes = {
-//   content: PropTypes.string,
-//   imgSrc: PropTypes.string,
-//   countLikes: PropTypes.string,
-// };
+Posts.propTypes = {
+  posts: PropTypes.array,
+};
+
 export default Posts;

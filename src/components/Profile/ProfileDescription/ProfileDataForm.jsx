@@ -1,8 +1,10 @@
 import React from "react";
+import PropTypes from "prop-types";
 import style from "./ProfileDescription.module.scss";
 import { useForm } from "react-hook-form";
 
-export const ProfileDataForm = ({handleProfile, profile}) => {
+const ProfileDataForm = (props) => {
+  const {handleProfile, profile} = props;
   const { register, handleSubmit } = useForm({
     defaultValues: {...profile},
   });
@@ -35,3 +37,10 @@ export const ProfileDataForm = ({handleProfile, profile}) => {
             </div>
           </form>);
 }
+
+ProfileDataForm.propTypes = {
+  handleProfile: PropTypes.func,
+  profile: PropTypes.object,
+}
+
+export default ProfileDataForm;

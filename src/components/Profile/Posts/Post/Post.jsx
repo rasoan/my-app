@@ -2,9 +2,8 @@ import React from "react";
 import style from "./Post.module.scss";
 import PropTypes from "prop-types";
 
-
-
 const Post = (props) => {
+  const {content, countLikes, imgSrc} = props;
   
   return (
     <div className={style.PostContainer}>
@@ -13,11 +12,11 @@ const Post = (props) => {
           className={style.image}
           width="50"
           height="50"
-          src={props.imgSrc}
+          src={imgSrc}
         ></img>
-        <p>{props.content}</p>
+        <p>{content}</p>
       </div>
-      <p className={style.PostCountLikes}>{props.countLikes}</p>
+      <p className={style.PostCountLikes}>{countLikes}</p>
     </div>
   );
 };
