@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import style from "./ProfilePicture.module.scss";
+import style from "../Profile.module.scss";
 
 const ProfilePicture = (props) => {
   const {photos, onSubmit, fileInputRef, controlPanels} = props;

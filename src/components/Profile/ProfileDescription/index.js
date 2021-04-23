@@ -7,27 +7,22 @@ import ProfileDescriptionViewMode from "./ProfileDescriptionViewMode";
 const ProfileDescriptionContainer = (props) => {
   const {profile, saveProfile, controlPanels} = props;
 
-  const [editMode, setEditMode] = useState(false)
-  const toggleSetEditMode = () => {
-    let mode = editMode ? false: true;
-    setEditMode(mode);
-  }
+  const [editMode, setEditMode] = useState(false);
   
   const onSubmit = async (formData) => {
     await saveProfile(formData);
-    toggleSetEditMode();
+    setEditMode(false);
   }
 
   return (
-  <div>
+  <>
     {editMode ? <ProfileDescriptionEditMode handleProfile={onSubmit}
                                             profile={profile}
-                                            initialValues={profile} 
-                                            toggleSetEditMode={toggleSetEditMode} />: 
+                                            initialValues={profile} />: 
                 <ProfileDescriptionViewMode profile={profile}
-                                            toggleSetEditMode={toggleSetEditMode}
+                                            setEditMode={setEditMode}
                                             controlPanels={controlPanels} />}
-  </div>
+  </>
 );}
 
 let mapStateToProps = (state) => ({

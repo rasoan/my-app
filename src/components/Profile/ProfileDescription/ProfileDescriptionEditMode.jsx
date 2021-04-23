@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import style from "./ProfileDescription.module.scss";
+import style from "../Profile.module.scss";
 import { useForm } from "react-hook-form";
 
 const ProfileDataForm = (props) => {
   const {handleProfile, profile} = props;
+
   const { register, handleSubmit } = useForm({
     defaultValues: {...profile},
   });
