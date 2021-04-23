@@ -1,9 +1,9 @@
 import React from "react";
-import style from "./UsersList.module.scss";
+import style from "../Users.module.scss";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem";
-import Pagination from "../../Pagination/Pagination";
-import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
+import Pagination from "../../Pagination";
+import PreloaderServerUpload from "../../Preloaders/PreloaderServerUpload";
 
 
 let UsersList = (props) => {

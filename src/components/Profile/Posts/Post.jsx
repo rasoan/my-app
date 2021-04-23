@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Post.module.scss";
+import style from "../Profile.module.scss";
 import PropTypes from "prop-types";
 
 const Post = (props) => {
@@ -8,12 +8,10 @@ const Post = (props) => {
   return (
     <div className={style.PostContainer}>
       <div className={style.PostContentImg}>
-        <img
-          className={style.image}
-          width="50"
-          height="50"
-          src={imgSrc}
-        ></img>
+        <img className={style.postImage}
+             width="50"
+             height="50"
+             src={imgSrc} />
         <p>{content}</p>
       </div>
       <p className={style.PostCountLikes}>{countLikes}</p>

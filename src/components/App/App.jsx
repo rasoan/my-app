@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppWithRoutes from "./AppWithRoutes";
 import Header from "../Header";
-import PreloaderInitializationApplication from "../Preloader/PreloaderInitializationApplication";
+import PreloaderInitializationApplication from "../Preloaders/PreloaderInitializationApplication";
 
 const App = (props) => {
   const {authMe, initializeTheApplication, initialize} = props;

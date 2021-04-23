@@ -1,8 +1,12 @@
 import React from "react";
-import style from "./Status.module.scss";
+import PropTypes from "prop-types";
+import style from "../Profile.module.scss";
 
-const Status = ({controlPanels, activateEditMode, editMode, deActivateEditModeEnterOrEsc, onStatusChange, deActivateEditMode, statusText}) => {
-  activateEditMode = controlPanels ? activateEditMode: ()=>{};
+const Status = (props) => {
+  const {controlPanels, activateEditMode, editMode, 
+         deActivateEditModeEnterOrEsc, onStatusChange, 
+         deActivateEditMode, statusText} = props;
+         
   let statusTextStyle = controlPanels ? style.statusText: "";
   
   return <div className={style.statusTextContainer}>
@@ -15,8 +19,18 @@ const Status = ({controlPanels, activateEditMode, editMode, deActivateEditModeEn
                                autoFocus={true}
                                value={statusText} />}
            {!editMode && <span className={statusTextStyle} 
-                               onClick={activateEditMode}>{statusText}</span>}            
+                               onClick={controlPanels ? activateEditMode: ()=>{}}>{statusText}</span>}            
          </div>
 };
+
+Status.propTypes = {
+  controlPanels: PropTypes.bool,
+  activateEditMode: PropTypes.func,
+  editMode: PropTypes.bool,
+  deActivateEditModeEnterOrEsc: PropTypes.func,
+  onStatusChange: PropTypes.func,
+  deActivateEditMode: PropTypes.func,
+  statusText: PropTypes.string,
+}
 
 export default Status;

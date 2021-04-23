@@ -1,11 +1,11 @@
 import React from "react";
 import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
-import PreloaderServerUpload from '../Preloader/PreloaderServerUpload';
+import PreloaderServerUpload from '../Preloaders/PreloaderServerUpload';
 import ProfileDescription from "./ProfileDescription";
-import StatusContainer from "../Status/StatusContainer";
+import Status from "./Status";
 import ProfilePicture from "./ProfilePicture";
-import PostsContainer from "./Posts/PostsContainer";
+import Posts from "./Posts";
 import ButtonFollowUnfollow from "../ButtonFollowUnfollow";
 import ButtonStartCommunication from "../ButtonStartCommunication";
       
@@ -21,14 +21,14 @@ const Profile = (props) => {
         <ProfilePicture />
         <ProfileDescription />
       </div>
-      <StatusContainer /> 
+      <Status /> 
       {!controlPanels && isAuth && <ButtonFollowUnfollow follow={follow}
                                                          unfollow={unfollow}
                                                          friend={""}
                                                          userId={profile.userId} />}
       {!controlPanels && isAuth && <ButtonStartCommunication startCommunication={startCommunication}
                                                              userId={profile.userId} />}
-      <PostsContainer profile={profile} />
+      <Posts profile={profile} />
     </div>
   );
 };

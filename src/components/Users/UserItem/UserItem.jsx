@@ -1,8 +1,8 @@
 import React from "react";
-import style from "./UserItem.module.scss";
+import style from "../Users.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
-import PreloaderServerUpload from "../../Preloader/PreloaderServerUpload";
+import PreloaderServerUpload from "../../Preloaders/PreloaderServerUpload";
 import ButtonFollowUnfollow from "../../ButtonFollowUnfollow";
 let classNames = require('classnames');
 

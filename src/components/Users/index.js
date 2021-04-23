@@ -1,6 +1,6 @@
 import React from "react";
-import style from "./Users.module.scss";
 import PropTypes from "prop-types";
+import style from "./Users.module.scss";
 import UsersList from "./UsersList";
 import { connect } from "react-redux";
 
@@ -15,6 +15,10 @@ const Users = (props) => {
         <UsersList />
       </div>
     );
+}
+
+Users.propTypes = {
+  isAuth: PropTypes.bool,
 }
 
 let mapStateToProps = (state) => ({

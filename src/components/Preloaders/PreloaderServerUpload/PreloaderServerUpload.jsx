@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./Preloaders.module.scss";
+import style from "../Preloaders.module.scss";
 
 const PreloaderServerUpload = () => {
   return (<div>

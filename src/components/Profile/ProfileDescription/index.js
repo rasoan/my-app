@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import PropTypes from "prop-types";
 import {connect} from "react-redux";
 import {saveProfile} from "../../../redux/profile-reducer";
 import ProfileDescriptionEditMode from "./ProfileDescriptionEditMode";
@@ -24,6 +25,12 @@ const ProfileDescriptionContainer = (props) => {
                                             controlPanels={controlPanels} />}
   </>
 );}
+
+ProfileDescriptionContainer.propTypes = {
+  profile: PropTypes.object,
+  saveProfile: PropTypes.func,
+  controlPanels: PropTypes.bool,
+}
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
