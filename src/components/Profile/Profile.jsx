@@ -2,9 +2,9 @@ import React from "react";
 import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
 import PreloaderServerUpload from '../Preloader/PreloaderServerUpload';
-import ProfileDescriptionContainer from "./ProfileDescription/ProfileDescriptionContainer";
+import ProfileDescription from "./ProfileDescription";
 import StatusContainer from "../Status/StatusContainer";
-import ProfilePictureContainer from "./ProfilePicture/ProfilePictureContainer";
+import ProfilePicture from "./ProfilePicture";
 import PostsContainer from "./Posts/PostsContainer";
 import ButtonFollowUnfollow from "../ButtonFollowUnfollow";
 import ButtonStartCommunication from "../ButtonStartCommunication";
@@ -18,8 +18,8 @@ const Profile = (props) => {
   return (
     <div className={style.ProfileContainer}>
       <div className={style.pictureAndDescriptionContainer}>
-        <ProfilePictureContainer />
-        <ProfileDescriptionContainer />
+        <ProfilePicture />
+        <ProfileDescription />
       </div>
       <StatusContainer /> 
       {!controlPanels && isAuth && <ButtonFollowUnfollow follow={follow}

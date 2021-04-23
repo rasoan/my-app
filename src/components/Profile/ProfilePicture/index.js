@@ -38,4 +38,4 @@ let mapStateToProps = (state) => (
 
 const actionCreators = {updateProfilePicture};
   
-  export default connect(mapStateToProps,actionCreators)(ProfilePictureContainer);
+export default connect(mapStateToProps,actionCreators)(ProfilePictureContainer);

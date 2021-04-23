@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Users.module.scss";
 import PropTypes from "prop-types";
-import UsersListContainer from "./UsersList/UsersListContainer";
+import UsersList from "./UsersList";
 import { connect } from "react-redux";
 
 const Users = (props) => {
@@ -12,7 +12,7 @@ const Users = (props) => {
     }
     return (
       <div className={style.UsersContainer}>
-        <UsersListContainer />
+        <UsersList />
       </div>
     );
 }
