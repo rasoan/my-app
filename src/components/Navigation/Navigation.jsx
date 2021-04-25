@@ -1,7 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import style from "./Navigation.module.scss";
-import {NavLink, Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
+import PATH from '../../constants/path';
 
 const Navigation = (props) => {
   const {clickProfileLink} = props;
@@ -10,32 +11,32 @@ const Navigation = (props) => {
       <div className={style.NavigationContainer}>
         <ul className={style.NavigationContainer__list}>
           <li className={style.NavigationContainer__item}>
-            <Link onClick={clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
+            <NavLink onClick={clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.PROFILE}>
               Profile
-            </Link>
+            </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/dialogs">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.DIALOGS}>
             Dialogs
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/news">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.NEWS}>
               News
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/music">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.MUSIC}>
               Music
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/users">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.USERS}>
               Users
             </NavLink>
           </li>
           <li className={style.NavigationContainer__item}>
-            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/settings">
+            <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to={PATH.SETTINGS}>
               Settings
             </NavLink>
           </li>
