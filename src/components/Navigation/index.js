@@ -16,7 +16,7 @@ const NavigationContainer = (props) => {
 }
 
 NavigationContainer.propTypes = {
-  refreshPage: PropTypes.func.isRequired,
+  refreshRequests: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
