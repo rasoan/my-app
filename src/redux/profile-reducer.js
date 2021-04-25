@@ -260,11 +260,8 @@ export const saveProfile = (profile) => {
 }
 
 const checkId = (id, isAuth, myId, defaultId) => {
-  console.log("id ", id, "isAuth ", isAuth && "да" || "нет", "myId ", myId, "defaultId ", defaultId);
   if(!id) {
     id = isAuth ? myId: defaultId;
   }
-  console.log("Возвращаю id ", id);
-  
   return id;
 }

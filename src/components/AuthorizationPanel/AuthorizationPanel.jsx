@@ -13,11 +13,18 @@ const AuthorizationPanel = (props) => {
                 <p className={style.infoText}>{"Почта: " + authorizationInfo.email}</p>
               </div>}
               {isAuth && <div className={style.authorizationPanel}>
-                <ButtonAuthorization text={"Выйти"} onClickF={logOut} srcImg={LOG_OUT_IMG} />
+                <ButtonAuthorization text={"Выйти"}
+                                     onClickF={logOut}
+                                     srcImg={LOG_OUT_IMG}
+                                     isAuth={isAuth} />
               </div>}
               {!isAuth && <div className={style.authorizationPanel}>
-                <ButtonAuthorization text={"Войти"} srcImg={SIGN_IN_IMG} />
-                <ButtonAuthorization text={"Зарегестрироваться"} srcImg={SIGN_UP_IMG} />
+                <ButtonAuthorization text={"Войти"}
+                                     srcImg={SIGN_IN_IMG}
+                                     isAuth={isAuth} />
+                <ButtonAuthorization text={"Зарегестрироваться"}
+                                     srcImg={SIGN_UP_IMG}
+                                     isAuth={isAuth} />
               </div>}
             </div>);
 };
