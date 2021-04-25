@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import style from "./Navigation.module.scss";
-import {NavLink} from 'react-router-dom';
+import {NavLink, Link} from 'react-router-dom';
 
 const Navigation = (props) => {
   const {clickProfileLink} = props;
@@ -10,9 +10,9 @@ const Navigation = (props) => {
       <div className={style.NavigationContainer}>
         <ul className={style.NavigationContainer__list}>
           <li className={style.NavigationContainer__item}>
-            <NavLink onClick={clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
+            <Link onClick={clickProfileLink} activeClassName={style.active} className={style.NavigationContainer__link} to="/Profile">
               Profile
-            </NavLink>
+            </Link>
           </li>
           <li className={style.NavigationContainer__item}>
             <NavLink activeClassName={style.active} className={style.NavigationContainer__link} to="/dialogs">

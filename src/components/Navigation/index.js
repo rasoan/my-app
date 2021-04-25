@@ -2,34 +2,30 @@ import React from "react";
 import PropTypes from "prop-types";
 import Navigation from './Navigation';
 import {getProfile, lookingMyProfile} from '../../redux/profile-reducer';
+import {refreshRequests} from '../../redux/app-reducer';
 import {connect} from "react-redux";
 
 const NavigationContainer = (props) => {
-  const {isAuth} = props;
+  const {refreshRequests} = props;
+
   const clickProfileLink = () => {
-    if(isAuth) {
-      console.log("Надо отправить на логинизацию, пользователь анонимный!")
-    }
+    refreshRequests();
   }
 
-  if(isAuth) {
-    console.log("Надо запретить редактировать статус и так далее, пользователь анонимный.")
-  }
   return <Navigation clickProfileLink={clickProfileLink} />;
 }
 
 NavigationContainer.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
+  refreshPage: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = (state) => ({
   redrawToProfileComponent: state.profilePage.redrawToProfileComponent,
-  isAuth: state.auth.isAuth,
 });
 
 const actionCreators = {
   getProfile,
-  lookingMyProfile,
+  refreshRequests,
 }
 
 export default connect(mapStateToProps, actionCreators)(NavigationContainer);

@@ -13,13 +13,14 @@ const ProfileContainer = (props) => {
     const {
         myId, match, profile, getProfile, getStatus,
         checkUserOrOwner, follow, unfollow,
-        startCommunication, controlPanels, isAuth} = props;
+        startCommunication, controlPanels,
+        refreshRequests, isAuth} = props;
 
     useEffect(() => {
         getProfile(match.params.userId);
         getStatus(match.params.userId);
         checkUserOrOwner(match.params.userId);
-    }, [myId]);
+    }, [myId, refreshRequests]);
 
     return (<Profile {...props} profile={profile}
                      follow={follow}
@@ -41,16 +42,17 @@ ProfileContainer.propTypes = {
     startCommunication: PropTypes.func,
     controlPanels: PropTypes.bool,
     isAuth: PropTypes.bool,
+    refreshPage: PropTypes.bool,
 }
 
-
-let mapStateToProps = (state) => ({
+const mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
     isFetching: state.profilePage.isFetching,
     myId: state.auth.userId,
     logoutFetching: state.auth.logoutFetching,
     controlPanels: state.app.controlPanels,
     isAuth: state.auth.isAuth,
+    refreshRequests: state.app.refreshRequests,
 });
 
 const actionCreators = {
