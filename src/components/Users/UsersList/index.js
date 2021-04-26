@@ -20,7 +20,7 @@ const UsersListContainer = (props) => {
 
   useEffect(() => {
     getUsersSC(currentPage, pagesSize);
-  }, []);
+  }, [getUsersSC, currentPage, pagesSize]);
   
     return (<UsersList totalUsersCount={totalUsersCount}
                        pagesSize={pagesSize}
@@ -42,7 +42,7 @@ UsersListContainer.propTypes = {
   getUsersSC: PropTypes.func,
   users: PropTypes.array,
   isFetching: PropTypes.bool,
-  isFetchingFollowOrUnfollowIdList: PropTypes.bool,
+  isFetchingFollowOrUnfollowIdList: PropTypes.array,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
   defaultAvatarSrc: PropTypes.string,

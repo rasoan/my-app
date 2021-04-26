@@ -1,5 +1,4 @@
 import React from "react";
-import style from "../Users.module.scss";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem";
 import Pagination from "../../Pagination";
@@ -48,7 +47,7 @@ UsersList.propTypes = {
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
   defaultAvatarSrc: PropTypes.string.isRequired,
-  isFetchingFollowOrUnfollowIdList: PropTypes.bool.isRequired,
+  isFetchingFollowOrUnfollowIdList: PropTypes.array.isRequired,
   isAuth: PropTypes.bool.isRequired,
   startCommunication: PropTypes.func.isRequired,
 };

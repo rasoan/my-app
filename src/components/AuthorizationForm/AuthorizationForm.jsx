@@ -32,13 +32,13 @@ const AuthorizationForm = (props) => {
           <div>
             <input placeholder="Логин"
                    type="text"
-                   className={errors.login && style.inCorrect ||touchedFields.login && style.correct }
+                   className={(errors.login && style.inCorrect) || (touchedFields.login && style.correct) }
                    {...register("login")} />
                    {errors.login && <p>{errors.login.message}</p>}
           </div>
           <div>
             <input placeholder="Пароль"
-                   className={errors.password && style.inCorrect ||touchedFields.password && style.correct}
+                   className={(errors.password && style.inCorrect) || (touchedFields.password && style.correct)}
                    type="password"
                    {...register("password")} />
                    {errors.password && <p>{errors.password.message}</p>}
@@ -48,7 +48,7 @@ const AuthorizationForm = (props) => {
           </div>
           <button>Залогиниться</button>
           <div>
-            {captchaUrl && <img src={captchaUrl} />}
+            {captchaUrl && <img src={captchaUrl} alt={"captcha"} />}
             {captchaUrl && <div><input type="text"
                                         {...register("captcha")} />
                            </div> }

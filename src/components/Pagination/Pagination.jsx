@@ -13,7 +13,7 @@ const Pagination = (props) => {
   const [currentPageNumber, setCurrentPageNumber] = useState(1); // переменная одинаковая X
   let pageNumbers = listPageNumbers
                     .map(pageNumber => {
-                      return <li className={style.pageNumberContainer}>
+                      return <li key={'key-' + pageNumber} className={style.pageNumberContainer}>
                                <button onClick={() => {
                                                        if (!loading) onPageChanged(pageNumber, countCardsInPage)
                                                       }

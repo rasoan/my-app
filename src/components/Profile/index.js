@@ -20,7 +20,7 @@ const ProfileContainer = (props) => {
         getProfile(match.params.userId);
         getStatus(match.params.userId);
         checkUserOrOwner(match.params.userId);
-    }, [myId, refreshRequests]);
+    }, [myId, refreshRequests, getProfile, getStatus, checkUserOrOwner, match.params.userId]);
 
     return (<Profile {...props} profile={profile}
                      follow={follow}

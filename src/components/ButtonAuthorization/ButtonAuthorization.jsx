@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import style from "./ButtonAuthorization.module.scss";
 import {NavLink} from 'react-router-dom';
 import {Button} from '@material-ui/core';
-import { Link } from '@material-ui/core';
 
 const ButtonAuthorization = (props) => {
     const {onClickF = () => null, srcImg, text, isAuth} = props;

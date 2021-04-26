@@ -12,7 +12,9 @@ const DialogItem = (props) => {
   return (
     <div className={style.dialogItemContainer}>
       <NavLink to={path} className={style.dialogLink}>
-        <img className={style.userImg} src={photos.small} />
+        <img className={style.userImg}
+             src={photos.small}
+             alt="user" />
         <p>{userName}</p>
         <div className={style.containerInfo}>
           <DialogueInformation header={'Новых сообщений'}

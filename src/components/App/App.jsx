@@ -12,7 +12,7 @@ const App = (props) => {
            await authMe();
            initializeTheApplication(true);
     })();
-  }, []);
+  }, [authMe, initializeTheApplication]);
 
   if (!initialize) return <PreloaderInitializationApplication />;
   

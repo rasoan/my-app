@@ -25,7 +25,7 @@ const MessageForm = (props) => {
     return (
         <form onSubmit={handleSubmit(handleSendMessage)}>
           <div>
-            <textarea className={errors.message && style.inCorrect ||touchedFields.login && style.correct }
+            <textarea className={(errors.message && style.inCorrect) || (touchedFields.login && style.correct)}
                       {...register("message")} />
                       {errors.message && <p>{errors.message.message}</p>}
           </div>

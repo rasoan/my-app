@@ -11,6 +11,7 @@ const Post = (props) => {
         <img className={style.postImage}
              width="50"
              height="50"
+             alt="user"
              src={imgSrc} />
         <p>{content}</p>
       </div>

@@ -7,7 +7,7 @@ const Dialogs = (props) => {
   const {dialogs, getDialogs} = props;
   useEffect(() => {
     getDialogs();
-  }, []);
+  }, [getDialogs]);
   
   let dialogsData = dialogs.map((element, i) => ( <DialogItem key={element.id + " " + i}
                                                               userName={element.userName} 

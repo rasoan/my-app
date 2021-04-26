@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import {getMessages, sendMessage} from "../../redux/messages-reducer";
 import { connect } from "react-redux";

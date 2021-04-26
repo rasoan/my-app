@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Navigation from './Navigation';
-import {getProfile, lookingMyProfile} from '../../redux/profile-reducer';
+import {getProfile} from '../../redux/profile-reducer';
 import {refreshRequests} from '../../redux/app-reducer';
 import {connect} from "react-redux";
 

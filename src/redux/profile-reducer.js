@@ -1,7 +1,4 @@
-import {
-  usersApi,
-  profileAPI
-} from "../api/api";
+import {profileAPI} from "../api/api";
 import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 import {DEFAULT_STATUS_TEXT} from "../constants/Profile";
 import {DEFAULT_USER_ID} from "../constants/Authorization";

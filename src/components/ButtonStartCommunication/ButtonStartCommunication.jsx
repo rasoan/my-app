@@ -11,7 +11,7 @@ const ButtonStartCommunication = (props) => {
 
 ButtonStartCommunication.propTypes = {
   startCommunication: PropTypes.func.isRequired,
-  userId: PropTypes.string,
+  userId: PropTypes.number,
 };
 
 export default ButtonStartCommunication;

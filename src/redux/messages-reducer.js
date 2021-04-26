@@ -1,5 +1,4 @@
 import {messagesAPI} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const GET_MESSAGES = 'GET_MESSAGES';
 

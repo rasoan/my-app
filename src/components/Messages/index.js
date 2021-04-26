@@ -7,10 +7,8 @@ import Messages from "./Messages";
 const MessagesContainer = (props) => {
   const {userId, messages, totalCount, getMessages} = props;
   useEffect(() => {
-    console.log("Получить сообщения с ", userId);
     getMessages(userId);
-    
-  },[]);
+  },[userId, getMessages]);
   
   return (<Messages messages={messages}
                     totalCount={totalCount} />)

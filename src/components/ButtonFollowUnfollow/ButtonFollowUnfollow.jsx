@@ -16,7 +16,7 @@ const ButtonFollowUnfollow = (props) => {
 };
 
 ButtonFollowUnfollow.propTypes = {
-  userId: PropTypes.string,
+  userId: PropTypes.number,
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
 };
