@@ -4,6 +4,7 @@ import {logOut, authMe} from "../../redux/auth-reducer";
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,
+    photos: state.profilePage.profile.photos,
     authorizationInfo: {  
                         userId: state.auth.userId,
                         email: state.auth.email,
