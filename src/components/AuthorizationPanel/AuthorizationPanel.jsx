@@ -17,6 +17,7 @@ import {
     ListItemText,
     Typography
 } from '@material-ui/core';
+import Box from '@material-ui/core/Box';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import Email from '@material-ui/icons/Email';
 import {makeStyles} from '@material-ui/core/styles';
@@ -25,12 +26,21 @@ const useStyles = makeStyles((theme) => ({
     exit: {
         justifyContent: 'center',
     },
-    buttonAvatar: {
-        marginRight: '10px',
+    avatar: {
+        marginRight: '5px',
     },
     login: {
         color: '#3f51b5',
         textTransform: 'none',
+        textAlign: 'center',
+        width: '100%',
+    },
+    buttonInfo: {
+        width: 'min-content',
+        margin: '0 10px 0 auto',
+        "&:hover": {
+            textDecoration: 'none',
+        }
     }
 }));
 
@@ -48,10 +58,10 @@ const AuthorizationPanel = (props) => {
         setAnchorEl(null);
     };
 
-    return (<div className={style.authorizationPanelWrapper}>
-        {isAuth && <div className={style.authorizationPanel}>
-            <Button  onClick={handleClick}>
-                <Avatar className={classes.buttonAvatar} alt="User" src={photos && photos.small}/>
+    return (<>
+        {isAuth && <>
+            <Button className={classes.buttonInfo} onClick={handleClick}>
+                <Avatar className={classes.avatar} alt="User" src={photos && photos.small}/>
                 <Typography className={classes.login} variantMapping={Button}>{authorizationInfo.login}</Typography>
             </Button>
             <Menu
@@ -75,23 +85,27 @@ const AuthorizationPanel = (props) => {
                         <ListItemText primary={"Почта: " + authorizationInfo.email}/>
                     </ListItem>
                 </List>
-                <MenuItem className={classes.exit}
-                          onClick={() => {
+                <MenuItem onClick={() => {
                               handleClose();
                               logOut();
                           }}>
-                    Выйти
+                   <Typography className={classes.login}>Выйти</Typography>
                 </MenuItem>
             </Menu>
-        </div>}
-        {!isAuth && <div className={style.authorizationPanel}>
-            <Link component={NavLink}
-                  to="/authorization"
-                  variant={"button"}>
-                Авторизация
+        </>}
+        {!isAuth && <>
+            <Link className={classes.buttonInfo}
+                  component={NavLink}
+                  to="/authorization">
+                <Button>
+                <Box display="flex">
+                  <Box display="flex" className={classes.avatar}><PermIdentity /></Box>
+                  <Typography className={classes.login}>Авторизация</Typography>
+                </Box>
+                </Button>
             </Link>
-        </div>}
-    </div>);
+        </>}
+    </>);
 };
 
 AuthorizationPanel.propTypes = {
