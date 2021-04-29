@@ -17,12 +17,10 @@ const App = (props) => {
   if (!initialize) return <PreloaderInitializationApplication />;
   
   return (<>
-            {initialize && <div>
-              <Header />
-              <AppWithRoutes />
-            </div>}
-          </>);
-};
+            {initialize && <AppWithRoutes />}
+          </>
+  );
+}
 
 App.propTypes = {
   authMe: PropTypes.func.isRequired,
