@@ -1,41 +1,44 @@
 import React from "react";
 import PropTypes from "prop-types";
-import style from "./AuthorizationPanel.module.scss";
-import ButtonAuthorization from '../ButtonAuthorization';
-import {SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from '../../constants/Authorization';
-import MUButton from "../Button";
 import {NavLink} from 'react-router-dom';
-import {
-    Avatar,
-    Menu,
-    MenuItem,
-    Link,
-    Button,
-    List,
-    ListItem,
-    ListItemIcon,
-    ListItemText,
-    Typography
-} from '@material-ui/core';
+import Avatar from '@material-ui/core/Avatar';
+import Menu from '@material-ui/core/Menu';
+import MenuItem from '@material-ui/core/MenuItem';
+import Link from '@material-ui/core/Link';
+import Button from '@material-ui/core/Button';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import Email from '@material-ui/icons/Email';
 import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
-    exit: {
-        justifyContent: 'center',
-    },
-    avatar: {
-        marginRight: '5px',
-    },
-    login: {
+    root: {
         color: '#3f51b5',
+    },
+    exit: {
         textTransform: 'none',
         textAlign: 'center',
         width: '100%',
     },
-    buttonInfo: {
+    login: {
+        textTransform: 'none',
+        textAlign: 'center',
+        width: '100%',
+    },
+    auth: {
+        textTransform: 'none',
+        textAlign: 'center',
+        width: '100%',
+    },
+    avatar: {
+        marginRight: '5px',
+    },
+    mainButton: {
         width: 'min-content',
         margin: '0 10px 0 auto',
         "&:hover": {
@@ -47,9 +50,7 @@ const useStyles = makeStyles((theme) => ({
 const AuthorizationPanel = (props) => {
     const {isAuth, authorizationInfo, logOut, photos} = props;
     const classes = useStyles(props);
-
     const [anchorEl, setAnchorEl] = React.useState(null);
-
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -60,9 +61,9 @@ const AuthorizationPanel = (props) => {
 
     return (<>
         {isAuth && <>
-            <Button className={classes.buttonInfo} onClick={handleClick}>
+            <Button className={classes.mainButton} onClick={handleClick}>
                 <Avatar className={classes.avatar} alt="User" src={photos && photos.small}/>
-                <Typography className={classes.login} variantMapping={Button}>{authorizationInfo.login}</Typography>
+                <Typography className={classes.root + ' ' + classes.login} variantMapping={Button}>{authorizationInfo.login}</Typography>
             </Button>
             <Menu
                 id="simple-menu"
@@ -86,22 +87,22 @@ const AuthorizationPanel = (props) => {
                     </ListItem>
                 </List>
                 <MenuItem onClick={() => {
-                              handleClose();
-                              logOut();
-                          }}>
-                   <Typography className={classes.login}>Выйти</Typography>
+                    handleClose();
+                    logOut();
+                }}>
+                    <Typography className={classes.root + ' ' + classes.exit}>Выйти</Typography>
                 </MenuItem>
             </Menu>
         </>}
         {!isAuth && <>
-            <Link className={classes.buttonInfo}
+            <Link className={classes.mainButton}
                   component={NavLink}
                   to="/authorization">
                 <Button>
-                <Box display="flex">
-                  <Box display="flex" className={classes.avatar}><PermIdentity /></Box>
-                  <Typography className={classes.login}>Авторизация</Typography>
-                </Box>
+                    <Box display="flex">
+                        <Box display="flex" className={classes.avatar}><PermIdentity className={classes.root}/></Box>
+                        <Typography className={classes.root + ' ' + classes.auth}>Авторизация</Typography>
+                    </Box>
                 </Button>
             </Link>
         </>}
