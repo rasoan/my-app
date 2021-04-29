@@ -16,12 +16,11 @@ import Box from '@material-ui/core/Box';
 
 const Copyright = () => {
     return (
-        <Typography variant="body2" color="textSecondary" align="center">
-            <Typography color="inherit">
-                Социальная сеть
-            </Typography>{' '}
-            {new Date().getFullYear()}
-        </Typography>
+        <Box>
+            <Typography color="inherit" variant="body2" color="textSecondary" align="center">
+                Социальная сеть <br />{new Date().getFullYear()}
+            </Typography>
+        </Box>
     );
 }
 
@@ -85,7 +84,6 @@ const AuthorizationForm = (props) => {
                     autoComplete="current-password"
                     placeholder="LoG234HH"
                     className={(errors.password && style.inCorrect) || (touchedFields.password && style.correct)}
-                    type="password"
                     {...register("password")}
                 />
                 {errors.password && <p>{errors.password.message}</p>}
