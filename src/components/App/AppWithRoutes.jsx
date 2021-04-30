@@ -4,7 +4,7 @@ import {Route, Switch} from 'react-router-dom';
 import {withSuspense} from "../../hoc/withSuspense";
 import {Redirect} from "react-router-dom";
 import AuthorizationPage from '../../pages/AuthorizationPage';
-import LeftPanel from '../LeftPanel';
+import Navigation from '../Navigation';
 import PATH from '../../constants/path';
 import Header from "../Header";
 
@@ -17,7 +17,7 @@ const All = () => {
     return (<>
         <Header />
         <div className={style.container}>
-            <LeftPanel/>
+            <Navigation/>
             <Switch>
                 <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
                 <Route path={PATH.DIALOGS} render={withSuspense(DialogsPage)}/>

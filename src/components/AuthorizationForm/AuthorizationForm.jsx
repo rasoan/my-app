@@ -14,15 +14,6 @@ import Link from '@material-ui/core/Link';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-const Copyright = () => {
-    return (
-        <Box>
-            <Typography color="inherit" variant="body2" color="textSecondary" align="center">
-                Социальная сеть <br />{new Date().getFullYear()}
-            </Typography>
-        </Box>
-    );
-}
 
 const useStyles = makeStyles((theme) => ({
     form: {
@@ -121,7 +112,9 @@ const AuthorizationForm = (props) => {
                 </Link>
             </Box>
             <Box mt={5}>
-                <Copyright/>
+                    <Typography color="inherit" variant="body2" color="textSecondary" align="center">
+                        Социальная сеть <br />{new Date().getFullYear()}
+                    </Typography>
             </Box>
         </form>
     );

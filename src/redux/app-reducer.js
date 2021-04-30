@@ -2,11 +2,13 @@ const INITIALIZE_THE_APPLICATION = "INITIALIZE_THE_APPLICATION";
 const OPEN_CONTROL_PANEL = "OPEN_CONTROL_PANEL";
 const CLOSE_CONTROL_PANEL = "CLOSE_CONTROL_PANEL";
 const REFRESH_REQUEST = "REFRESH_REQUESTS";
+const TOGGLE_NAV = "TOGGLE_NAV";
 
 let initialState = {
     initializeTheApplication: false,
     controlPanels: false,
     refreshRequests: false,
+    navigationPanelVisibility: false,
 };
 
 const app = (state = initialState, action) => {
@@ -32,6 +34,11 @@ const app = (state = initialState, action) => {
                 ...state,
                 refreshRequests: !(state.refreshRequests),
             }
+        case TOGGLE_NAV:
+            return {
+                ...state,
+                navigationPanelVisibility: !(state.navigationPanelVisibility),
+            }
         default:
             return state;
     }
@@ -47,6 +54,7 @@ export let initializeTheApplicationAC = (initializeTheApplication) => {
 const openControlPanelAC = () => ({type: OPEN_CONTROL_PANEL});
 const closeControlPanelAC = () => ({type: CLOSE_CONTROL_PANEL});
 const refreshRequestsAC = () => ({type: REFRESH_REQUEST});
+const toggleNavAC = () => ({type: TOGGLE_NAV});
 
 export const initializeTheApplication = (initializeTheApplication) => {
     return (dispatch) => {
@@ -94,6 +102,13 @@ export const checkUserOrOwner = (id) => {
 export const refreshRequests = () => {
     return (dispatch) => {
         const action = refreshRequestsAC();
+        dispatch(action);
+    }
+}
+
+export const toggleNav = () => {
+    return (dispatch) => {
+        const action = toggleNavAC();
         dispatch(action);
     }
 }
