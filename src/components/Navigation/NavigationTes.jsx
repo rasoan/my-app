@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
         height: '0 !important',
     },
     toolbarMobile: {
-        marginTop: '100px',
+        marginTop: '120px',
     },
     drawerPaper: {
         width: drawerWidth,
