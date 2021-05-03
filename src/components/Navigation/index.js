@@ -1,7 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Navigation from './Navigation';
-import NavigationTes from './NavigationTes';
 import {getProfile} from '../../redux/profile-reducer';
 import {refreshRequests} from '../../redux/app-reducer';
 import {toggleNav} from "../../redux/app-reducer.js";
@@ -15,9 +14,9 @@ const NavigationContainer = (props) => {
   }
 
   return (<>
-    <NavigationTes clickProfileLink={clickProfileLink}
-                   navigationPanelVisibility={navigationPanelVisibility}
-                   toggleNav={toggleNav} />
+    <Navigation clickProfileLink={clickProfileLink}
+                navigationPanelVisibility={navigationPanelVisibility}
+                toggleNav={toggleNav} />
     {/*<Navigation clickProfileLink={clickProfileLink} />*/}
   </>);
 }
