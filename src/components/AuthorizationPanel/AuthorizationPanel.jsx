@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-
 import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -17,19 +16,32 @@ import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        color: '#3f51b5',
+        [theme.breakpoints.up("xs")]: {
+            fontSize: 16
+        },
+    },
+    iconRoot: {
+        [theme.breakpoints.up("xs")]: {
+            display: 'none',
+        },
+        [theme.breakpoints.up("sm")]: {
+            display: 'block',
+        },
     },
     exit: {
+        color: '#3f51b5',
         textTransform: 'none',
         textAlign: 'center',
         width: '100%',
     },
     login: {
+        color: '#3f51b5',
         textTransform: 'none',
         textAlign: 'center',
         width: '100%',
     },
     auth: {
+        color: '#3f51b5',
         textTransform: 'none',
         textAlign: 'center',
         width: '100%',
@@ -62,8 +74,8 @@ const AuthorizationPanel = (props) => {
     return (<>
         {isAuth && <>
             <Button className={classes.mainButton} onClick={handleClick}>
-                <Avatar className={classes.avatar} alt="User" src={photos && photos.small}/>
-                <Typography className={classes.root + ' ' + classes.login}
+                <Avatar className={`${classes.iconRoot} ${classes.avatar}`} alt="User" src={photos && photos.small}/>
+                <Typography className={`${classes.root} ${classes.login}`}
                             variantMapping={Button}>{authorizationInfo.login}</Typography>
             </Button>
             <Menu
@@ -75,13 +87,13 @@ const AuthorizationPanel = (props) => {
             >
                 <List>
                     <ListItem>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconRoot}>
                             <PermIdentity/>
                         </ListItemIcon>
                         <ListItemText primary={"Айди: " + authorizationInfo.userId}/>
                     </ListItem>
                     <ListItem>
-                        <ListItemIcon>
+                        <ListItemIcon className={classes.iconRoot}>
                             <Email/>
                         </ListItemIcon>
                         <ListItemText primary={"Почта: " + authorizationInfo.email}/>
@@ -91,7 +103,7 @@ const AuthorizationPanel = (props) => {
                     handleClose();
                     logOut();
                 }}>
-                    <Typography className={classes.root + ' ' + classes.exit}>Выйти</Typography>
+                    <Typography className={classes.exit}>Выйти</Typography>
                 </MenuItem>
             </Menu>
         </>}
@@ -99,7 +111,7 @@ const AuthorizationPanel = (props) => {
             <Button className={classes.mainButton}
                     component={NavLink}
                     to="/authorization">
-                <PermIdentity display="flex" className={`${classes.root} ${classes.avatar}`}/>
+                <PermIdentity display="flex" className={`${classes.root} ${classes.iconRoot} ${classes.avatar}`}/>
                 <Typography className={classes.root + ' ' + classes.auth}>Авторизация</Typography>
             </Button>
         </>}
