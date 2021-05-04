@@ -21,12 +21,11 @@ import style from "./Navigation.module.scss";
 import PATH from "../../constants/path";
 
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyles = makeStyles((theme) => ({
     root: {
         display: 'flex',
-
     },
     drawer: {
         [theme.breakpoints.up('sm')]: {
@@ -44,12 +43,12 @@ const useStyles = makeStyles((theme) => ({
     // necessary for content to be below app bar
     toolbar: {
         ...theme.mixins.toolbar,
-        marginTop: '10px',
+        marginTop: '20px',
         minHeight: '0 !important',
         height: '0 !important',
     },
     toolbarMobile: {
-        marginTop: '80px',
+        marginTop: '90px',
     },
     drawerPaper: {
         width: drawerWidth,
@@ -66,11 +65,8 @@ const useStyles = makeStyles((theme) => ({
         zIndex: '1 !important',
     },
     navLink: {
-        padding: '5px 0',
+        padding: '8px 0 8px 40px',
         width: '100%',
-        textAlign: 'center',
-        color: 'black',
-        fontWeight: 'bold',
         '&:hover': {
             textDecoration: 'none',
         }
@@ -131,7 +127,7 @@ const MyDrawer = (props) => {
             </List>
             <Divider/>
             <List>
-                <ListItem button>
+                <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
                              activeClass={classes.navLink}
                              className={classes.navLink}
