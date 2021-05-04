@@ -11,9 +11,9 @@ const Users = (props) => {
       console.log("Пользователь анонимный, надо запретить добавлять в друзья и так далее")
     }
     return (
-      <div className={style.UsersContainer}>
+      <>
         <UsersList />
-      </div>
+      </>
     );
 }
 
