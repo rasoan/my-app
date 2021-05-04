@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem";
 import Pagination from "../../Pagination";
-import PreloaderServerUpload from "../../Preloaders/PreloaderServerUpload";
+import PreloaderLinear from "../../Preloaders/PreloaderLinear";
 
 
 let UsersList = (props) => {
@@ -22,7 +22,7 @@ let UsersList = (props) => {
                            countCardsInPage={pagesSize} 
                            loading={isFetching}
                            getCards={getUsers} />
-               {isFetching ? <PreloaderServerUpload /> : null}
+               {isFetching ? <PreloaderLinear /> : null}
                {!isFetching && users.map((user, i) => <UserItem key={user.name + i}
                                                                 navlinkTo={"/Profile/" + user.id}
                                                                 id={user.id} 

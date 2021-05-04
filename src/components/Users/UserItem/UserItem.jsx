@@ -2,7 +2,7 @@ import React from "react";
 import style from "../Users.module.scss";
 import PropTypes from "prop-types";
 import {NavLink} from "react-router-dom";
-import PreloaderServerUpload from "../../Preloaders/PreloaderServerUpload";
+import PreloaderLinear from "../../Preloaders/PreloaderLinear";
 import ButtonFollowUnfollow from "../../ButtonFollowUnfollow";
 
 const UserItem = (props) => {
@@ -12,7 +12,7 @@ const UserItem = (props) => {
         startCommunication
     } = props;
 
-    let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <PreloaderServerUpload/> : null;
+    let isFetching = isFetchingFollowOrUnfollowIdList.some(element => element === id) ? <PreloaderLinear/> : null;
     let avatarSrc = photo ? photo : defaultAvatarSrc;
 
     return (

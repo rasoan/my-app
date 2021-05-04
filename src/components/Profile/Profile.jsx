@@ -1,7 +1,7 @@
 import React from "react";
 import style from "./Profile.module.scss";
 import PropTypes from "prop-types";
-import PreloaderServerUpload from '../Preloaders/PreloaderServerUpload';
+import PreloaderLinear from '../Preloaders/PreloaderLinear';
 import ProfileDescription from "./ProfileDescription";
 import Status from "./Status";
 import ProfilePicture from "./ProfilePicture";
@@ -12,7 +12,7 @@ import ButtonStartCommunication from "../ButtonStartCommunication";
 const Profile = (props) => {
   const {profile, isFetching, follow, unfollow, startCommunication, controlPanels, isAuth} = props;
 
-  if (isFetching) return (<PreloaderServerUpload/>);
+  if (isFetching) return (<PreloaderLinear/>);
   if (!profile) return <></> 
   
   return (
