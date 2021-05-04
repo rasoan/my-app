@@ -4,12 +4,15 @@ const SEND_MESSAGE = 'SEND-MESSAGE';
 const START_COMMUNICATION = 'START_COMMUNICATION';
 const GET_DIALOGS = 'GET_ALL_DIALOGS';
 const GET_MESSAGES = 'GET_MESSAGES';
+const START_FETCHING = 'START_FETCHING';
+const STOP_FETCHING = 'STOP_FETCHING';
 
 let initialState = {
   messages: [],
   dialogsData: [],
   dialogs: [],
   interlocutors: [],
+    isFetching: false,
 };
 
 const dialogsReducer = (state = initialState, action) => {
@@ -41,6 +44,16 @@ const dialogsReducer = (state = initialState, action) => {
               ...state,
               messages: action.messages,
              }
+      case START_FETCHING:
+          return {
+              ...state,
+              isFetching: true,
+          }
+      case STOP_FETCHING:
+          return {
+              ...state,
+              isFetching: false,
+          }
     default:
       return state;
   }
@@ -52,6 +65,8 @@ const sendMessageCreatorAC = (newMessage) => ({type: SEND_MESSAGE, newMessage,})
 const startCommunicationAC = (interlocutor) => ({type: START_COMMUNICATION, interlocutor,});
 const getDialogsAC = (dialogs) => ({type: GET_DIALOGS, dialogs,});
 const getMessagesAC = (messages) => ({type: GET_MESSAGES, messages,});
+const startFetchingAC = () => ({ type: START_FETCHING });
+const stopFetchingAC = () => ({ type: STOP_FETCHING });
 
 
 
@@ -72,9 +87,13 @@ export const startCommunication = (userId) => {
 
 export const getDialogs = () => {
   return async (dispatch) => {
+      let action = startFetchingAC();
+      dispatch(action);
            const response = await dialogsAPI.getAllDialogs();
-           let action = getDialogsAC(response.data);
+           action = getDialogsAC(response.data);
            dispatch(action);
+      action = stopFetchingAC();
+      dispatch(action);
   }
 }
 

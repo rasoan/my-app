@@ -10,6 +10,7 @@ const mapStateToProps = (state) => {
           messages: state.dialogsPage.messages,
           isAuth: state.auth.isAuth,
           dialogs: state.dialogsPage.dialogs,
+       isFetching: state.dialogsPage.isFetching,
          }
 }
 
