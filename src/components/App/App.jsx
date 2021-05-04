@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import AppWithRoutes from "./AppWithRoutes";
-import Header from "../Header";
 import PreloaderInitializationApplication from "../Preloaders/PreloaderInitializationApplication";
 
 const App = (props) => {

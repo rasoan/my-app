@@ -112,7 +112,7 @@ const AuthorizationForm = (props) => {
                 </Link>
             </Box>
             <Box mt={5}>
-                    <Typography color="inherit" variant="body2" color="textSecondary" align="center">
+                    <Typography variant="body2" color="textSecondary" align="center">
                         Социальная сеть <br />{new Date().getFullYear()}
                     </Typography>
             </Box>

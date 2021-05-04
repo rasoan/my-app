@@ -1,23 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
-import IconButton from '@material-ui/core/IconButton';
 import Link from '@material-ui/core/Link';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
-import MenuIcon from '@material-ui/icons/Menu';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import {NavLink} from "react-router-dom";
-import style from "./Navigation.module.scss";
 import PATH from "../../constants/path";
 
 
@@ -93,7 +84,6 @@ const MyDrawer = (props) => {
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             activeClass={classes.navLink}
                              className={classes.navLink}
                              to={PATH.DIALOGS}>
                         Dialogs
@@ -101,7 +91,6 @@ const MyDrawer = (props) => {
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             activeClass={classes.navLink}
                              className={classes.navLink}
                              to={PATH.NEWS}>
                         News
@@ -109,7 +98,6 @@ const MyDrawer = (props) => {
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             activeClass={classes.navLink}
                              className={classes.navLink}
                              to={PATH.MUSIC}>
                         Music
@@ -117,7 +105,6 @@ const MyDrawer = (props) => {
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             activeClass={classes.navLink}
                              className={classes.navLink}
                              to={PATH.USERS}>
                         Users
@@ -129,7 +116,6 @@ const MyDrawer = (props) => {
             <List>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             activeClass={classes.navLink}
                              className={classes.navLink}
                              to={PATH.SETTINGS}>
                         Settings
