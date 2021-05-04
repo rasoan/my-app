@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const useStyles = makeStyles((theme) => ({
     root: {
+        margin: 20,
         display: 'flex',
         '& > * + *': {
             marginLeft: theme.spacing(2),
@@ -16,8 +17,7 @@ const PreloaderCircular = () => {
 
     return (
         <div className={classes.root}>
-            <CircularProgress />
-            <CircularProgress color="secondary" />
+            <CircularProgress color="primary" />
         </div>
     );
 }

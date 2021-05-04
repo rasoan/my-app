@@ -34,3 +34,11 @@ export const getIsAuth = (state) => {
 export const getDefaultAvatarSrc = (state) => {
   return state.usersPage.defaultAvatarSrc;
 }
+
+export const getIsFetchingGetUsersCards = (state) => {
+  return state.usersPage.isFetchingGetUsersCards;
+}
+
+export const getIsFetchingGetUsersCount = (state) => {
+  return state.usersPage.isFetchingGetUsersCount;
+}

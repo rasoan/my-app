@@ -3,14 +3,16 @@ import PropTypes from "prop-types";
 import UserItem from "../UserItem";
 import Pagination from "../../Pagination";
 import PreloaderLinear from "../../Preloaders/PreloaderLinear";
+import PreloaderCircular from "../../Preloaders/PreloaderCircular";
 
 
 let UsersList = (props) => {
     const {
         totalUsersCount, pagesSize,
-        isFetching, users, getUsers, follow, unfollow,
+        users, follow, unfollow,
         defaultAvatarSrc, isFetchingFollowOrUnfollowIdList, isAuth,
-        startCommunication
+        startCommunication, getUsersCardsSC,
+        isFetchingGetUsersCards, isFetchingGetUsersCount
     } = props;
 
     let countPage = Math.ceil(totalUsersCount / pagesSize);
@@ -19,12 +21,14 @@ let UsersList = (props) => {
         pages.push(i);
     }
 
+
     return (<div style={{width: '100%'}}>
-      <Pagination listPageNumbers={pages}
-                  countCardsInPage={pagesSize}
-                  loading={isFetching}
-                  getCards={getUsers}/>
-        {isFetching ? <PreloaderLinear/> :
+        {isFetchingGetUsersCount ? <PreloaderLinear/> :
+            <Pagination listPageNumbers={pages}
+                        countCardsInPage={pagesSize}
+                        loading={isFetchingGetUsersCards}
+                        getCards={getUsersCardsSC}/>}
+        {!isFetchingGetUsersCount && (isFetchingGetUsersCards ? <PreloaderCircular /> :
             <div>
                 {users.map((user, i) => <UserItem key={user.name + i}
                                                   navlinkTo={"/Profile/" + user.id}
@@ -38,7 +42,7 @@ let UsersList = (props) => {
                                                   defaultAvatarSrc={defaultAvatarSrc}
                                                   isAuth={isAuth}
                                                   startCommunication={startCommunication}/>)}
-            </div>}
+            </div>)}
     </div>);
 }
 
