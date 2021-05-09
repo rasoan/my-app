@@ -23,11 +23,10 @@ let UsersList = (props) => {
 
 
     return (<div style={{width: '100%'}}>
-        {isFetchingGetUsersCount ? <PreloaderLinear/> :
             <Pagination listPageNumbers={pages}
                         countCardsInPage={pagesSize}
                         loading={isFetchingGetUsersCards}
-                        getCards={getUsersCardsSC}/>}
+                        getCards={getUsersCardsSC}/>
         {!isFetchingGetUsersCount && (isFetchingGetUsersCards ? <PreloaderCircular /> :
             <div>
                 {users.map((user, i) => <UserItem key={user.name + i}

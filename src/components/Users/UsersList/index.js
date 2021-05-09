@@ -19,10 +19,7 @@ const UsersListContainer = (props) => {
       isFetchingGetUsersCards, isFetchingGetUsersCount,
       getCountUsers, getUsersCardsSC} = props;
 
-  useEffect(() => {
-      getCountUsers();
-      getUsersCardsSC(currentPage, pagesSize);
-  }, [getUsersCardsSC, currentPage, pagesSize]);
+
 
     return (<UsersList totalUsersCount={totalUsersCount}
                        pagesSize={pagesSize}
