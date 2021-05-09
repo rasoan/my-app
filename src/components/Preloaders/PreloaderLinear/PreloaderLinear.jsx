@@ -10,6 +10,9 @@ const useStyles = makeStyles((theme) => ({
             marginTop: theme.spacing(2),
         },
     },
+    linearProgress: {
+        height: 4,
+    }
 }));
 
 const PreloaderLinear = () => {
@@ -17,7 +20,7 @@ const PreloaderLinear = () => {
 
     return (
         <div className={classes.root}>
-            <LinearProgress color="primary" />
+            <LinearProgress className={classes.linearProgress} color="primary" />
         </div>
     );
 }
