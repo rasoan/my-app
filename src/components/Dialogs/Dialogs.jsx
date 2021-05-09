@@ -1,15 +1,13 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import style from "./Dialogs.module.scss";
 import DialogItem from "../DialogItem";
-import PreloaderLinear from "../Preloaders/PreloaderLinear";
+
 
 
 const Dialogs = (props) => {
-  const {dialogs, getDialogs, isFetching} = props;
-  useEffect(() => {
-    getDialogs();
-  }, [getDialogs]);
+  const {dialogs} = props;
+
   
   let dialogsData = dialogs.map((element, i) => ( <DialogItem key={element.id + " " + i}
                                                               userName={element.userName} 
@@ -22,7 +20,7 @@ const Dialogs = (props) => {
 
   return (
       <div className={style.dialogsContainer}>
-        {isFetching ? <PreloaderLinear/>: dialogsData}
+        {dialogsData}
       </div>
   );
 }
