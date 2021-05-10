@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import style from "./Users.module.scss";
 import UsersList from "./UsersList";
 import { connect } from "react-redux";
 

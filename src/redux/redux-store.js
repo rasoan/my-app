@@ -1,10 +1,10 @@
 import {combineReducers, compose, createStore} from "redux";
-import profileReducer from "./profile-reducer";
-import dialogsReducer from "./dialogs-reducer";
-import messagesReducer from "./messages-reducer";
-import usersReducer from "./users-reducer";
-import authReducer from "./auth-reducer";
-import app from "./app-reducer";
+import profileReducer from "./reducers/profile-reducer";
+import dialogsReducer from "./reducers/dialogs-reducer";
+import messagesReducer from "./reducers/messages-reducer";
+import usersReducer from "./reducers/users-reducer";
+import authReducer from "./reducers/auth-reducer";
+import app from "./reducers/app-reducer";
 import thunkMiddleware from "redux-thunk";
 import { applyMiddleware } from "redux";
 import {reducer as formReducer} from "redux-form";

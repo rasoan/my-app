@@ -1,6 +1,6 @@
 import AuthorizationPanel from "./AuthorizationPanel";
 import {connect} from "react-redux";
-import {logOut, authMe} from "../../redux/auth-reducer";
+import {logOut, authMe} from "../../redux/reducers/auth-reducer";
 
 const mapStateToProps = (state) => ({
     isAuth: state.auth.isAuth,

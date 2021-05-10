@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import Status from "./Status";
 import {compose} from "redux";
 import { connect } from "react-redux";
-import {updateNewStatusText} from "../../../redux/profile-reducer";
+import {updateNewStatusText} from "../../../redux/reducers/profile-reducer";
 
 const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText, controlPanels}) => {
   const [editMode, setEditMode] = useState(false);

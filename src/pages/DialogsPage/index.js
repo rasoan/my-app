@@ -1,6 +1,6 @@
 import DialogsPage from "./DialogsPage";
 import {connect} from "react-redux";
-import {getDialogs, onSendMessageClick} from "../../redux/dialogs-reducer";
+import {getDialogs, onSendMessageClick} from "../../redux/reducers/dialogs-reducer";
 
 const mapStateToProps = (state) => {
     return {

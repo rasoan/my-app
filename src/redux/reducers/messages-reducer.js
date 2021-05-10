@@ -1,4 +1,4 @@
-import {messagesAPI} from "../api/api";
+import {messagesAPI} from "../../api/api";
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const GET_MESSAGES = 'GET_MESSAGES';
 

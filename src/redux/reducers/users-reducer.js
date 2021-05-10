@@ -1,5 +1,5 @@
-import {usersApi} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
+import {usersApi} from "../../api/api";
+import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
 
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';

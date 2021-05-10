@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Post from "./Post";
-import {addPost} from '../../../redux/profile-reducer.js';
+import {addPost} from '../../../redux/reducers/profile-reducer.js';
 import {connect} from "react-redux";
 import PostForm from "./PostForm";
 

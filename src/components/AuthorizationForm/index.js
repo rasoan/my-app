@@ -1,7 +1,7 @@
 import AuthorizationForm from "./AuthorizationForm";
 import React from "react";
 import PropTypes from "prop-types";
-import {signIn} from "../../redux/auth-reducer";
+import {signIn} from "../../redux/reducers/auth-reducer";
 import {connect} from "react-redux";
 import {Redirect} from "react-router";
 

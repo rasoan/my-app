@@ -1,6 +1,6 @@
 import {stopSubmit} from "redux-form";
-import {authAPI, securituAPI} from "../api/api";
-import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
+import {authAPI, securituAPI} from "../../api/api";
+import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
 
 const SET_USER_DATA = "SET_USER_DATA";
 const SIGN_IN = "SIGN_IN";

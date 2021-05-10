@@ -1,5 +1,5 @@
-import {dialogsAPI} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
+import {dialogsAPI} from "../../api/api";
+import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
 const SEND_MESSAGE = 'SEND-MESSAGE';
 const START_COMMUNICATION = 'START_COMMUNICATION';
 const GET_DIALOGS = 'GET_ALL_DIALOGS';

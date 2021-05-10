@@ -4,11 +4,11 @@ import UsersList from "./UsersList";
 import {connect} from "react-redux";
 import {
     unfollow, follow, getCountUsers, getUsersCardsSC
-} from '../../../redux/users-reducer';
+} from '../../../redux/reducers/users-reducer';
 import {getUsers, getPagesSize, getTotalUsersCount, 
         getIsFetching, getIsFetchingFollowOrUnfollowIdList, 
         getIsAuth, getDefaultAvatarSrc, getIsFetchingGetUsersCards, getIsFetchingGetUsersCount} from "../../../selectors/users-selectors";
-import {startCommunication} from "../../../redux/dialogs-reducer";
+import {startCommunication} from "../../../redux/reducers/dialogs-reducer";
 
 
 

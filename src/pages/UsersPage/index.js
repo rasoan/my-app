@@ -7,7 +7,7 @@ import {
     getTotalUsersCount,
     getUsers
 } from "../../selectors/users-selectors";
-import {getCountUsers, getUsersCardsSC} from "../../redux/users-reducer";
+import {getCountUsers, getUsersCardsSC} from "../../redux/reducers/users-reducer";
 import {connect} from "react-redux";
 
 
