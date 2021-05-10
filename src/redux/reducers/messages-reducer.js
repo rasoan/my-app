@@ -1,6 +1,6 @@
 import {messagesAPI} from "../../api/api";
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const GET_MESSAGES = 'GET_MESSAGES';
+import {SEND_MESSAGE,
+GET_MESSAGES} from '../actions/types/action-types';
 
 let initialState = {
   messages: [],

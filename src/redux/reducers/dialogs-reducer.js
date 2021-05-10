@@ -1,11 +1,11 @@
 import {dialogsAPI} from "../../api/api";
 import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
-const SEND_MESSAGE = 'SEND-MESSAGE';
-const START_COMMUNICATION = 'START_COMMUNICATION';
-const GET_DIALOGS = 'GET_ALL_DIALOGS';
-const GET_MESSAGES = 'GET_MESSAGES';
-const START_FETCHING = 'START_FETCHING';
-const STOP_FETCHING = 'STOP_FETCHING';
+import {SEND_MESSAGE,
+START_COMMUNICATION,
+GET_DIALOGS,
+GET_MESSAGES,
+START_FETCHING,
+STOP_FETCHING} from '../actions/types/action-types';
 
 let initialState = {
   messages: [],

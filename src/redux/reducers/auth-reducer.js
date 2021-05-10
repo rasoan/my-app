@@ -2,11 +2,11 @@ import {stopSubmit} from "redux-form";
 import {authAPI, securituAPI} from "../../api/api";
 import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
 
-const SET_USER_DATA = "SET_USER_DATA";
-const SIGN_IN = "SIGN_IN";
-const SIGN_UP = "SIGN_UP";
-const LOG_OUT = "LOG_OUT";
-const GET_CAPTCHA = "GET_CAPTCHA";
+import {SET_USER_DATA,
+SIGN_IN,
+SIGN_UP,
+LOG_OUT,
+GET_CAPTCHA} from '../actions/types/action-types';
 
 let initialState = {
     userId: DEFAULT_USER_ID,
