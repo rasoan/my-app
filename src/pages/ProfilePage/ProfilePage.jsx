@@ -4,13 +4,13 @@ import PreloaderLinear from '../../components/Preloaders/PreloaderLinear';
 
 const ProfilePage = (props) => {
     const {getProfile, getStatus, checkUserOrOwner, match,
-           myId, refreshRequests, isFetching} = props;
+           myId, isFetching} = props;
 
     useEffect(() => {
         getProfile(match.params.userId);
         getStatus(match.params.userId);
         checkUserOrOwner(match.params.userId);
-    }, [myId, refreshRequests, getProfile, getStatus, checkUserOrOwner, match.params.userId]);
+    }, [myId, getProfile, getStatus, checkUserOrOwner, match]);
 
     return (
         <>

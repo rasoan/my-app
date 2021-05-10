@@ -5,7 +5,6 @@ import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({
     myId: state.auth.userId,
-    refreshRequests: state.app.refreshRequests,
     isFetching: state.profilePage.isFetching,
 });
 

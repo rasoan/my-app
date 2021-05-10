@@ -34,7 +34,6 @@ const Profile = (props) => {
 
 Profile.propTypes = {
   profile: PropTypes.object.isRequired,
-  isFetching: PropTypes.bool.isRequired,
   follow: PropTypes.func.isRequired,
   unfollow: PropTypes.func.isRequired,
   startCommunication: PropTypes.func.isRequired,
