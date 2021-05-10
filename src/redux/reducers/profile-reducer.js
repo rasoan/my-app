@@ -15,6 +15,17 @@ SAVE_PROFILE} from '../actions/types/action-types';
 
 //updateProfilePicture
 
+import {addPostAC,
+    setUserProfileAC,
+    startFetchingAC,
+    stopFetchingAC,
+    updateNewStatusTextAC,
+    lookingMyProfileAC,
+    notLookingMyProfileAC,
+    getStatusAC,
+    updateProfilePictureAC,
+    saveProfileAC} from '../actions/creators/profile-creator';
+
 let initialState = {
   posts: [{
       content: 'alo',
@@ -112,62 +123,6 @@ const profileReducer = (state = initialState, action) => {
 }
 
 export default profileReducer;
-
-export let addPostAC = (text) =>
-  ({
-    type: ADD_POST,
-    message: text,
-  });
-
-export let setUserProfileAC = (profile) =>
-  ({
-    type: SET_USER_PROFILE,
-    profile
-  });
-
-export let startFetchingAC = () =>
-  ({
-    type: START_FETCHING
-  });
-
-export let stopFetchingAC = () =>
-  ({
-    type: STOP_FETCHING
-  });
-
-export let updateNewStatusTextAC = (statusText) =>
-({
-  type: UPDATE_STATUS_TEXT,
-  statusText,
-});
-
-export let lookingMyProfileAC = () =>
-({
-  type: SET_FLAG_LOOKING_AT_MY_PROFILE,
-});
-
-export let notLookingMyProfileAC = () =>
-({
-  type: SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
-});
-
-export let getStatusAC = (statusText) =>
-({
-  type: GET_STATUS,
-  statusText
-})
-
-export let updateProfilePictureAC = (imagefile) =>
-({
-  type: UPDATE_PROFILE_PICTURE,
-  imagefile,
-})
-
-export let saveProfileAC = (profile) =>
-({
-  type: SAVE_PROFILE,
-  profile,
-})
 
 export const getProfile = (id) => {
   return async (dispatch, getState) => {

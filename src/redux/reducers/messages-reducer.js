@@ -2,6 +2,9 @@ import {messagesAPI} from "../../api/api";
 import {SEND_MESSAGE,
 GET_MESSAGES} from '../actions/types/action-types';
 
+import {sendMessageAC,
+    getMessagesAC} from '../actions/creators/messages-creator';
+
 let initialState = {
   messages: [],
   totalCount: null,
@@ -26,9 +29,6 @@ const messagesReducer = (state = initialState, action) => {
       return state;
   }
 }
-
-const sendMessageAC = (newMessage) => ({type: SEND_MESSAGE, newMessage,});
-const getMessagesAC = (messages) => ({type: GET_MESSAGES, messages,});
 
 export const sendMessage = (userId, message) => {
       return async (dispatch) => {

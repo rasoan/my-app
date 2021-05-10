@@ -3,6 +3,10 @@
  CLOSE_CONTROL_PANEL,
  REFRESH_REQUEST,
  TOGGLE_NAV} from '../actions/types/action-types';
+ import {openControlPanelAC,
+     closeControlPanelAC,
+     refreshRequestsAC,
+     toggleNavAC} from '../actions/creators/app-creator';
 
 let initialState = {
     initializeTheApplication: false,
@@ -51,10 +55,8 @@ export let initializeTheApplicationAC = (initializeTheApplication) => {
     }
 }
 
-const openControlPanelAC = () => ({type: OPEN_CONTROL_PANEL});
-const closeControlPanelAC = () => ({type: CLOSE_CONTROL_PANEL});
-const refreshRequestsAC = () => ({type: REFRESH_REQUEST});
-const toggleNavAC = () => ({type: TOGGLE_NAV});
+
+
 
 export const initializeTheApplication = (initializeTheApplication) => {
     return (dispatch) => {

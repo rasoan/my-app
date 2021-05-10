@@ -13,6 +13,18 @@ FETCHING_GET_USERS_CARDS_END,
 FETCHING_GET_USERS_COUNT_START,
 FETCHING_GET_USERS_COUNT_END} from '../actions/types/action-types';
 
+import {setUsers,
+    followAC,
+    unfollowAC,
+    setTotalUsersCount,
+    toggleIsFetching,
+    isFetchingFollowOrUnfollowStart,
+    isFetchingFollowOrUnfollowEnd,
+    fetchingGetCountUsersStartAC,
+    fetchingGetCountUsersEndAC,
+    fetchingGetUserCardsStartAC,
+    fetchingGetUserCardsEndAC} from '../actions/creators/users-creator';
+
 let initialState = {
     users: [],
     defaultAvatarSrc: DEFAULT_AVATAR_SRC,
@@ -106,19 +118,7 @@ const usersReducer = (state = initialState, action) => {
             return state;
     }
 }
-
 export default usersReducer;
-export let setUsers = (users) => ({type: SET_USERS, users});
-export let followAC = (id) => ({type: FOLLOW, id});
-export let unfollowAC = (id) => ({type: UNFOLLOW, id});
-export let setTotalUsersCount = (totalUsersCount) => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount});
-export let toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
-export let isFetchingFollowOrUnfollowStart = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START, id});
-export let isFetchingFollowOrUnfollowEnd = (id) => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END, id});
-const fetchingGetCountUsersStartAC = () => ({type: FETCHING_GET_USERS_COUNT_START});
-const fetchingGetCountUsersEndAC = () => ({type: FETCHING_GET_USERS_COUNT_END});
-const fetchingGetUserCardsStartAC = () => ({type: FETCHING_GET_USERS_CARDS_START});
-const fetchingGetUserCardsEndAC = () => ({type: FETCHING_GET_USERS_CARDS_END});
 
 
 export const getCountUsers = () => {

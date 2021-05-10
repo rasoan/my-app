@@ -6,6 +6,12 @@ GET_DIALOGS,
 GET_MESSAGES,
 START_FETCHING,
 STOP_FETCHING} from '../actions/types/action-types';
+import {sendMessageCreatorAC,
+    startCommunicationAC,
+    getDialogsAC,
+    getMessagesAC,
+    startFetchingAC,
+    stopFetchingAC} from '../actions/creators/dialogs-creator';
 
 let initialState = {
   messages: [],
@@ -61,12 +67,7 @@ const dialogsReducer = (state = initialState, action) => {
 
 export default dialogsReducer;
 
-const sendMessageCreatorAC = (newMessage) => ({type: SEND_MESSAGE, newMessage,});
-const startCommunicationAC = (interlocutor) => ({type: START_COMMUNICATION, interlocutor,});
-const getDialogsAC = (dialogs) => ({type: GET_DIALOGS, dialogs,});
-const getMessagesAC = (messages) => ({type: GET_MESSAGES, messages,});
-const startFetchingAC = () => ({ type: START_FETCHING });
-const stopFetchingAC = () => ({ type: STOP_FETCHING });
+
 
 
 
