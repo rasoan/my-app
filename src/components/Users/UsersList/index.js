@@ -7,7 +7,7 @@ import {
 } from '../../../redux/users-reducer';
 import {getUsers, getPagesSize, getTotalUsersCount, 
         getIsFetching, getIsFetchingFollowOrUnfollowIdList, 
-        getIsAuth, getDefaultAvatarSrc, getIsFetchingGetUsersCards, getIsFetchingGetUsersCount} from "../../../redux/users-selectors";
+        getIsAuth, getDefaultAvatarSrc, getIsFetchingGetUsersCards, getIsFetchingGetUsersCount} from "../../../selectors/users-selectors";
 import {startCommunication} from "../../../redux/dialogs-reducer";
 
 

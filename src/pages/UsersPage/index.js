@@ -6,7 +6,7 @@ import {
     getPagesSize,
     getTotalUsersCount,
     getUsers
-} from "../../redux/users-selectors";
+} from "../../selectors/users-selectors";
 import {getCountUsers, getUsersCardsSC} from "../../redux/users-reducer";
 import {connect} from "react-redux";
 

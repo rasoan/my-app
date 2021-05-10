@@ -4,9 +4,9 @@ import {follow, unfollow} from "../../redux/users-reducer"
 import {startCommunication} from "../../redux/dialogs-reducer"
 import {withRouter} from "react-router";
 import {compose} from "redux";
-import {getProfileSelector} from "../../redux/profile-selectors";
-import {getContolPanelsSelector} from "../../redux/app-selectors";
-import {getIsAuthSelector} from "../../redux/auth-selectors";
+import {getProfileSelector} from "../../selectors/profile-selectors";
+import {getContolPanelsSelector} from "../../selectors/app-selectors";
+import {getIsAuthSelector} from "../../selectors/auth-selectors";
 
 const mapStateToProps = (state) => ({
     profile: getProfileSelector(state),
