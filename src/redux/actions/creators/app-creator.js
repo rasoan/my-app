@@ -5,7 +5,7 @@ import {
     REFRESH_REQUEST, TOGGLE_NAV
 } from "../types/action-types";
 
-export let initializeTheApplicationAC = (initializeTheApplication) => {
+export const initializeTheApplicationAC = (initializeTheApplication) => {
     return {
         type: INITIALIZE_THE_APPLICATION,
         initializeTheApplication,

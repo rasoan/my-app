@@ -21,6 +21,7 @@ export const signUpAC = (isAuth) => {
     }
 }
 
-export const logOutAC = () => ({type: LOG_OUT})
+export const logOutAC = () => ({type: LOG_OUT});
+
 export const getCaptchaAC = (captchaUrl) =>
     ({type: GET_CAPTCHA, captchaUrl});
