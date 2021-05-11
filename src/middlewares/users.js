@@ -10,7 +10,6 @@ import {setUsers,
     fetchingGetUserCardsStartAC,
     fetchingGetUserCardsEndAC} from '../redux/actions/creators/users-creator';
 
-
 export const getCountUsers = () => {
     return async (dispatch) => {
         let action = fetchingGetCountUsersStartAC();
@@ -53,12 +52,12 @@ const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCrea
 
 export const follow = (id) => {
     return async (dispatch) => {
-        followUnfollow(dispatch, id, usersApi.follow.bind(usersApi), followAC);
+       await followUnfollow(dispatch, id, usersApi.follow.bind(usersApi), followAC);
     }
 }
 
 export const unfollow = (id) => {
     return async (dispatch) => {
-        followUnfollow(dispatch, id, usersApi.unfollow.bind(usersApi), unfollowAC);
+        await  followUnfollow(dispatch, id, usersApi.unfollow.bind(usersApi), unfollowAC);
     }
 }

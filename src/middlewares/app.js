@@ -3,25 +3,23 @@
      refreshRequestsAC,
      toggleNavAC, initializeTheApplicationAC} from '../redux/actions/creators/app-creator';
 
-
 export const initializeTheApplication = (initializeTheApplication) => {
     return (dispatch) => {
-        dispatch(initializeTheApplicationAC(initializeTheApplication));
+        const action = initializeTheApplicationAC(initializeTheApplication);
+        dispatch(action);
     }
 }
 
 export const openControlPanel = () => {
     return (dispatch) => {
-
-        let action = openControlPanelAC();
+        const action = openControlPanelAC();
         dispatch(action);
     }
 }
 
 export const closeControlPanel = () => {
     return (dispatch) => {
-
-        let action = closeControlPanelAC();
+        const action = closeControlPanelAC();
         dispatch(action);
     }
 }
@@ -32,16 +30,16 @@ export const checkUserOrOwner = (id) => {
         const myId = getState().auth.userId;
         const isAuth = getState().auth.isAuth;
         if (id && id === myId) { // есть в адресной строке id и он мой ОТКРЫТЬ
-            let action = openControlPanelAC();
+            const action = openControlPanelAC();
             dispatch(action);
         } else if (id) { // есть в адресной строке id и он не мой СКРЫТЬ
-            let action = closeControlPanelAC();
+            const action = closeControlPanelAC();
             dispatch(action);
         } else if (isAuth) { // если я авторизован и адресная строка пустая ОТКРЫТЬ
-            let action = openControlPanelAC();
+            const action = openControlPanelAC();
             dispatch(action);
         } else if (!isAuth) { // иначе если я не авторизован и адресная строка пустая СКРЫТЬ
-            let action = closeControlPanelAC();
+            const action = closeControlPanelAC();
             dispatch(action);
         }
     }

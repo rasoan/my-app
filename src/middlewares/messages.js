@@ -2,7 +2,6 @@ import {messagesAPI} from "../api/api";
 import {sendMessageAC,
     getMessagesAC} from '../redux/actions/creators/messages-creator';
 
-
 export const sendMessage = (userId, message) => {
       return async (dispatch) => {
         
