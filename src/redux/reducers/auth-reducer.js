@@ -1,12 +1,4 @@
-import {stopSubmit} from "redux-form";
-import {authAPI, securituAPI} from "../../api/api";
 import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
-import {setUserDataAC,
-    signInAC,
-    signUpAC,
-    logOutAC,
-    getCaptchaAC} from '../actions/creators/auth-creator';
-
 import {SET_USER_DATA,
 SIGN_IN,
 SIGN_UP,

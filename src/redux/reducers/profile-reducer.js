@@ -1,7 +1,5 @@
-import {profileAPI} from "../../api/api";
 import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
 import {DEFAULT_STATUS_TEXT} from "../../constants/Profile";
-import {DEFAULT_USER_ID} from "../../constants/Authorization";
 import {ADD_POST,
 SET_USER_PROFILE,
 START_FETCHING,
@@ -12,19 +10,6 @@ SET_FLAG_LOOKING_AT_MY_PROFILE,
 SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
 UPDATE_PROFILE_PICTURE,
 SAVE_PROFILE} from '../actions/types/action-types';
-
-
-
-import {addPostAC,
-    setUserProfileAC,
-    startFetchingAC,
-    stopFetchingAC,
-    updateNewStatusTextAC,
-    lookingMyProfileAC,
-    notLookingMyProfileAC,
-    getStatusAC,
-    updateProfilePictureAC,
-    saveProfileAC} from '../actions/creators/profile-creator';
 
 let initialState = {
   posts: [{

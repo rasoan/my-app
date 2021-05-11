@@ -1,9 +1,5 @@
-import {messagesAPI} from "../../api/api";
 import {SEND_MESSAGE,
 GET_MESSAGES} from '../actions/types/action-types';
-
-import {sendMessageAC,
-    getMessagesAC} from '../actions/creators/messages-creator';
 
 let initialState = {
   messages: [],
@@ -29,6 +25,5 @@ const messagesReducer = (state = initialState, action) => {
       return state;
   }
 }
-
 
 export default messagesReducer;

@@ -1,4 +1,3 @@
-import {dialogsAPI} from "../../api/api";
 import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
 import {SEND_MESSAGE,
 START_COMMUNICATION,
@@ -6,12 +5,6 @@ GET_DIALOGS,
 GET_MESSAGES,
 START_FETCHING,
 STOP_FETCHING} from '../actions/types/action-types';
-import {sendMessageCreatorAC,
-    startCommunicationAC,
-    getDialogsAC,
-    getMessagesAC,
-    startFetchingAC,
-    stopFetchingAC} from '../actions/creators/dialogs-creator';
 
 let initialState = {
   messages: [],

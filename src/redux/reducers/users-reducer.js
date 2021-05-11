@@ -1,4 +1,3 @@
-import {usersApi} from "../../api/api";
 import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
 
 import {FOLLOW,
@@ -12,18 +11,6 @@ FETCHING_GET_USERS_CARDS_START,
 FETCHING_GET_USERS_CARDS_END,
 FETCHING_GET_USERS_COUNT_START,
 FETCHING_GET_USERS_COUNT_END} from '../actions/types/action-types';
-
-import {setUsers,
-    followAC,
-    unfollowAC,
-    setTotalUsersCount,
-    toggleIsFetching,
-    isFetchingFollowOrUnfollowStart,
-    isFetchingFollowOrUnfollowEnd,
-    fetchingGetCountUsersStartAC,
-    fetchingGetCountUsersEndAC,
-    fetchingGetUserCardsStartAC,
-    fetchingGetUserCardsEndAC} from '../actions/creators/users-creator';
 
 let initialState = {
     users: [],

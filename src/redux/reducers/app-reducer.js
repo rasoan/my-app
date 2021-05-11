@@ -3,10 +3,6 @@
  CLOSE_CONTROL_PANEL,
  REFRESH_REQUEST,
  TOGGLE_NAV} from '../actions/types/action-types';
- import {openControlPanelAC,
-     closeControlPanelAC,
-     refreshRequestsAC,
-     toggleNavAC} from '../actions/creators/app-creator';
 
 let initialState = {
     initializeTheApplication: false,
@@ -47,6 +43,5 @@ const app = (state = initialState, action) => {
             return state;
     }
 }
-
 
 export default app;
