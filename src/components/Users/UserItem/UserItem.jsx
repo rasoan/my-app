@@ -30,7 +30,7 @@ const UserItem = (props) => {
                                                                unfollow={unfollow}
                                                                friend={followed}
                                                                userId={id}/>)}
-                <button onClick={() => startCommunication(id)}>Начать диалог</button>
+                {isAuth && <button onClick={() => startCommunication(id)}>Начать диалог</button>}
             </div>
         </div>
 
