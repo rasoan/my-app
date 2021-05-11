@@ -1,23 +1,8 @@
 import {usersApi} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-
-import {FOLLOW,
-UNFOLLOW,
-SET_USERS,
-SET_TOTAL_USERS_COUNT,
-TOGGLE_IS_FETCHING,
-IS_FETCHING_FOLLOW_OR_UNFOLLOW_START,
-IS_FETCHING_FOLLOW_OR_UNFOLLOW_END,
-FETCHING_GET_USERS_CARDS_START,
-FETCHING_GET_USERS_CARDS_END,
-FETCHING_GET_USERS_COUNT_START,
-FETCHING_GET_USERS_COUNT_END} from '../redux/actions/types/action-types';
-
 import {setUsers,
     followAC,
     unfollowAC,
     setTotalUsersCount,
-    toggleIsFetching,
     isFetchingFollowOrUnfollowStart,
     isFetchingFollowOrUnfollowEnd,
     fetchingGetCountUsersStartAC,

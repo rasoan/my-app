@@ -1,20 +1,5 @@
 import {profileAPI} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-import {DEFAULT_STATUS_TEXT} from "../constants/Profile";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
-import {ADD_POST,
-SET_USER_PROFILE,
-START_FETCHING,
-STOP_FETCHING,
-GET_STATUS,
-UPDATE_STATUS_TEXT,
-SET_FLAG_LOOKING_AT_MY_PROFILE,
-SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
-UPDATE_PROFILE_PICTURE,
-SAVE_PROFILE} from '../redux/actions/types/action-types';
-
-//updateProfilePicture
-
 import {addPostAC,
     setUserProfileAC,
     startFetchingAC,
@@ -23,8 +8,7 @@ import {addPostAC,
     lookingMyProfileAC,
     notLookingMyProfileAC,
     getStatusAC,
-    updateProfilePictureAC,
-    saveProfileAC} from '../redux/actions/creators/profile-creator';
+    updateProfilePictureAC} from '../redux/actions/creators/profile-creator';
 
 export const getProfile = (id) => {
   return async (dispatch, getState) => {

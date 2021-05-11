@@ -1,7 +1,4 @@
 import {messagesAPI} from "../api/api";
-import {SEND_MESSAGE,
-GET_MESSAGES} from '../redux/actions/types/action-types';
-
 import {sendMessageAC,
     getMessagesAC} from '../redux/actions/creators/messages-creator';
 

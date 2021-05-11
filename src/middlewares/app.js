@@ -1,22 +1,7 @@
- import {INITIALIZE_THE_APPLICATION,
- OPEN_CONTROL_PANEL,
- CLOSE_CONTROL_PANEL,
- REFRESH_REQUEST,
- TOGGLE_NAV} from '../redux/actions/types/action-types';
  import {openControlPanelAC,
      closeControlPanelAC,
      refreshRequestsAC,
-     toggleNavAC} from '../redux/actions/creators/app-creator';
-
-
-export let initializeTheApplicationAC = (initializeTheApplication) => {
-    return {
-        type: INITIALIZE_THE_APPLICATION,
-        initializeTheApplication,
-    }
-}
-
-
+     toggleNavAC, initializeTheApplicationAC} from '../redux/actions/creators/app-creator';
 
 
 export const initializeTheApplication = (initializeTheApplication) => {

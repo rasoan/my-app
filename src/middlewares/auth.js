@@ -1,21 +1,7 @@
 import {stopSubmit} from "redux-form";
 import {authAPI, securituAPI} from "../api/api";
-import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../constants/Authorization";
-import {setUserDataAC,
-    signInAC,
-    signUpAC,
-    logOutAC,
-    getCaptchaAC} from '../redux/actions/creators/auth-creator';
-
-import {SET_USER_DATA,
-SIGN_IN,
-SIGN_UP,
-LOG_OUT,
-GET_CAPTCHA} from '../redux/actions/types/action-types';
-
-
-
-
+import {DEFAULT_USER_ID} from "../constants/Authorization";
+import {setUserDataAC, getCaptchaAC} from '../redux/actions/creators/auth-creator';
 
 export const authMe = () => {
     return async (dispatch) => {

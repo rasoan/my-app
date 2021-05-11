@@ -1,19 +1,10 @@
 import {dialogsAPI} from "../api/api";
-import {DEFAULT_AVATAR_SRC} from "../constants/Users";
-import {SEND_MESSAGE,
-START_COMMUNICATION,
-GET_DIALOGS,
-GET_MESSAGES,
-START_FETCHING,
-STOP_FETCHING} from '../redux/actions/types/action-types';
 import {sendMessageCreatorAC,
     startCommunicationAC,
     getDialogsAC,
     getMessagesAC,
     startFetchingAC,
     stopFetchingAC} from '../redux/actions/creators/dialogs-creator';
-
-
 
 export const onSendMessageClick = (newMessageBody) => {
       return (dispatch) => {
