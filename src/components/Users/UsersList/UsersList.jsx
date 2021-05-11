@@ -4,7 +4,6 @@ import UserItem from "../UserItem";
 import Pagination from "../../Pagination";
 import PreloaderCircular from "../../Preloaders/PreloaderCircular";
 
-
 let UsersList = (props) => {
     const {
         totalUsersCount, pagesSize,
