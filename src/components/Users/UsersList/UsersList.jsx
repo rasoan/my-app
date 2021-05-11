@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import UserItem from "../UserItem";
 import Pagination from "../../Pagination";
-import PreloaderLinear from "../../Preloaders/PreloaderLinear";
 import PreloaderCircular from "../../Preloaders/PreloaderCircular";
 
 
@@ -48,9 +47,7 @@ let UsersList = (props) => {
 UsersList.propTypes = {
     totalUsersCount: PropTypes.number.isRequired,
     pagesSize: PropTypes.number.isRequired,
-    isFetching: PropTypes.bool.isRequired,
     users: PropTypes.array.isRequired,
-    getUsers: PropTypes.func.isRequired,
     follow: PropTypes.func.isRequired,
     unfollow: PropTypes.func.isRequired,
     defaultAvatarSrc: PropTypes.string.isRequired,

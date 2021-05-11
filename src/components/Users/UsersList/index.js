@@ -6,18 +6,18 @@ import {
     unfollow, follow, getCountUsers, getUsersCardsSC
 } from '../../../middlewares/users';
 import {getUsers, getPagesSize, getTotalUsersCount, 
-        getIsFetching, getIsFetchingFollowOrUnfollowIdList, 
+        getIsFetchingFollowOrUnfollowIdList,
         getIsAuth, getDefaultAvatarSrc, getIsFetchingGetUsersCards, getIsFetchingGetUsersCount} from "../../../selectors/users-selectors";
 import {startCommunication} from "../../../middlewares/dialogs";
 
 
 
 const UsersListContainer = (props) => {
-  const {currentPage, pagesSize, totalUsersCount, users,
-         isFetching, isFetchingFollowOrUnfollowIdList, follow, 
+  const {pagesSize, totalUsersCount, users,
+         isFetchingFollowOrUnfollowIdList, follow,
          unfollow, defaultAvatarSrc, isAuth, startCommunication,
       isFetchingGetUsersCards, isFetchingGetUsersCount,
-      getCountUsers, getUsersCardsSC} = props;
+      getUsersCardsSC} = props;
 
 
 
@@ -40,7 +40,6 @@ UsersListContainer.propTypes = {
   pagesSize: PropTypes.number,
   totalUsersCount: PropTypes.number,
   users: PropTypes.array,
-  isFetching: PropTypes.bool,
   isFetchingFollowOrUnfollowIdList: PropTypes.array,
   follow: PropTypes.func,
   unfollow: PropTypes.func,
