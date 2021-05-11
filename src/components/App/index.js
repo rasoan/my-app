@@ -1,6 +1,6 @@
 import {connect} from "react-redux";
-import {authMe} from "../../redux/reducers/auth-reducer";
-import {initializeTheApplication} from "../../redux/reducers/app-reducer";
+import {authMe} from "../../middlewares/auth";
+import {initializeTheApplication} from "../../middlewares/app";
 import App from "./App";
 
 const mapStateToProps = (state) => {

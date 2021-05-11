@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import ProfilePicture from "./ProfilePicture";
 import {connect} from "react-redux";
-import {updateProfilePicture} from "../../../redux/reducers/profile-reducer";
+import {updateProfilePicture} from "../../../middlewares/profile";
 const fileInputRef = React.createRef();
 
 const ProfilePictureContainer = (props) => {

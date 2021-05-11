@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import PropTypes from "prop-types";
-import {getMessages} from "../../redux/reducers/messages-reducer";
+import {getMessages} from "../../middlewares/messages";
 import { connect } from "react-redux";
 import Messages from "./Messages";
 

@@ -1,5 +1,5 @@
 import Header from './Header.jsx';
-import {toggleNav} from "../../redux/reducers/app-reducer.js";
+import {toggleNav} from "../../middlewares/app";
 import {connect} from "react-redux";
 
 const mapStateToProps = (state) => ({toggleNav: state.app.toggleNav});

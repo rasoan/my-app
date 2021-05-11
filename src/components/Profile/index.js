@@ -1,7 +1,7 @@
 import Profile from "../Profile/Profile";
 import {connect} from "react-redux";
-import {follow, unfollow} from "../../redux/reducers/users-reducer"
-import {startCommunication} from "../../redux/reducers/dialogs-reducer"
+import {follow, unfollow} from "../../middlewares/users"
+import {startCommunication} from "../../middlewares/dialogs";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import {getProfileSelector} from "../../selectors/profile-selectors";

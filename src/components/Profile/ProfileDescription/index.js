@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {connect} from "react-redux";
-import {saveProfile} from "../../../redux/reducers/profile-reducer";
+import {saveProfile} from "../../../middlewares/profile";
 import ProfileDescriptionEditMode from "./ProfileDescriptionEditMode";
 import ProfileDescriptionViewMode from "./ProfileDescriptionViewMode";
 

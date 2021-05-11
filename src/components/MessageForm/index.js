@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {getMessages, sendMessage} from "../../redux/reducers/messages-reducer";
+import {getMessages, sendMessage} from "../../middlewares/messages";
 import { connect } from "react-redux";
 import MessageForm from "./MessageForm";
 

@@ -1,5 +1,5 @@
 import Dialogs from "./Dialogs";
-import {onSendMessageClick, getDialogs} from "../../redux/reducers/dialogs-reducer.js";
+import {onSendMessageClick, getDialogs} from "../../middlewares/dialogs";
 import {connect} from "react-redux";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";

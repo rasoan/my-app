@@ -1,9 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Navigation from './Navigation';
-import {getProfile} from '../../redux/reducers/profile-reducer';
-import {refreshRequests} from '../../redux/reducers/app-reducer';
-import {toggleNav} from "../../redux/reducers/app-reducer.js";
+import {getProfile} from '../../middlewares/profile';
+import {refreshRequests, toggleNav} from '../../middlewares/app';
 import {connect} from "react-redux";
 
 const NavigationContainer = (props) => {
