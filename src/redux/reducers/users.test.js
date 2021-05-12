@@ -34,12 +34,14 @@ let initialState =  {
     isFetchingGetUsersCount: false
 };
 
-test('Проверяем reducer (подписка и отписка на друга)', () => {
-    let resultState = usersReducer(initialState, followAC(17061));
+test('Проверяем подписку на друга', () => {
+    const resultState = usersReducer(initialState, followAC(17061));
     const followed = resultState.users.find((user) => user.id === 17061).followed;
     expect(followed).toBeTruthy();
+});
 
-    resultState = usersReducer(initialState, unfollowAC(17061));
+test('Проверяем отписку от друга', () => {
+    const resultState = usersReducer(initialState, unfollowAC(17061));
     const unfollowed = resultState.users.find((user) => user.id === 17061).followed;
     expect(unfollowed).toBeFalsy();
 });
