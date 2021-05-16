@@ -2,6 +2,12 @@
      closeControlPanelAC,
      refreshRequestsAC,
      toggleNavAC, initializeTheApplicationAC} from '../redux/actions/creators/app-creator';
+ import {
+     CLOSE_CONTROL_PANEL,
+     INITIALIZE_THE_APPLICATION,
+     OPEN_CONTROL_PANEL,
+     REFRESH_REQUEST, TOGGLE_NAV
+ } from "../redux/actions/types/action-types";
 
 export const initializeTheApplication = (initializeTheApplication) => {
     return (dispatch) => {
@@ -29,19 +35,22 @@ export const checkUserOrOwner = (id) => {
         id = Number(id);
         const myId = getState().auth.userId;
         const isAuth = getState().auth.isAuth;
-        if (id && id === myId) { // есть в адресной строке id и он мой ОТКРЫТЬ
+
+        // если id мой и авторизован или id нет в адресной строке и авторизовн
+        if (((id === myId) && isAuth) || (!id && isAuth)) {
             const action = openControlPanelAC();
             dispatch(action);
-        } else if (id) { // есть в адресной строке id и он не мой СКРЫТЬ
-            const action = closeControlPanelAC();
-            dispatch(action);
-        } else if (isAuth) { // если я авторизован и адресная строка пустая ОТКРЫТЬ
-            const action = openControlPanelAC();
-            dispatch(action);
-        } else if (!isAuth) { // иначе если я не авторизован и адресная строка пустая СКРЫТЬ
+        }
+// если не авторизован или в адресной строке есть id и id не мой
+        if( !isAuth || (id && id != myId)) {
             const action = closeControlPanelAC();
             dispatch(action);
         }
+
+
+
+
+
     }
 }
 

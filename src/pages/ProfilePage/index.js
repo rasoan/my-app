@@ -1,7 +1,7 @@
 import ProfilePage from "./ProfilePage";
-import {checkUserOrOwner} from "../../middlewares/app";
 import {getProfile, getStatus} from "../../middlewares/profile";
 import {connect} from "react-redux";
+import {checkUserOrOwner} from "../../middlewares/app";
 
 const mapStateToProps = (state) => ({
     myId: state.auth.userId,
@@ -11,6 +11,6 @@ const mapStateToProps = (state) => ({
 const actionCreators = {
     getProfile,
     getStatus,
-    checkUserOrOwner,
+    checkUserOrOwner
 }
 export default connect(mapStateToProps, actionCreators)(ProfilePage);
