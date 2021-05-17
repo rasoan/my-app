@@ -11,7 +11,7 @@ let initialState = {
     navigationPanelVisibility: false,
 };
 
-const app = (state = initialState, action) => {
+const appReducer = (state = initialState, action) => {
     switch (action.type) {
         case INITIALIZE_THE_APPLICATION:
             return {
@@ -44,4 +44,4 @@ const app = (state = initialState, action) => {
     }
 }
 
-export default app;
+export default appReducer;

@@ -1,10 +1,12 @@
 import appReducer from "../reducers/app-reducer";
-import {openMainControlPanelAC,
-        closeMainControlPanelAC,
-        openQuestPageControlPanelAC,
-        closeQuestPageControlPanelAC,
-        openOwnerPageControlPanelAC,
-        closeOwnerPageControlPanelAC} from "../actions/creators/app-creator";
+import {
+    openMainControlPanelAC,
+    closeMainControlPanelAC,
+    openQuestPageControlPanelAC,
+    closeQuestPageControlPanelAC,
+    openOwnerPageControlPanelAC,
+    closeOwnerPageControlPanelAC, initializeTheApplicationAC, refreshRequestsAC, toggleNavAC
+} from "../actions/creators/app-creator";
 
 let initialState = {
     initializeTheApplication: false,
@@ -53,3 +55,30 @@ testReducerControlPanels('Проверяем закрытие панели уп�
     initialState, closeOwnerPageControlPanelAC,
     'ownerPageControlPanel','toBeFalsy'
 );
+
+test('Тестируем инициализацию всего приложения: ', () => {
+    const resultState = appReducer(initialState, initializeTheApplicationAC());
+    const initializeTheApplication = resultState.initializeTheApplication;
+    expect(initializeTheApplication).toBeTruthy();
+});
+
+test('Тестируем обновление всех запросов страницы: ', () => {
+    const refreshRequestsBeforeValue = initialState.refreshRequests;
+    const resultState = appReducer(initialState, refreshRequestsAC());
+   const refreshRequestsAfterValue = resultState.refreshRequests;
+   expect(refreshRequestsAfterValue).not.toBe(refreshRequestsBeforeValue);
+});
+
+const testNavigationPanel = () => {
+
+}
+test('Тестируем отображение/скрытие навигационной панели для пк/мобил: ', () => {
+    const navigationPanelVisibilityBefore = initialState.navigationPanelVisibility;
+    let resultState = appReducer(initialState, toggleNavAC());
+    let navigationPanelVisibilityAfter = resultState.navigationPanelVisibility;
+    expect(navigationPanelVisibilityBefore).not.toBe(navigationPanelVisibilityAfter);
+
+    resultState = appReducer(resultState, toggleNavAC());
+    navigationPanelVisibilityAfter = resultState.navigationPanelVisibility;
+    expect(navigationPanelVisibilityBefore).toBe(navigationPanelVisibilityAfter);
+});
