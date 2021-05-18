@@ -49,6 +49,7 @@ export const checkUserOrOwner = (id) => {
         const myId = getState().auth.userId;
         const isAuth = getState().auth.isAuth;
 
+        // открыть общую панель управления
         if(isAuth) {
             const action = openMainControlPanelAC(true);
             dispatch(action);
@@ -58,17 +59,32 @@ export const checkUserOrOwner = (id) => {
           dispatch(action);
         }
 
+        // открыть панель управления владельца страницы
+        if (((id === myId) && isAuth) || (!id && isAuth)) {
+            const action = openOwnerPageControlPanel(true);
+            dispatch(action);
+        }
+
+        // закрыть панель управления владельца страницы
+        if (!isAuth || (id && id !== myId)) {
+            const action = openOwnerPageControlPanel(false);
+            dispatch(action);
+        }
+
+        // открыть панель управления гостя страницы
+        if(isAuth && (id && id !== myId)) {
+            const action = openQuestPageControlPanel(true);
+            dispatch(action);
+        }
+
+        // закрыть панель управления гостя страницы
+
+
 
         // // если id мой и авторизован или id нет в адресной строке и авторизовн
-        // if (((id === myId) && isAuth) || (!id && isAuth)) {
-        //     const action = openMainControlPanelAC(true);
-        //     dispatch(action);
-        // }
+
         //
         // // если не авторизован или в адресной строке есть id и id не мой
-        // if (!isAuth || (id && id !== myId)) {
-        //     const action = openMainControlPanelAC(false);
-        //     dispatch(action);
-        // }
+
     }
 }

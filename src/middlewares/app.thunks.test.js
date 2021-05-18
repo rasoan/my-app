@@ -88,14 +88,14 @@ const testFunctionCheckUserOrOwnerOrAuth = (descriptionTest,
 
 testFunctionCheckUserOrOwnerOrAuth("Скрыть от пользователя главные управляющие элементы на текущей странице" +
     "потому что он просматривает чужую страницу и авторизован",
-    15634,
+    '15634',
     {auth: {isAuth: false, userId: 11}},
     openMainControlPanelAC,
     false);
 
 testFunctionCheckUserOrOwnerOrAuth("Открыть пользователю главные управляющие элементы на текущей странице" +
     "потому что он просматривает чужую страницу и авторизован",
-    15634,
+    '15634',
     {auth: {isAuth: true, userId: 11}},
     openMainControlPanelAC,
     true);
