@@ -1,27 +1,26 @@
 import appReducer from "../reducers/app-reducer";
 import {
     openMainControlPanelAC,
-    closeMainControlPanelAC,
     openQuestPageControlPanelAC,
-    closeQuestPageControlPanelAC,
     openOwnerPageControlPanelAC,
-    closeOwnerPageControlPanelAC, initializeTheApplicationAC, refreshRequestsAC, toggleNavAC
+    initializeTheApplicationAC,
+    refreshRequestsAC, toggleNavigationPanelAC,
 } from "../actions/creators/app-creator";
 
 let initialState = {
     initializeTheApplication: false,
     refreshRequests: false,
-    navigationPanelVisibility: false,
-    mainControlPanels: false,
+    navigationPanel: false,
+    mainControlPanel: false,
     questPageControlPanel: false,
     ownerPageControlPanel: false,
 };
 
 const testReducerControlPanels = (descriptionTest, reducer,
                                   initialState, actionCreator,
-                                  nameCheckedParameter, nameJestMethod) => {
+                                  nameCheckedParameter, nameJestMethod, flag) => {
     test(descriptionTest, () => {
-        const resultState = reducer(initialState, actionCreator());
+        const resultState = reducer(initialState, actionCreator(flag));
         const controlPanel = resultState[nameCheckedParameter];
         expect(controlPanel)[nameJestMethod]();
     })
@@ -29,31 +28,35 @@ const testReducerControlPanels = (descriptionTest, reducer,
 
 testReducerControlPanels('Проверяем открытие главной панели управления: ', appReducer,
     initialState, openMainControlPanelAC,
-    'mainControlPanels','toBeTruthy'
+    'mainControlPanel', 'toBeTruthy',
+    true
 );
 testReducerControlPanels('Проверяем закрытие главной панели управления: ', appReducer,
-    initialState, closeMainControlPanelAC,
-    'mainControlPanels','toBeFalsy'
+    initialState, openMainControlPanelAC,
+    'mainControlPanel', 'toBeFalsy',
+    false
 );
-
 
 testReducerControlPanels('Проверяем открытие панели управления гостя страницы: ', appReducer,
     initialState, openQuestPageControlPanelAC,
-    'questPageControlPanel','toBeTruthy'
+    'questPageControlPanel', 'toBeTruthy',
+    true
 );
 testReducerControlPanels('Проверяем закрытие панели управления гостя страницы: ', appReducer,
-    initialState, closeQuestPageControlPanelAC,
-    'questPageControlPanel','toBeFalsy'
+    initialState, openQuestPageControlPanelAC,
+    'questPageControlPanel', 'toBeFalsy',
+    false
 );
-
 
 testReducerControlPanels('Проверяем открытие панели управления владельца страницы: ', appReducer,
     initialState, openOwnerPageControlPanelAC,
-    'ownerPageControlPanel','toBeTruthy'
+    'ownerPageControlPanel', 'toBeTruthy',
+    true
 );
 testReducerControlPanels('Проверяем закрытие панели управления владельца страницы: ', appReducer,
-    initialState, closeOwnerPageControlPanelAC,
-    'ownerPageControlPanel','toBeFalsy'
+    initialState, openOwnerPageControlPanelAC,
+    'ownerPageControlPanel', 'toBeFalsy',
+    false
 );
 
 test('Тестируем инициализацию всего приложения: ', () => {
@@ -65,20 +68,18 @@ test('Тестируем инициализацию всего приложен�
 test('Тестируем обновление всех запросов страницы: ', () => {
     const refreshRequestsBeforeValue = initialState.refreshRequests;
     const resultState = appReducer(initialState, refreshRequestsAC());
-   const refreshRequestsAfterValue = resultState.refreshRequests;
-   expect(refreshRequestsAfterValue).not.toBe(refreshRequestsBeforeValue);
+    const refreshRequestsAfterValue = resultState.refreshRequests;
+    expect(refreshRequestsAfterValue).not.toBe(refreshRequestsBeforeValue);
 });
 
-const testNavigationPanel = () => {
-
-}
 test('Тестируем отображение/скрытие навигационной панели для пк/мобил: ', () => {
-    const navigationPanelVisibilityBefore = initialState.navigationPanelVisibility;
-    let resultState = appReducer(initialState, toggleNavAC());
-    let navigationPanelVisibilityAfter = resultState.navigationPanelVisibility;
-    expect(navigationPanelVisibilityBefore).not.toBe(navigationPanelVisibilityAfter);
+    const navigationPanelBefore = initialState.navigationPanel;
+    let resultState = appReducer(initialState, toggleNavigationPanelAC());
+    let navigationPanelAfter = resultState.navigationPanel;
+    expect(navigationPanelBefore).not.toBe(navigationPanelAfter);
 
-    resultState = appReducer(resultState, toggleNavAC());
-    navigationPanelVisibilityAfter = resultState.navigationPanelVisibility;
-    expect(navigationPanelVisibilityBefore).toBe(navigationPanelVisibilityAfter);
+    resultState = appReducer(resultState, toggleNavigationPanelAC());
+
+    navigationPanelAfter = resultState.navigationPanel;
+    expect(navigationPanelBefore).toBe(navigationPanelAfter);
 });

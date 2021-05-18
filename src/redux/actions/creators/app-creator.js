@@ -1,18 +1,14 @@
 import {
-    CLOSE_CONTROL_PANEL,
     INITIALIZE_THE_APPLICATION,
-    OPEN_CONTROL_PANEL,
-    REFRESH_REQUEST, TOGGLE_NAV
+    REFRESH_REQUEST,
+    OPEN_MAIN_CONTROL_PANEL,
+    OPEN_OWNER_PAGE_CONTROL_PANEL,
+    OPEN_QUEST_PAGE_CONTROL_PANEL, TOGGLE_NAVIGATION_PANEL
 } from "../types/action-types";
 
-export const initializeTheApplicationAC = (initializeTheApplication) => {
-    return {
-        type: INITIALIZE_THE_APPLICATION,
-        initializeTheApplication,
-    }
-}
-
-export const openControlPanelAC = () => ({type: OPEN_CONTROL_PANEL});
-export const closeControlPanelAC = () => ({type: CLOSE_CONTROL_PANEL});
+export const initializeTheApplicationAC = () => ({type: INITIALIZE_THE_APPLICATION});
 export const refreshRequestsAC = () => ({type: REFRESH_REQUEST});
-export const toggleNavAC = () => ({type: TOGGLE_NAV});
+export const toggleNavigationPanelAC = () => ({type: TOGGLE_NAVIGATION_PANEL});
+export const openMainControlPanelAC = (flag) => ({type: OPEN_MAIN_CONTROL_PANEL, flag});
+export const openOwnerPageControlPanelAC = (flag) => ({type: OPEN_OWNER_PAGE_CONTROL_PANEL, flag});
+export const openQuestPageControlPanelAC = (flag) => ({type: OPEN_QUEST_PAGE_CONTROL_PANEL, flag});

@@ -1,9 +1,18 @@
 import expect from "expect";
-import {checkUserOrOwner, closeControlPanel, initializeTheApplication, openControlPanel} from "./app";
 import {
-    closeControlPanelAC,
+    checkUserOrOwner,
+    closeControlPanel,
+    initializeTheApplication,
+    openControlPanel, openMainControlPanel, openOwnerPageControlPanel, openQuestPageControlPanel,
+    refreshRequests,
+    toggleNavigationPanel
+} from "./app";
+import {
     initializeTheApplicationAC,
-    openControlPanelAC
+    openMainControlPanelAC, openOwnerPageControlPanelAC,
+    openQuestPageControlPanelAC,
+    refreshRequestsAC,
+    toggleNavigationPanelAC,
 } from "../redux/actions/creators/app-creator";
 
 const dispatchMock = jest.fn();
@@ -14,27 +23,84 @@ const getStateMock = jest.fn();
 beforeEach(() => {
     dispatchMock.mockClear();
 });
+
 test("Тестируем санку инициализации приложения: ", () => {
-    const thunk = initializeTheApplication(true);
-    thunk(dispatchMock);
+    initializeTheApplication(dispatchMock);
     expect(dispatchMock).toBeCalledTimes(1);
     expect(dispatchMock).toHaveBeenNthCalledWith(1, initializeTheApplicationAC(true));
 });
 
-test("Тестируем санку которая открывает пользователю управляющий интерфейс: ", () => {
-    const thunk = openControlPanel();
-    thunk(dispatchMock);
+test('Тестируем санку обновления всех запросов текущей страницы: ', () => {
+   refreshRequests(dispatchMock);
     expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, openControlPanelAC());
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, refreshRequestsAC());
 });
 
-test("Тестируем санку которая закрывает пользователю управляющий интерфейс: ", () => {
-    const thunk = closeControlPanel();
-    thunk(dispatchMock);
+test('Тестируем санку которая открывает/закрывает боковую панель: ', () => {
+   toggleNavigationPanel(dispatchMock);
     expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, closeControlPanelAC());
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleNavigationPanelAC());
 });
 
+const testControlPanels = (descriptionTest, thunkCreator, mockFunction, actionCreator, flag) => {
+   test(descriptionTest, () => {
+       const thunk = thunkCreator(flag);
+       thunk(mockFunction);
+       expect(mockFunction).toBeCalledTimes(1);
+       expect(mockFunction).toHaveBeenNthCalledWith(1, actionCreator(flag));
+   });
+}
+
+testControlPanels('Тестируем санку которая открывает пользователю главную панель: ',
+    openMainControlPanel,
+    dispatchMock,
+    openMainControlPanelAC,
+    true);
+
+testControlPanels('Тестируем санку которая открывает пользователю панель упр владельца страницы: ',
+    openOwnerPageControlPanel,
+    dispatchMock,
+    openOwnerPageControlPanelAC,
+    true);
+
+testControlPanels('Тестируем санку которая открывает пользователю панель упр для гостя страницы: ',
+    openQuestPageControlPanel,
+    dispatchMock,
+    openQuestPageControlPanelAC,
+    true);
+
+
+
+
+const testFunctionCheckUserOrOwnerOrAuth = (descriptionTest,
+                                         myId,
+                                         mockReturnValueObj,
+                                         usedActionCreator,
+                                         flagUsedAC) => {
+    test(descriptionTest, () => {
+        const thunk = checkUserOrOwner(myId);
+        getStateMock.mockReturnValue(mockReturnValueObj);
+        thunk(dispatchMock, getStateMock);
+        expect(dispatchMock).toBeCalledTimes(1);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, usedActionCreator(flagUsedAC))
+    });
+}
+
+testFunctionCheckUserOrOwnerOrAuth("Скрыть от пользователя главные управляющие элементы на текущей странице" +
+    "потому что он просматривает чужую страницу и авторизован",
+    15634,
+    {auth: {isAuth: false, userId: 11}},
+    openMainControlPanelAC,
+    false);
+
+testFunctionCheckUserOrOwnerOrAuth("Открыть пользователю главные управляющие элементы на текущей странице" +
+    "потому что он просматривает чужую страницу и авторизован",
+    15634,
+    {auth: {isAuth: true, userId: 11}},
+    openMainControlPanelAC,
+    true);
+
+/*
 test("Скрыть от пользователю управляющие элементы на текущей странице" +
            "потому что он просматривает чужую страницу и авторизован", () => {
     let myId = 15634; // id авторизованного пользователя
@@ -79,30 +145,6 @@ test("Скрыть от пользователя управляющие элем
     expect(dispatchMock).toBeCalledTimes(1);
     expect(dispatchMock).toHaveBeenNthCalledWith(1, closeControlPanelAC());
 });
-/*
-import {} from "../api/api";
 
-jest.mock("../api/api"); // заглушка для api
 
-const appApiMock = appApi;
-const resultFollowUnfollow = { data: { resultCode: 0 } }; // имитируем удачный ответ от сервера
-const dispatchMock = jest.fn(); // имитируем dispatch()
-
-beforeEach(() => { // очистка
-    dispatchMock.mockClear();
-    userApiMock.follow.mockClear();
-    userApiMock.getUsers.mockClear();
-});
-
-test("Тестируем санку, которая отвечает за подписку на пользователя: ", async () => {
-    userApiMock
-        .follow
-        .mockReturnValue(Promise.resolve(resultFollowUnfollow)); // привязываем к заглушке иммитируемый ответ
-    const thunk = follow(1);
-    await thunk(dispatchMock); // ставим заглушку dispatch()-а
-    expect(dispatchMock).toBeCalledTimes(3); // dispatch() должен вызваться 3 раза
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, isFetchingFollowOrUnfollowStart(1)); // первый раз так
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, followAC(1)); // второй раз так
-    expect(dispatchMock).toHaveBeenNthCalledWith(3, isFetchingFollowOrUnfollowEnd(1)); // и третий раз так
-});
-*/
+ */
