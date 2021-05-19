@@ -77,9 +77,7 @@ test('Тестируем отображение/скрытие навигаци�
     let resultState = appReducer(initialState, toggleNavigationPanelAC());
     let navigationPanelAfter = resultState.navigationPanel;
     expect(navigationPanelBefore).not.toBe(navigationPanelAfter);
-
     resultState = appReducer(resultState, toggleNavigationPanelAC());
-
     navigationPanelAfter = resultState.navigationPanel;
     expect(navigationPanelBefore).toBe(navigationPanelAfter);
 });

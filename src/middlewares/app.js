@@ -18,8 +18,8 @@ export const refreshRequests = (dispatch) => {
 }
 
 export const toggleNavigationPanel = (dispatch) => {
-        const action = toggleNavigationPanelAC();
-        dispatch(action);
+    const action = toggleNavigationPanelAC();
+    dispatch(action);
 }
 
 export const openMainControlPanel = (flag) => {
@@ -29,62 +29,39 @@ export const openMainControlPanel = (flag) => {
     }
 }
 
-export const openOwnerPageControlPanel = (flag) => {
-    return (dispatch) => {
+export const openOwnerPageControlPanel = (dispatch, flag) => {
         const action = openOwnerPageControlPanelAC(flag);
         dispatch(action);
-    }
 }
 
-export const openQuestPageControlPanel = (flag) => {
-    return (dispatch) => {
+export const openQuestPageControlPanel = (dispatch, flag) => {
         const action = openQuestPageControlPanelAC(flag);
         dispatch(action);
-    }
 }
 
-export const checkUserOrOwner = (id) => {
+export const checkOwnerOrQuest = (userId) => {
     return (dispatch, getState) => {
-        id = Number(id);
-        const myId = getState().auth.userId;
         const isAuth = getState().auth.isAuth;
-
-        // открыть общую панель управления
-        if(isAuth) {
-            const action = openMainControlPanelAC(true);
-            dispatch(action);
-        }
-        else {
-          const action = openMainControlPanelAC(false);
-          dispatch(action);
-        }
+        const myId = getState().auth.myId;
 
         // открыть панель управления владельца страницы
-        if (((id === myId) && isAuth) || (!id && isAuth)) {
-            const action = openOwnerPageControlPanel(true);
-            dispatch(action);
+        if (((userId === myId) && isAuth) || (!userId && isAuth)) {
+            openOwnerPageControlPanel(dispatch, true);
         }
 
         // закрыть панель управления владельца страницы
-        if (!isAuth || (id && id !== myId)) {
-            const action = openOwnerPageControlPanel(false);
-            dispatch(action);
+        if (!isAuth || (userId && userId !== myId)) {
+            openOwnerPageControlPanel(dispatch, false);
         }
 
         // открыть панель управления гостя страницы
-        if(isAuth && (id && id !== myId)) {
-            const action = openQuestPageControlPanel(true);
-            dispatch(action);
+        if (isAuth && (userId && userId !== myId)) {
+            openQuestPageControlPanel(dispatch, true);
         }
 
         // закрыть панель управления гостя страницы
-
-
-
-        // // если id мой и авторизован или id нет в адресной строке и авторизовн
-
-        //
-        // // если не авторизован или в адресной строке есть id и id не мой
-
+        if (!isAuth || (userId === myId)) {
+            openQuestPageControlPanel(dispatch, false);
+        }
     }
 }

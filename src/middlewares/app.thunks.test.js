@@ -1,5 +1,6 @@
 import expect from "expect";
 import {
+    checkOwnerOrQuest,
     checkUserOrOwner,
     closeControlPanel,
     initializeTheApplication,
@@ -16,135 +17,126 @@ import {
 } from "../redux/actions/creators/app-creator";
 
 const dispatchMock = jest.fn();
-
 const getStateMock = jest.fn();
-
-
 beforeEach(() => {
     dispatchMock.mockClear();
 });
 
-test("Тестируем санку инициализации приложения: ", () => {
-    initializeTheApplication(dispatchMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, initializeTheApplicationAC(true));
-});
-
-test('Тестируем санку обновления всех запросов текущей страницы: ', () => {
-   refreshRequests(dispatchMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, refreshRequestsAC());
-});
-
-test('Тестируем санку которая открывает/закрывает боковую панель: ', () => {
-   toggleNavigationPanel(dispatchMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, toggleNavigationPanelAC());
-});
-
-const testControlPanels = (descriptionTest, thunkCreator, mockFunction, actionCreator, flag) => {
-   test(descriptionTest, () => {
-       const thunk = thunkCreator(flag);
-       thunk(mockFunction);
-       expect(mockFunction).toBeCalledTimes(1);
-       expect(mockFunction).toHaveBeenNthCalledWith(1, actionCreator(flag));
-   });
-}
-
-testControlPanels('Тестируем санку которая открывает пользователю главную панель: ',
-    openMainControlPanel,
-    dispatchMock,
-    openMainControlPanelAC,
-    true);
-
-testControlPanels('Тестируем санку которая открывает пользователю панель упр владельца страницы: ',
-    openOwnerPageControlPanel,
-    dispatchMock,
-    openOwnerPageControlPanelAC,
-    true);
-
-testControlPanels('Тестируем санку которая открывает пользователю панель упр для гостя страницы: ',
-    openQuestPageControlPanel,
-    dispatchMock,
-    openQuestPageControlPanelAC,
-    true);
-
-
-
-
-const testFunctionCheckUserOrOwnerOrAuth = (descriptionTest,
-                                         myId,
-                                         mockReturnValueObj,
-                                         usedActionCreator,
-                                         flagUsedAC) => {
+// функция тестирования простой санки без параметров
+const testSimpleThunk = (descriptionTest, thunk, actionCreator) => {
     test(descriptionTest, () => {
-        const thunk = checkUserOrOwner(myId);
-        getStateMock.mockReturnValue(mockReturnValueObj);
-        thunk(dispatchMock, getStateMock);
-        expect(dispatchMock).toBeCalledTimes(1);
-        expect(dispatchMock).toHaveBeenNthCalledWith(1, usedActionCreator(flagUsedAC))
+       thunk(dispatchMock);
+       expect(dispatchMock).toBeCalledTimes(1);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, actionCreator());
     });
 }
 
-testFunctionCheckUserOrOwnerOrAuth("Скрыть от пользователя главные управляющие элементы на текущей странице" +
-    "потому что он просматривает чужую страницу и авторизован",
-    '15634',
-    {auth: {isAuth: false, userId: 11}},
-    openMainControlPanelAC,
-    false);
+// функция тестирования простой функции которая принимает диспатч и один параметр
+const testSimpleFunctionUsedDispatch = (descriptionTest,
+                                        simpleFunction,
+                                        actionCreator,
+                                        flag) => {
+    test(descriptionTest, () => {
+        simpleFunction(dispatchMock, flag);
+        expect(dispatchMock).toBeCalledTimes(1);
+        expect(dispatchMock).toHaveBeenNthCalledWith(1, actionCreator(flag));
+    });
+}
 
-testFunctionCheckUserOrOwnerOrAuth("Открыть пользователю главные управляющие элементы на текущей странице" +
-    "потому что он просматривает чужую страницу и авторизован",
-    '15634',
-    {auth: {isAuth: true, userId: 11}},
-    openMainControlPanelAC,
+// тест функции которая открывает панель управления (гость, владелец) страницы
+const testFunctionCheckUserOrOwnerOrAuth = (descriptionTest,
+                                            userId,
+                                            mockReturnValueObj,
+                                            functionsDispatch) => {
+    test(descriptionTest, () => {
+        const thunk = checkOwnerOrQuest(userId);
+        getStateMock.mockReturnValue(mockReturnValueObj);
+        thunk(dispatchMock, getStateMock);
+        expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
+        functionsDispatch.forEach((callbackObj, index) => {
+            expect(dispatchMock).toHaveBeenNthCalledWith(index+1, callbackObj.f(callbackObj.parameter));
+        });
+
+    });
+}
+
+testSimpleThunk('Тестируем санку инициализации приложения: ',
+    initializeTheApplication,
+    initializeTheApplicationAC);
+
+testSimpleThunk('Тестируем санку обновления всех запросов текущей страницы: ',
+    refreshRequests,
+    refreshRequestsAC);
+
+testSimpleThunk('Тестируем санку которая открывает/закрывает боковую панель: ',
+    toggleNavigationPanel,
+    toggleNavigationPanelAC);
+
+test('Тестируем санку которая открывает пользователю главную панель: ', () => {
+   const thunk = openMainControlPanel(true);
+   thunk(dispatchMock);
+   expect(dispatchMock).toBeCalledTimes(1);
+   expect(dispatchMock).toHaveBeenNthCalledWith(1, openMainControlPanelAC(true))
+});
+
+testSimpleFunctionUsedDispatch('Проверяем диспатч открытия пан. упр. владельца страницы: ',
+    openOwnerPageControlPanel,
+    openOwnerPageControlPanelAC,
     true);
 
-/*
-test("Скрыть от пользователю управляющие элементы на текущей странице" +
-           "потому что он просматривает чужую страницу и авторизован", () => {
-    let myId = 15634; // id авторизованного пользователя
-    const thunk = checkUserOrOwner(myId);
-    // авторизован, id просматриваемой страницы
-    getStateMock.mockReturnValue({auth: {isAuth: true, userId: 11}});
-    thunk(dispatchMock, getStateMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, closeControlPanelAC());
-});
+testSimpleFunctionUsedDispatch('Проверяем диспатч закрытия пан. упр. владельца страницы: ',
+    openOwnerPageControlPanel,
+    openOwnerPageControlPanelAC,
+    false);
 
-test("Скрыть от пользователю управляющие элементы на текущей странице" +
-    "потому что он просматривает чужую страницу и не авторизован", () => {
-    let myId = 15634; // id авторизованного пользователя
-    const thunk = checkUserOrOwner(myId);
-    // авторизован, id просматриваемой страницы
-    getStateMock.mockReturnValue({auth: {isAuth: false, userId: 11}});
-    thunk(dispatchMock, getStateMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, closeControlPanelAC());
-});
+testSimpleFunctionUsedDispatch('Проверяем диспатч открытия пан. упр. гостя страницы: ',
+    openQuestPageControlPanel,
+    openQuestPageControlPanelAC,
+    true);
 
+testSimpleFunctionUsedDispatch('Проверяем диспатч закрытия пан. упр. гостя страницы: ',
+    openQuestPageControlPanel,
+    openQuestPageControlPanelAC,
+    false);
 
-test("Открыть пользователю управляющие элементы на текущей странице" +
-           "потому что он просматривает свою страницу и авторизован", () => {
-    let myId = 15634; // id авторизованного пользователя
-    const thunk = checkUserOrOwner(myId);
-    // авторизован, id просматриваемой страницы
-    getStateMock.mockReturnValue({auth: {isAuth: true, userId: myId}});
-    thunk(dispatchMock, getStateMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, openControlPanelAC());
-});
+testFunctionCheckUserOrOwnerOrAuth("не авторизован",
+    '15634',
+    {auth: {isAuth: false, myId: '15634'}},
+    [
+        {
+            f: openOwnerPageControlPanelAC,
+            parameter: false
+        },
+        {
+            f: openQuestPageControlPanelAC,
+            parameter: false,
+        },
+    ]);
 
-test("Скрыть от пользователя управляющие элементы на текущей странице" +
-    "потому что он не авторизован", () => {
-    let myId = 15634; // id авторизованного пользователя
-    const thunk = checkUserOrOwner(myId);
-    // не авторизован, id просматриваемой страницы
-    getStateMock.mockReturnValue({auth: {isAuth: false, userId: myId}});
-    thunk(dispatchMock, getStateMock);
-    expect(dispatchMock).toBeCalledTimes(1);
-    expect(dispatchMock).toHaveBeenNthCalledWith(1, closeControlPanelAC());
-});
+testFunctionCheckUserOrOwnerOrAuth("авторизован, гость",
+    '15',
+    {auth: {isAuth: true, myId: '15634'}},
+    [
+        {
+            f: openOwnerPageControlPanelAC,
+            parameter: false
+        },
+        {
+            f: openQuestPageControlPanelAC,
+            parameter: true,
+        },
+    ]);
 
-
- */
+testFunctionCheckUserOrOwnerOrAuth("авторизован, владелец",
+    '15634',
+    {auth: {isAuth: true, myId: '15634'}},
+    [
+        {
+            f: openOwnerPageControlPanelAC,
+            parameter: true
+        },
+        {
+            f: openQuestPageControlPanelAC,
+            parameter: false,
+        },
+    ]);
