@@ -72,12 +72,15 @@ testSimpleThunk('Тестируем санку которая открывает
     toggleNavigationPanel,
     toggleNavigationPanelAC);
 
-test('Тестируем санку которая открывает пользователю главную панель: ', () => {
-   const thunk = openMainControlPanel(true);
-   thunk(dispatchMock);
-   expect(dispatchMock).toBeCalledTimes(1);
-   expect(dispatchMock).toHaveBeenNthCalledWith(1, openMainControlPanelAC(true))
-});
+testSimpleFunctionUsedDispatch('Тестируем санку которая открывает пользователю главную панель: ',
+    openMainControlPanel,
+    openMainControlPanelAC,
+    true);
+
+testSimpleFunctionUsedDispatch('Тестируем санку которая закрывает пользователю главную панель: ',
+    openMainControlPanel,
+    openMainControlPanelAC,
+    false);
 
 testSimpleFunctionUsedDispatch('Проверяем диспатч открытия пан. упр. владельца страницы: ',
     openOwnerPageControlPanel,

@@ -22,11 +22,9 @@ export const toggleNavigationPanel = (dispatch) => {
     dispatch(action);
 }
 
-export const openMainControlPanel = (flag) => {
-    return (dispatch) => {
+export const openMainControlPanel = (dispatch, flag) => {
         const action = openMainControlPanelAC(flag);
         dispatch(action);
-    }
 }
 
 export const openOwnerPageControlPanel = (dispatch, flag) => {

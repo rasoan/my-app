@@ -2,6 +2,7 @@ import {stopSubmit} from "redux-form";
 import {authAPI, securituAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 import {setUserDataAC, getCaptchaAC} from '../redux/actions/creators/auth-creator';
+import {openMainControlPanel} from "./app";
 
 export const authMe = () => {
     return async (dispatch) => {
@@ -10,6 +11,7 @@ export const authMe = () => {
             let {id, email, login} = response.data.data;
             let action = setUserDataAC(id, email, login, true);
             dispatch(action);
+            openMainControlPanel(dispatch, true);
         } else if (response.data.resultCode === 2) {
             let action = setUserDataAC(DEFAULT_USER_ID);
             dispatch(action);
