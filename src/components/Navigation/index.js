@@ -2,11 +2,12 @@ import React from "react";
 import PropTypes from "prop-types";
 import Navigation from './Navigation';
 import {getProfile} from '../../middlewares/profile';
-import {refreshRequests, toggleNav} from '../../middlewares/app';
+import {refreshRequests, toggleNav, toggleNavigationPanel} from '../../middlewares/app';
 import {connect} from "react-redux";
+import {getNavigationPanelSelector} from "../../selectors/app-selectors";
 
 const NavigationContainer = (props) => {
-  const {refreshRequests, navigationPanelVisibility, toggleNav} = props;
+  const {refreshRequests, navigationPanel, toggleNavigationPanel} = props;
 
   const clickProfileLink = () => {
     refreshRequests();
@@ -14,8 +15,8 @@ const NavigationContainer = (props) => {
 
   return (<>
     <Navigation clickProfileLink={clickProfileLink}
-                navigationPanelVisibility={navigationPanelVisibility}
-                toggleNav={toggleNav} />
+                navigationPanel={navigationPanel}
+                toggleNavigationPanel={toggleNavigationPanel} />
     {/*<Navigation clickProfileLink={clickProfileLink} />*/}
   </>);
 }
@@ -26,13 +27,13 @@ NavigationContainer.propTypes = {
 
 const mapStateToProps = (state) => ({
   redrawToProfileComponent: state.profilePage.redrawToProfileComponent,
-  navigationPanelVisibility: state.app.navigationPanelVisibility,
+  navigationPanel: getNavigationPanelSelector(state),
 });
 
 const actionCreators = {
   getProfile,
   refreshRequests,
-  toggleNav,
+  toggleNavigationPanel,
 }
 
 export default connect(mapStateToProps, actionCreators)(NavigationContainer);

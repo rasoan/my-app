@@ -3,14 +3,14 @@ import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
 
 const ProfilePicture = (props) => {
-  const {photos, onSubmit, fileInputRef, controlPanels} = props;
+  const {photos, onSubmit, fileInputRef, ownerPageControlPanel} = props;
 
   return (
     <div className={style.profilePictureContainer}>
       <img className={style.image}
            src={photos?.large}
            alt={"user"}/>
-      {controlPanels && <form onSubmit={onSubmit} className={style.profilePictureUpload}>
+      {ownerPageControlPanel && <form onSubmit={onSubmit} className={style.profilePictureUpload}>
          <div className={style.profilePictureUploadBlock}>
           <input type="file" ref={fileInputRef} />
           <button type="submit">Загрузить файл</button>

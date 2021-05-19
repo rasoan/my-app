@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
 
 const ProfileDescriptionViewMode = (props) => {
-    const {profile, setEditMode, controlPanels} = props;
+    const {profile, setEditMode, ownerPageControlPanel} = props;
 
     return (<div className={style.ProfileInfoContainer}>
-              {controlPanels && <button onClick={() => setEditMode(true)}>Редактировать</button>}
+              {ownerPageControlPanel && <button onClick={() => setEditMode(true)}>Редактировать</button>}
               <div>
                 <p><b>Fullname:</b> {profile.fullName}</p>
                 <p><b>Looking for a job:</b> {profile.lookingForAJob ? "Yes": "No"}</p>
@@ -31,7 +31,7 @@ const ProfileDescriptionViewMode = (props) => {
 ProfileDescriptionViewMode.propTypes = {
   profile: PropTypes.object,
   toggleSetEditMode: PropTypes.func,
-  controlPanels: PropTypes.bool,
+  ownerPageControlPanel: PropTypes.bool,
 }
 
 export default ProfileDescriptionViewMode;

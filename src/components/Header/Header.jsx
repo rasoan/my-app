@@ -42,7 +42,7 @@ const useStyles = makeStyles( theme => ({
 }))
 
 const Header = (props) => {
-    const {toggleNav} = props;
+    const {toggleNavigationPanel} = props;
     const classes = useStyles();
   return (
     <>
@@ -54,7 +54,7 @@ const Header = (props) => {
                   color="inherit"
                   aria-label="open drawer"
                   edge="start"
-                  onClick={toggleNav}
+                  onClick={toggleNavigationPanel}
                   className={classes.menuButton}
               >
                   <MenuIcon />

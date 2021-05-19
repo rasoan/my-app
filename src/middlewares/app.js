@@ -17,9 +17,11 @@ export const refreshRequests = (dispatch) => {
     dispatch(action);
 }
 
-export const toggleNavigationPanel = (dispatch) => {
-    const action = toggleNavigationPanelAC();
-    dispatch(action);
+export const toggleNavigationPanel = () => {
+    return (dispatch) => {
+        const action = toggleNavigationPanelAC();
+        dispatch(action);
+    }
 }
 
 export const openMainControlPanel = (dispatch, flag) => {

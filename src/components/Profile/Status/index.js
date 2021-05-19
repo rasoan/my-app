@@ -3,8 +3,9 @@ import Status from "./Status";
 import {compose} from "redux";
 import { connect } from "react-redux";
 import {updateNewStatusText} from "../../../middlewares/profile";
+import {getOwnerPageControlPanelSelector} from "../../../selectors/app-selectors";
 
-const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText, controlPanels}) => {
+const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusText, ownerPageControlPanel}) => {
   const [editMode, setEditMode] = useState(false);
   const [statusCopy, setStatusCopy] = useState(statusGlobalState);
   const [status, setStatus] = useState(statusGlobalState);
@@ -54,14 +55,14 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
                  deActivateEditMode={deActivateEditMode}
                  deActivateEditModeEnterOrEsc={deActivateEditModeEnterOrEsc}
                  onStatusChange={onStatusChange} 
-                 statusText={status} 
-                 controlPanels={controlPanels}/>
+                 statusText={status}
+                 ownerPageControlPanel={ownerPageControlPanel}/>
 }
 
 let mapStateToProps = (state) => ({
   statusGlobalState: state.profilePage.statusText,
   defaultStatusText: state.profilePage.defaultStatusText,
-  controlPanels: state.app.controlPanels,
+  ownerPageControlPanel: getOwnerPageControlPanelSelector(state),
 });
 
 export default compose(

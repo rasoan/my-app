@@ -4,9 +4,10 @@ import {connect} from "react-redux";
 import {saveProfile} from "../../../middlewares/profile";
 import ProfileDescriptionEditMode from "./ProfileDescriptionEditMode";
 import ProfileDescriptionViewMode from "./ProfileDescriptionViewMode";
+import {getOwnerPageControlPanelSelector} from "../../../selectors/app-selectors";
 
 const ProfileDescriptionContainer = (props) => {
-  const {profile, saveProfile, controlPanels} = props;
+  const {profile, saveProfile, ownerPageControlPanel} = props;
 
   const [editMode, setEditMode] = useState(false);
   
@@ -22,7 +23,7 @@ const ProfileDescriptionContainer = (props) => {
                                             initialValues={profile} />: 
                 <ProfileDescriptionViewMode profile={profile}
                                             setEditMode={setEditMode}
-                                            controlPanels={controlPanels} />}
+                                            ownerPageControlPanel={ownerPageControlPanel} />}
   </>
 );}
 
@@ -34,7 +35,7 @@ ProfileDescriptionContainer.propTypes = {
 
 let mapStateToProps = (state) => ({
     profile: state.profilePage.profile,
-    controlPanels: state.app.controlPanels,
+  ownerPageControlPanel: getOwnerPageControlPanelSelector(state),
 });
 
 const actionCreators = {saveProfile};

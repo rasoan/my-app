@@ -3,11 +3,11 @@ import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
 
 const Status = (props) => {
-  const {controlPanels, activateEditMode, editMode, 
+  const {ownerPageControlPanel, activateEditMode, editMode,
          deActivateEditModeEnterOrEsc, onStatusChange, 
          deActivateEditMode, statusText} = props;
          
-  let statusTextStyle = controlPanels ? style.statusText: "";
+  let statusTextStyle = ownerPageControlPanel ? style.statusText: "";
   
   return <div className={style.statusTextContainer}>
            {editMode && <input className={style.inputStatusText}
@@ -19,7 +19,7 @@ const Status = (props) => {
                                autoFocus={true}
                                value={statusText} />}
            {!editMode && <span className={statusTextStyle} 
-                               onClick={controlPanels ? activateEditMode: ()=>{}}>{statusText}</span>}            
+                               onClick={ownerPageControlPanel ? activateEditMode: ()=>{}}>{statusText}</span>}
          </div>
 };
 

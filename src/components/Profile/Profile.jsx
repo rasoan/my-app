@@ -10,7 +10,7 @@ import ButtonStartCommunication from "../ButtonStartCommunication";
       
 const Profile = (props) => {
   const {profile, follow, unfollow,
-         startCommunication, controlPanels, isAuth} = props;
+         startCommunication, questPageControlPanel, isAuth} = props;
 
   if (!profile) return <></>;
   
@@ -21,11 +21,11 @@ const Profile = (props) => {
         <ProfileDescription />
       </div>
       <Status /> 
-      {!controlPanels && isAuth && <ButtonFollowUnfollow follow={follow}
+      {questPageControlPanel && <ButtonFollowUnfollow follow={follow}
                                                          unfollow={unfollow}
                                                          friend={""}
                                                          userId={profile.userId} />}
-      {!controlPanels && isAuth && <ButtonStartCommunication startCommunication={startCommunication}
+      {questPageControlPanel && <ButtonStartCommunication startCommunication={startCommunication}
                                                              userId={profile.userId} />}
       <Posts profile={profile} />
     </div>

@@ -1,8 +1,9 @@
 import Header from './Header.jsx';
-import {toggleNav} from "../../middlewares/app";
+import {toggleNav, toggleNavigationPanel} from "../../middlewares/app";
 import {connect} from "react-redux";
+import {getToggleNavigationControlPanelSelector} from "../../selectors/app-selectors";
 
-const mapStateToProps = (state) => ({toggleNav: state.app.toggleNav});
-const actionCreators = ({toggleNav});
+const mapStateToProps = (state) => ({navigationPanel: getToggleNavigationControlPanelSelector(state)});
+const actionCreators = ({toggleNavigationPanel});
 
 export default connect(mapStateToProps, actionCreators)(Header);

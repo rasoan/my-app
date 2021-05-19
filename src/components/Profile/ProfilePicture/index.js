@@ -3,10 +3,11 @@ import PropTypes from "prop-types";
 import ProfilePicture from "./ProfilePicture";
 import {connect} from "react-redux";
 import {updateProfilePicture} from "../../../middlewares/profile";
+import {getOwnerPageControlPanelSelector} from "../../../selectors/app-selectors";
 const fileInputRef = React.createRef();
 
 const ProfilePictureContainer = (props) => {
-  const {photos, updateProfilePicture, fileInputRef, controlPanels} = props;
+  const {photos, updateProfilePicture, fileInputRef, ownerPageControlPanel} = props;
 
   const onSubmit = (event) => {
     event.preventDefault();
@@ -16,14 +17,14 @@ const ProfilePictureContainer = (props) => {
   return <ProfilePicture photos={photos} 
                          onSubmit={onSubmit}
                          fileInputRef={fileInputRef}
-                         controlPanels={controlPanels} />;
+                         ownerPageControlPanel={ownerPageControlPanel} />;
 };
 
 ProfilePictureContainer.propTypes = {
   photos: PropTypes.object,
   updateProfilePicture: PropTypes.func,
   fileInputRef: PropTypes.object,
-  controlPanels: PropTypes.bool,
+    ownerPageControlPanel: PropTypes.bool,
 }
 
 let mapStateToProps = (state) => (

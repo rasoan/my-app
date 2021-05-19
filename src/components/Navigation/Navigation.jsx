@@ -126,7 +126,7 @@ const MyDrawer = (props) => {
 }
 
 const Navigation = (props) => {
-    const {clickProfileLink, navigationPanelVisibility, toggleNav} = props;
+    const {clickProfileLink, navigationPanel, toggleNavigationPanel} = props;
     const {window} = props;
     const classes = useStyles();
     const theme = useTheme();
@@ -144,7 +144,7 @@ const Navigation = (props) => {
                         container={container}
                         variant="temporary"
                         anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-                        open={navigationPanelVisibility}
+                        open={navigationPanel}
                         classes={{
                             paper: classes.drawerPaper,
                             root: classes.navigationPanelZindex,
@@ -152,8 +152,8 @@ const Navigation = (props) => {
                         }}
                         ModalProps={{
                             keepMounted: true, // Better open performance on mobile.
-                            onEscapeKeyDown: toggleNav,
-                            onBackdropClick: toggleNav,
+                            onEscapeKeyDown: toggleNavigationPanel,
+                            onBackdropClick: toggleNavigationPanel,
                         }}
                     >
                         <MyDrawer classes={classes} classToolbar={`${classes.toolbar}  ${classes.toolbarMobile}`}/>
@@ -165,7 +165,7 @@ const Navigation = (props) => {
                             paper: `${classes.drawerPaper} ${classes.drawerPaperLarge}`,
                         }}
                         variant="permanent"
-                        open={navigationPanelVisibility}
+                        open={navigationPanel}
                     >
                         <MyDrawer classes={classes}
                                   classToolbar={classes.toolbar}

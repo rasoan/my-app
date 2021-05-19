@@ -5,12 +5,12 @@ import {startCommunication} from "../../middlewares/dialogs";
 import {withRouter} from "react-router";
 import {compose} from "redux";
 import {getProfileSelector} from "../../selectors/profile-selectors";
-import {getContolPanelsSelector} from "../../selectors/app-selectors";
+import {getContolPanelsSelector, getQuestPageControlPanelSelector} from "../../selectors/app-selectors";
 import {getIsAuthSelector} from "../../selectors/auth-selectors";
 
 const mapStateToProps = (state) => ({
     profile: getProfileSelector(state),
-    controlPanels: getContolPanelsSelector(state),
+    questPageControlPanel: getQuestPageControlPanelSelector(state),
     isAuth: getIsAuthSelector(state),
 });
 
