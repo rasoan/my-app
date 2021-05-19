@@ -7,14 +7,18 @@ import {
     refreshRequestsAC,
 } from '../redux/actions/creators/app-creator';
 
-export const initializeTheApplication = (dispatch) => {
-    const action = initializeTheApplicationAC();
-    dispatch(action);
+export const initializeTheApplication = () => {
+    return (dispatch) => {
+        const action = initializeTheApplicationAC();
+        dispatch(action);
+    }
 }
 
-export const refreshRequests = (dispatch) => {
-    const action = refreshRequestsAC();
-    dispatch(action);
+export const refreshRequests = () => {
+    return (dispatch) => {
+        const action = refreshRequestsAC();
+        dispatch(action);
+    }
 }
 
 export const toggleNavigationPanel = () => {

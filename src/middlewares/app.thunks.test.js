@@ -23,8 +23,9 @@ beforeEach(() => {
 });
 
 // функция тестирования простой санки без параметров
-const testSimpleThunk = (descriptionTest, thunk, actionCreator) => {
+const testSimpleThunk = (descriptionTest, thunkCreator, actionCreator) => {
     test(descriptionTest, () => {
+       const thunk = thunkCreator();
        thunk(dispatchMock);
        expect(dispatchMock).toBeCalledTimes(1);
         expect(dispatchMock).toHaveBeenNthCalledWith(1, actionCreator());
@@ -71,6 +72,7 @@ testSimpleThunk('Тестируем санку обновления всех з�
 testSimpleThunk('Тестируем санку которая открывает/закрывает боковую панель: ',
     toggleNavigationPanel,
     toggleNavigationPanelAC);
+
 test('Тестируем санку которая открывает/закрывает боковую панель: ', () => {
    const thunk = toggleNavigationPanel();
    thunk(dispatchMock);

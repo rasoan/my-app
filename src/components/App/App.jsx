@@ -9,7 +9,7 @@ const App = (props) => {
   useEffect(() => {
     (async () => {
            await authMe();
-           initializeTheApplication(true);
+           initializeTheApplication();
     })();
   }, [authMe, initializeTheApplication]);
 
