@@ -2,14 +2,14 @@ import {stopSubmit} from "redux-form";
 import {authAPI, securituAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 import {setUserDataAC, getCaptchaAC} from '../redux/actions/creators/auth-creator';
-import {openMainControlPanel} from "./app";
+import {openMainControlPanel, openQuestPageControlPanel, openOwnerPageControlPanel} from "./app";
 
 export const authMe = () => {
     return async (dispatch) => {
         let response = await authAPI.getAuthMe();
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
-            let action = setUserDataAC(id, email, login, true);
+            let action = setUserDataAC(String(id), email, login, true);
             dispatch(action);
             openMainControlPanel(dispatch, true);
         } else if (response.data.resultCode === 2) {
@@ -50,6 +50,9 @@ export const logOut = () => {
         if (response.data.resultCode === 0) {
             let action = setUserDataAC(DEFAULT_USER_ID);
             dispatch(action);
+            openMainControlPanel(dispatch, false);
+            openOwnerPageControlPanel(dispatch, false);
+            openQuestPageControlPanel(dispatch, false);
         }
         return response;
     }
