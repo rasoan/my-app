@@ -95,6 +95,10 @@ testSignInFunction('Тест не залогинились и показали c
                 f: getCaptchaAC,
                 parameter: "",
     }]);
+
+testSignInFunction('Тест залогинились: ',
+    {signInValue: {data: {resultCode: 0}}, getCaptchaUrlValue: ""},
+    []);
 //
 // test("Тест завершения сеанса авторизации: ", () => {
 //     const thunk = logOut();
