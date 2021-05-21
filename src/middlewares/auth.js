@@ -1,38 +1,36 @@
-import {stopSubmit} from "redux-form";
-import {authAPI, securituAPI} from "../api/api";
+import {authAPI, securityAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 import {setUserDataAC, getCaptchaAC} from '../redux/actions/creators/auth-creator';
-import {openMainControlPanel, openQuestPageControlPanel, openOwnerPageControlPanel} from "./app";
+import {openMainControlPanel,
+    openQuestPageControlPanel,
+    openOwnerPageControlPanel} from "./app";
 
 export const authMe = () => {
     return async (dispatch) => {
-        let response = await authAPI.getAuthMe();
+        const response = await authAPI.getAuthMe();
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
             let action = setUserDataAC(String(id), email, login, true);
             dispatch(action);
             openMainControlPanel(dispatch, true);
         } else if (response.data.resultCode === 2) {
-            let action = setUserDataAC(DEFAULT_USER_ID);
+            let action = setUserDataAC(String(DEFAULT_USER_ID));
             dispatch(action);
         }
-        return response;
+        return response.data;
     }
 }
 
 export const signIn = (email, password, rememberMe = null, captcha) => {
     return async (dispatch) => {
-        let response = await authAPI.signIn(email, password, rememberMe, captcha);
+        const response = await authAPI.signIn(email, password,
+            rememberMe, captcha);
         if (response.data.resultCode === 0) {
-            let action = authMe();
-            dispatch(action);
-        } else {
-            let action = authMe();
-            dispatch(action);
-            action = stopSubmit("authorization", {_error: response.data.messages[0]});
-            dispatch(action);
-            let responseCaptcha = await securituAPI.getCaptchaUrl();
-            action = getCaptchaAC(responseCaptcha.data.url);
+            authMe()(dispatch);
+        }
+        else {
+            const responseCaptcha = await securityAPI.getCaptchaUrl();
+            const action = getCaptchaAC(responseCaptcha.data.url);
             dispatch(action);
         }
         return response;

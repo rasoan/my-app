@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const AuthorizationPage = () => {
+const AuthorizationPage = (props) => {
   const classes = useStyles();
 
   return (
