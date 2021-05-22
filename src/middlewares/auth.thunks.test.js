@@ -1,12 +1,14 @@
 import {authMe, logOut, signIn} from "./auth";
 import {getCaptchaAC} from "../redux/actions/creators/auth-creator";
 import {setUserDataAC} from "../redux/actions/creators/auth-creator";
-import {openMainControlPanelAC} from "../redux/actions/creators/app-creator";
+import {
+    openMainControlPanelAC,
+    openOwnerPageControlPanelAC,
+    openQuestPageControlPanelAC
+} from "../redux/actions/creators/app-creator";
 import {authAPI, securityAPI} from "../api/api";
 import expect from "expect";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
-import {checkOwnerOrQuest} from "./app";
-
 
 
 jest.mock("../api/api"); // заглушка для api
@@ -38,25 +40,6 @@ const testAuthFunction = (descriptionTest,
     });
 }
 
-testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
-    {
-        data: {
-            resultCode: 2,
-        }
-    },
-    [{
-        f: setUserDataAC,
-        parameters: [DEFAULT_USER_ID],
-    }]);
-
-testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
-    {
-        data: {
-            resultCode: 1,
-        }
-    },
-    []);
-
 testAuthFunction("Тест проверки на авторизованность сеанса авторизовался: ",
     {data: {resultCode: 0, data: {id: "0", email: 'ar@gmail.com', login: 'none', isAuth: true}}},
     [{
@@ -68,6 +51,16 @@ testAuthFunction("Тест проверки на авторизованност�
             parameters: [true],
         }]);
 
+testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
+    {data: {resultCode: 2}},
+    [{
+        f: setUserDataAC,
+        parameters: [DEFAULT_USER_ID],
+    }]);
+
+testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
+    {data: {resultCode: 1}},
+    []);
 
 
 const testSignInFunction = (descriptionTest,
@@ -79,7 +72,10 @@ const testSignInFunction = (descriptionTest,
             .mockReturnValue(Promise.resolve(mockReturnValueObj.signInValue));
         securityApi
             .getCaptchaUrl
-            .mockReturnValue(Promise.resolve(mockReturnValueObj.getCaptchaUrlValue))
+            .mockReturnValue(Promise.resolve(mockReturnValueObj.getCaptchaUrlValue));
+        authApi
+            .getAuthMe
+            .mockReturnValue(Promise.resolve({data: {resultCode: 2}}));
         const thunk = signIn();
         await thunk(dispatchMock);
         expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
@@ -92,14 +88,35 @@ const testSignInFunction = (descriptionTest,
 testSignInFunction('Тест не залогинились и показали captcha: ',
     {signInValue: {data: {resultCode: 1}}, getCaptchaUrlValue: {data: {url: ""}}},
     [{
-                f: getCaptchaAC,
-                parameter: "",
+        f: getCaptchaAC,
+        parameter: "",
     }]);
 
 testSignInFunction('Тест залогинились: ',
     {signInValue: {data: {resultCode: 0}}, getCaptchaUrlValue: ""},
-    []);
-//
-// test("Тест завершения сеанса авторизации: ", () => {
-//     const thunk = logOut();
-// });
+    [{
+        f: setUserDataAC,
+        parameter: DEFAULT_USER_ID,
+    }]);
+
+test("Тест завершения сеанса авторизации: ", async () => {
+    authApi
+        .logOut
+        .mockReturnValue(Promise.resolve({data: {resultCode: 0}}));
+    const thunk = logOut();
+    await thunk(dispatchMock);
+    expect(dispatchMock).toBeCalledTimes(4);
+    expect(dispatchMock).toHaveBeenNthCalledWith(1, setUserDataAC(DEFAULT_USER_ID));
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, openMainControlPanelAC(false));
+    expect(dispatchMock).toHaveBeenNthCalledWith(3, openOwnerPageControlPanelAC(false));
+    expect(dispatchMock).toHaveBeenNthCalledWith(4, openQuestPageControlPanelAC(false));
+});
+
+test("Тест завершения сеанса авторизации (ошибка на сервере): ", async () => {
+    authApi
+        .logOut
+        .mockReturnValue(Promise.resolve({data: {resultCode: 1}}));
+    const thunk = logOut();
+    await thunk(dispatchMock);
+    expect(dispatchMock).toBeCalledTimes(0);
+});

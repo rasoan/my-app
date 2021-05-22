@@ -8,15 +8,19 @@ import {openMainControlPanel,
 export const authMe = () => {
     return async (dispatch) => {
         const response = await authAPI.getAuthMe();
+
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
             let action = setUserDataAC(String(id), email, login, true);
             dispatch(action);
             openMainControlPanel(dispatch, true);
-        } else if (response.data.resultCode === 2) {
+        }
+
+        if (response.data.resultCode === 2) {
             let action = setUserDataAC(String(DEFAULT_USER_ID));
             dispatch(action);
         }
+
         return response.data;
     }
 }
