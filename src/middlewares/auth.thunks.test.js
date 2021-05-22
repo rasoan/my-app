@@ -20,6 +20,8 @@ const dispatchMock = jest.fn(); // имитируем dispatch()
 beforeEach(() => {
     dispatchMock.mockClear();
     authApi.getAuthMe.mockClear();
+    authApi.signIn.mockClear();
+    authApi.logOut.mockClear();
     securityApi.getCaptchaUrl.mockClear();
 });
 

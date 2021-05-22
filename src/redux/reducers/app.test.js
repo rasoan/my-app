@@ -81,3 +81,8 @@ test('Тестируем отображение/скрытие навигаци�
     navigationPanelAfter = resultState.navigationPanel;
     expect(navigationPanelBefore).toBe(navigationPanelAfter);
 });
+
+test('Тестируем возвращаемое значение при неизвестном action (должно остаться неизменным):', () => {
+    const resultState = appReducer(initialState, {type: undefined});
+    expect(resultState).toEqual(initialState);
+})

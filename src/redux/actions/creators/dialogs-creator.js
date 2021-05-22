@@ -7,7 +7,7 @@ import {
     STOP_FETCHING
 } from "../types/action-types";
 
-export const sendMessageCreatorAC = (newMessage) => ({type: SEND_MESSAGE, newMessage,});
+export const sendMessageAC = (newMessage) => ({type: SEND_MESSAGE, newMessage,});
 export const startCommunicationAC = (interlocutor) => ({type: START_COMMUNICATION, interlocutor,});
 export const getDialogsAC = (dialogs) => ({type: GET_DIALOGS, dialogs,});
 export const getMessagesAC = (messages) => ({type: GET_MESSAGES, messages,});

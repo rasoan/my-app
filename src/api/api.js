@@ -72,8 +72,11 @@ export const dialogsAPI = {
         return instance.put('/dialogs/' + userId);
     },
     getAllDialogs() { // получить все диалоги
-        return instance.get("/dialogs")
+        return instance.get("/dialogs");
     },
+    getMessages() {
+        return instance.get("/messages");
+    }
 }
 
 export const messagesAPI = {

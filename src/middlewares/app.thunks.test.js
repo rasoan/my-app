@@ -1,10 +1,8 @@
 import expect from "expect";
 import {
     checkOwnerOrQuest,
-    checkUserOrOwner,
-    closeControlPanel,
     initializeTheApplication,
-    openControlPanel, openMainControlPanel, openOwnerPageControlPanel, openQuestPageControlPanel,
+    openMainControlPanel, openOwnerPageControlPanel, openQuestPageControlPanel,
     refreshRequests,
     toggleNavigationPanel
 } from "./app";
@@ -72,11 +70,6 @@ testSimpleThunk('Тестируем санку обновления всех з�
 testSimpleThunk('Тестируем санку которая открывает/закрывает боковую панель: ',
     toggleNavigationPanel,
     toggleNavigationPanelAC);
-
-test('Тестируем санку которая открывает/закрывает боковую панель: ', () => {
-   const thunk = toggleNavigationPanel();
-   thunk(dispatchMock);
-});
 
 testSimpleFunctionUsedDispatch('Тестируем санку которая открывает пользователю главную панель: ',
     openMainControlPanel,
