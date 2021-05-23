@@ -1,10 +1,10 @@
 import {usersApi} from "../api/api";
-import {setUsers,
+import {setUsersAC,
     followAC,
     unfollowAC,
-    setTotalUsersCount,
-    isFetchingFollowOrUnfollowStart,
-    isFetchingFollowOrUnfollowEnd,
+    setTotalUsersCountAC,
+    isFetchingFollowOrUnfollowStartAC,
+    isFetchingFollowOrUnfollowEndAC,
     fetchingGetCountUsersStartAC,
     fetchingGetCountUsersEndAC,
     fetchingGetUserCardsStartAC,
@@ -16,7 +16,7 @@ export const getCountUsers = () => {
         dispatch(action);
         let response = await usersApi.getUsers();
         if (response.status === 200) {
-            action = setTotalUsersCount(response.data.totalCount);
+            action = setTotalUsersCountAC(response.data.totalCount);
             dispatch(action);
         }
         action = fetchingGetCountUsersEndAC();
@@ -30,7 +30,7 @@ export const getUsersCardsSC = (currentPage, pagesSize) => {
         dispatch(action);
         let response = await usersApi.getUsers(currentPage, pagesSize);
         if (response.status === 200) {
-            action = setUsers(response.data.items);
+            action = setUsersAC(response.data.items);
             dispatch(action);
         }
         action = fetchingGetUserCardsEndAC();
@@ -39,14 +39,14 @@ export const getUsersCardsSC = (currentPage, pagesSize) => {
 }
 
 const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCreator) => {
-    let action = isFetchingFollowOrUnfollowStart(id);
+    let action = isFetchingFollowOrUnfollowStartAC(id);
     dispatch(action);
     let response = await UsersApiFollowOrUnfollow(id);
     if (response.data.resultCode === 0) {
         action = actionCreator(id);
         dispatch(action);
     }
-    action = isFetchingFollowOrUnfollowEnd(id);
+    action = isFetchingFollowOrUnfollowEndAC(id);
     dispatch(action);
 }
 
