@@ -10,18 +10,19 @@ import {addPostAC,
     getStatusAC,
     updateProfilePictureAC} from '../redux/actions/creators/profile-creator';
 
-export const getProfile = (id) => {
+export const getProfile = (userId) => {
   return async (dispatch, getState) => {
-    id = checkId(id, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
+    userId = checkId(userId, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
     let action = startFetchingAC();
     dispatch(action);
-    let response = await profileAPI.getProfile(id);   
+    let response = await profileAPI.getProfile(userId);
     if (response.status === 200) {
       action = setUserProfileAC(response.data);
       dispatch(action);
-      action = stopFetchingAC();
-      dispatch(action);
     }
+    action = stopFetchingAC();
+    dispatch(action);
+    return userId;
   }
 }
 
@@ -76,9 +77,6 @@ export const updateProfilePicture = (imagefile) => {
       let action = updateProfilePictureAC(response.data.data.photos);
       dispatch(action);
     }
-    else {
-      console.log("Фотография профиля не обновилась, не подходящий формат файла!")
-    }
   }
 }
 
@@ -97,7 +95,7 @@ export const saveProfile = (profile) => {
   }
 }
 
-const checkId = (id, isAuth, myId, defaultId) => {
+export const checkId = (id, isAuth, myId, defaultId) => {
   if(!id) {
     id = isAuth ? myId: defaultId;
   }

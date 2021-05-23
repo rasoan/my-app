@@ -4,18 +4,18 @@ import {sendMessageAC,
 
 export const sendMessage = (userId, message) => {
       return async (dispatch) => {
-        
-               let response = await messagesAPI.sendMessage(userId, message);
-               
-               let action = sendMessageAC(response);
-               dispatch(action);
+               //
+               // let response = await messagesAPI.sendMessage(userId, message);
+               //
+               // let action = sendMessageAC(response);
+               // dispatch(action);
              }
 }
 
 export const getMessages = (userId, currentPage = 1, pagesSize = 10) => {
   return async (dispatch) => {
-    const response = await messagesAPI.getMessages(userId, currentPage, pagesSize);
-    const action = getMessagesAC(response.data);
-    dispatch(action);
+    // const response = await messagesAPI.getMessages(userId, currentPage, pagesSize);
+    // const action = getMessagesAC(response.data);
+    // dispatch(action);
   }
 }

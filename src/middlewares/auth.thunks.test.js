@@ -38,7 +38,6 @@ const testAuthFunction = (descriptionTest,
         functionsDispatch.forEach((callbackObj, index) => {
             expect(dispatchMock).toHaveBeenNthCalledWith(index + 1, callbackObj.f(...callbackObj.parameters));
         });
-
     });
 }
 
