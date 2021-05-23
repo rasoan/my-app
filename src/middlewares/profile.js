@@ -5,10 +5,9 @@ import {addPostAC,
     startFetchingAC,
     stopFetchingAC,
     updateNewStatusTextAC,
-    lookingMyProfileAC,
-    notLookingMyProfileAC,
     getStatusAC,
     updateProfilePictureAC} from '../redux/actions/creators/profile-creator';
+import {checkId} from "../middlewaresAdditions/profile";
 
 export const getProfile = (userId) => {
   return async (dispatch, getState) => {
@@ -43,27 +42,11 @@ export const updateNewStatusText = (newStatusText) => {
   }
 }
 
-export const lookingMyProfile = () => {
-  return (dispatch) => {
-    let action = lookingMyProfileAC();
-    dispatch(action);
-  }
-}
-
-export const notLookingMyProfile = () => {
-  return (dispatch) => {
-    let action = notLookingMyProfileAC();
-    dispatch(action);
-  }
-}
-
 export const getStatus = (id) => {
   return async (dispatch, getState) => {
-    
     id = checkId(id, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
     let response = await profileAPI.getStatus(id)
     if (response.status === 200) {
-
       let action = getStatusAC(response.data);
       dispatch(action);
     }
@@ -91,13 +74,5 @@ export const saveProfile = (profile) => {
         dispatch(action);
       }
     }
-    return response;
   }
-}
-
-export const checkId = (id, isAuth, myId, defaultId) => {
-  if(!id) {
-    id = isAuth ? myId: defaultId;
-  }
-  return id;
 }

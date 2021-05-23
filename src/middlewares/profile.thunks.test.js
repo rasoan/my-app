@@ -1,12 +1,19 @@
 import {profileAPI} from "../api/api";
-import {checkId, getProfile} from "./profile";
-import {setUserProfileAC, startFetchingAC, stopFetchingAC} from "../redux/actions/creators/profile-creator";
+import {addPost, getProfile, getStatus, saveProfile, updateNewStatusText, updateProfilePicture} from "./profile";
+import {
+    addPostAC, getStatusAC,
+    setUserProfileAC,
+    startFetchingAC,
+    stopFetchingAC,
+    updateNewStatusTextAC, updateProfilePictureAC
+} from "../redux/actions/creators/profile-creator";
+import {checkId} from "../middlewaresAdditions/profile";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 jest.mock("../api/api");
 const profileApi = profileAPI;
 
 const dispatchMock = jest.fn();
-const getState = jest.fn();
+const getStateMock = jest.fn();
 
 beforeEach(() => {
    dispatchMock.mockClear();
@@ -107,4 +114,160 @@ testGetProfileFunction(
             parameter: undefined,
         }
     ]
+);
+
+test("Тестируем функцию добавления поста :", () => {
+   const thunk = addPost("");
+   thunk(dispatchMock);
+   expect(dispatchMock).toBeCalledTimes(1);
+   expect(dispatchMock).toHaveBeenNthCalledWith(1, addPostAC(""));
+});
+
+const testUpdateNewStText = (descriptionTest,
+                                updateStatusReturnValue,
+                                functionsDispatch) => {
+    test(descriptionTest, async () => {
+        profileApi
+            .updateStatus
+            .mockReturnValue(updateStatusReturnValue);
+        const thunk = updateNewStatusText("1");
+        await thunk(dispatchMock);
+        expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
+        functionsDispatch.forEach((callbackObj, index) => {
+            expect(dispatchMock).toHaveBeenNthCalledWith(index + 1, callbackObj.f(callbackObj.parameter));
+        });
+    });
+}
+
+testUpdateNewStText(
+    "Обновили статус и с сервера пришёл подтверждающий ответ: ",
+        {status: 200},
+    [
+        {
+            f: updateNewStatusTextAC,
+            parameter: "1"
+        }
+    ]
+);
+
+testUpdateNewStText(
+    "Обновили статус и с сервера пришёл отрицательный ответ: ",
+        {status: 0},
+    []
+);
+
+const testGetStatus = (descriptionTest,
+                          getStatusReturnValue,
+                          functionsDispatch) => {
+    test(descriptionTest, async () => {
+        profileApi
+            .getStatus
+            .mockReturnValue(getStatusReturnValue);
+        getStateMock
+            .mockReturnValue({auth: {isAuth: undefined, userId: "1"}});
+        const thunk = getStatus("1");
+        await thunk(dispatchMock, getStateMock);
+        expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
+        functionsDispatch.forEach((callbackObj, index) => {
+            expect(dispatchMock).toHaveBeenNthCalledWith(index + 1, callbackObj.f(callbackObj.parameter));
+        });
+    });
+}
+
+testGetStatus(
+    "Тестируем получение статуса (положительный ответ от сервера): ",
+    {status: 200, data: "1"},
+    [
+        {
+            f: getStatusAC,
+            parameter: "1",
+        }
+    ]
+);
+
+testGetStatus("Тестируем получение статуса (отрицательный ответ от сервера): ",
+    {status: 0, data: "1"},
+    []);
+
+const testUpdatePrPicture = (
+    descriptionTest,
+    updPrPictReturnValue,
+    functionsDispatch) => {
+    test(descriptionTest, async () => {
+        profileApi
+            .updateProfilePicture
+            .mockReturnValue(updPrPictReturnValue);
+        const thunk = updateProfilePicture("");
+        await thunk(dispatchMock);
+        expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
+        functionsDispatch.forEach((callbackObj, index) => {
+            expect(dispatchMock).toHaveBeenNthCalledWith(index + 1, callbackObj.f(callbackObj.parameter));
+        });
+    })
+}
+
+testUpdatePrPicture(
+    "Тест обновления аватарки (успешно): ",
+    {data: {resultCode: 0, data: {photos: ""}}},
+    [
+        {
+            f: updateProfilePictureAC,
+            parameter: "",
+        }
+    ]
+);
+
+testUpdatePrPicture(
+    "Тест обновления аватарки (не успешно): ",
+    {data: {resultCode: 1, data: {photos: ""}}},
+    []
+);
+
+const testSaveProfile = (
+    descriptionTest,
+    saveProfileReturnValue,
+    getProfileReturnValue,
+    functionsDispatch) => {
+    test(descriptionTest, async () => {
+        profileApi
+            .saveProfile
+            .mockReturnValue(saveProfileReturnValue);
+        profileApi
+            .getProfile
+            .mockReturnValue(getProfileReturnValue);
+        getStateMock
+            .mockReturnValue({auth: {userId: ""}});
+        const thunk = saveProfile("");
+        await thunk(dispatchMock, getStateMock);
+        expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
+        functionsDispatch.forEach((callbackObj, index) => {
+            expect(dispatchMock).toHaveBeenNthCalledWith(index + 1, callbackObj.f(callbackObj.parameter));
+        });
+    })
+}
+
+testSaveProfile(
+    "Тестируем сохранение профайла (сохранили проф и получили проф): ",
+    {data: {resultCode: 0}},
+    {status: 200, data: ""},
+    [
+        {
+            f: setUserProfileAC,
+            parameter: ""
+        }
+    ]
+);
+
+testSaveProfile(
+    "Тестируем сохранение профайла (не сохранили проф и не получили проф): ",
+    {data: {resultCode: 1}},
+    {status: 200, data: ""},
+    []
+);
+
+testSaveProfile(
+    "Тестируем сохранение профайла (сохранили проф и не получили проф): ",
+    {data: {resultCode: 0}},
+    {status: 1, data: ""},
+    []
 );
