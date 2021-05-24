@@ -38,7 +38,7 @@ export const getUsersCardsSC = (currentPage, pagesSize) => {
     }
 }
 
-const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCreator) => {
+export const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCreator) => {
     let action = isFetchingFollowOrUnfollowStartAC(id);
     dispatch(action);
     let response = await UsersApiFollowOrUnfollow(id);
