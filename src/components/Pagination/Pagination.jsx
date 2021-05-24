@@ -1,39 +1,43 @@
-import React, {useState} from "react";
+import React from "react";
 import PropTypes from "prop-types";
-import style from "./Pagination.module.scss";
+import { makeStyles } from '@material-ui/core/styles';
+import Pagination from '@material-ui/lab/Pagination';
 
-const Pagination = (props) => {
+const useStyles = makeStyles((theme) => ({
+    root: {
+        '& > *': {
+            marginTop: theme.spacing(2),
+        },
+    },
+}));
+
+const MuPagination = (props) => {
   const {listPageNumbers, countCardsInPage, getCards, loading} = props;
-
-  let loadingStyle = loading ? style.loadingStyle: "";
-  let onPageChanged = (pageNumber, countCardsInPage) => {
-    setCurrentPageNumber(pageNumber);
+  const classes = useStyles();
+  const onPageChanged = (pageNumber, countCardsInPage) => {
     getCards(pageNumber, countCardsInPage);
   }
-  const [currentPageNumber, setCurrentPageNumber] = useState(1); // переменная одинаковая X
-  let pageNumbers = listPageNumbers
-                    .map(pageNumber => {
-                      return <li key={'key-' + pageNumber} className={style.pageNumberContainer}>
-                               <button onClick={() => {
-                                                       if (!loading) onPageChanged(pageNumber, countCardsInPage)
-                                                      }
-                                               } 
-                                       className={`${style.button} ${currentPageNumber === pageNumber && style.currentPage}`}
-                                       disabled={loading}>
-                                 {pageNumber}
-                               </button>
-                             </li>
-                                    }
-                                );
 
-  return (<ul className={`${loadingStyle} ${style.pageNumberListContainer}`}>{pageNumbers}</ul>);
+  return (<>
+      <div className={classes.root}>
+          <Pagination count={listPageNumbers.length}
+                      disabled={loading}
+                      onChange={(event, page) => {
+                          if (!loading) {
+                              onPageChanged(page, countCardsInPage);
+                          }
+                      }}
+                      showFirstButton
+                      showLastButton />
+      </div>
+  </>);
 };
 
-PropTypes.propTypes = {
+MuPagination.propTypes = {
   listPageNumbers: PropTypes.array.isRequired,
   countCardsInPage: PropTypes.number.isRequired,
   getCards: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
 }
 
-export default Pagination;
+export default MuPagination;
