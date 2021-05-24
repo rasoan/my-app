@@ -32,7 +32,7 @@ let mapStateToProps = (state) => (
       photos: state.profilePage.profile.photos,
       isFetching: state.profilePage.isFetching,
       fileInputRef: fileInputRef,
-      controlPanels: state.app.controlPanels,
+        ownerPageControlPanel: getOwnerPageControlPanelSelector(state),
     }
   )
 
