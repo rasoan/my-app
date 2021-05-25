@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const MuPagination = (props) => {
-  const {listPageNumbers, countCardsInPage, getCards, loading} = props;
+  const {countPage, countCardsInPage, getCards, loading} = props;
   const classes = useStyles();
   const onPageChanged = (pageNumber, countCardsInPage) => {
     getCards(pageNumber, countCardsInPage);
@@ -20,7 +20,7 @@ const MuPagination = (props) => {
 
   return (<>
       <div className={classes.root}>
-          <Pagination count={listPageNumbers.length}
+          <Pagination count={countPage}
                       disabled={loading}
                       onChange={(event, page) => {
                           if (!loading) {
@@ -34,7 +34,7 @@ const MuPagination = (props) => {
 };
 
 MuPagination.propTypes = {
-  listPageNumbers: PropTypes.array.isRequired,
+    countPage: PropTypes.number.isRequired,
   countCardsInPage: PropTypes.number.isRequired,
   getCards: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,

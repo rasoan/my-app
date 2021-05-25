@@ -14,13 +14,10 @@ let UsersList = (props) => {
     } = props;
 
     let countPage = Math.ceil(totalUsersCount / pagesSize);
-    let pages = [];
-    for (let i = 1; i <= countPage; i++) {
-        pages.push(i);
-    }
+
 
     return (<div style={{width: '100%'}}>
-            <Pagination listPageNumbers={pages}
+            <Pagination countPage={countPage}
                         countCardsInPage={pagesSize}
                         loading={isFetchingGetUsersCards}
                         getCards={getUsersCardsSC} />
