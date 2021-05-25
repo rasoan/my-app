@@ -13,15 +13,14 @@ let UsersList = (props) => {
         isFetchingGetUsersCards, isFetchingGetUsersCount
     } = props;
 
-    let countPage = Math.ceil(totalUsersCount / pagesSize);
-
+    const countPage = Math.ceil(totalUsersCount / pagesSize);
 
     return (<div style={{width: '100%'}}>
-            <Pagination countPage={countPage}
-                        countCardsInPage={pagesSize}
-                        loading={isFetchingGetUsersCards}
-                        getCards={getUsersCardsSC} />
-        {!isFetchingGetUsersCount && (isFetchingGetUsersCards ? <PreloaderCircular /> :
+        <Pagination countPage={countPage}
+                    countCardsInPage={pagesSize}
+                    loading={isFetchingGetUsersCards}
+                    getCards={getUsersCardsSC}/>
+        {!isFetchingGetUsersCount && (isFetchingGetUsersCards ? <PreloaderCircular/> :
             <div className="listCardsUsers">
                 {users.map((user, i) => <UserItem key={user.name + i}
                                                   navlinkTo={"/Profile/" + user.id}
