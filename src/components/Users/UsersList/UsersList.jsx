@@ -19,7 +19,6 @@ let UsersList = (props) => {
         pages.push(i);
     }
 
-
     return (<div style={{width: '100%'}}>
             <Pagination listPageNumbers={pages}
                         countCardsInPage={pagesSize}
