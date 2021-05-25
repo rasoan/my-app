@@ -1,5 +1,11 @@
 import React from "react";
+import {shallow} from 'enzyme';
 import UsersList from "./UsersList";
+import Adapter from 'enzyme-adapter-react-16.1';
+import Enzyme from 'enzyme';
+import {follow, getCountUsers, getUsersCardsSC, unfollow} from "../../../middlewares/users";
+import {startCommunication} from "../../../middlewares/dialogs";
+
 
 const users = [
     {
@@ -84,14 +90,25 @@ const users = [
     }
 ];
 
+Enzyme.configure({adapter: new Adapter()});
 test("Тест компоненты которая отрисовывает карточки с пользователями: ", () => {
     const component = shallow(<UsersList totalUsersCount={100}
                                          pagesSize={10}
                                          users={users}
-                                         follow={() => {}}
-                                         unfollow={() => {}}
+                                         follow={() => {
+                                         }}
+                                         unfollow={() => {
+                                         }}
                                          defaultAvatarSrc={""}
-                                         isFetchingFollowOrUnfollowIdList={() => {}}
+                                         isFetchingFollowOrUnfollowIdList={[]}
                                          isAuth={true}
-                                         startCommunication={() => {}} />);
+                                         startCommunication={() => {
+                                         }}
+                                         getCountUsers={() => {
+                                         }}
+                                         getUsersCardsSC={() => {
+                                         }}
+                                         isFetchingGetUsersCards={true} />);
+    const wrapper = component.find(".test");
+    expect(wrapper.length).toBe(1);
 });

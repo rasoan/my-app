@@ -19,7 +19,7 @@ let UsersList = (props) => {
         pages.push(i);
     }
 
-    return (<div style={{width: '100%'}}>
+    return (<div className={"test"} style={{width: '100%'}}>
             <Pagination listPageNumbers={pages}
                         countCardsInPage={pagesSize}
                         loading={isFetchingGetUsersCards}
