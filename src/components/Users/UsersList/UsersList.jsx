@@ -19,13 +19,13 @@ let UsersList = (props) => {
         pages.push(i);
     }
 
-    return (<div className={"test"} style={{width: '100%'}}>
+    return (<div style={{width: '100%'}}>
             <Pagination listPageNumbers={pages}
                         countCardsInPage={pagesSize}
                         loading={isFetchingGetUsersCards}
-                        getCards={getUsersCardsSC}/>
+                        getCards={getUsersCardsSC} />
         {!isFetchingGetUsersCount && (isFetchingGetUsersCards ? <PreloaderCircular /> :
-            <div>
+            <div className="listCardsUsers">
                 {users.map((user, i) => <UserItem key={user.name + i}
                                                   navlinkTo={"/Profile/" + user.id}
                                                   id={user.id}
