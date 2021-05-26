@@ -3,7 +3,6 @@ import {shallow} from 'enzyme';
 import UserItem from "./UserItem";
 import Adapter from 'enzyme-adapter-react-16.1';
 import Enzyme from 'enzyme';
-import Pagination from "../../Pagination/Pagination";
 import ButtonFollowUnfollow from "../../ButtonFollowUnfollow";
 import PreloaderLinear from "../../Preloaders/PreloaderLinear";
 Enzyme.configure({adapter: new Adapter()});
