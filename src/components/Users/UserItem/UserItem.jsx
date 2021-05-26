@@ -30,7 +30,7 @@ const UserItem = (props) => {
                                                                unfollow={unfollow}
                                                                friend={followed}
                                                                userId={id}/>)}
-                {isAuth && <button onClick={() => startCommunication(id)}>Начать диалог</button>}
+                {isAuth && <button className={"startCommunication"} onClick={() => startCommunication(id)}>Начать диалог</button>}
             </div>
         </div>
 
@@ -45,7 +45,7 @@ UserItem.propTypes = {
     photo: PropTypes.string,
     name: PropTypes.string,
     defaultAvatarSrc: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     navlinkTo: PropTypes.string,
     isAuth: PropTypes.bool,
     startCommunication: PropTypes.func,
