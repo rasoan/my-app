@@ -5,7 +5,7 @@ import Enzyme from 'enzyme';
 import Status from "./Status";
 Enzyme.configure({adapter: new Adapter()});
 
-const testLoadingUserItem = (descriptionTest,
+const testStatus = (descriptionTest,
                              editMode,
                              ownerPageControlPanel,
                              findComponents) => {
@@ -26,7 +26,7 @@ const testLoadingUserItem = (descriptionTest,
 }
 
 describe("Тестирум компоненту статус (авторизован, режим редактирования)", () => {
-    testLoadingUserItem("авторизован, режим редактирования",
+    testStatus("авторизован, режим редактирования",
         true,
         true,
         [
@@ -40,7 +40,7 @@ describe("Тестирум компоненту статус (авторизов
             },
         ]);
 
-    testLoadingUserItem("авторизован, режим просмотра",
+    testStatus("авторизован, режим просмотра",
         false,
         true,
         [
