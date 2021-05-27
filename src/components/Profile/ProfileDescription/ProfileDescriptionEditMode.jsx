@@ -29,12 +29,12 @@ const ProfileDataForm = (props) => {
               <textarea {...register("aboutMe")} />
             </div>
             <div>
-              <p><b>Contacts:</b> <ul>{Object.keys(profile.contacts).map(key => {
+              <div><b>Contacts:</b> <ul>{Object.keys(profile.contacts).map(key => {
                 return <li key={key}>
                           <p><b>{key}</b></p>
                           <input {...register(`contacts.${key}`, {pattern: new RegExp("[http]")})} />
                        </li>
-              })}</ul></p>
+              })}</ul></div>
             </div>
           </form>);
 }

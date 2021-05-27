@@ -1,10 +1,7 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
-import {connect} from "react-redux";
-import {saveProfile} from "../../../middlewares/profile";
 import ProfileDescriptionEditMode from "./ProfileDescriptionEditMode";
 import ProfileDescriptionViewMode from "./ProfileDescriptionViewMode";
-import {getOwnerPageControlPanelSelector} from "../../../selectors/app-selectors";
 
 const ProfileDescriptionContainer = (props) => {
     const {profile, saveProfile, ownerPageControlPanel} = props;
@@ -13,12 +10,13 @@ const ProfileDescriptionContainer = (props) => {
 
     const onSubmit = async (formData) => {
         await saveProfile(formData);
-        setEditMode(false);
+        setEditMode(false)
     }
 
     return (
         <>
             {editMode ? <ProfileDescriptionEditMode handleProfile={onSubmit}
+                                                    setEditMode={setEditMode}
                                                     profile={profile}
                                                     initialValues={profile} />:
                 <ProfileDescriptionViewMode profile={profile}

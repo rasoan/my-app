@@ -3,7 +3,7 @@ import {shallow} from 'enzyme';
 import UsersList from "./UsersList";
 import Pagination from "../../Pagination";
 import PreloaderCircular from "../../Preloaders/PreloaderCircular";
-import Adapter from 'enzyme-adapter-react-16.1';
+import Adapter from 'enzyme-adapter-react-16';
 import Enzyme from 'enzyme';
 Enzyme.configure({adapter: new Adapter()});
 
