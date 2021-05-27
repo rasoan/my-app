@@ -59,7 +59,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AuthorizationPanel = (props) => {
-    const {isAuth, authorizationInfo, logOut, photos} = props;
+    const {isAuth, authorizationInfo, logOut, srcAvatarAuthPanel} = props;
     const classes = useStyles(props);
     const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -74,7 +74,7 @@ const AuthorizationPanel = (props) => {
     return (<>
         {isAuth && <>
             <Button className={classes.mainButton} onClick={handleClick}>
-                <Avatar className={`${classes.iconRoot} ${classes.avatar}`} alt="User" src={photos && photos.small}/>
+                {srcAvatarAuthPanel && <Avatar className={`${classes.iconRoot} ${classes.avatar}`} alt="User" src={srcAvatarAuthPanel}/>}
                 <Typography className={`${classes.root} ${classes.login}`}
                             variantMapping={Button}>{authorizationInfo.login}</Typography>
             </Button>

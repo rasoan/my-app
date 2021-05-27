@@ -17,6 +17,8 @@ export const SIGN_IN = "SIGN_IN";
 export const SIGN_UP = "SIGN_UP";
 export const LOG_OUT = "LOG_OUT";
 export const GET_CAPTCHA = "GET_CAPTCHA";
+export const SET_AVATAR_AUTH_PANEL = "SET_AVATAR_AUTH_PANEL";
+
 
 // messages
 export const SEND_MESSAGE = 'SEND-MESSAGE';

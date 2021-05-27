@@ -29,3 +29,7 @@ export const getSignUpImgSelector = (state) => {
 export const getLogOutImgSelector = (state) => {
     return state.auth.logOutImg;
 }
+
+export const getAvatarAuthPanel = (state) => {
+    return state.auth.avatarAuthPanel;
+}

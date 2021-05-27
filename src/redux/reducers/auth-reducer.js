@@ -1,11 +1,13 @@
 import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
 import {SET_USER_DATA,
+    SET_AVATAR_AUTH_PANEL,
 SIGN_IN,
 SIGN_UP,
 LOG_OUT,
 GET_CAPTCHA} from '../actions/types/action-types';
 
 let initialState = {
+    avatarAuthPanel: null,
     userId: DEFAULT_USER_ID,
     isAuth: false,
     email: null,
@@ -23,6 +25,11 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data,
                 isAuth: action.isAuth,
+            }
+        case SET_AVATAR_AUTH_PANEL:
+            return {
+               ...state,
+                avatarAuthPanel: action.profile.photos.small,
             }
         case SIGN_IN:
             return {

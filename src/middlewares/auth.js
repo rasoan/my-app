@@ -1,6 +1,6 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
-import {setUserDataAC, getCaptchaAC} from '../redux/actions/creators/auth-creator';
+import {setUserDataAC, getCaptchaAC, setAvatarAuthPanelAC} from '../redux/actions/creators/auth-creator';
 import {openMainControlPanel,
     openQuestPageControlPanel,
     openOwnerPageControlPanel} from "./app";
@@ -8,11 +8,15 @@ import {openMainControlPanel,
 export const authMe = () => {
     return async (dispatch) => {
         const response = await authAPI.getAuthMe();
-
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
             let action = setUserDataAC(String(id), email, login, true);
             dispatch(action);
+            const responseProfile = await profileAPI.getProfile(id );
+            if (responseProfile.status === 200) {
+                action = setAvatarAuthPanelAC(responseProfile.data);
+                dispatch(action);
+            }
             openMainControlPanel(dispatch, true);
         }
 
@@ -51,6 +55,8 @@ export const logOut = () => {
         let response = await authAPI.logOut();
         if (response.data.resultCode === 0) {
             let action = setUserDataAC(DEFAULT_USER_ID);
+            dispatch(action);
+            action = setAvatarAuthPanelAC({photos: {small: null}});
             dispatch(action);
             openMainControlPanel(dispatch, false);
             openOwnerPageControlPanel(dispatch, false);
