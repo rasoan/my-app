@@ -8,7 +8,6 @@ const Status = (props) => {
          deActivateEditMode, statusText} = props;
          
   let statusTextStyle = ownerPageControlPanel ? style.statusText: "";
-  
   return <div className={style.statusTextContainer}>
            {editMode && <input className={style.inputStatusText}
                                onFocus={(event) => event.target.select()}

@@ -66,26 +66,16 @@ const profileReducer = (state = initialState, action) => {
         }
       case UPDATE_STATUS_TEXT:
         let updateStatusText = action.statusText && action.statusText !== ""? action.statusText: DEFAULT_STATUS_TEXT;
-        return {
+          return {
                 ...state,
                 statusText: updateStatusText,
-               }
-      case SET_FLAG_LOOKING_AT_MY_PROFILE:
-        return {
-                ...state,
-                lookingAtMyProfile: true,
-               }
-      case SET_FLAG_NOT_LOOKING_AT_MY_PROFILE:
-        return {
-                ...state,
-                lookingAtMyProfile: false,
-               }
+               }/*
       case GET_STATUS:
         let getStatusText = action.statusText && action.statusText !== ""? action.statusText: DEFAULT_STATUS_TEXT;
-        return {
+          return {
                 ...state,
                 statusText: getStatusText,
-               }
+               }*/
       case UPDATE_PROFILE_PICTURE:
         return {
                 ...state,

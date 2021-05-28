@@ -47,7 +47,8 @@ export const getStatus = (id) => {
     id = checkId(id, getState().auth.isAuth, getState().auth.userId, DEFAULT_USER_ID);
     let response = await profileAPI.getStatus(id)
     if (response.status === 200) {
-      let action = getStatusAC(response.data);
+      // let action = getStatusAC(response.data);
+      let action = updateNewStatusTextAC(response.data);
       dispatch(action);
     }
   }

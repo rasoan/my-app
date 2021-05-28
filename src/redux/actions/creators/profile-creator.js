@@ -35,6 +35,12 @@ export const updateNewStatusTextAC = (statusText) =>
         statusText,
     });
 
+// export const getStatusAC = (statusText) =>
+//     ({
+//         type: GET_STATUS,
+//         statusText
+//     })
+
 export const lookingMyProfileAC = () =>
     ({
         type: SET_FLAG_LOOKING_AT_MY_PROFILE,
@@ -44,12 +50,6 @@ export const notLookingMyProfileAC = () =>
     ({
         type: SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
     });
-
-export const getStatusAC = (statusText) =>
-    ({
-        type: GET_STATUS,
-        statusText
-    })
 
 export const updateProfilePictureAC = (imagefile) =>
     ({

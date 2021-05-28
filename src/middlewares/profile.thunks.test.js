@@ -179,7 +179,7 @@ testGetStatus(
     {status: 200, data: "1"},
     [
         {
-            f: getStatusAC,
+            f: updateNewStatusTextAC,
             parameter: "1",
         }
     ]
