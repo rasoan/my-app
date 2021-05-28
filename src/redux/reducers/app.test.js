@@ -16,9 +16,13 @@ let initialState = {
     ownerPageControlPanel: false,
 };
 
-const testReducerControlPanels = (descriptionTest, reducer,
-                                  initialState, actionCreator,
-                                  nameCheckedParameter, nameJestMethod, flag) => {
+const testReducerControlPanels = (descriptionTest,
+                                  reducer,
+                                  initialState,
+                                  actionCreator,
+                                  nameCheckedParameter,
+                                  nameJestMethod,
+                                  flag) => {
     test(descriptionTest, () => {
         const resultState = reducer(initialState, actionCreator(flag));
         const controlPanel = resultState[nameCheckedParameter];
