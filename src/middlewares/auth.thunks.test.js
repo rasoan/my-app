@@ -1,20 +1,20 @@
 import {authMe, logOut, signIn} from "./auth";
-import {getCaptchaAC} from "../redux/actions/creators/auth-creator";
+import {getCaptchaAC, setAvatarAuthPanelAC} from "../redux/actions/creators/auth-creator";
 import {setUserDataAC} from "../redux/actions/creators/auth-creator";
 import {
     openMainControlPanelAC,
     openOwnerPageControlPanelAC,
     openQuestPageControlPanelAC
 } from "../redux/actions/creators/app-creator";
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, securityAPI, profileAPI} from "../api/api";
 import expect from "expect";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 
 
 jest.mock("../api/api"); // заглушка для api
 const authApi = authAPI;
+const profileApi = profileAPI;
 const securityApi = securityAPI;
-const resultAuthMe = {data: {resultCode: 2}}; // имитируем удачный ответ от сервера
 const dispatchMock = jest.fn(); // имитируем dispatch()
 
 beforeEach(() => {
@@ -23,15 +23,20 @@ beforeEach(() => {
     authApi.signIn.mockClear();
     authApi.logOut.mockClear();
     securityApi.getCaptchaUrl.mockClear();
+    profileApi.getProfile.mockClear();
 });
 
 const testAuthFunction = (descriptionTest,
                           mockReturnValueObj,
+                          mockReturnValueObjProfile,
                           functionsDispatch) => {
     test(descriptionTest, async () => {
         authApi
             .getAuthMe
             .mockReturnValue(Promise.resolve(mockReturnValueObj));
+        profileApi
+            .getProfile
+            .mockReturnValue(Promise.resolve(mockReturnValueObjProfile))
         const thunk = authMe();
         await thunk(dispatchMock);
         expect(dispatchMock).toBeCalledTimes(functionsDispatch.length);
@@ -41,19 +46,26 @@ const testAuthFunction = (descriptionTest,
     });
 }
 
-testAuthFunction("Тест проверки на авторизованность сеанса авторизовался: ",
+testAuthFunction("Тест проверки на авторизованность сеанса авторизовался, получил аватарку: ",
     {data: {resultCode: 0, data: {id: "0", email: 'ar@gmail.com', login: 'none', isAuth: true}}},
+    {status: 200, data: ""},
     [{
         f: setUserDataAC,
         parameters: ["0", 'ar@gmail.com', 'none', true],
     },
         {
+            f: setAvatarAuthPanelAC,
+            parameters: [""],
+        },
+        {
             f: openMainControlPanelAC,
             parameters: [true],
-        }]);
+        }
+        ]);
 
 testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
     {data: {resultCode: 2}},
+    {status: 200, data: ""},
     [{
         f: setUserDataAC,
         parameters: [DEFAULT_USER_ID],
@@ -61,6 +73,7 @@ testAuthFunction("Тест проверки на авторизованност�
 
 testAuthFunction("Тест проверки на авторизованность сеанса ошибка: ",
     {data: {resultCode: 1}},
+    {status: 200, data: ""},
     []);
 
 
@@ -106,11 +119,12 @@ test("Тест завершения сеанса авторизации: ", asyn
         .mockReturnValue(Promise.resolve({data: {resultCode: 0}}));
     const thunk = logOut();
     await thunk(dispatchMock);
-    expect(dispatchMock).toBeCalledTimes(4);
     expect(dispatchMock).toHaveBeenNthCalledWith(1, setUserDataAC(DEFAULT_USER_ID));
-    expect(dispatchMock).toHaveBeenNthCalledWith(2, openMainControlPanelAC(false));
-    expect(dispatchMock).toHaveBeenNthCalledWith(3, openOwnerPageControlPanelAC(false));
-    expect(dispatchMock).toHaveBeenNthCalledWith(4, openQuestPageControlPanelAC(false));
+    expect(dispatchMock).toHaveBeenNthCalledWith(2, setAvatarAuthPanelAC({photos: {small: null}}))
+    expect(dispatchMock).toHaveBeenNthCalledWith(3, openMainControlPanelAC(false));
+    expect(dispatchMock).toHaveBeenNthCalledWith(4, openOwnerPageControlPanelAC(false));
+    expect(dispatchMock).toHaveBeenNthCalledWith(5, openQuestPageControlPanelAC(false));
+    expect(dispatchMock).toBeCalledTimes(5);
 });
 
 test("Тест завершения сеанса авторизации (ошибка на сервере): ", async () => {
