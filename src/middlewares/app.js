@@ -47,28 +47,23 @@ export const checkOwnerOrQuest = (userId) => {
     return (dispatch, getState) => {
         const isAuth = getState().auth.isAuth;
         const myId = getState().auth.myId;
-
-        // открыть панель управления владельца страницы
-        if (((userId === myId) && isAuth) || (!userId && isAuth)) {
-            openOwnerPageControlPanel(dispatch, true);
-        }
-
-        // закрыть панель управления владельца страницы
-        if (!isAuth || (userId && userId !== myId)) {
+        if (!isAuth) { // не авторизован, закрыть все панели управления
             openOwnerPageControlPanel(dispatch, false);
-        }
-
-        // открыть панель управления гостя страницы
-        if (isAuth && (userId && userId !== myId)) {
-            openQuestPageControlPanel(dispatch, true);
-        }
-
-        // закрыть панель управления гостя страницы
-        if (!isAuth || (userId === myId)) {
             openQuestPageControlPanel(dispatch, false);
+            return;
+        }
+        if ((userId === myId) || !userId) { // открыть панель управления владельца и закрыть гостя
+            openOwnerPageControlPanel(dispatch, true);
+            openQuestPageControlPanel(dispatch, false);
+
+        }
+        if (userId && userId !== myId) { // открыть панель управления гостя и закрыть владельца
+            openOwnerPageControlPanel(dispatch, false);
+            openQuestPageControlPanel(dispatch, true);
         }
     }
 }
+
 
 
 
