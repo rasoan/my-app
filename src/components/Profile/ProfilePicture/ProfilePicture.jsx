@@ -6,7 +6,7 @@ import ReactAvatarEditor from "react-avatar-editor";
 
 const ProfilePicture = (props) => {
   const {photos, onSubmit, fileInputRef, ownerPageControlPanel, updateProfilePicture} = props;
-  const [image, setImage] = useState("avatar.jpg");
+  const [image, setImage] = useState(null);
   const [scale, setScale] = useState(1);
   const [preview, setPreview] = useState(null);
   const [editor, setEditor] = useState(null);
@@ -16,13 +16,19 @@ const ProfilePicture = (props) => {
   };
 
   const handleSave = (data) => {
-    editor.loadingImage.then(element => console.log(element))
-    setPreview(editor.getImage().toDataURL());
-    editor.getImageScaledToCanvas().toBlob((blob) => {
-      console.log(blob)
-      const file = new File([blob], "fileName.png", { type: "image/png" });
-      updateProfilePicture(file);
-    });
+    if (editor.props.image && (editor.props.image.type === "image/jpeg" || editor.props.image.type === "image/png")) {
+      setPreview(editor.getImage().toDataURL());
+      editor.getImageScaledToCanvas().toBlob((blob) => {
+        const file = new File([blob], "fileName.png", {type: "image/png"});
+        updateProfilePicture(file);
+      });
+    }
+    else if (editor.props.image) {
+      console.log("Ошибка, проверьте тип загружаемого файла, он должен быть в формате jpg или png.")
+    }
+    else {
+      console.log("Выберите пожалуйста изображение.")
+    }
   };
 
   const handleScale = (e) => {
