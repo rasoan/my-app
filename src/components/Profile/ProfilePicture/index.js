@@ -10,15 +10,18 @@ const fileInputRef = React.createRef();
 const ProfilePictureContainer = (props) => {
     const {photos, updateProfilePicture, fileInputRef, ownerPageControlPanel} = props;
 
-    const onSubmit = (event) => {
-        event.preventDefault();
-        updateProfilePicture(fileInputRef.current);
-    }
+    // const onSubmit = (event) => {
+    //     event.preventDefault();
+    //     updateProfilePicture(fileInputRef.current);
+    // }
+    // const onSubmit = (element) => {
+    //     updateProfilePicture(element);
+    // }
 
     return <ProfilePicture photos={photos}
-                           onSubmit={onSubmit}
                            fileInputRef={fileInputRef}
-                           ownerPageControlPanel={ownerPageControlPanel}/>;
+                           ownerPageControlPanel={ownerPageControlPanel}
+                           updateProfilePicture={updateProfilePicture}/>;
 };
 
 ProfilePictureContainer.propTypes = {

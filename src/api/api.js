@@ -31,15 +31,27 @@ export const profileAPI = {
     updateStatus(status) {
         return instance.put('profile/status', {status: status});
     },
+    // updateProfilePicture(imagefile) {
+    //     let formData = new FormData();
+    //     console.log(imagefile.files[0]);
+    //     formData.append("image", imagefile.files[0]);
+    //     return instance.put('/profile/photo', formData, {
+    //                                                      headers: {
+    //                                                                'Content-Type': 'multipart/form-data'
+    //                                                               }
+    //                                                     }
+    //                                                     );
+    // },
     updateProfilePicture(imagefile) {
         let formData = new FormData();
-        formData.append("image", imagefile.files[0]);
+        console.log(imagefile);
+        formData.append("image", imagefile);
         return instance.put('/profile/photo', formData, {
-                                                         headers: {
-                                                                   'Content-Type': 'multipart/form-data'
-                                                                  }
-                                                        }
-                                                        );
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }
+        );
     },
     saveProfile(profile) {
         return instance.put('/profile', profile)

@@ -5,7 +5,7 @@ import Dropzone from "react-dropzone";
 import ReactAvatarEditor from "react-avatar-editor";
 
 const ProfilePicture = (props) => {
-  const {photos, onSubmit, fileInputRef, ownerPageControlPanel} = props;
+  const {photos, onSubmit, fileInputRef, ownerPageControlPanel, updateProfilePicture} = props;
   const [image, setImage] = useState("avatar.jpg");
   const [scale, setScale] = useState(1);
   const [preview, setPreview] = useState(null);
@@ -16,9 +16,13 @@ const ProfilePicture = (props) => {
   };
 
   const handleSave = (data) => {
-    // const img = this.editor.getImageScaledToCanvas().toDataURL();
-    const img = this.editor.getImage().toDataURL();
-    setPreview(img);
+    editor.loadingImage.then(element => console.log(element))
+    setPreview(editor.getImage().toDataURL());
+    editor.getImageScaledToCanvas().toBlob((blob) => {
+      console.log(blob)
+      const file = new File([blob], "fileName.png", { type: "image/png" });
+      updateProfilePicture(file);
+    });
   };
 
   const handleScale = (e) => {
@@ -41,36 +45,39 @@ const ProfilePicture = (props) => {
       <img className={style.image}
            src={photos?.large}
            alt={"user"}/>
-      {ownerPageControlPanel && <form onSubmit={onSubmit} className={style.profilePictureUpload}>
-         <div className={style.profilePictureUploadBlock}>
-          <input type="file" ref={fileInputRef} />
-          <button type="submit">Загрузить файл</button>
-        </div>
-      </form>}
+      {/*{ownerPageControlPanel && <form onSubmit={onSubmit} className={style.profilePictureUpload}>*/}
+      {/*   <div className={style.profilePictureUploadBlock}>*/}
+      {/*    <input type="file" ref={fileInputRef} />*/}
+      {/*    <button type="submit">Загрузить файл</button>*/}
+      {/*  </div>*/}
+      {/*</form>}*/}
       <div>
         <Dropzone
             onDrop={handleDrop}
             disableClick={true}
             multiple={false}
             style={{
-              width: this.state.width,
-              height: this.state.height,
+              width: "270px",
+              height: "300px",
               marginBottom: "35px"
             }}
         >
-          <div>
+          {() => {
+          return (<div>
             <ReactAvatarEditor
                 ref={setEditorRef}
                 scale={parseFloat(scale)}
-                width={150}
-                height={150}
+                width={270}
+                height={300}
                 rotate={0}
                 border={25}
                 image={image}
                 className="editor-canvas"
             />
-          </div>
+          </div>)
+        }}
         </Dropzone>
+        <br />
         <br />
         New File:
         <input name="newImage" type="file" onChange={handleNewImage} />
@@ -80,16 +87,16 @@ const ProfilePicture = (props) => {
             name="scale"
             type="range"
             onChange={handleScale}
-            min="1"
+            min={"1"}
             max="2"
             step="0.01"
             defaultValue="1"
         />
         <br />
         <br />
-        <input type="button" onClick={handleSave} value="Preview" />
+        <input type="button" onClick={handleSave} value="Сохранить" />
         <br />
-        {!!preview && <img src={preview.img} />}
+        {!!preview && <img src={preview} />}
       </div>
     </div>
   );
