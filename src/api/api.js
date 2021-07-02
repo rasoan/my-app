@@ -44,7 +44,6 @@ export const profileAPI = {
     // },
     updateProfilePicture(imagefile) {
         let formData = new FormData();
-        console.log(imagefile);
         formData.append("image", imagefile);
         return instance.put('/profile/photo', formData, {
                 headers: {

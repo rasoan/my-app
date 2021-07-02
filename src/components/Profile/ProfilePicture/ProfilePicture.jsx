@@ -59,7 +59,7 @@ const ProfilePicture = (props) => {
           variant="body2"
           className={style.uploadFileButton}
       >
-        Загрузка файла
+        Загрузить фотографию
         <input
             type="file"
             onChange={handleNewImage}

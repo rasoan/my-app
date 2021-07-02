@@ -16,6 +16,9 @@ export const getProfile = (userId) => {
     dispatch(action);
     let response = await profileAPI.getProfile(userId);
     if (response.status === 200) {
+      if (!getState().auth.isAuth) {
+        response.data.photos.small = null;
+      }
       action = setUserProfileAC(response.data);
       dispatch(action);
     }

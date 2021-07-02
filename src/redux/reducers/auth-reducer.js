@@ -7,7 +7,6 @@ LOG_OUT,
 GET_CAPTCHA} from '../actions/types/action-types';
 
 let initialState = {
-    avatarAuthPanel: null,
     userId: DEFAULT_USER_ID,
     isAuth: false,
     email: null,
@@ -25,11 +24,6 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 ...action.data,
                 isAuth: action.isAuth,
-            }
-        case SET_AVATAR_AUTH_PANEL:
-            return {
-               ...state,
-                avatarAuthPanel: action.profile.photos.small,
             }
         case SIGN_IN:
             return {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import PropTypes from "prop-types";
 import {NavLink} from 'react-router-dom';
 import Avatar from '@material-ui/core/Avatar';
@@ -13,6 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import PermIdentity from '@material-ui/icons/PermIdentity';
 import Email from '@material-ui/icons/Email';
 import {makeStyles} from '@material-ui/core/styles';
+import {setAvatarAuthPanelAC} from "../../redux/actions/creators/auth-creator";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -70,7 +71,6 @@ const AuthorizationPanel = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
-
     return (<>
         {isAuth && <>
             <Button className={classes.mainButton} onClick={handleClick}>

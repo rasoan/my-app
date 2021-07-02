@@ -51,10 +51,10 @@ export const notLookingMyProfileAC = () =>
         type: SET_FLAG_NOT_LOOKING_AT_MY_PROFILE,
     });
 
-export const updateProfilePictureAC = (imagefile) =>
+export const updateProfilePictureAC = (photos) =>
     ({
         type: UPDATE_PROFILE_PICTURE,
-        imagefile,
+        photos,
     })
 
 export const saveProfileAC = (profile) =>
