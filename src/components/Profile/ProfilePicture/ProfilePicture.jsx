@@ -4,14 +4,15 @@ import style from "../Profile.module.scss";
 import Dropzone from "react-dropzone";
 import ReactAvatarEditor from "react-avatar-editor";
 import { Link } from '@material-ui/core';
+import Button from "../../Button";
+import ButtonRange from "../../ButtonRange";
+
 const ProfilePicture = (props) => {
   const {photos, updateProfilePicture} = props;
   const [image, setImage] = useState(null);
   const [scale, setScale] = useState(1);
   const [editor, setEditor] = useState(null);
-
   const inputFileRef = React.useRef();
-
   const handleNewImage = (e) => {
     setImage(e.target.files[0]);
   };
@@ -31,8 +32,8 @@ const ProfilePicture = (props) => {
     }
   };
 
-  const handleScale = (e) => {
-    const scale = parseFloat(e.target.value);
+  const handleScale = (event, value) => {
+    const scale = parseFloat(value);
     setScale(scale);
   };
 
@@ -94,20 +95,16 @@ const ProfilePicture = (props) => {
           </div>)
         }}
         </Dropzone>
-        <br />
-        Zoom:
-        <input
-            name="scale"
-            type="range"
-            onChange={handleScale}
-            min={"1"}
-            max="6"
-            step="0.01"
-            defaultValue="1"
+          <ButtonRange onChange={handleScale}
+                       min={1}
+                       max={5}
+                       step={0.01}
+                       width={250}
+                       text={"Зум"}
+          />
+       <Button text={"Сохранить"}
+               onClick={handleSave}
         />
-        <br />
-        <br />
-        <input type="button" onClick={handleSave} value="Сохранить" />
       </div>
     </div>
   );

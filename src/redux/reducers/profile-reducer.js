@@ -84,7 +84,6 @@ const profileReducer = (state = initialState, action) => {
                 statusText: getStatusText,
                }*/
         case UPDATE_PROFILE_PICTURE:
-            console.log("hello")
             return {
                 ...state,
                 profile: {

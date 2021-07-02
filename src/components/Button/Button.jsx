@@ -3,12 +3,12 @@ import PropTypes from 'prop-types';
 import ButtonMU from '@material-ui/core/Button';
 
 const Button = (props) => {
-    const {handlerClick, text, component,
+    const {onClick, text, component,
            isDisable, color, to, variant} = props;
     return (
         <ButtonMU variant={variant}
                   color={color}
-                  onClick={handlerClick}
+                  onClick={onClick}
                   component={component}
                   disabled={isDisable}
                   to={to}>
@@ -18,7 +18,7 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-    handlerClick: () => {
+    onClick: () => {
     },
     component: 'button',
     isDisable: false,
