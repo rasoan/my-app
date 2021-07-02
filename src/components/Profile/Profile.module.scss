@@ -16,11 +16,29 @@
 
 .profilePictureContainer {
   position: relative;
+  overflow: hidden;
   width: 300px;
   height: min-content;
   display: flex;
   align-items: center;
   flex-direction: column;
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover .uploadFileButton {
+    bottom: 0;
+    text-decoration: none;
+  }
+}
+
+.uploadFileButton {
+  width: 100%;
+  background-color: #0000008a !important;
+  padding: 2px 0 !important;
+  color: white !important;
+  position: absolute !important;
+  bottom: -30px;
+  transition: bottom .3s linear;
 }
 
 .profilePictureUpload {

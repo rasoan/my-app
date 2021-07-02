@@ -3,13 +3,14 @@ import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
 import Dropzone from "react-dropzone";
 import ReactAvatarEditor from "react-avatar-editor";
-
+import { Link } from '@material-ui/core';
 const ProfilePicture = (props) => {
-  const {photos, onSubmit, fileInputRef, ownerPageControlPanel, updateProfilePicture} = props;
+  const {photos, updateProfilePicture} = props;
   const [image, setImage] = useState(null);
   const [scale, setScale] = useState(1);
-  const [preview, setPreview] = useState(null);
   const [editor, setEditor] = useState(null);
+
+  const inputFileRef = React.useRef();
 
   const handleNewImage = (e) => {
     setImage(e.target.files[0]);
@@ -17,7 +18,6 @@ const ProfilePicture = (props) => {
 
   const handleSave = (data) => {
     if (editor.props.image && (editor.props.image.type === "image/jpeg" || editor.props.image.type === "image/png")) {
-      setPreview(editor.getImage().toDataURL());
       editor.getImageScaledToCanvas().toBlob((blob) => {
         const file = new File([blob], "fileName.png", {type: "image/png"});
         updateProfilePicture(file);
@@ -47,16 +47,27 @@ const ProfilePicture = (props) => {
   };
 
   return (
-    <div className={style.profilePictureContainer}>
+    <div>
+      <div className={style.profilePictureContainer}
+           onClick={() => inputFileRef.current.click()}
+      >
       <img className={style.image}
            src={photos?.large}
            alt={"user"}/>
-      {/*{ownerPageControlPanel && <form onSubmit={onSubmit} className={style.profilePictureUpload}>*/}
-      {/*   <div className={style.profilePictureUploadBlock}>*/}
-      {/*    <input type="file" ref={fileInputRef} />*/}
-      {/*    <button type="submit">Загрузить файл</button>*/}
-      {/*  </div>*/}
-      {/*</form>}*/}
+      <Link
+          component="button"
+          variant="body2"
+          className={style.uploadFileButton}
+      >
+        Загрузка файла
+        <input
+            type="file"
+            onChange={handleNewImage}
+            ref={inputFileRef}
+            hidden
+        />
+      </Link>
+      </div>
       <div>
         <Dropzone
             onDrop={handleDrop}
@@ -84,25 +95,19 @@ const ProfilePicture = (props) => {
         }}
         </Dropzone>
         <br />
-        <br />
-        New File:
-        <input name="newImage" type="file" onChange={handleNewImage} />
-        <br />
         Zoom:
         <input
             name="scale"
             type="range"
             onChange={handleScale}
             min={"1"}
-            max="2"
+            max="6"
             step="0.01"
             defaultValue="1"
         />
         <br />
         <br />
         <input type="button" onClick={handleSave} value="Сохранить" />
-        <br />
-        {!!preview && <img src={preview} />}
       </div>
     </div>
   );
