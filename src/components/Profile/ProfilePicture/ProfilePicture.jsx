@@ -1,56 +1,25 @@
 import React, {useState} from "react";
 import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
-import Dropzone from "react-dropzone";
-import ReactAvatarEditor from "react-avatar-editor";
 import { Link } from '@material-ui/core';
-import Button from "../../Button";
-import ButtonRange from "../../ButtonRange";
+import UploaderPhoto from "../../UploaderPhoto";
+import Dialog from "../../Dialog/Dialog";
+
+
 
 const ProfilePicture = (props) => {
   const {photos, updateProfilePicture} = props;
-  const [image, setImage] = useState(null);
-  const [scale, setScale] = useState(1);
-  const [editor, setEditor] = useState(null);
-  const inputFileRef = React.useRef();
-  const handleNewImage = (e) => {
-    setImage(e.target.files[0]);
-  };
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
 
-  const handleSave = (data) => {
-    if (editor.props.image && (editor.props.image.type === "image/jpeg" || editor.props.image.type === "image/png")) {
-      editor.getImageScaledToCanvas().toBlob((blob) => {
-        const file = new File([blob], "fileName.png", {type: "image/png"});
-        updateProfilePicture(file);
-      });
-    }
-    else if (editor.props.image) {
-      console.log("Ошибка, проверьте тип загружаемого файла, он должен быть в формате jpg или png.")
-    }
-    else {
-      console.log("Выберите пожалуйста изображение.")
-    }
-  };
-
-  const handleScale = (event, value) => {
-    const scale = parseFloat(value);
-    setScale(scale);
-  };
-
-  const setEditorRef = (editor) => {
-    if (editor) {
-      setEditor(editor);
-    }
-  };
-
-  const handleDrop = (acceptedFiles) => {
-    setImage(acceptedFiles[0]);
-  };
+  const toggleDialog = (flag) => {
+      setIsOpenDialog(flag);
+      console.log(isOpenDialog)
+  }
 
   return (
     <div>
       <div className={style.profilePictureContainer}
-           onClick={() => inputFileRef.current.click()}
+          onClick={() => toggleDialog(true)}
       >
       <img className={style.image}
            src={photos?.large}
@@ -61,51 +30,11 @@ const ProfilePicture = (props) => {
           className={style.uploadFileButton}
       >
         Загрузить фотографию
-        <input
-            type="file"
-            onChange={handleNewImage}
-            ref={inputFileRef}
-            hidden
-        />
       </Link>
       </div>
-      <div>
-        <Dropzone
-            onDrop={handleDrop}
-            disableClick={true}
-            multiple={false}
-            style={{
-              width: "270px",
-              height: "300px",
-              marginBottom: "35px"
-            }}
-        >
-          {() => {
-          return (<div>
-            <ReactAvatarEditor
-                ref={setEditorRef}
-                scale={parseFloat(scale)}
-                width={270}
-                height={300}
-                rotate={0}
-                border={25}
-                image={image}
-                className="editor-canvas"
-            />
-          </div>)
-        }}
-        </Dropzone>
-          <ButtonRange onChange={handleScale}
-                       min={1}
-                       max={5}
-                       step={0.01}
-                       width={250}
-                       text={"Зум"}
-          />
-       <Button text={"Сохранить"}
-               onClick={handleSave}
-        />
-      </div>
+      <UploaderPhoto updatePhotoFunction={updateProfilePicture} />
+        <Dialog isOpenDialog={isOpenDialog}
+                toggleDialog={toggleDialog} />
     </div>
   );
 };
