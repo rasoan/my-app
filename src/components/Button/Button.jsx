@@ -4,7 +4,8 @@ import ButtonMU from '@material-ui/core/Button';
 
 const Button = (props) => {
     const {onClick, text, component,
-           isDisable, color, to, variant} = props;
+           isDisable, color, to, variant,ref} = props;
+
     return (
         <ButtonMU variant={variant}
                   color={color}

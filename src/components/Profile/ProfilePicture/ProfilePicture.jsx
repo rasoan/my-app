@@ -33,7 +33,8 @@ const ProfilePicture = (props) => {
       </div>
         <Dialog isOpenDialog={isOpenDialog}
                 toggleDialog={setIsOpenDialog}
-                html={<UploaderPhoto updatePhotoFunction={updateProfilePicture} />}
+                dialogTittle={"Загрузка новой фотографии"}
+                dialogContent={<UploaderPhoto updatePhotoFunction={updateProfilePicture} />}
                 />
     </div>
   );

@@ -3,7 +3,8 @@ import Dropzone from "react-dropzone";
 import ReactAvatarEditor from "react-avatar-editor";
 import ButtonRange from "../ButtonRange";
 import Button from "../Button";
-import {Link} from "@material-ui/core";
+import {Container, Grid, GridList} from "@material-ui/core";
+import Box from "@material-ui/core/Box";
 
 const UploaderPhoto = (props) => {
     const {updatePhotoFunction} = props;
@@ -12,11 +13,12 @@ const UploaderPhoto = (props) => {
     const [editor, setEditor] = useState(null);
     const uploadFileRef = React.useRef();
 
-    const handleNewImage = (e) => {
-        setImage(e.target.files[0]);
-    };
+    const handleDown = () => {
+        uploadFileRef.current.value = null;
+        setImage(null);
+    }
 
-    const handleSave = (data) => {
+    const handleSave = () => {
         if (editor.props.image && (editor.props.image.type === "image/jpeg" || editor.props.image.type === "image/png")) {
             editor.getImageScaledToCanvas().toBlob((blob) => {
                 const file = new File([blob], "fileName.png", {type: "image/png"});
@@ -41,21 +43,16 @@ const UploaderPhoto = (props) => {
     };
 
     const handleDrop = (acceptedFiles) => {
+        console.log("hello")
         setImage(acceptedFiles[0]);
     };
+
     return <div>
-        <Dropzone
-            onDrop={handleDrop}
-            disableClick={true}
-            multiple={false}
-            style={{
-                width: "270px",
-                height: "300px",
-                marginBottom: "35px"
-            }}
-        >
-            {() => {
-                return (<div>
+        <Dropzone onDrop={handleDrop}>
+            {({ getRootProps, getInputProps }) => (
+                <div {...getRootProps({ className: "dropzone" })}>
+                    <input {...getInputProps()}
+                           ref={uploadFileRef} />
                     <ReactAvatarEditor
                         ref={setEditorRef}
                         scale={parseFloat(scale)}
@@ -66,9 +63,11 @@ const UploaderPhoto = (props) => {
                         image={image}
                         className="editor-canvas"
                     />
-                </div>)
-            }}
+                </div>
+            )}
         </Dropzone>
+
+        <Box display="flex" justifyContent="center" alignItems="center">
         <ButtonRange onChange={handleScale}
                      min={1}
                      max={5}
@@ -76,22 +75,21 @@ const UploaderPhoto = (props) => {
                      width={250}
                      text={"Зум"}
         />
-        <Link
-            component="button"
-            variant="body2"
-             onClick={() => uploadFileRef.current.click()}
-        >
-            Загрузить фотографию
-            <input
-                type="file"
-                onChange={handleNewImage}
-                ref={uploadFileRef}
-                hidden
-            />
-        </Link>
-        <Button text={"Сохранить"}
-                onClick={handleSave}
-        />
+        </Box>
+        <Grid container justify={"center"} spacing={3}>
+            {!image && <Grid item>
+                <Button text={"Загрузить фотографию"}
+                        onClick={() => uploadFileRef.current.click()}/>
+            </Grid>}
+            {image && <Grid item>
+                <Button text={"Сохранить"}
+                        onClick={handleSave}/>
+            </Grid>}
+            {image && <Grid item>
+                <Button text={"Вернутся назад"}
+                        onClick={handleDown}/>
+            </Grid>}
+        </Grid>
     </div>
 }
 

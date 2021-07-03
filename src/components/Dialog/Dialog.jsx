@@ -5,13 +5,13 @@ import Dialog from '@material-ui/core/Dialog';
 import {DialogContent} from "@material-ui/core";
 
 const MyDialog = (props) => {
-    const {toggleDialog, isOpenDialog, html} = props;
+    const {toggleDialog, isOpenDialog, dialogTittle, dialogContent} = props;
 
     return (
         <Dialog onClose={() => toggleDialog(false)} aria-labelledby="simple-dialog-title" open={isOpenDialog}>
-            <DialogTitle id="simple-dialog-title">Оба, дарова</DialogTitle>
+            <DialogTitle id="simple-dialog-title">{dialogTittle}</DialogTitle>
             <DialogContent dividers>
-              {html}
+              {dialogContent}
             </DialogContent>
         </Dialog>
     );
