@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone";
 import ReactAvatarEditor from "react-avatar-editor";
 import ButtonRange from "../ButtonRange";
 import Button from "../Button";
-import {Container, Grid, GridList, Paper} from "@material-ui/core";
+import {Grid} from "@material-ui/core";
 import Box from "@material-ui/core/Box";
 import {makeStyles} from '@material-ui/core';
 import Typography from "@material-ui/core/Typography";
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
         alignItems: "center",
     },
     uploadFileBoxOnDrop: {
-        backgroundColor: "#2ce4058f",
+        backgroundColor: "#3c463a21",
     }
 });
 
@@ -70,22 +70,18 @@ const UploaderPhoto = (props) => {
 
     const dragOverHandler = () => {
         setDragOver(true);
-        console.log("Изображение наведено");
     }
 
     const dragLeaveHandler = () => {
         setDragOver(false);
-        console.log("Изображение покинуло поле");
     }
-// `${classes.root} ${dragOver ? classes.dragOver : !image ? classes.dragLeave: classes.dragDefault}`
+
     return <div>
         <Dropzone onDrop={handleDrop}
                   onDragEnter={dragOverHandler}
                   onDragLeave={dragLeaveHandler}>
             {({getRootProps, getInputProps}) => (
-                <div style={{width: 320, height: 320, display: "flex", justifyContent: "center", alignItems: "center"}}
-                     {...getRootProps({className: "dropzone"})}
-                     onClick={() => uploadFileRef.current.click()}
+                <div {...getRootProps({className: "dropzone"})}
                      className={`${style.dropzone} ${dragOver ? style.dropzoneDragOver : !image ? style.dropzoneDragLeave : style.transparentBorder}`}
                 >
                     <input {...getInputProps()}
@@ -101,6 +97,7 @@ const UploaderPhoto = (props) => {
                         className="editor-canvas"
                     />}
                     {!image && <Box className={`${classes.uploadFileBox} ${dragOver && classes.uploadFileBoxOnDrop}`}
+                                    onClick={() => uploadFileRef.current.click()}
                                     display={"flex"}>
                         <Typography variant="h8" component="span">Загрузить фотографию</Typography>
                     </Box>}
