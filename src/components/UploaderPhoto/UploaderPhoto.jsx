@@ -26,7 +26,7 @@ const useStyles = makeStyles({
 });
 
 const UploaderPhoto = (props) => {
-    const {updatePhotoFunction} = props;
+    const {updatePhotoFunction, messageSubmitPhotoResult} = props;
     let classes = useStyles({border: "1px solid black"});
     const [image, setImage] = useState(null);
     const [scale, setScale] = useState(1);
@@ -116,6 +116,7 @@ const UploaderPhoto = (props) => {
                          text={"Зум"}
             />
         </Box>
+        {messageSubmitPhotoResult && <Typography color={"error"}>{messageSubmitPhotoResult}</Typography>}
         <Grid container justify={"center"} spacing={3}>
             {!image && <Grid item>
                 <Button text={"Загрузить фотографию"}

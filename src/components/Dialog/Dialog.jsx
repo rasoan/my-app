@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import {DialogContent} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
 
 const MyDialog = (props) => {
     const {toggleDialog, isOpenDialog, dialogTittle, dialogContent} = props;

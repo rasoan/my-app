@@ -63,6 +63,10 @@ export const updateProfilePicture = (imagefile) => {
     if (response.data.resultCode === 0) {
       let action = updateProfilePictureAC(response.data.data.photos);
       dispatch(action);
+      return true;
+    }
+    else {
+      return false;
     }
   }
 }
