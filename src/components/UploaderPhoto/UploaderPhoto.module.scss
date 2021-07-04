@@ -1,0 +1,60 @@
+.dropzone {
+  position: relative;
+  padding: 30px;
+  border: 2px solid transparent;
+}
+
+.dropzone::before, .dropzone::after, .dropzoneBottomRL::before, .dropzoneBottomRL::after {
+  display: block;
+  content: "";
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  border-color: transparent;
+}
+
+.dropzone::before {
+  top: -2px;
+  left: -2px;
+  border-top: 2px solid;
+  border-left: 2px solid;
+}
+
+.dropzone::after {
+  top: -2px;
+  right: -2px;
+  border-top: 2px solid;
+  border-right: 2px solid;
+}
+
+.dropzoneBottomRL::before {
+  bottom: -2px;
+  left: -2px;
+  border-bottom: 2px solid;
+  border-left: 2px solid;
+}
+
+.dropzoneBottomRL::after {
+  bottom: -2px;
+  right: -2px;
+  border-bottom: 2px solid;
+  border-right: 2px solid;
+}
+
+.dropzoneDragOver::before,
+.dropzoneDragOver::after,
+.dropzoneBottomRLDragOver::before,
+.dropzoneBottomRLDragOver::after {
+  border-color: green;
+}
+
+.dropzoneDragLeave::before,
+.dropzoneDragLeave::after,
+.dropzoneBottomRLDragLeave::before,
+.dropzoneBottomRLDragLeave::after {
+  border-color: black;
+}
+
+.transparentBorder::before, .transparentBorder::after  {
+  border-color: transparent;
+}
