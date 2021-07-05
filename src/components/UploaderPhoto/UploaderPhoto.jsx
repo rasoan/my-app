@@ -40,17 +40,13 @@ const UploaderPhoto = (props) => {
     }
 
     const handleSave = () => {
-        if (editor.props.image && (editor.props.image.type === "image/jpeg" || editor.props.image.type === "image/png")) {
-            editor.getImageScaledToCanvas().toBlob((blob) => {
-                const file = new File([blob], "fileName.png", {type: "image/png"});
-                updatePhotoFunction(file);
-            });
-        } else if (editor.props.image) {
-            console.log("Ошибка, проверьте тип загружаемого файла, он должен быть в формате jpg или png.")
-        } else {
-            console.log("Выберите пожалуйста изображение.")
-        }
-    };
+
+        editor.getImageScaledToCanvas().toBlob((blob) => {
+            const file = new File([blob], "fileName.png", {type: "image/png"});
+            updatePhotoFunction(file);
+        });
+    }
+
 
     const handleScale = (event, value) => {
         const scale = parseFloat(value);

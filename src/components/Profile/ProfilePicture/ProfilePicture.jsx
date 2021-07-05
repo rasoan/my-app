@@ -26,11 +26,12 @@ const ProfilePicture = (props) => {
   }
 
   return (
-    <div>
       <div className={`${style.profilePictureContainer} ${ownerPageControlPanel && style.profilePictureContainerHoverEffect}`}
           onClick={ownerPageControlPanel ? () => toggleDialog(true): null}
       >
       <img className={style.image}
+           width="100%"
+           height="100%"
            src={photos?.large}
            alt={"user"}/>
           {ownerPageControlPanel && <Link
@@ -40,14 +41,13 @@ const ProfilePicture = (props) => {
       >
         Загрузить фотографию
       </Link>}
-      </div>
         <Dialog isOpenDialog={isOpenDialog}
                 toggleDialog={setIsOpenDialog}
                 dialogTittle={"Загрузка новой фотографии"}
                 dialogContent={<UploaderPhoto updatePhotoFunction={onClickUpdatePhoto}
                                               messageSubmitPhotoResult={messageSubmitPhotoResult} />}
                 />
-    </div>
+      </div>
   );
 };
 

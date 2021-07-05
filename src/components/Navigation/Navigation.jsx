@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
     // necessary for content to be below app bar
     toolbar: {
-        ...theme.mixins.toolbar,
         marginTop: '20px',
         minHeight: '0 !important',
         height: '0 !important',
@@ -43,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawerPaper: {
         width: drawerWidth,
+        backgroundColor: '#edeef0 !important',
     },
     drawerPaperLarge: {
         position: "static",

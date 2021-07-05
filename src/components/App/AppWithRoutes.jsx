@@ -10,11 +10,12 @@ import ProfilePage from '../../pages/ProfilePage';
 import DialogsPage from '../../pages/DialogsPage';
 import UsersPage from '../../pages/UsersPage';
 import MessagesPage from '../../pages/MessagesPage';
+import {Container} from "@material-ui/core";
 
 const All = () => {
     return (<>
         <Header/>
-        <div className={style.container}>
+        <Container style={{display: "flex", height: "100%", backgroundColor: "#edeef0"}}>
             <Navigation/>
             <Switch>
                 <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
@@ -25,7 +26,7 @@ const All = () => {
                 <Route path={PATH.USERS} component={UsersPage}/>
                 <Route path={PATH.ALL} render={() => <h2>Error 404, not found!</h2>}/>
             </Switch>
-        </div>
+</Container>
     </>);
 }
 
