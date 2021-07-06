@@ -10,6 +10,8 @@ import ListItem from '@material-ui/core/ListItem';
 import {makeStyles, useTheme} from '@material-ui/core/styles';
 import {NavLink} from "react-router-dom";
 import PATH from "../../constants/path";
+import {ListItemIcon} from "@material-ui/core";
+import InboxIcon from '@material-ui/icons/Inbox';
 
 
 const drawerWidth = 200;
@@ -30,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
             marginLeft: drawerWidth,
         },
     },
-
     // necessary for content to be below app bar
     toolbar: {
         marginTop: '20px',
@@ -43,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     drawerPaper: {
         width: drawerWidth,
         backgroundColor: '#edeef0 !important',
+        border: "none",
     },
     drawerPaperLarge: {
         position: "static",
@@ -63,9 +65,14 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     listItem: {
-      padding: 0,
+        padding: 0,
     },
+    divider: {
+        width: "60%",
+    }
 }));
+
+
 
 const MyDrawer = (props) => {
     const {classes, classToolbar, clickProfileLink} = props;
@@ -75,49 +82,51 @@ const MyDrawer = (props) => {
             <div className={classToolbar}/>
             <List>
                 <ListItem button className={classes.listItem}>
-                    <Link    component={NavLink}
-                             className={classes.navLink}
-                             onClick={clickProfileLink}
-                             to={PATH.PROFILE}>
+                    <Link component={NavLink}
+                          className={classes.navLink}
+                          onClick={clickProfileLink}
+                          to={PATH.PROFILE}>
+                        <ListItemIcon>
+                            <InboxIcon />
+                        </ListItemIcon>
                         Profile
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             className={classes.navLink}
-                             to={PATH.DIALOGS}>
+                          className={classes.navLink}
+                          to={PATH.DIALOGS}>
                         Dialogs
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             className={classes.navLink}
-                             to={PATH.NEWS}>
+                          className={classes.navLink}
+                          to={PATH.NEWS}>
                         News
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             className={classes.navLink}
-                             to={PATH.MUSIC}>
+                          className={classes.navLink}
+                          to={PATH.MUSIC}>
                         Music
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             className={classes.navLink}
-                             to={PATH.USERS}>
+                          className={classes.navLink}
+                          to={PATH.USERS}>
                         Users
                     </Link>
                 </ListItem>
-
             </List>
-            <Divider/>
+            <Divider variant={"middle"} className={classes.divider}/>
             <List>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
-                             className={classes.navLink}
-                             to={PATH.SETTINGS}>
+                          className={classes.navLink}
+                          to={PATH.SETTINGS}>
                         Settings
                     </Link>
                 </ListItem>
@@ -136,7 +145,6 @@ const Navigation = (props) => {
 
     return (<div className={classes.navigationPanelZindex}>
         <div className={classes.root}>
-            <CssBaseline/>
             <nav className={classes.drawer} aria-label="mailbox folders">
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
                 <Hidden smUp implementation="css">

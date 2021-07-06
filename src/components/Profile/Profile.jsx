@@ -44,7 +44,7 @@ const Profile = (props) => {
     return (
         <div className={style.ProfileContainer}>
             <Grid container display={"flex"}>
-                {!editMode && <Box p={2} className={classes.root}>
+                {!editMode && <Box p={2} mb={2} mt={2} className={classes.root}>
                     <ProfilePicture />
                     {ownerPageControlPanel && <Button className={classes.setEditModeButton}
                                                       fullWidth onClick={() => setEditMode(true)}

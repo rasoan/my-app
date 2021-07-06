@@ -1,6 +1,5 @@
 import React from "react";
 import PropTypes from "prop-types";
-import style from "../Profile.module.scss";
 import {useForm} from "react-hook-form";
 
 const ProfileDataForm = (props) => {

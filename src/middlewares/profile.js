@@ -74,6 +74,7 @@ export const updateProfilePicture = (imagefile) => {
 export const saveProfile = (profile) => {
   return async (dispatch, getState) => {
     let id = getState().auth.userId;
+    console.log(profile);
     let response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === 0) {
       let response = await profileAPI.getProfile(id)
