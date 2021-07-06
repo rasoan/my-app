@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
+import Status from "../Status";
 
 const ProfileDescriptionViewMode = (props) => {
     const {profile, setEditMode, ownerPageControlPanel} = props;
 
-    return (<div className={style.ProfileInfoContainer}>
-              {ownerPageControlPanel && <button onClick={() => setEditMode(true)}>Редактировать</button>}
+    return (<div>
               <div>
-                <p><b>Fullname:</b> {profile.fullName}</p>
+                  <p><strong>{profile.fullName}</strong></p>
+                  <Status/>
                 <p><b>Looking for a job:</b> {profile.lookingForAJob ? "Yes": "No"}</p>
               </div>
               {profile.lookingForAJob && 

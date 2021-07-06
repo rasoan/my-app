@@ -2,20 +2,13 @@ import React, {useState} from "react";
 import PropTypes from "prop-types";
 import ProfileDescriptionEditMode from "./ProfileDescriptionEditMode";
 import ProfileDescriptionViewMode from "./ProfileDescriptionViewMode";
-
 const ProfileDescriptionContainer = (props) => {
-    const {profile, saveProfile, ownerPageControlPanel} = props;
-
-    const [editMode, setEditMode] = useState(false);
-
-    const onSubmit = async (formData) => {
-        await saveProfile(formData);
-        setEditMode(false)
-    }
+    const {profile, ownerPageControlPanel, editMode, setEditMode, onSubmitProfileInfo} = props;
 
     return (
         <>
-            {editMode ? <ProfileDescriptionEditMode handleProfile={onSubmit}
+
+            {editMode ? <ProfileDescriptionEditMode onSubmitProfileInfo={onSubmitProfileInfo}
                                                     setEditMode={setEditMode}
                                                     profile={profile}
                                                     initialValues={profile} />:
