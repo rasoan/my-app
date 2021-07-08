@@ -10,6 +10,7 @@ const ProfilePicture = (props) => {
   const [isOpenDialog, setIsOpenDialog] = useState(false);
   const [messageSubmitPhotoResult, setMessageSubmitPhotoResult] = useState(null);
   const toggleDialog = (flag) => {
+      console.log("hflaglo ", flag);
       setIsOpenDialog(flag);
   }
 
@@ -20,12 +21,12 @@ const ProfilePicture = (props) => {
           setMessageSubmitPhotoResult(null);
       }
       else {
-          console.log("error")
-          setMessageSubmitPhotoResult("Возникла ошибка и фотография не обновлена.")
+          console.log("error");
+          setMessageSubmitPhotoResult("Возникла ошибка и фотография не обновлена.");
       }
   }
 
-  return (
+  return (<>
       <div className={`${style.profilePictureContainer} ${ownerPageControlPanel && style.profilePictureContainerHoverEffect}`}
           onClick={ownerPageControlPanel ? () => toggleDialog(true): null}
       >
@@ -41,14 +42,15 @@ const ProfilePicture = (props) => {
       >
         Загрузить фотографию
       </Link>}
+      </div>
         <Dialog isOpenDialog={isOpenDialog}
-                toggleDialog={setIsOpenDialog}
+                toggleDialog={toggleDialog}
                 dialogTittle={"Загрузка новой фотографии"}
                 dialogContent={<UploaderPhoto updatePhotoFunction={onClickUpdatePhoto}
                                               messageSubmitPhotoResult={messageSubmitPhotoResult} />}
                 />
-      </div>
-  );
+
+  </>);
 };
 
 ProfilePicture.propTypes = {
