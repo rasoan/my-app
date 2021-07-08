@@ -74,13 +74,13 @@ const useStyles = makeStyles((theme) => ({
         }
     },
     listItemIcon: {
-      minWidth: 35,
+        minWidth: 35,
+        color: "#3f51b5",
     },
     divider: {
         width: "60%",
     }
 }));
-
 
 
 const MyDrawer = (props) => {
@@ -95,40 +95,40 @@ const MyDrawer = (props) => {
                           className={classes.navLink}
                           onClick={clickProfileLink}
                           to={PATH.PROFILE}>
-                        <ListItemIcon className={classes.listItemIcon}><Person /></ListItemIcon>
-                        <ListItemText primary={"Профайл"} />
+                        <ListItemIcon className={classes.listItemIcon}><Person/></ListItemIcon>
+                        <ListItemText primary={"Профайл"}/>
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
                           className={classes.navLink}
                           to={PATH.DIALOGS}>
-                        <ListItemIcon className={classes.listItemIcon}><Send /></ListItemIcon>
-                        <ListItemText primary={"Сообщения"} />
+                        <ListItemIcon className={classes.listItemIcon}><Send/></ListItemIcon>
+                        <ListItemText primary={"Сообщения"}/>
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
                           className={classes.navLink}
                           to={PATH.NEWS}>
-                        <ListItemIcon className={classes.listItemIcon}><LocalLibrary /></ListItemIcon>
-                        <ListItemText primary={"Новости"} />
+                        <ListItemIcon className={classes.listItemIcon}><LocalLibrary/></ListItemIcon>
+                        <ListItemText primary={"Новости"}/>
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
                           className={classes.navLink}
                           to={PATH.MUSIC}>
-                        <ListItemIcon className={classes.listItemIcon}><MusicNote /></ListItemIcon>
-                        <ListItemText primary={"Музыка"} />
+                        <ListItemIcon className={classes.listItemIcon}><MusicNote/></ListItemIcon>
+                        <ListItemText primary={"Музыка"}/>
                     </Link>
                 </ListItem>
                 <ListItem button className={classes.listItem}>
                     <Link component={NavLink}
                           className={classes.navLink}
                           to={PATH.USERS}>
-                        <ListItemIcon className={classes.listItemIcon}><PeopleOutline /></ListItemIcon>
-                        <ListItemText primary={"Людины"} />
+                        <ListItemIcon className={classes.listItemIcon}><PeopleOutline/></ListItemIcon>
+                        <ListItemText primary={"Людины"}/>
                     </Link>
                 </ListItem>
             </List>
@@ -138,8 +138,8 @@ const MyDrawer = (props) => {
                     <Link component={NavLink}
                           className={classes.navLink}
                           to={PATH.SETTINGS}>
-                        <ListItemIcon className={classes.listItemIcon}><Settings /></ListItemIcon>
-                        <ListItemText primary={"Настройки"} />
+                        <ListItemIcon className={classes.listItemIcon}><Settings/></ListItemIcon>
+                        <ListItemText primary={"Настройки"}/>
                     </Link>
                 </ListItem>
             </List>
