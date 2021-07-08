@@ -16,7 +16,7 @@ const useStyles = makeStyles({
         height: 'min-content',
     },
     setEditModeButton: {
-        margin: "10px 0",
+        margin: "10px 0 0",
         backgroundColor: "#edeef0",
         color: "black",
         fontWeight: "normal",
