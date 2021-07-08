@@ -11,6 +11,7 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
   const [status, setStatus] = useState(statusGlobalState);
 
   const activateEditMode = () => {
+    console.log("hello")
     setEditMode(true);
   }
   

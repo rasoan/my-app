@@ -74,8 +74,7 @@
 }
 
 .postImage {
-  border: 1px solid black;
-  border-radius: 50%;
+  border: none;
   margin-right: 10px;
 } 
 
@@ -87,12 +86,9 @@
   display: block;
   min-width: 164px;
   max-width: max-content;
-  border: 1px solid black;
-  border-radius: 6px;
   word-break: break-all;
   &:hover {
     cursor: pointer;
-    background-color: rgb(214, 204, 204);
   }
 }
 

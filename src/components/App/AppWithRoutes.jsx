@@ -15,7 +15,7 @@ import {Container} from "@material-ui/core";
 const All = () => {
     return (<>
         <Header/>
-        <Container style={{display: "flex", height: "100%", backgroundColor: "#edeef0"}}>
+        <Container style={{display: "flex", height: "100%"}}>
             <Navigation/>
             <Switch>
                 <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>

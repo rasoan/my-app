@@ -3,11 +3,12 @@ import PropTypes from "prop-types";
 import style from "../Profile.module.scss";
 import Status from "../Status";
 import {Box, makeStyles} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles({
     root: {
         backgroundColor: 'white',
-        height: 'min-content',
     },
     setEditModeButton: {
         margin: "10px 0",
@@ -17,6 +18,9 @@ const useStyles = makeStyles({
         '&:hover': {
             backgroundColor: "#dfe1e4",
         }
+    },
+    fullName: {
+        marginBottom: 4,
     }
 });
 
@@ -24,12 +28,12 @@ const ProfileDescriptionViewMode = (props) => {
     const {profile} = props;
     const classes = useStyles();
     return (<>
-            <Box p={2} m={2} className={classes.root}>
-            <div>
-                <p><strong>{profile.fullName}</strong></p>
+        <Box p={2} m={2} width={540} height={446} className={classes.root}>
+            <Box mb={2}>
+                <Typography className={classes.fullName} variant={"h5"} component={"p"}>{profile.fullName}</Typography>
                 <Status/>
-                <p><b>Looking for a job:</b> {profile.lookingForAJob ? "Yes" : "No"}</p>
-            </div>
+            </Box>
+            <p><b>Looking for a job:</b> {profile.lookingForAJob ? "Yes" : "No"}</p>
             {profile.lookingForAJob &&
             <div>
                 <p>{profile.lookingForAJobDescription}</p>
