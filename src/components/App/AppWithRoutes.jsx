@@ -15,18 +15,22 @@ import {Container} from "@material-ui/core";
 const All = () => {
     return (<>
         <Header/>
-        <Container style={{display: "flex", height: "100%"}}>
+        <Container maxWidth={false} className={style.wrapper} style={{display: "flex", height: "100%", width: "100%", padding: 0}}>
             <Navigation/>
-            <Switch>
-                <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
-                <Route path={PATH.DIALOGS} component={DialogsPage}/>
-                <Route path={PATH.MESSAGES + '/:userId?'} component={MessagesPage}/>
-                <Route path={PATH.PROFILE + '/:userId?'} component={ProfilePage}/>
-                <Route path={PATH.MY_APP + '/:userId?'} component={ProfilePage}/>
-                <Route path={PATH.USERS} component={UsersPage}/>
-                <Route path={PATH.ALL} render={() => <h2>Error 404, not found!</h2>}/>
-            </Switch>
-</Container>
+            <div style={{display: "flex", flexDirection: "column", width: "100%", height: "100%"}}>
+                <div style={{flexGrow: 1, width: "100%"}}>
+                    <Switch>
+                        <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
+                        <Route path={PATH.DIALOGS} component={DialogsPage}/>
+                        <Route path={PATH.MESSAGES + '/:userId?'} component={MessagesPage}/>
+                        <Route path={PATH.PROFILE + '/:userId?'} component={ProfilePage}/>
+                        <Route path={PATH.MY_APP + '/:userId?'} component={ProfilePage}/>
+                        <Route path={PATH.USERS} component={UsersPage}/>
+                        <Route path={PATH.ALL} render={() => <h2>Error 404, not found!</h2>}/>
+                    </Switch>
+                </div>
+            </div>
+        </Container>
     </>);
 }
 

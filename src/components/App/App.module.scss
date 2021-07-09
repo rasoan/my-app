@@ -1,12 +1,5 @@
-html {
+@import "../../styles-global/globalStules.module";
 
-}
-
-body {
-
-}
-
-.container {
-  display: flex;
-  width: 100%;
+.wrapper {
+  background-color: $mainBackgroundColor;
 }

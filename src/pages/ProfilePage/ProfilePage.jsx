@@ -3,8 +3,10 @@ import Profile from "../../components/Profile";
 import PreloaderLinear from '../../components/Preloaders/PreloaderLinear';
 
 const ProfilePage = (props) => {
-    const {getProfile, getStatus, checkOwnerOrQuest, match,
-           myId, isFetching} = props;
+    const {
+        getProfile, getStatus, checkOwnerOrQuest, match,
+        myId, isFetching
+    } = props;
 
     useEffect(() => {
         getProfile(match.params.userId);
@@ -14,7 +16,7 @@ const ProfilePage = (props) => {
 
     return (
         <>
-        {isFetching ? <PreloaderLinear />: <Profile />}
+            {isFetching ? <PreloaderLinear/> : <Profile/>}
         </>
     )
 }
