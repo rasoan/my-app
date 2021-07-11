@@ -4,9 +4,22 @@ import {BrowserRouter} from 'react-router-dom';
 import React from 'react';
 import store from './redux/redux-store.js';
 import {Provider} from "react-redux";
+import Theme from "./ThemeProvider";
+import {createTheme, ThemeProvider} from '@material-ui/core/styles';
+import purple from '@material-ui/core/colors/purple';
+import green from '@material-ui/core/colors/green';
+
+
+const theme = createTheme({
+    backgroundColors: {
+      mainBackgroundColor: "#edeef0",
+    }
+});
 
 ReactDOM.render(<BrowserRouter>
     <Provider store={store}>
-        <App/>
+        <ThemeProvider theme={theme}>
+            <App/>
+        </ThemeProvider>
     </Provider>
 </BrowserRouter>, document.getElementById('root'));

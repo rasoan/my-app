@@ -11,10 +11,19 @@ import DialogsPage from '../../pages/DialogsPage';
 import UsersPage from '../../pages/UsersPage';
 import MessagesPage from '../../pages/MessagesPage';
 import Box from "@material-ui/core/Box";
+import {makeStyles} from "@material-ui/core";
 
-const All = () => {
+const useStyles = makeStyles(theme => ({
+    wrapper: {
+        backgroundColor: theme.backgroundColors.mainBackgroundColor,
+    }
+}));
+
+const All = (props) => {
+console.log(props.theme);
+const classes = useStyles();
     return (<>
-        <Box className={style.wrapper}
+        <Box className={classes.wrapper}
              display={"flex"}
              flexDirection={"column"}
              minHeight={"100vh"}>
