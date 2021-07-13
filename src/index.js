@@ -12,9 +12,20 @@ import green from '@material-ui/core/colors/green';
 
 const theme = createTheme({
     backgroundColors: {
-      mainBackgroundColor: "#edeef0",
+        mainBackgroundColor: "#edeef0",
     }
 });
+
+theme.overrides = {
+    MuiButton: {
+        root: {
+            backgroundColor: "#edeef0",
+            '&:hover': {
+                backgroundColor: "#dfe1e4",
+            }
+        }
+    }
+}
 
 ReactDOM.render(<BrowserRouter>
     <Provider store={store}>

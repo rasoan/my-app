@@ -20,34 +20,22 @@ import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Button from "@material-ui/core/Button";
+import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
     root: {
         backgroundColor: 'white',
     },
-    setEditModeButton: {
-        margin: "10px 0",
-        backgroundColor: "#edeef0",
-        color: "black",
-        fontWeight: "normal",
-        '&:hover': {
-            backgroundColor: "#dfe1e4",
-        }
-    },
     fullName: {
         marginBottom: 4,
-    },
-    nested: {
-        paddingLeft: theme.spacing(4),
-    },
-    listItemContainer: {
-        width: "100%"
     },
     collapsibleButtonLinks: {
         display: "flex",
         justifyContent: "space-between",
+    },
+    linkToSocialNetworks: {
         '&:hover': {
-            backgroundColor: theme.backgroundColors.mainBackgroundColor,
+            cursor: "pointer",
         }
     }
 }));
@@ -62,46 +50,60 @@ const ProfileDescriptionViewMode = (props) => {
     };
 
     return (<>
-            <Box p={2} m={2} width={540} height={"min-content"} className={classes.root}>
-                <Box mb={2}>
+            <Box p={2}
+                 m={2}
+                 width={540}
+                 height={"min-content"}
+                 className={classes.root}>
+                <Box my={2}>
                     <Typography className={classes.fullName} variant={"h5"}
                                 component={"p"}>{profile.fullName}</Typography>
                     <Status/>
                 </Box>
-                <List disablePadding>
-                    {profile.lookingForAJob && <ListItem>
-                        <Typography><b>Работа: </b>{profile.lookingForAJobDescription}</Typography>
-                    </ListItem>}
-                    <ListItem>
-                        <Typography><b>О себе:</b> {profile.aboutMe}</Typography>
-                    </ListItem>
-                        <Divider/>
-                    <ListItem style={{display: "block"}}>
-                        <Button onClick={handleClick}
-                                fullWidth
-                                className={classes.collapsibleButtonLinks}>
-                            <Box display={"flex"}>
-                                <InsertLinkIcon style={{marginRight: 10}}/>
-                                <Typography>Мои социальные сети:</Typography>
-                            </Box>
-                            {open ? <ExpandLess/> : <ExpandMore/>}
-                        </Button>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <List style={{paddingBottom: 0}}>
-                                {profile?.contacts && Object.keys(profile.contacts).map((key, i) => {
-                                    return (<>
-                                        {profile.contacts[key] && <ListItem key={i + key}>
-                                            <ListItemText>
-                                                <Typography><b>{key}: </b>{profile.contacts[key]}</Typography>
-                                            </ListItemText>
-                                        </ListItem>}
-                                    </>)
-                                })}
-                            </List>
-                            <Divider/>
-                        </Collapse>
-                    </ListItem>
-                </List>
+                <Box my={2}>
+                    <List disablePadding>
+                        {profile.lookingForAJob &&
+                        <ListItem>
+                            <Typography><b>Работа: </b>{profile.lookingForAJobDescription}</Typography>
+                        </ListItem>}
+                        <ListItem>
+                            <Typography><b>О себе:</b> {profile.aboutMe}</Typography>
+                        </ListItem>
+                    </List>
+                </Box>
+                <Divider/>
+                <Box my={2}>
+                    <Button onClick={handleClick}
+                            fullWidth
+                            className={classes.collapsibleButtonLinks}>
+                        <Box display={"flex"}>
+                            <InsertLinkIcon style={{marginRight: 10}}/>
+                            <Typography>Мои социальные сети:</Typography>
+                        </Box>
+                        {open ? <ExpandLess/> : <ExpandMore/>}
+                    </Button>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <List style={{paddingBottom: 0}}>
+                            {profile?.contacts && Object.keys(profile.contacts).map((key, i) => {
+                                return (<>
+                                    {profile.contacts[key] && <ListItem key={i + key}>
+                                        <ListItemText inset>
+                                            <Typography><b>{key}: </b>
+                                                <Link className={classes.linkToSocialNetworks}
+                                                      href={profile.contacts[key]}
+                                                      target="_blank"
+                                                      rel="noreferrer"
+                                                >{profile.contacts[key]}
+                                                </Link>
+                                            </Typography>
+                                        </ListItemText>
+                                    </ListItem>}
+                                </>)
+                            })}
+                        </List>
+                    </Collapse>
+                </Box>
+                <Divider/>
             </Box>
         </>
     );

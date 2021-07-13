@@ -17,12 +17,7 @@ const useStyles = makeStyles({
     },
     setEditModeButton: {
         margin: "10px 0 0",
-        backgroundColor: "#edeef0",
-        color: "black",
         fontWeight: "normal",
-        '&:hover': {
-            backgroundColor: "#dfe1e4",
-        }
     }
 });
 
@@ -48,7 +43,6 @@ const Profile = (props) => {
                     <ProfilePicture />
                     {ownerPageControlPanel && <Button className={classes.setEditModeButton}
                                                       fullWidth onClick={() => setEditMode(true)}
-                                                      color="primary"
                     >Редактировать</Button>}
                 </Box>}
                 <ProfileDescription editMode={editMode}
