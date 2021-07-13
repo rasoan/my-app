@@ -11,25 +11,28 @@ import DialogsPage from '../../pages/DialogsPage';
 import UsersPage from '../../pages/UsersPage';
 import MessagesPage from '../../pages/MessagesPage';
 import Box from "@material-ui/core/Box";
-import {makeStyles} from "@material-ui/core";
+import {Container, makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
     wrapper: {
         backgroundColor: theme.backgroundColors.mainBackgroundColor,
+    },
+    mainContainerContent: {
+        display: "flex",
+        flexGrow: 1,
+        minWidth: 1232,
     }
 }));
 
 const All = (props) => {
-console.log(props.theme);
-const classes = useStyles();
+    const classes = useStyles();
+
     return (<>
         <Box className={classes.wrapper}
-             display={"flex"}
-             flexDirection={"column"}
              minHeight={"100vh"}>
             <Header/>
-            <Box display={"flex"}
-                 flexGrow={1}>
+            <Container
+                className={classes.mainContainerContent}>
                 <Navigation/>
                 <Switch>
                     <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
@@ -40,7 +43,7 @@ const classes = useStyles();
                     <Route path={PATH.USERS} component={UsersPage}/>
                     <Route path={PATH.ALL} render={() => <h2>Error 404, not found!</h2>}/>
                 </Switch>
-            </Box>
+            </Container>
         </Box>
 
     </>);
