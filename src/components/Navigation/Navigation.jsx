@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
     navLink: {
         display: "flex",
         alignItems: "center",
-        padding: '8px 0 8px 40px',
+        padding: '8px 0',
         width: '100%',
         '&:hover': {
             textDecoration: 'none',

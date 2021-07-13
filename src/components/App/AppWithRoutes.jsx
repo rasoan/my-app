@@ -20,7 +20,17 @@ const useStyles = makeStyles(theme => ({
     mainContainerContent: {
         display: "flex",
         flexGrow: 1,
-        minWidth: 1232,
+        padding: 0,
+        border: "1px solid black",
+        [theme.breakpoints.down('sm')]: {
+            width: 500,
+        },
+        [theme.breakpoints.up('md')]: {
+            width: 800,
+        },
+        [theme.breakpoints.up('lg')]: {
+            width: 1232,
+        },
     }
 }));
 
@@ -34,6 +44,7 @@ const All = (props) => {
             <Container
                 className={classes.mainContainerContent}>
                 <Navigation/>
+                <div style={{flexGrow: 1}}>
                 <Switch>
                     <Route exact path={PATH.NULL_PATH} render={() => <Redirect to='/profile'/>}/>
                     <Route path={PATH.DIALOGS} component={DialogsPage}/>
@@ -43,9 +54,9 @@ const All = (props) => {
                     <Route path={PATH.USERS} component={UsersPage}/>
                     <Route path={PATH.ALL} render={() => <h2>Error 404, not found!</h2>}/>
                 </Switch>
+                </div>
             </Container>
         </Box>
-
     </>);
 }
 
