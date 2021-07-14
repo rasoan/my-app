@@ -24,6 +24,7 @@ import Link from "@material-ui/core/Link";
 
 const useStyles = makeStyles(theme => ({
     root: {
+        flexGrow: 1,
         backgroundColor: 'white',
     },
     fullName: {
@@ -51,8 +52,8 @@ const ProfileDescriptionViewMode = (props) => {
 
     return (<>
             <Box p={2}
-                 m={2}
-                 width={540}
+                 ml={2}
+                 mt={2}
                  height={"min-content"}
                  className={classes.root}>
                 <Box my={2}>

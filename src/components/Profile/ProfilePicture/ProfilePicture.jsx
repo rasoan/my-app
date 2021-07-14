@@ -31,8 +31,8 @@ const ProfilePicture = (props) => {
           onClick={ownerPageControlPanel ? () => toggleDialog(true): null}
       >
       <img className={style.image}
-           width="100%"
-           height="100%"
+           width="300"
+           height="300"
            src={photos?.large}
            alt={"user"}/>
           {ownerPageControlPanel && <Link

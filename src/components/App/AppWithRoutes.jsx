@@ -19,9 +19,8 @@ const useStyles = makeStyles(theme => ({
     },
     mainContainerContent: {
         display: "flex",
-        flexGrow: 1,
+        justifyContent: "center",
         padding: 0,
-        border: "1px solid black",
         [theme.breakpoints.down('sm')]: {
             width: 500,
         },
