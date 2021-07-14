@@ -21,14 +21,20 @@ const useStyles = makeStyles(theme => ({
         display: "flex",
         justifyContent: "center",
         padding: 0,
-        [theme.breakpoints.down('sm')]: {
-            width: 500,
+        [theme.breakpoints.up('xs')]: {
+            width: 200,
+        },
+        [theme.breakpoints.up('sm')]: {
+            width: 400,
         },
         [theme.breakpoints.up('md')]: {
-            width: 800,
+            width: 600,
         },
         [theme.breakpoints.up('lg')]: {
-            width: 1232,
+            width: 900,
+        },
+        [theme.breakpoints.up('xl')]: {
+            width: 1200,
         },
     }
 }));
