@@ -71,6 +71,7 @@ const AuthorizationPanel = (props) => {
     const handleClose = () => {
         setAnchorEl(null);
     };
+
     return (<>
         {isAuth && <>
             <Button className={classes.mainButton} onClick={handleClick}>

@@ -8,6 +8,7 @@ import {addPostAC,
     getStatusAC,
     updateProfilePictureAC} from '../redux/actions/creators/profile-creator';
 import {checkId} from "../middlewaresAdditions/profile";
+import {setPhotosAuthUserAC} from "../redux/actions/creators/auth-creator";
 
 export const getProfile = (userId) => {
   return async (dispatch, getState) => {
@@ -63,6 +64,8 @@ export const updateProfilePicture = (imagefile) => {
     if (response.data.resultCode === 0) {
       let action = updateProfilePictureAC(response.data.data.photos);
       dispatch(action);
+      action = setPhotosAuthUserAC(response.data.data.photos);
+      dispatch(action);
       return true;
     }
     else {
@@ -74,7 +77,6 @@ export const updateProfilePicture = (imagefile) => {
 export const saveProfile = (profile) => {
   return async (dispatch, getState) => {
     let id = getState().auth.userId;
-    console.log(profile);
     let response = await profileAPI.saveProfile(profile);
     if (response.data.resultCode === 0) {
       let response = await profileAPI.getProfile(id)

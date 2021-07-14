@@ -1,6 +1,6 @@
 import {authAPI, profileAPI, securityAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
-import {setUserDataAC, getCaptchaAC, setAvatarAuthPanelAC} from '../redux/actions/creators/auth-creator';
+import {setUserDataAC, getCaptchaAC, setPhotosAuthUserAC} from '../redux/actions/creators/auth-creator';
 import {openMainControlPanel,
     openQuestPageControlPanel,
     openOwnerPageControlPanel} from "./app";
@@ -14,7 +14,7 @@ export const authMe = () => {
             dispatch(action);
             const responseProfile = await profileAPI.getProfile(id );
             if (responseProfile.status === 200) {
-                action = setAvatarAuthPanelAC(responseProfile.data);
+                action = setPhotosAuthUserAC(responseProfile.data.photos);
                 dispatch(action);
             }
             openMainControlPanel(dispatch, true);
@@ -56,7 +56,7 @@ export const logOut = () => {
         if (response.data.resultCode === 0) {
             let action = setUserDataAC(DEFAULT_USER_ID);
             dispatch(action);
-            action = setAvatarAuthPanelAC({photos: {small: null}});
+            action = setPhotosAuthUserAC({small: null, large: null});
             dispatch(action);
             openMainControlPanel(dispatch, false);
             openOwnerPageControlPanel(dispatch, false);

@@ -1,20 +1,23 @@
 import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
-import {SET_USER_DATA,
-    SET_AVATAR_AUTH_PANEL,
-SIGN_IN,
-SIGN_UP,
-LOG_OUT,
-GET_CAPTCHA} from '../actions/types/action-types';
+import {
+    SET_USER_DATA,
+    SET_PHOTOS_AUTH_USER,
+    SIGN_IN,
+    SIGN_UP,
+    LOG_OUT,
+    GET_CAPTCHA
+} from '../actions/types/action-types';
 
 let initialState = {
     userId: DEFAULT_USER_ID,
     isAuth: false,
     email: null,
     login: null,
+    photos: {
+        small: "",
+        large: "",
+    },
     captchaUrl: "",
-    signInImg: SIGN_IN_IMG,
-    signUpImg: SIGN_UP_IMG,
-    logOutImg: LOG_OUT_IMG,
 };
 
 const authReducer = (state = initialState, action) => {
@@ -44,6 +47,14 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 captchaUrl: action.captchaUrl,
+            }
+        case SET_PHOTOS_AUTH_USER:
+            return {
+                ...state,
+                photos: {
+                    large: action.photos.large,
+                    small: action.photos.small,
+                },
             }
         default:
             return state;

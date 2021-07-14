@@ -31,5 +31,5 @@ export const getLogOutImgSelector = (state) => {
 }
 
 export const getAvatarAuthPanel = (state) => {
-    return state.profilePage.profile.photos.small;
+    return state.auth.photos.small;
 }
