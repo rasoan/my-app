@@ -4,16 +4,13 @@ import {BrowserRouter} from 'react-router-dom';
 import React from 'react';
 import store from './redux/redux-store.js';
 import {Provider} from "react-redux";
-import Theme from "./ThemeProvider";
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
-import purple from '@material-ui/core/colors/purple';
 import green from '@material-ui/core/colors/green';
-
 
 const theme = createTheme({
     backgroundColors: {
         mainBackgroundColor: "#edeef0",
-    }
+    },
 });
 
 theme.overrides = {

@@ -28,7 +28,6 @@ const ProfileDataForm = (props) => {
                             control={control}
                             {...register("fullName")}
                             render={({field}) => <TextField {...field}
-                                                            variant="outlined"
                                                             label="Имя и фамилия"/>}
                         />
                     </div>
@@ -68,9 +67,11 @@ const ProfileDataForm = (props) => {
                         />
                     </div>
                     <div>
-                        <List
+                        <List disablePadding
                             subheader={
-                                <ListSubheader component="div" id="Contacts-text-fields">
+                                <ListSubheader
+                                    disablePadding
+                                    component="div">
                                     Контакты
                                 </ListSubheader>
                             }
@@ -78,9 +79,16 @@ const ProfileDataForm = (props) => {
                             {Object.keys(profile.contacts).map(key => {
                                     return (<React.Fragment key={`listItem-${key}`}>
                                         <ListItem>
-                                            <input
-                                                type="text"
+                                            {/*<input*/}
+                                            {/*    type="text"*/}
+                                            {/*    {...register(`contacts.${key}`)}*/}
+                                            {/*/>*/}
+                                            <Controller
+                                                name={`contacts.${key}`}
+                                                control={control}
                                                 {...register(`contacts.${key}`)}
+                                                render={({field}) => <TextField {...field}
+                                                                                label={key}/>}
                                             />
                                             {/*{errors[key] && <p>{errors[key].message}</p>}*/}
                                         </ListItem>
