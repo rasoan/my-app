@@ -28,10 +28,10 @@ const useStyles = makeStyles(theme => ({
             width: 400,
         },
         [theme.breakpoints.up('md')]: {
-            width: 600,
+            width: 700,
         },
         [theme.breakpoints.up('lg')]: {
-            width: 900,
+            width: 1000,
         },
         [theme.breakpoints.up('xl')]: {
             width: 1200,
