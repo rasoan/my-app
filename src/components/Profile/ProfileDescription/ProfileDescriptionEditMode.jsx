@@ -5,52 +5,69 @@ import TextField from "@material-ui/core/TextField";
 
 import style from "../../../styles-global/FormControls.module.scss";
 import {yupResolver} from "@hookform/resolvers/yup";
-import {List, ListItem} from "@material-ui/core";
+import {Checkbox, FormControlLabel, List, ListItem} from "@material-ui/core";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import Button from "@material-ui/core/Button";
 import * as Yup from "yup";
+import Box from "@material-ui/core/Box";
 
 const ProfileDataForm = (props) => {
     const {onSubmitProfileInfo, profile} = props;
 
-    const validationSchema = Yup.object().shape({
-        login: Yup.string()
-            .required('Поле обязательно для заполнения.')
-            .min(2, 'Миниум 2 символа!')
-            .max(50, 'Максимум 50 символов')
-            .matches(/[@]/, 'Символ @ обязателен'),
-        password: Yup.string()
-            .required('Поле обязательно для заполнения.')
-            .min(2, 'Миниум 2 символа!')
-            .max(50, 'Максимум 50 символов'),
-    });
-
     const {register, handleSubmit, formState, control} = useForm({
         defaultValues: {...profile},
-        mode: 'onBlur',
-        resolver: yupResolver(validationSchema),
     });
 
     const {errors, touchedFields} = formState;
     return (<>
-            <form onSubmit={handleSubmit(onSubmitProfileInfo)}>
-                <div>
-                    <b>Fullname</b>
-                    <input type="text" {...register("fullName")} />
-                </div>
-                <div>
-                    <p><b>Looking for a job</b></p>
-                    <input type="checkbox" {...register("lookingForAJob")} />
-                </div>
-                <div>
-                    <p><b>Looking for a job Description</b></p>
-                    <textarea {...register("lookingForAJobDescription")} />
-                </div>
-                <div>
-                    <p><b>About me:</b></p>
-                    <Controller as={TextField} name="aboutMe" control={control} defaultValue="" />
-                </div>
-                <div>
+            <Box my={10} width={"100%"}>
+                <form onSubmit={handleSubmit(onSubmitProfileInfo)}>
+                    <div>
+                        <Controller
+                            name={"fullName"}
+                            control={control}
+                            {...register("fullName")}
+                            render={({field}) => <TextField {...field}
+                                                            variant="outlined"
+                                                            label="Имя и фамилия"/>}
+                        />
+                    </div>
+                    <div>
+                        {/*<input type="checkbox" {...register("lookingForAJob")} />*/}
+                        <Controller
+                            control={control}
+                            {...register("lookingForAJob")}
+                            render={({field}) => (
+                                <FormControlLabel
+                                    control={<Checkbox {...field}
+                                                       checked={field.value}
+                                    />}
+                                    label={"Ищу работу"}
+                                />)
+                            }
+                        />
+                    </div>
+                    <div>
+                        <Controller
+                            name={"lookingForAJobDescription"}
+                            control={control}
+                            {...register("lookingForAJobDescription")}
+                            render={({field}) => <TextField {...field}
+                                                            label="Краткое информация обо мне, как работнике"
+                                                            multiline/>}
+                        />
+                    </div>
+                    <div>
+                        <Controller
+                            name={"aboutMe"}
+                            control={control}
+                            {...register("aboutMe")}
+                            render={({field}) => <TextField {...field}
+                                                            label="О себе"
+                                                            multiline/>}
+                        />
+                    </div>
+                    <div>
                         <List
                             subheader={
                                 <ListSubheader component="div" id="Contacts-text-fields">
@@ -59,13 +76,9 @@ const ProfileDataForm = (props) => {
                             }
                         >
                             {Object.keys(profile.contacts).map(key => {
-                                console.log(`contacts.${key}`)
                                     return (<React.Fragment key={`listItem-${key}`}>
                                         <ListItem>
-                                            <TextField
-                                                variant="outlined"
-                                                margin="normal"
-                                                fullWidth
+                                            <input
                                                 type="text"
                                                 {...register(`contacts.${key}`)}
                                             />
@@ -75,10 +88,10 @@ const ProfileDataForm = (props) => {
                                 }
                             )}
                         </List>
-                </div>
-
-                <Button>Сохранить</Button>
-            </form>
+                    </div>
+                    <Button>Сохранить</Button>
+                </form>
+            </Box>
         </>
     );
 }

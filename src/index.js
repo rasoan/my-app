@@ -24,6 +24,25 @@ theme.overrides = {
                 backgroundColor: "#dfe1e4",
             }
         }
+    },
+    MuiCheckbox: {
+        root: {
+            '&$checked': {
+                color: green[600],
+            },
+        },
+    }
+}
+
+theme.props = {
+    MuiCheckbox: {
+        color: "default",
+    },
+    MuiTextField: {
+        fullWidth: true,
+    },
+    MuiButton: {
+        fullWidth: true,
     }
 }
 
