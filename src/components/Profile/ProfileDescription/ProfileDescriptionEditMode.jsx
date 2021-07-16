@@ -97,7 +97,7 @@ const ProfileDataForm = (props) => {
                             )}
                         </List>
                     </div>
-                    <Button>Сохранить</Button>
+                    <button>Сохранить</button>
                 </form>
             </Box>
         </>
