@@ -27,9 +27,6 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         backgroundColor: 'white',
     },
-    fullName: {
-        marginBottom: 4,
-    },
     collapsibleButtonLinks: {
         display: "flex",
         justifyContent: "space-between",
@@ -51,14 +48,11 @@ const ProfileDescriptionViewMode = (props) => {
     };
 
     return (<>
-            <Box p={2}
-                 ml={2}
-                 mt={2}
-                 height={"min-content"}
+            <Box height={"min-content"}
                  className={classes.root}>
-                <Box my={2}>
-                    <Typography className={classes.fullName} variant={"h5"}
-                                component={"p"}>{profile.fullName}</Typography>
+                <Box mb={2}>
+                    <Typography variant={"h5"}
+                                component={"span"}>{profile.fullName}</Typography>
                     <Status/>
                 </Box>
                 <Box my={2}>

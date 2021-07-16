@@ -33,8 +33,8 @@ const ProfileDataForm = (props) => {
 
     const {errors, touchedFields} = formState;
     return (<>
-            {/*<Typography>Редактировать основную информацию о себе</Typography>*/}
-            <Box my={10} width={"100%"}>
+            <Typography>Редактировать основную информацию о себе</Typography>
+            <Box width={"100%"}>
                 <form onSubmit={handleSubmit(onSubmitProfileInfo)}>
                     <List>
                         <ListItem>

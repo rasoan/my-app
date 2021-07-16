@@ -11,11 +11,14 @@ import {Grid, makeStyles, Paper} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 
 const useStyles = makeStyles(theme => ({
-    root: {
+    gridItem: {
         backgroundColor: 'white',
         height: 'min-content',
+        padding: theme.spacing(2),
+        margin: theme.spacing(0, 1),
     },
     profileContainer: {
+        padding: `${theme.spacing(2)}px 0`,
         [theme.breakpoints.down('sm')]: {
             flexWrap: "wrap"
         },
@@ -52,9 +55,8 @@ const Profile = (props) => {
               display={"flex"}
               className={classes.profileContainer}>
             {!editMode &&
-            <Box p={2}
-                 my={2}
-                 className={classes.root}>
+            <Grid item
+                  className={classes.gridItem}>
                 <ProfilePicture/>
                 {ownerPageControlPanel &&
                 <Button className={classes.setEditModeButton}
@@ -63,10 +65,14 @@ const Profile = (props) => {
                 >
                     Редактировать
                 </Button>}
-            </Box>}
-            <ProfileDescription editMode={editMode}
-                                onSubmitProfileInfo={onSubmitProfileInfo}
-                                setEditMode={setEditMode}/>
+            </Grid>}
+            <Grid item
+                  style={{width: "100%"}}
+                  className={`${classes.gridItem}`}>
+                <ProfileDescription editMode={editMode}
+                                    onSubmitProfileInfo={onSubmitProfileInfo}
+                                    setEditMode={setEditMode}/>
+            </Grid>
         </Grid>
         {questPageControlPanel && <ButtonFollowUnfollow follow={follow}
                                                         unfollow={unfollow}
