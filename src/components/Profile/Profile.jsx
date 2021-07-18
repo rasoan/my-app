@@ -18,7 +18,8 @@ const useStyles = makeStyles(theme => ({
         margin: theme.spacing(0, 1),
     },
     profileContainer: {
-        padding: `${theme.spacing(2)}px 0`,
+        padding: theme.spacing(2, 0),
+        marginBottom: theme.spacing(5),
         [theme.breakpoints.down('sm')]: {
             flexWrap: "wrap"
         },

@@ -10,6 +10,7 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
   const [statusCopy, setStatusCopy] = useState(statusGlobalState);
   const [status, setStatus] = useState(statusGlobalState);
 
+
   const activateEditMode = () => {
     console.log("hello")
     setEditMode(true);
@@ -57,7 +58,8 @@ const StatusContainer = ({defaultStatusText, statusGlobalState, updateNewStatusT
                  deActivateEditModeEnterOrEsc={deActivateEditModeEnterOrEsc}
                  onStatusChange={onStatusChange} 
                  statusText={status}
-                 ownerPageControlPanel={ownerPageControlPanel}/>
+                 ownerPageControlPanel={ownerPageControlPanel}
+  />
 }
 
 let mapStateToProps = (state) => ({

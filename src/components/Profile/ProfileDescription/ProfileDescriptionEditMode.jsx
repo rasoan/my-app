@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import PropTypes from "prop-types";
 import {useForm, Controller} from "react-hook-form";
 import TextField from "@material-ui/core/TextField";
@@ -21,64 +21,109 @@ const useStyles = makeStyles({
     },
     listSocialLinks: {
         width: "100%",
+    },
+    defaultListItem: {
+        display: "block",
     }
 });
 
 const ProfileDataForm = (props) => {
     const {onSubmitProfileInfo, profile} = props;
+    const MAX_LENGTH_TEXTAREA = 300;
+    const MAX_LENGTH_LINKS_SOCIAL = 100;
+    const [toggleShowingLookingForAJob, setToggleShowingLookingForAJob] = useState(profile.contacts.lookingForAJob);
+
     const classes = useStyles();
-    const {register, handleSubmit, formState, control} = useForm({
-        defaultValues: {...profile},
+
+    const validationSchema = Yup.object().shape({
+        fullName: Yup.string()
+            .required('Поле обязательно для заполнения'),
+        lookingForAJob: Yup.boolean(),
+        lookingForAJobDescription: Yup.string()
+            .when('lookingForAJob', {
+                is: true,
+                then: Yup.string().required('Снимите галочку под чекбоксом "Ищу работу" или заполните это поле'),
+            }),
+        contacts: Yup.object().shape({
+            ...Object.entries(profile.contacts)
+                .map(array => ({
+                    [array[0]]: Yup
+                        .string()
+                        .matches(/htt(p|ps):\/\/(?=.{1,}\..{1,})/i, "Неверный формат ссылки (например http(s)://v.l)")
+                }))
+                .reduce((result, item) => {
+                    const key = Object.keys(item)[0];
+                    result[key] = item[key];
+                    return result;
+                }),
+        }),
     });
 
-    const {errors, touchedFields} = formState;
+
+    const {register, handleSubmit, formState, control, getValues} = useForm({
+        defaultValues: {...profile},
+        mode: 'onBlur',
+        resolver: yupResolver(validationSchema)
+    });
+
+    const {errors} = formState;
+
+
     return (<>
             <Typography>Редактировать основную информацию о себе</Typography>
             <Box width={"100%"}>
                 <form onSubmit={handleSubmit(onSubmitProfileInfo)}>
                     <List>
-                        <ListItem>
+                        <ListItem className={classes.defaultListItem}>
                             <Controller
-                                name={"fullName"}
                                 control={control}
                                 {...register("fullName")}
                                 render={({field}) => <TextField {...field}
-                                                                label="Имя и фамилия"/>}
+                                                                inputProps={{maxLength: MAX_LENGTH_TEXTAREA}}
+                                                                label="Имя и фамилия"
+
+                                />}
                             />
+                            {errors["fullName"] &&
+                            <Typography color={"error"}>{errors["fullName"].message}</Typography>}
                         </ListItem>
-                        <ListItem>
+                        <ListItem className={classes.defaultListItem}>
                             <Controller
                                 control={control}
                                 {...register("lookingForAJob")}
-                                render={({field}) => (
-                                    <FormControlLabel
+                                render={({field}) => {
+                                    setToggleShowingLookingForAJob(getValues("lookingForAJob"))
+                                    return <FormControlLabel
                                         control={<Checkbox {...field}
                                                            checked={field.value}
                                         />}
                                         label={"Ищу работу"}
-                                    />)
+                                    />}
                                 }
                             />
                         </ListItem>
-                        <ListItem>
+                        {toggleShowingLookingForAJob && <ListItem className={classes.defaultListItem}>
                             <Controller
-                                name={"lookingForAJobDescription"}
                                 control={control}
                                 {...register("lookingForAJobDescription")}
                                 render={({field}) => <TextField {...field}
+                                                                inputProps={{maxLength: MAX_LENGTH_TEXTAREA}}
                                                                 label="Краткое информация обо мне, как работнике"
                                                                 multiline/>}
                             />
-                        </ListItem>
-                        <ListItem>
+                            {errors["lookingForAJobDescription"] &&
+                            <Typography color={"error"}>{errors["lookingForAJobDescription"].message}</Typography>}
+                        </ListItem>}
+                        <ListItem className={classes.defaultListItem}>
                             <Controller
-                                name={"aboutMe"}
                                 control={control}
                                 {...register("aboutMe")}
                                 render={({field}) => <TextField {...field}
+                                                                inputProps={{maxLength: MAX_LENGTH_TEXTAREA}}
                                                                 label="О себе"
                                                                 multiline/>}
                             />
+                            {errors["aboutMe"] && <Typography color={"error"}>{errors["aboutMe"].message}</Typography>}
                         </ListItem>
                         <ListItem>
                             <List className={classes.listSocialLinks}>
@@ -87,15 +132,20 @@ const ProfileDataForm = (props) => {
                                 </ListSubheader>
                                 {Object.keys(profile.contacts).map(key => {
                                         return (<React.Fragment key={`listItem-${key}`}>
-                                            <ListItem className={classes.listItemLinkSocial}>
+                                            <ListItem
+                                                className={`${classes.defaultListItem} ${classes.listItemLinkSocial}`}>
                                                 <Controller
-                                                    name={`contacts.${key}`}
                                                     control={control}
                                                     {...register(`contacts.${key}`)}
-                                                    render={({field}) => <TextField {...field}
-                                                                                    label={key}/>}
+                                                    render={({field}) => {
+                                                        return <TextField {...field}
+                                                                          inputProps={{maxLength: MAX_LENGTH_LINKS_SOCIAL}}
+                                                                          label={key}
+                                                        />
+                                                    }}
                                                 />
-                                                {/*{errors[key] && <p>{errors[key].message}</p>}*/}
+                                                {errors['contacts']?.[key] &&
+                                                <Typography color={"error"}>{errors['contacts'][key].message}</Typography>}
                                             </ListItem>
                                         </React.Fragment>);
                                     }
