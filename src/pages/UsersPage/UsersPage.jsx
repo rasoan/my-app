@@ -9,7 +9,7 @@ const UsersPage = (props) => {
     useEffect(() => {
         getCountUsers();
         getUsersCardsSC(1, pagesSize);
-    }, [getUsersCardsSC, pagesSize]);
+    }, [getUsersCardsSC, pagesSize, getCountUsers]);
 
     return (<>
         {isFetchingGetUsersCount ? <PreloaderLinear />: <Users />}

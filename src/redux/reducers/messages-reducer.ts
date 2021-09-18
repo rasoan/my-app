@@ -1,19 +1,19 @@
 import {SEND_MESSAGE,
 GET_MESSAGES} from '../actions/types/action-types';
 
-let initialState = {
+const initialState = {
   messages: [],
-  totalCount: null,
-  error: null,
-};
+  totalCount: 0,
+  error: false
+}
 
-const messagesReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const messagesReducer = (state = initialState, action: any): initialStateType => {
   switch (action.type) {
     case SEND_MESSAGE:
       return {
               ...state,
-              // messages: [...state.messages, {id: 6, message: action.newMessage}],
-              // newMessageBody: "",
              };
     case GET_MESSAGES:
       return {
@@ -26,4 +26,4 @@ const messagesReducer = (state = initialState, action) => {
   }
 }
 
-export default messagesReducer;
+export default messagesReducer

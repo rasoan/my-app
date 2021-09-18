@@ -1,28 +1,33 @@
-import {DEFAULT_AVATAR_SRC} from "../../constants/Users";
+import DEFAULT_AVATAR_SRC from "../../images/avatar.png";
 
-import {FOLLOW,
-UNFOLLOW,
-SET_USERS,
-SET_TOTAL_USERS_COUNT,
-TOGGLE_IS_FETCHING,
-IS_FETCHING_FOLLOW_OR_UNFOLLOW_START,
-IS_FETCHING_FOLLOW_OR_UNFOLLOW_END,
-FETCHING_GET_USERS_CARDS_START,
-FETCHING_GET_USERS_CARDS_END,
-FETCHING_GET_USERS_COUNT_START,
-FETCHING_GET_USERS_COUNT_END} from '../actions/types/action-types';
+import {
+    FOLLOW,
+    UNFOLLOW,
+    SET_USERS,
+    SET_TOTAL_USERS_COUNT,
+    TOGGLE_IS_FETCHING,
+    IS_FETCHING_FOLLOW_OR_UNFOLLOW_START,
+    IS_FETCHING_FOLLOW_OR_UNFOLLOW_END,
+    FETCHING_GET_USERS_CARDS_START,
+    FETCHING_GET_USERS_CARDS_END,
+    FETCHING_GET_USERS_COUNT_START,
+    FETCHING_GET_USERS_COUNT_END
+} from '../actions/types/action-types';
+import {userType} from "../../types/types";
 
 let initialState = {
-    users: [],
+    users: [] as Array<userType>,
     defaultAvatarSrc: DEFAULT_AVATAR_SRC,
     pagesSize: 5,
     totalUsersCount: 0,
-    isFetchingFollowOrUnfollowIdList: [],
+    isFetchingFollowOrUnfollowIdList: [] as Array<number>,
     isFetchingGetUsersCards: false,
     isFetchingGetUsersCount: false,
 };
 
-const usersReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const usersReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case SET_USERS:
             return {
@@ -54,18 +59,6 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 totalUsersCount: action.totalUsersCount,
             }
-        case TOGGLE_IS_FETCHING:
-            if (action.isFetching) {
-                return {
-                    ...state,
-                    isFetching: true,
-                }
-            } else {
-                return {
-                    ...state,
-                    isFetching: false,
-                }
-            }
         case FETCHING_GET_USERS_COUNT_START: {
             return {
                 ...state,
@@ -96,7 +89,9 @@ const usersReducer = (state = initialState, action) => {
                 isFetchingFollowOrUnfollowIdList: [...state.isFetchingFollowOrUnfollowIdList, action.id],
             }
         case IS_FETCHING_FOLLOW_OR_UNFOLLOW_END:
-            let isFetchingFollowOrUnfollowIdList = state.isFetchingFollowOrUnfollowIdList.filter(id => id !== action.id);
+            let isFetchingFollowOrUnfollowIdList = state
+                .isFetchingFollowOrUnfollowIdList
+                .filter(id => id !== action.id);
             return {
                 ...state,
                 isFetchingFollowOrUnfollowIdList,

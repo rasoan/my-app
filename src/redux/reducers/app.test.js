@@ -1,4 +1,4 @@
-import appReducer from "../reducers/app-reducer";
+import appReducer from "./app-reducer";
 import {
     openMainControlPanelAC,
     openQuestPageControlPanelAC,

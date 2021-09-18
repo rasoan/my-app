@@ -1,4 +1,3 @@
-import React, {useEffect} from "react";
 import UsersList from "./UsersList";
 import {connect} from "react-redux";
 import {unfollow, follow, getCountUsers, getUsersCardsSC} from '../../../middlewares/users';

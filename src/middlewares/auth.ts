@@ -6,22 +6,22 @@ import {openMainControlPanel,
     openOwnerPageControlPanel} from "./app";
 
 export const authMe = () => {
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         const response = await authAPI.getAuthMe();
         if (response.data.resultCode === 0) {
             let {id, email, login} = response.data.data;
-            let action = setUserDataAC(String(id), email, login, true);
-            dispatch(action);
+            const userDataAction = setUserDataAC(id, email, login, true);
+            dispatch(userDataAction);
             const responseProfile = await profileAPI.getProfile(id );
             if (responseProfile.status === 200) {
-                action = setPhotosAuthUserAC(responseProfile.data.photos);
-                dispatch(action);
+                const photosAuthUserAction = setPhotosAuthUserAC(responseProfile.data.photos);
+                dispatch(photosAuthUserAction);
             }
             openMainControlPanel(dispatch, true);
         }
 
         if (response.data.resultCode === 2) {
-            let action = setUserDataAC(String(DEFAULT_USER_ID));
+            const action = setUserDataAC(DEFAULT_USER_ID);
             dispatch(action);
         }
 
@@ -29,10 +29,9 @@ export const authMe = () => {
     }
 }
 
-export const signIn = (email, password, rememberMe = null, captcha) => {
-    return async (dispatch) => {
-        const response = await authAPI.signIn(email, password,
-            rememberMe, captcha);
+export const signIn = (email: string, password: string, rememberMe: boolean, captcha: any) => {
+    return async (dispatch: any) => {
+        const response = await authAPI.signIn(email, password, rememberMe, captcha);
         if (response.data.resultCode === 0) {
             authMe()(dispatch);
         }
@@ -45,19 +44,14 @@ export const signIn = (email, password, rememberMe = null, captcha) => {
     }
 }
 
-export const signUp = () => {
-    return (dispatch) => {
-    }
-}
-
 export const logOut = () => {
-    return async (dispatch, getState) => {
+    return async (dispatch: any, getState: any) => {
         let response = await authAPI.logOut();
         if (response.data.resultCode === 0) {
-            let action = setUserDataAC(DEFAULT_USER_ID);
-            dispatch(action);
-            action = setPhotosAuthUserAC({small: null, large: null});
-            dispatch(action);
+            const userDataAction = setUserDataAC(DEFAULT_USER_ID);
+            dispatch(userDataAction);
+            const photosAuthUserAction = setPhotosAuthUserAC({small: null, large: null});
+            dispatch(photosAuthUserAction);
             openMainControlPanel(dispatch, false);
             openOwnerPageControlPanel(dispatch, false);
             openQuestPageControlPanel(dispatch, false);

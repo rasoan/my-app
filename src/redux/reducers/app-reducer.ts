@@ -7,7 +7,7 @@ import {
     OPEN_QUEST_PAGE_CONTROL_PANEL
 } from '../actions/types/action-types';
 
-let initialState = {
+const initialState = {
     initializeTheApplication: false,
     refreshRequests: false,
     navigationPanel: false,
@@ -16,7 +16,9 @@ let initialState = {
     ownerPageControlPanel: false,
 };
 
-const appReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const appReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case INITIALIZE_THE_APPLICATION:
             return {

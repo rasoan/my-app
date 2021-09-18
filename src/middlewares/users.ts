@@ -11,34 +11,37 @@ import {setUsersAC,
     fetchingGetUserCardsEndAC} from '../redux/actions/creators/users-creator';
 
 export const getCountUsers = () => {
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         let action = fetchingGetCountUsersStartAC();
         dispatch(action);
         let response = await usersApi.getUsers();
         if (response.status === 200) {
-            action = setTotalUsersCountAC(response.data.totalCount);
-            dispatch(action);
+            const setTotalUsersCountAction = setTotalUsersCountAC(response.data.totalCount);
+            dispatch(setTotalUsersCountAction);
         }
-        action = fetchingGetCountUsersEndAC();
-        dispatch(action);
+        const fetchingGetCountUsersEndAction = fetchingGetCountUsersEndAC();
+        dispatch(fetchingGetCountUsersEndAction);
     }
 }
 
-export const getUsersCardsSC = (currentPage, pagesSize) => {
-    return async (dispatch) => {
+export const getUsersCardsSC = (currentPage: number, pagesSize: number) => {
+    return async (dispatch: any) => {
         let action = fetchingGetUserCardsStartAC();
         dispatch(action);
         let response = await usersApi.getUsers(currentPage, pagesSize);
         if (response.status === 200) {
-            action = setUsersAC(response.data.items);
-            dispatch(action);
+            const setUsersAction = setUsersAC(response.data.items);
+            dispatch(setUsersAction);
         }
-        action = fetchingGetUserCardsEndAC();
-        dispatch(action);
+        const fetchingGetUserCardsEndAction = fetchingGetUserCardsEndAC();
+        dispatch(fetchingGetUserCardsEndAction);
     }
 }
 
-export const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, actionCreator) => {
+export const followUnfollow = async (dispatch: any,
+                                     id: number,
+                                     UsersApiFollowOrUnfollow: any,
+                                     actionCreator: any) => {
     let action = isFetchingFollowOrUnfollowStartAC(id);
     dispatch(action);
     let response = await UsersApiFollowOrUnfollow(id);
@@ -46,18 +49,18 @@ export const followUnfollow = async (dispatch, id, UsersApiFollowOrUnfollow, act
         action = actionCreator(id);
         dispatch(action);
     }
-    action = isFetchingFollowOrUnfollowEndAC(id);
-    dispatch(action);
+    const isFetchingFollowOrUnfollowEndAction = isFetchingFollowOrUnfollowEndAC(id);
+    dispatch(isFetchingFollowOrUnfollowEndAction);
 }
 
-export const follow = (id) => {
-    return async (dispatch) => {
+export const follow = (id: number) => {
+    return async (dispatch: any) => {
        await followUnfollow(dispatch, id, usersApi.follow.bind(usersApi), followAC);
     }
 }
 
-export const unfollow = (id) => {
-    return async (dispatch) => {
+export const unfollow = (id: number) => {
+    return async (dispatch: any) => {
         await  followUnfollow(dispatch, id, usersApi.unfollow.bind(usersApi), unfollowAC);
     }
 }

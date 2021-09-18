@@ -1,4 +1,4 @@
-import {DEFAULT_USER_ID, SIGN_IN_IMG, SIGN_UP_IMG, LOG_OUT_IMG} from "../../constants/Authorization";
+import {DEFAULT_USER_ID} from "../../constants/Authorization";
 import {
     SET_USER_DATA,
     SET_PHOTOS_AUTH_USER,
@@ -7,20 +7,23 @@ import {
     LOG_OUT,
     GET_CAPTCHA
 } from '../actions/types/action-types';
+import {photosType} from "../../types/types"
 
-let initialState = {
+const initialState = {
     userId: DEFAULT_USER_ID,
     isAuth: false,
-    email: null,
-    login: null,
+    email: null as string | null,
+    login: null as string | null,
     photos: {
-        small: "",
-        large: "",
-    },
-    captchaUrl: "",
+        small: null as string | null,
+        large: null as string | null,
+    } as photosType,
+    captchaUrl: null as string | null,
 };
 
-const authReducer = (state = initialState, action) => {
+export type initialStateType = typeof initialState
+
+const authReducer = (state = initialState, action: any): initialStateType => {
     switch (action.type) {
         case SET_USER_DATA:
             return {

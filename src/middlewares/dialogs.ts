@@ -8,15 +8,15 @@ import {
     stopFetchingAC
 } from '../redux/actions/creators/dialogs-creator';
 
-export const onSendMessageClick = (newMessageBody) => {
-    return (dispatch) => {
+export const onSendMessageClick = (newMessageBody: any) => {
+    return (dispatch: any) => {
         let action = sendMessageAC(newMessageBody);
         dispatch(action);
     }
 }
 
-export const startCommunication = (userId) => {
-    return async (dispatch) => {
+export const startCommunication = (userId: number) => {
+    return async (dispatch: any) => {
         let response = await dialogsAPI.startCommunication(userId);
         let action = startCommunicationAC(response);
         dispatch(action);
@@ -24,22 +24,22 @@ export const startCommunication = (userId) => {
 }
 
 export const getDialogs = () => {
-    return async (dispatch) => {
+    return async (dispatch: any) => {
         let action = startFetchingAC();
         dispatch(action);
         const response = await dialogsAPI.getAllDialogs();
-        action = getDialogsAC(response.data);
-        dispatch(action);
-        action = stopFetchingAC();
-        dispatch(action);
+        const getDialogsAction = getDialogsAC(response.data);
+        dispatch(getDialogsAction);
+        const stopFetchingAction = stopFetchingAC();
+        dispatch(stopFetchingAction);
     }
 }
 
-export const getMessages = (userId,
+export const getMessages = (userId: number,
                             currentPage = 1,
                             pagesSize = 10) => {
-    return async (dispatch) => {
-        const response = await dialogsAPI.getMessages(userId, currentPage, pagesSize);
+    return async (dispatch: any) => {
+        const response = await dialogsAPI.getMessages();
         const action = getMessagesAC(response.data);
         dispatch(action);
     }
