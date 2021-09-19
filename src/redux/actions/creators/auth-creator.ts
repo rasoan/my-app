@@ -11,7 +11,10 @@ export type SetUserDataType = {
     data: userDataAuth | null
     isAuth: boolean
 }
-export const setUserDataAC = (userId: number, email = null, login = null, isAuth = false): SetUserDataType => {
+export const setUserDataAC = (userId: number,
+                              email: null | string = null,
+                              login: null | string = null,
+                              isAuth = false): SetUserDataType => {
     return {
         type: SET_USER_DATA,
         data: {

@@ -1,4 +1,4 @@
-import {authAPI, profileAPI, securityAPI} from "../api/api";
+import {authAPI, profileAPI, ResultCodesEnum, securityAPI} from "../api/api";
 import {DEFAULT_USER_ID} from "../constants/Authorization";
 import {setUserDataAC, getCaptchaAC, setPhotosAuthUserAC} from '../redux/actions/creators/auth-creator';
 import {openMainControlPanel,
@@ -8,7 +8,7 @@ import {openMainControlPanel,
 export const authMe = () => {
     return async (dispatch: any) => {
         const response = await authAPI.getAuthMe();
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             let {id, email, login} = response.data.data;
             const userDataAction = setUserDataAC(id, email, login, true);
             dispatch(userDataAction);
@@ -18,9 +18,7 @@ export const authMe = () => {
                 dispatch(photosAuthUserAction);
             }
             openMainControlPanel(dispatch, true);
-        }
-
-        if (response.data.resultCode === 2) {
+        } else {
             const action = setUserDataAC(DEFAULT_USER_ID);
             dispatch(action);
         }
@@ -32,10 +30,9 @@ export const authMe = () => {
 export const signIn = (email: string, password: string, rememberMe: boolean, captcha: any) => {
     return async (dispatch: any) => {
         const response = await authAPI.signIn(email, password, rememberMe, captcha);
-        if (response.data.resultCode === 0) {
-            authMe()(dispatch);
-        }
-        else {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
+            await authMe()(dispatch);
+        } else {
             const responseCaptcha = await securityAPI.getCaptchaUrl();
             const action = getCaptchaAC(responseCaptcha.data.url);
             dispatch(action);
@@ -47,7 +44,7 @@ export const signIn = (email: string, password: string, rememberMe: boolean, cap
 export const logOut = () => {
     return async (dispatch: any, getState: any) => {
         let response = await authAPI.logOut();
-        if (response.data.resultCode === 0) {
+        if (response.data.resultCode === ResultCodesEnum.Success) {
             const userDataAction = setUserDataAC(DEFAULT_USER_ID);
             dispatch(userDataAction);
             const photosAuthUserAction = setPhotosAuthUserAC({small: null, large: null});
@@ -56,6 +53,7 @@ export const logOut = () => {
             openOwnerPageControlPanel(dispatch, false);
             openQuestPageControlPanel(dispatch, false);
         }
+
         return response;
     }
 }

@@ -1,4 +1,9 @@
-import * as axios from "axios";
+import axios from "axios";
+import {profileType} from "../types/types";
+
+export enum ResultCodesEnum {
+    Success = 0,
+}
 
 const instance = axios.create({
     withCredentials: true,
@@ -12,23 +17,23 @@ export const usersApi = {
     getUsers(currentPage = 1, pagesSize = 10) {
         return instance.get(`/users?page=${currentPage}&count=${pagesSize}`);
     },
-    follow(id) {
+    follow(id: number) {
         return instance.post('/follow/' + id);
     },
-    unfollow(id) {
+    unfollow(id: number) {
         return instance.delete('/follow/' + id);
     },
 }
 
 export const profileAPI = {
-    getProfile(id) {
+    getProfile(id: number) {
         return instance.get(`/profile/`+ id);
     },
-    getStatus(userId) {
+    getStatus(userId: number) {
         return instance.get('/profile/status/' + userId)
                        .then(response => response);
     },
-    updateStatus(status) {
+    updateStatus(status: string) {
         return instance.put('profile/status', {status: status});
     },
     // updateProfilePicture(imagefile) {
@@ -42,9 +47,9 @@ export const profileAPI = {
     //                                                     }
     //                                                     );
     // },
-    updateProfilePicture(imagefile) {
+    updateProfilePicture(imageFile: File) {
         let formData = new FormData();
-        formData.append("image", imagefile);
+        formData.append("image", imageFile);
         return instance.put('/profile/photo', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -52,16 +57,25 @@ export const profileAPI = {
             }
         );
     },
-    saveProfile(profile) {
+    saveProfile(profile: profileType) {
         return instance.put('/profile', profile)
     },
 }
 
+type MeResponseType = {
+    data: {
+        id: number
+        email: string
+        login: string
+    }
+    resultCode: ResultCodesEnum
+    messages: Array<string>
+}
 export const authAPI = {
     getAuthMe() {
-        return instance.get('auth/me');
+        return instance.get<MeResponseType>('auth/me');
     },
-    signIn(email, password, rememberMe = false, captcha = null) {
+    signIn(email: string, password: string, rememberMe = false, captcha = null) {
         return instance.post('/auth/login', {email, password, rememberMe, captcha});
     },
     logOut() {
@@ -79,7 +93,7 @@ export const securityAPI = {
 }
 
 export const dialogsAPI = {
-    startCommunication(userId) { // открыть диалог с другом
+    startCommunication(userId: number) { // открыть диалог с другом
         return instance.put('/dialogs/' + userId);
     },
     getAllDialogs() { // получить все диалоги
@@ -91,33 +105,28 @@ export const dialogsAPI = {
 }
 
 export const messagesAPI = {
-    getMessages(userId, currentPage, pagesSize) { // получить сообщения с этим пользователем
+    getMessages(userId: number, currentPage: number, pagesSize: number) { // получить сообщения с этим пользователем
         return instance.get(`/dialogs/${userId}/messages?page=${currentPage}&count=${pagesSize}`);
     },
-    sendMessage(userId, message = "") { // отправить сообщение
+    sendMessage(userId: number, message = "") { // отправить сообщение
         return instance.post(`/dialogs/${userId}/messages`, message);
     },
-    messageViewed(messageId) { // сообщение просмотрено
+    messageViewed(messageId: number) { // сообщение просмотрено
         return instance.get(`/dialogs/messages/${messageId}/viewed`);
     },
-    deleteOnlyYouMessage(messageId) {
+    deleteOnlyYouMessage(messageId: number) {
         return instance.delete(`/dialogs/messages/${messageId}`)
     },
-    addMessageSpam(messageId) { // добавить сообщение в спам
+    addMessageSpam(messageId: number) { // добавить сообщение в спам
         return instance.post(`/dialogs/messages/${messageId}/spam`);
     },
-    restoreYourMessage(messageId) { // восстановить сообщение
+    restoreYourMessage(messageId: number) { // восстановить сообщение
         return instance.put(`/dialogs/messages/${messageId}/restore`);
     },
-    return_messages_newest_than_date(userId, date) { // не понятно что
+    return_messages_newest_than_date(userId: number, date: any) { // не понятно что
         return instance.put(`/dialogs/${userId}/messages/new?newerThen=${date}`);
     },
     getNewMessages() { // получить новые сообщения
         return instance.get(`/dialogs/messages/new/count`);
     },
 }
-/*
-/dialogs/id
-put
-
-*/
