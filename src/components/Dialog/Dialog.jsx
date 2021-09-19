@@ -4,8 +4,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Dialog from '@material-ui/core/Dialog';
 import {DialogContent} from "@material-ui/core";
 
-const MyDialog = (props) => {
-    const {toggleDialog, isOpenDialog, dialogTittle, dialogContent} = props;
+const MyDialog = ({toggleDialog, isOpenDialog, dialogTittle, dialogContent}) => {
 
     return (
         <Dialog onClose={ () => toggleDialog(false)} aria-labelledby="simple-dialog-title" open={isOpenDialog}>
@@ -20,9 +19,5 @@ const MyDialog = (props) => {
     );
 }
 
-MyDialog.propTypes = {
-    toggleDialog: PropTypes.func.isRequired,
-    isOpenDialog: PropTypes.bool.isRequired,
-};
 
 export default MyDialog;

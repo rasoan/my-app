@@ -1,5 +1,5 @@
 import React from "react";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 import { makeStyles } from '@material-ui/core/styles';
 import Pagination from '@material-ui/lab/Pagination';
 
@@ -11,10 +11,18 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const MuPagination = (props) => {
-  const {countPage, countCardsInPage, getCards, loading} = props;
+type PropsType = {
+    countPage: number
+    countCardsInPage: number
+    getCards: (pageNumber: number, countCardsInPage: number) => void
+    loading: boolean
+}
+const MuPagination: React.FC<PropsType> = ({countPage,
+                                           countCardsInPage,
+                                           getCards,
+                                           loading}) => {
   const classes = useStyles();
-  const onPageChanged = (pageNumber, countCardsInPage) => {
+  const onPageChanged = (pageNumber: number, countCardsInPage: number) => {
     getCards(pageNumber, countCardsInPage);
   }
 
@@ -33,11 +41,11 @@ const MuPagination = (props) => {
   </>);
 };
 
-MuPagination.propTypes = {
-    countPage: PropTypes.number.isRequired,
-  countCardsInPage: PropTypes.number.isRequired,
-  getCards: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-}
+// MuPagination.propTypes = {
+//     countPage: PropTypes.number.isRequired,
+//   countCardsInPage: PropTypes.number.isRequired,
+//   getCards: PropTypes.func.isRequired,
+//   loading: PropTypes.bool.isRequired,
+// }
 
 export default MuPagination;

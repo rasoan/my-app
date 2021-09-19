@@ -5,7 +5,6 @@ import {
     UNFOLLOW,
     SET_USERS,
     SET_TOTAL_USERS_COUNT,
-    TOGGLE_IS_FETCHING,
     IS_FETCHING_FOLLOW_OR_UNFOLLOW_START,
     IS_FETCHING_FOLLOW_OR_UNFOLLOW_END,
     FETCHING_GET_USERS_CARDS_START,
@@ -14,6 +13,7 @@ import {
     FETCHING_GET_USERS_COUNT_END
 } from '../actions/types/action-types';
 import {userType} from "../../types/types";
+import {ActionsTypes} from "../actions/creators/users-creator";
 
 let initialState = {
     users: [] as Array<userType>,
@@ -27,7 +27,7 @@ let initialState = {
 
 export type initialStateType = typeof initialState
 
-const usersReducer = (state = initialState, action: any): initialStateType => {
+const usersReducer = (state = initialState, action: ActionsTypes): initialStateType => {
     switch (action.type) {
         case SET_USERS:
             return {

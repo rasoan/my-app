@@ -2,7 +2,7 @@ import App from './components/App';
 import ReactDOM from 'react-dom'
 import {BrowserRouter} from 'react-router-dom';
 import React from 'react';
-import store from './redux/redux-store.js';
+import store from './redux/redux-store.ts';
 import {Provider} from "react-redux";
 import {createTheme, ThemeProvider} from '@material-ui/core/styles';
 import green from '@material-ui/core/colors/green';

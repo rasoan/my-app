@@ -33,19 +33,28 @@ export type SetTotalUsersCountACType = {
     type: typeof SET_TOTAL_USERS_COUNT
     totalUsersCount: number
 }
-export const setTotalUsersCountAC = (totalUsersCount: number): SetTotalUsersCountACType => ({type: SET_TOTAL_USERS_COUNT, totalUsersCount})
+export const setTotalUsersCountAC = (totalUsersCount: number): SetTotalUsersCountACType => ({
+    type: SET_TOTAL_USERS_COUNT,
+    totalUsersCount
+})
 
 export type IsFetchingFollowOrUnfollowStartACType = {
     type: typeof IS_FETCHING_FOLLOW_OR_UNFOLLOW_START
     id: number
 }
-export const isFetchingFollowOrUnfollowStartAC = (id: number): IsFetchingFollowOrUnfollowStartACType => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START, id})
+export const isFetchingFollowOrUnfollowStartAC = (id: number): IsFetchingFollowOrUnfollowStartACType => ({
+    type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_START,
+    id
+})
 
 export type IsFetchingFollowOrUnfollowEndACType = {
     type: typeof IS_FETCHING_FOLLOW_OR_UNFOLLOW_END
     id: number
 }
-export const isFetchingFollowOrUnfollowEndAC = (id: number): IsFetchingFollowOrUnfollowEndACType => ({type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END, id})
+export const isFetchingFollowOrUnfollowEndAC = (id: number): IsFetchingFollowOrUnfollowEndACType => ({
+    type: IS_FETCHING_FOLLOW_OR_UNFOLLOW_END,
+    id
+})
 
 export type FetchingGetCountUsersStartACType = {
     type: typeof FETCHING_GET_USERS_COUNT_START
@@ -67,3 +76,13 @@ export type FetchingGetUserCardsEndACType = {
 }
 export const fetchingGetUserCardsEndAC = (): FetchingGetUserCardsEndACType => ({type: FETCHING_GET_USERS_CARDS_END})
 
+export type ActionsTypes = setUsersACType |
+    FollowACType |
+    UnfollowACType |
+    SetTotalUsersCountACType |
+    IsFetchingFollowOrUnfollowStartACType |
+    IsFetchingFollowOrUnfollowEndACType |
+    FetchingGetCountUsersStartACType |
+    FetchingGetCountUsersEndACType |
+    FetchingGetUserCardsStartACType |
+    FetchingGetUserCardsEndACType

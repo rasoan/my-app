@@ -58,7 +58,7 @@ const Profile = (props) => {
             {!editMode &&
             <Grid item
                   className={classes.gridItem}>
-                <ProfilePicture/>
+                <ProfilePicture />
                 {ownerPageControlPanel &&
                 <Button className={classes.setEditModeButton}
                         fullWidth

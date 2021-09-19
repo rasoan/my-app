@@ -25,8 +25,10 @@ const useStyles = makeStyles({
     }
 });
 
-const UploaderPhoto = (props) => {
-    const {updatePhotoFunction, messageSubmitPhotoResult} = props;
+const UploaderPhoto = ({
+                           updatePhotoFunction,
+                           messageSubmitPhotoResult
+                       }) => {
     let classes = useStyles({border: "1px solid black"});
     const [image, setImage] = useState(null);
     const [scale, setScale] = useState(1);
